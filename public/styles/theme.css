@@ -1,12 +1,13 @@
 * {
-  --bg-color: #ddd;
-  --fg-color: gray;
-  --primary-color: blue;
-  --accent-color: red;
-  --tertiary-color: green;
-  --custom-color-1: orange;
-  --custom-color-2: pink;
-  --custom-color-3: limegreen;
+  --prism-teal: #2fceb0;
+  --bright-gold: rgb(244, 170, 51);
+
+  --bg-color: var(--prism-teal);
+  --fg-color: white;
+
+  --custom-color-1: #f19221;
+  --custom-color-2: #854e9e;
+  --custom-color-3: #74bf44;
   --custom-color-4: purple;
   --custom-color-5: crimson;
   --custom-color-6: magenta;
