@@ -1,0 +1,29 @@
+* {
+  --bg-color: #ddd;
+  --fg-color: gray;
+  --primary-color: blue;
+  --accent-color: red;
+  --tertiary-color: green;
+  --custom-color-1: orange;
+  --custom-color-2: pink;
+  --custom-color-3: limegreen;
+  --custom-color-4: purple;
+  --custom-color-5: crimson;
+  --custom-color-6: magenta;
+  --text-font: "Helvetica Neue", sans-serif;
+  --header-font: serif;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: var(--bg-color);
+  font-family: var(--text-font);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--header-font);
+}

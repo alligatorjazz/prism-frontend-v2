@@ -1,0 +1,25 @@
+{
+  "name": "frontend",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@iconify-json/feather": "^1.2.1",
+    "astro": "^5.15.9",
+    "astro-icon": "^1.1.5",
+    "dayjs": "^1.11.19",
+    "eslint": "^9.39.1",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "sass": "^1.94.2",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@sassi/breakpoints": "^1.1.0"
+  }
+}

@@ -1,0 +1,33 @@
+---
+import { getSiteMetadata, getSiteRoutes } from "../api";
+import MetadataLoader from "../components/MetadataLoader.astro";
+import Navbar from "../components/Navbar.astro";
+import type { SurfaceMetadata } from "../types";
+import "../styles/global.css";
+
+interface Props {
+	pageMetadata: SurfaceMetadata;
+}
+
+const siteMetadata = await getSiteMetadata();
+const routes = await getSiteRoutes();
+
+const { pageMetadata } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<MetadataLoader pageMetadata={pageMetadata} siteMetadata={siteMetadata} />
+		<link rel="stylesheet" href="/styles/theme.css" />
+	</head>
+	<body>
+		<Navbar routes={routes} siteMetadata={siteMetadata} />
+		<div class="w-full flex flex-col"><slot /></div>
+	</body>
+</html>
+
+<style></style>

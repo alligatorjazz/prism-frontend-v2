@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { Route } from "../types";
+
+interface Props extends HTMLAttributes<"div"> {
+	routes: Route[];
+}
+const { routes, ...props } = Astro.props;
+---
+
+{
+	routes.map((route) => {
+		if (route.type === "internal") {
+			return <a href={route.path}>{route.displayName}</a>;
+		}
+
+		if (route.type === "external") {
+			return <a href={route.url}>{route.displayName}</a>;
+		}
+
+		console.error("Could not parse route: ", route);
+		return null;
+	})
+}

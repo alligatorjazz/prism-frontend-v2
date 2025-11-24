@@ -1,0 +1,70 @@
+---
+import {
+	type PageMetadata,
+	type SiteMetadata,
+	type SurfaceMetadata,
+} from "../types";
+export const prerender = false;
+
+interface Props {
+	pageMetadata: SurfaceMetadata;
+	siteMetadata: SiteMetadata;
+}
+
+function build({ author, ...node }: SurfaceMetadata): PageMetadata {
+	return {
+		title: node.title,
+		description:
+			node.description ??
+			siteMetadata.description ??
+			`${siteMetadata.title}'s ${node.title} page.`,
+		canonical: node?.url ?? Astro.url.toString(),
+		author: author?.name,
+		og: {
+			...node,
+			...((node.type === "book" || node.type === "article") && author?.url
+				? { [`${node.type}:author`]: author.url }
+				: {}),
+			url: node?.url ?? Astro.url.toString(),
+		},
+	};
+}
+
+const {
+	pageMetadata: { shortTitle, ...metadata },
+	siteMetadata,
+} = Astro.props;
+const { title, description, author, canonical, og } = build(metadata);
+---
+
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+{author && <meta name="author" content={author} />}
+{canonical && <meta name="canonical" content={canonical} />}
+{
+	!Object.keys(og).includes("title") && (
+		<meta property={"og:title"} content={title} />
+	)
+}
+{
+	!Object.keys(og).includes("description") && (
+		<meta property={"og:description"} content={description} />
+	)
+}
+{
+	Object.entries(og).map(([property, content]) => {
+		if (Array.isArray(content)) {
+			return content.map((value) => (
+				<meta property={property} content={JSON.stringify(value)} />
+			));
+		}
+
+		return (
+			<meta
+				property={property}
+				content={typeof content === "number" ? content.toString() : content}
+			/>
+		);
+	})
+}
+<title>{shortTitle ?? metadata.title}</title>
