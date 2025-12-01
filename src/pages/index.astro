@@ -2,8 +2,10 @@
 import Base from "../templates/Base.astro";
 import { Image } from "astro:assets";
 import logo from "../assets/img/prism-logo-primary.png";
+import ToString from "../components/ToString.astro";
 import centerLink from "../assets/img/centerlink-badge.png";
 import { Icon } from "astro-icon/components";
+import ThreeTwoThree from "../sections/ThreeTwoThree.astro";
 ---
 
 <Base
@@ -16,9 +18,16 @@ import { Icon } from "astro-icon/components";
 	}}
 >
 	<section id="animated-hero"></section>
-	<section id="tagline">
-		<div><p>For every color</p> <p>For everyone</p></div>
-	</section>
+	<!-- <section id="tagline"> -->
+	<!-- 	<div><p>For every color</p> <p>For everyone</p></div> -->
+	<!-- </section> -->
+	<ThreeTwoThree>
+		<div slot="left">
+			<ToString><p title="testing">test</p></ToString>
+		</div>
+		<div slot="center"><ToString>test</ToString></div>
+		<div slot="right"><ToString>test</ToString></div>
+	</ThreeTwoThree>
 	<section id="our-mission">
 		<h1>Our Mission</h1>
 		<p>
@@ -140,6 +149,5 @@ import { Icon } from "astro-icon/components";
 				NOT IMPLY ENDORSEMENT, APPROVAL, OR RECOMMENDATION BY THE STATE."
 			</p>
 		</div>
-		<style lang="scss"></style>
 	</footer>
 </Base>

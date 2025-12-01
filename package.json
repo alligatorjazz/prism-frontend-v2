@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@iconify-json/ri": "^1.2.6",
+    "@payloadcms/richtext-lexical": "^3.65.0",
     "astro": "^5.15.9",
     "astro-icon": "^1.1.5",
     "dayjs": "^1.11.19",

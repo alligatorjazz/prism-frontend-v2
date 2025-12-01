@@ -1,0 +1,28 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { Column } from "../types/sections";
+
+interface Props extends HTMLAttributes<"section"> {
+	columns: [Column, Column, Column];
+	fullWidth?: boolean;
+}
+
+const { columns, fullWidth } = Astro.props;
+---
+
+<section class:list={fullWidth ? "full-width" : ""}>
+	<slot name="left" />
+	<slot name="center" />
+	<slot name="right" />
+</section>
+
+<style>
+	section {
+		padding: 1rem;
+		background: var(--bg-color);
+	}
+
+	section.full-width {
+		width: 100%;
+	}
+</style>
