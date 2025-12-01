@@ -4,6 +4,7 @@
 
   --bg-color: var(--prism-teal);
   --fg-color: white;
+  --accent-color: var(--bright-gold);
 
   --custom-color-1: #f19221;
   --custom-color-2: #854e9e;
@@ -11,8 +12,10 @@
   --custom-color-4: purple;
   --custom-color-5: crimson;
   --custom-color-6: magenta;
-  --text-font: "Helvetica Neue", sans-serif;
-  --header-font: serif;
+  --text-font: "Zilla Slab", serif;
+  --header-font: "Poppins", sans-serif;
+
+  font-family: var(--text-font);
 }
 
 html,

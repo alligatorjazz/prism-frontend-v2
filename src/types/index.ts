@@ -19,6 +19,7 @@ export type SiteMetadata = {
   title: string;
   fullTitle?: string;
   description?: string;
+  logo?: string;
 };
 
 export type Route = (
@@ -30,4 +31,4 @@ export type Route = (
       type: "external";
       url: string;
     }
-) & { displayName: string };
+) & { displayName: string; highlight?: boolean };

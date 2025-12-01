@@ -11,14 +11,52 @@ const { routes, ...props } = Astro.props;
 {
 	routes.map((route) => {
 		if (route.type === "internal") {
-			return <a href={route.path}>{route.displayName}</a>;
+			return (
+				<a
+					class:list={["nav-link", route.highlight ? "highlighted" : ""]}
+					href={route.path}
+				>
+					{route.displayName}
+				</a>
+			);
 		}
 
 		if (route.type === "external") {
-			return <a href={route.url}>{route.displayName}</a>;
+			return (
+				<a
+					class:list={["nav-link", route.highlight ? "highlighted" : ""]}
+					href={route.url}
+				>
+					{route.displayName}
+				</a>
+			);
 		}
 
 		console.error("Could not parse route: ", route);
 		return null;
 	})
 }
+
+<style>
+	.nav-link {
+		color: var(--fg-color);
+		font-weight: 600;
+		transition: all 300ms;
+		text-decoration: none;
+		font-family: var(--header-font);
+
+		&:hover {
+			color: var(--accent-color);
+		}
+	}
+
+	.nav-link.highlight {
+		background: var(--accent-color);
+		padding: 1rem;
+		flex: 1;
+		border-radius: 12px;
+		&:hover {
+			backdrop-filter: brightness(75%);
+		}
+	}
+</style>

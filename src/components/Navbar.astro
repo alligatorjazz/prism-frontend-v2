@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import type { Route, SiteMetadata } from "../types";
 import NavLinks from "./NavLinks.astro";
+import { Image } from "astro:assets";
 
 export const prerender = false;
 interface Props {
@@ -15,12 +16,23 @@ const { siteMetadata, routes } = Astro.props;
 <header data-drawer="inactive" data-prev-scroll="up">
 	<a href="/" class="site-logo">
 		<!-- TODO: add logo support -->
-		{siteMetadata.title}
+		{
+			siteMetadata.logo ? (
+				<Image
+					src={siteMetadata.logo}
+					alt={`The ${siteMetadata.title} logo.`}
+					width={247}
+					height={71}
+				/>
+			) : (
+				<p>siteMetadata.title</p>
+			)
+		}
 	</a>
 	<nav class="desktop-nav">
 		<NavLinks routes={routes} />
 	</nav>
-	<button id="trigger"><Icon name={"feather:menu"} /> </button>
+	<button id="trigger"><Icon name={"ri:menu-fill"} /> </button>
 	<nav class="mobile-nav">
 		<div>
 			<NavLinks routes={routes} />
@@ -37,16 +49,15 @@ const { siteMetadata, routes } = Astro.props;
 		display: flex;
 		justify-content: space-between;
 		flex-direction: row;
-		background: green;
 
 		a.site-logo {
-			background: magenta;
 		}
 
 		nav.mobile-nav {
 			/* hides on desktop */
 			display: flex;
 			justify-content: end;
+			align-items: center;
 			position: fixed;
 			top: 0;
 			right: 0;
@@ -96,6 +107,7 @@ const { siteMetadata, routes } = Astro.props;
 			@include breakpoint-up(md) {
 				display: flex;
 			}
+			align-items: center;
 			gap: 1rem;
 		}
 	}
