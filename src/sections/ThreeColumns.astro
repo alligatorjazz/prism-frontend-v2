@@ -1,0 +1,46 @@
+---
+import slugify from "slugify";
+import type { Column, Section } from "../types/sections";
+
+interface Props extends Section {
+	columnLayout?: [string, string, string];
+	columns?: [Column, Column, Column];
+}
+
+const { fullWidth, title, columnLayout } = Astro.props;
+const gridTemplateColumns = columnLayout?.join(" ") ?? "1fr 1fr 1fr";
+---
+
+<section
+	id={slugify(title, { strict: true })}
+	title={title}
+	class:list={fullWidth ? "full-width" : ""}
+>
+	<div><slot name="left" /></div>
+	<div><slot name="center" /></div>
+	<div><slot name="right" /></div>
+</section>
+
+<style lang={"scss"} define:vars={{ gridTemplateColumns }}>
+	@use "../styles/utils" as *;
+
+	section {
+		padding: 1rem;
+		background: var(--bg-color);
+		display: grid;
+		grid-template-columns: var(--gridTemplateColumns);
+
+		&.full-width {
+			width: 100%;
+		}
+
+		& > div {
+			border: 1px solid magenta;
+		}
+
+		@include breakpoint-up(md) {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+</style>

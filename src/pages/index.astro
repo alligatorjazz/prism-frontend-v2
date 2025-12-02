@@ -5,7 +5,7 @@ import logo from "../assets/img/prism-logo-primary.png";
 import ToString from "../components/ToString.astro";
 import centerLink from "../assets/img/centerlink-badge.png";
 import { Icon } from "astro-icon/components";
-import ThreeTwoThree from "../sections/ThreeTwoThree.astro";
+import ThreeColumns from "../sections/ThreeColumns.astro";
 ---
 
 <Base
@@ -21,13 +21,21 @@ import ThreeTwoThree from "../sections/ThreeTwoThree.astro";
 	<!-- <section id="tagline"> -->
 	<!-- 	<div><p>For every color</p> <p>For everyone</p></div> -->
 	<!-- </section> -->
-	<ThreeTwoThree>
-		<div slot="left">
-			<ToString><p title="testing">test</p></ToString>
-		</div>
-		<div slot="center"><ToString>test</ToString></div>
-		<div slot="right"><ToString>test</ToString></div>
-	</ThreeTwoThree>
+	<ThreeColumns title="Tagline" columnTemplate={["4fr", "6fr", "4fr"]}>
+		<ToString slot="left"><p title="testing">test</p></ToString>
+		<ToString slot="center">
+			<div
+				style={{
+					fontSize: "4.5rem",
+					fontFamily: "var(--header-font)",
+					fontWeight: "500",
+				}}
+			>
+				<p>For every color,<br />For everyone</p>
+			</div>
+		</ToString>
+		<ToString slot="right">test</ToString>
+	</ThreeColumns>
 	<section id="our-mission">
 		<h1>Our Mission</h1>
 		<p>

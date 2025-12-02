@@ -1,0 +1,41 @@
+@mixin breakpoint-up($size) {
+  @if $size == "sm" { 
+    & { 
+      @media (width >= 40rem) {
+       @content;  
+      } 
+    } 
+  }
+
+  @if $size == "md" { 
+    & { 
+      @media (width >= 48rem) {
+        @content;  
+      } 
+    } 
+  }
+
+  @if $size == "lg" { 
+    & { 
+      @media (width >= 64rem) {
+        @content;  
+      } 
+    } 
+  }
+
+  @if $size == "xl" { 
+    & { 
+      @media (width >= 80rem) {
+        @content;  
+      } 
+    } 
+  }
+
+  @if $size == "2xl" { 
+    & { 
+      @media (width >= 96rem) {
+        @content;  
+      } 
+    } 
+  }
+}

@@ -1,8 +1,5 @@
 {
-	  "compilerOptions": {
-    "paths": {
-      "@sassi*": ["./node_modules/@sassi/breakpoints/sassi-breakpoints"],
-    }
+	"compilerOptions": {
   },
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],

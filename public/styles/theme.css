@@ -14,8 +14,6 @@
   --custom-color-6: magenta;
   --text-font: "Zilla Slab", serif;
   --header-font: "Poppins", sans-serif;
-
-  font-family: var(--text-font);
 }
 
 html,

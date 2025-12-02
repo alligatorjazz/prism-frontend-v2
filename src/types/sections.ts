@@ -4,5 +4,10 @@ export type ColumnChild = RichText;
 export type Column = {
   hideOnMobile?: boolean;
   hideOnDesktop?: boolean;
-  content: ColumnChild;
+  // content: ColumnChild;
+};
+
+export type Section = {
+  title: string;
+  fullWidth?: boolean;
 };
