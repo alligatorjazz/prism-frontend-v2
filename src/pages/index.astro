@@ -5,7 +5,8 @@ import logo from "../assets/img/prism-logo-primary.png";
 import ToString from "../components/ToString.astro";
 import centerLink from "../assets/img/centerlink-badge.png";
 import { Icon } from "astro-icon/components";
-import ThreeColumns from "../sections/ThreeColumns.astro";
+import FlagWithTagline from "../sections/FlagWithTagline.astro";
+import flag from "../assets/img/long-pride-flag.png";
 ---
 
 <Base
@@ -18,24 +19,21 @@ import ThreeColumns from "../sections/ThreeColumns.astro";
 	}}
 >
 	<section id="animated-hero"></section>
-	<!-- <section id="tagline"> -->
-	<!-- 	<div><p>For every color</p> <p>For everyone</p></div> -->
-	<!-- </section> -->
-	<ThreeColumns title="Tagline" columnTemplate={["4fr", "6fr", "4fr"]}>
-		<ToString slot="left"><p title="testing">test</p></ToString>
+	<FlagWithTagline title="Tagline" image={{ alt: "A pride flag.", ...flag }}>
 		<ToString slot="center">
 			<div
 				style={{
 					fontSize: "4.5rem",
 					fontFamily: "var(--header-font)",
-					fontWeight: "500",
+					fontWeight: "600",
+					lineHeight: "5rem",
+					color: "var(--fg-color)",
 				}}
 			>
 				<p>For every color,<br />For everyone</p>
 			</div>
 		</ToString>
-		<ToString slot="right">test</ToString>
-	</ThreeColumns>
+	</FlagWithTagline>
 	<section id="our-mission">
 		<h1>Our Mission</h1>
 		<p>
@@ -159,3 +157,10 @@ import ThreeColumns from "../sections/ThreeColumns.astro";
 		</div>
 	</footer>
 </Base>
+
+<style>
+	#animated-hero {
+		height: 60vh;
+		background-color: darkmagenta;
+	}
+</style>
