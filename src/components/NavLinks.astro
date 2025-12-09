@@ -50,13 +50,17 @@ const { routes, ...props } = Astro.props;
 		}
 	}
 
-	.nav-link.highlight {
+	.nav-link.highlighted {
 		background: var(--accent-color);
-		padding: 1rem;
+		padding: 0.5rem;
+		width: 16rem;
+		text-align: center;
 		flex: 1;
-		border-radius: 12px;
+		border-radius: var(--round-edge);
+
 		&:hover {
-			backdrop-filter: brightness(75%);
+			background: white;
+			color: var(--accent-color);
 		}
 	}
 </style>
