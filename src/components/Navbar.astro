@@ -59,10 +59,11 @@ const { siteMetadata, routes } = Astro.props;
 		align-items: center;
 		flex-direction: row;
 		position: fixed;
-		background-color: green;
+		background-color: var(--bg-color);
 		height: 10rem;
 		overflow: hidden;
 		transition: height 300ms;
+		filter: var(--shadow);
 
 		&[data-prev-scroll="down"] {
 			height: 0;
