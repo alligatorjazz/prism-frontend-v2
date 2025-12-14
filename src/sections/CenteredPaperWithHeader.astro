@@ -1,0 +1,55 @@
+---
+import slugify from "slugify";
+const { title } = Astro.props;
+---
+
+<section id={slugify(title, { strict: true })} title={title}>
+	<div class="flag">
+		<LongFlag />
+	</div>
+	<div class="tagline"><slot name="center" /></div>
+	<div class="spacer"></div>
+</section>
+
+<style lang={"scss"} >
+	@use "../styles/utils" as *;
+
+	section {
+		background: var(--bg-color);
+		display: grid;
+		grid-template-columns: 2fr 2fr 2fr;
+		gap: 1rem;
+
+		&.full-width {
+			width: 100%;
+		}
+
+		& > div {
+			/* border: 1px solid magenta; */
+		}
+
+		.flag {
+			display: flex;
+			align-items: center;
+			/* background: #20dd2233; */
+		}
+
+		.tagline {
+			display: flex;
+			justify-content: center;
+			flex: 1;
+			white-space: nowrap;
+			/* background: #d123ff33 */
+		}
+
+		.spacer {
+			flex: 1;
+			/* background: #ff553333; */
+		}
+
+		@include breakpoint-up(md) {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+</style>
