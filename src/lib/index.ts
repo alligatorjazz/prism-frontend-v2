@@ -1,3 +1,4 @@
+import murmurhash from "murmurhash";
 import { siteBreakpoints } from "../config";
 
 export type ArrayElement<ArrayType extends readonly unknown[]> =
@@ -130,4 +131,8 @@ export function repeatRandom<T>(
   }
 
   return array as T[];
+}
+
+export function hash(value: string | object) {
+  return murmurhash.v3(value.toString());
 }

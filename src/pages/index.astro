@@ -10,8 +10,18 @@ import flag from "../assets/img/long-pride-flag.png";
 import CenteredPaperWithHeader from "../sections/CenteredPaperWithHeader.astro";
 import ColoredHeader from "../sections/ColoredHeader.astro";
 import CardsWithHeader from "../sections/CardsWithHeader.astro";
+import { faker } from "@faker-js/faker";
+import EventsWithHeader from "../sections/EventsWithHeader.astro";
 
-const fakeEvents = [];
+const fakeEvents = new Array(12).fill(null).map(() => {
+	return {
+		name: faker.lorem.words({ min: 2, max: 6 }),
+		date: faker.date.future().toString(),
+		location: faker.lorem.words({ min: 1, max: 5 }),
+		image: faker.image.urlPicsumPhotos(),
+	};
+});
+
 ---
 
 <Base
@@ -62,24 +72,7 @@ const fakeEvents = [];
 			{ label: "School Policy Hub", background: "blue", href: "/" },
 		]}
 	/>
-	<section id="upcoming-events">
-		<div><h1>Upcoming Events</h1></div>
-		<div>
-			<ul>
-				<li><a href="/"><div></div></a></li>
-				<li><a href="/"><div></div></a></li>
-				<li><a href="/"><div></div></a></li>
-			</ul>
-			<div>
-				<button type="button">1</button>
-				<button type="button">2</button>
-				<button type="button">3</button>
-				<button type="button">4</button>
-				<button type="button">5</button>
-				<button type="button">6</button>
-			</div>
-		</div>
-	</section>
+	<EventsWithHeader title="Upcoming Events" events={fakeEvents}/>
 	<section id="our-partners">
 		<p>
 			PRISM prides itself in being a collaborative member of the LGBT community

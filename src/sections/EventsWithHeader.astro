@@ -1,10 +1,22 @@
 ---
 import slugify from "slugify";
-
+import ColoredHeader from "../components/ColoredHeader.astro";
+import EventList from "../components/EventList.astro";
 interface Props {
 	title: string;
 	events: { name: string; date: string; location: string; image: string }[];
 }
+
+const { title, events } = Astro.props;
 ---
 
-<section id={slugify(title, { strict: true })}></section>
+<section id={slugify(title, { strict: true })}>
+	<ColoredHeader background="var(--bg-color)"><h1>{title}</h1></ColoredHeader>
+	<EventList events={events} />
+</section>
+
+<style>
+	h1 {
+		text-align: center;
+	}
+</style>

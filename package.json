@@ -9,12 +9,14 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@faker-js/faker": "^10.2.0",
     "@iconify-json/ri": "^1.2.6",
     "@payloadcms/richtext-lexical": "^3.65.0",
     "astro": "^5.15.9",
     "astro-icon": "^1.1.5",
     "dayjs": "^1.11.19",
     "eslint": "^9.39.1",
+    "murmurhash": "^2.0.1",
     "prettier": "^3.7.3",
     "prettier-plugin-astro": "^0.14.1",
     "sass": "^1.94.2",
