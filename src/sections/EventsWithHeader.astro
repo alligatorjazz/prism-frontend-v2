@@ -1,0 +1,10 @@
+---
+import slugify from "slugify";
+
+interface Props {
+	title: string;
+	events: { name: string; date: string; location: string; image: string }[];
+}
+---
+
+<section id={slugify(title, { strict: true })}></section>

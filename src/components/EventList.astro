@@ -1,0 +1,38 @@
+---
+interface Props {
+	events: { name: string; date: string; location: string; image: string }[];
+}
+const { events } = Astro.props;
+---
+
+<ul class="event-list">
+	{
+		events.map(({ name, date, location, image }) => (
+			<li class="rounded">
+				<div>
+					<img src={image} alt={name} />
+				</div>
+				<div class="info">
+					<h1>{name}</h1>
+					<h2>{date}</h2>
+					<h3>{location}</h3>
+				</div>
+				<a href="/">Learn More</a>
+			</li>
+		))
+	}
+</ul>
+<style>
+	.event-list {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+		list-style: none;
+		margin: 0;
+
+		li {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+</style>
