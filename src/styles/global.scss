@@ -1,5 +1,14 @@
 @use "utils" as *;
 
+:root {
+  // TODO: make these values load from utils;
+  --sm: 40rem;
+  --md: 48rem;
+  --lg: 64rem;
+  --xl: 80rem;
+  --2xl: 96rem;
+}
+
 * {
   box-sizing: border-box;
 }

@@ -11,6 +11,9 @@
 - [ ] STI Clinic Search
 
 ## Features
+- [ ] Section Backgrounds
 - [ ] Section Borders
+- [ ] Configurable Theme Colors / Fonts
 - [ ] Banner Alerts
 - [ ] Search Bar
+- [ ] OpenGraph Props for Pages

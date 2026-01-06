@@ -1,55 +1,44 @@
 ---
 import slugify from "slugify";
+import { Image } from "astro:assets";
+import tornPaper from "../assets/img/torn-notebook-paper.png";
+interface Props {
+	title: string;
+}
+
+// TODO: implement tornPaper
 const { title } = Astro.props;
 ---
 
 <section id={slugify(title, { strict: true })} title={title}>
-	<div class="flag">
-		<LongFlag />
+	<div class="header"><slot name="header" /></div>
+	<div class="content">
+		<slot name="content" />
 	</div>
-	<div class="tagline"><slot name="center" /></div>
-	<div class="spacer"></div>
 </section>
 
 <style lang={"scss"} >
 	@use "../styles/utils" as *;
 
 	section {
-		background: var(--bg-color);
-		display: grid;
-		grid-template-columns: 2fr 2fr 2fr;
-		gap: 1rem;
+		background: var(--accent-color);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 2rem 0rem;
 
-		&.full-width {
-			width: 100%;
+		.header {
+			margin: auto;
+			text-align: center;
+			& > * {
+				margin: 0;
+			}
 		}
 
-		& > div {
-			/* border: 1px solid magenta; */
-		}
-
-		.flag {
-			display: flex;
-			align-items: center;
-			/* background: #20dd2233; */
-		}
-
-		.tagline {
-			display: flex;
-			justify-content: center;
-			flex: 1;
-			white-space: nowrap;
-			/* background: #d123ff33 */
-		}
-
-		.spacer {
-			flex: 1;
-			/* background: #ff553333; */
-		}
-
-		@include breakpoint-up(md) {
-			display: flex;
-			flex-direction: column;
+		.content {
+			max-width: var(--lg);
+			padding: 2rem;
+			background: var(--fg-color);
 		}
 	}
 </style>

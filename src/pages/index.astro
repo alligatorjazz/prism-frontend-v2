@@ -7,6 +7,9 @@ import centerLink from "../assets/img/centerlink-badge.png";
 import { Icon } from "astro-icon/components";
 import FlagWithTagline from "../sections/FlagWithTagline.astro";
 import flag from "../assets/img/long-pride-flag.png";
+import CenteredPaperWithHeader from "../sections/CenteredPaperWithHeader.astro";
+import ColoredHeader from "../sections/ColoredHeader.astro";
+import CardsWithHeader from "../sections/CardsWithHeader.astro";
 ---
 
 <Base
@@ -34,23 +37,29 @@ import flag from "../assets/img/long-pride-flag.png";
 			</div>
 		</ToString>
 	</FlagWithTagline>
-	<section id="our-mission">
-		<h1>Our Mission</h1>
-		<p>
+	<CenteredPaperWithHeader title="Our Mission">
+		<h1
+			style={{ fontSize: "4.5rem", fontWeight: "600", lineHeight: "5rem" }}
+			slot="header"
+		>
+			Our Mission
+		</h1>
+		<p slot="content">
 			PRISM works to expand access to LGBTQ-inclusive education and sexual
 			health resources for youth in South Florida. It's our goal to make sure
 			everyone feels included in their community, regardless of race, ethnicity,
 			religion, sexual orientation, gender identity, or gender expression.
 		</p>
-	</section>
-	<section id="resources">
-		<ul>
-			<li><a href="/"><div>Learn</div></a></li>
-			<li><a href="/"><div>Student Ambassador Program</div></a></li>
-			<li><a href="/"><div>Get Tested</div></a></li>
-			<li><a href="/"><div>School Policy Hub</div></a></li>
-		</ul>
-	</section>
+	</CenteredPaperWithHeader>
+	<CardsWithHeader
+		title="Resources"
+		cards={[
+			{ label: "Learn", background: "yellow", href: "/", textColor: "black" },
+			{ label: "Student Ambassador Program", background: "purple", href: "/" },
+			{ label: "Get Tested", background: "pink", href: "/" },
+			{ label: "School Policy Hub", background: "blue", href: "/" },
+		]}
+	/>
 	<section id="upcoming-events">
 		<div><h1>Upcoming Events</h1></div>
 		<div>

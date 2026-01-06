@@ -1,0 +1,17 @@
+---
+interface Props {
+	background?: string;
+}
+const { background } = Astro.props;
+---
+
+<div class="colored-header">
+	<slot />
+</div>
+
+<style define:vars={{ background }}>
+	.colored-header {
+		padding: 1rem 2rem;
+		background: var(--background);
+	}
+</style>

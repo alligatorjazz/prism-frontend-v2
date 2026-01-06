@@ -1,0 +1,52 @@
+---
+import slugify from "slugify";
+import ColoredHeader from "../components/ColoredHeader.astro";
+import LinkCard from "../components/LinkCard.astro";
+
+interface Props {
+	title: string;
+	background?: string;
+	cards: {
+		label: string;
+		background: string;
+		href: string;
+		textColor?: string;
+	}[];
+}
+
+const { title, background, cards } = Astro.props;
+---
+
+<section id={slugify(title, { strict: true })}>
+	<ColoredHeader
+		><slot name="header"><h1 class="cards-header">{title}</h1></slot
+		></ColoredHeader
+	>
+	<ul>
+		{
+			cards.map((card) => (
+				<li>
+					<LinkCard {...card} />
+				</li>
+			))
+		}
+	</ul>
+</section>
+
+<style>
+	.cards-header {
+		font-size: 4rem;
+		text-align: center;
+		color: var(--fg-color);
+	}
+
+	ul {
+		background: lightgray;
+		padding: 4rem;
+		list-style: none;
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+</style>
