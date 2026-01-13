@@ -1,17 +1,16 @@
 ---
 import Base from "../templates/Base.astro";
-import { Image } from "astro:assets";
-import logo from "../assets/img/prism-logo-primary.png";
 import ToString from "../components/ToString.astro";
-import centerLink from "../assets/img/centerlink-badge.png";
-import { Icon } from "astro-icon/components";
 import FlagWithTagline from "../sections/FlagWithTagline.astro";
 import flag from "../assets/img/long-pride-flag.png";
 import CenteredPaperWithHeader from "../sections/CenteredPaperWithHeader.astro";
-import ColoredHeader from "../sections/ColoredHeader.astro";
 import CardsWithHeader from "../sections/CardsWithHeader.astro";
 import { faker } from "@faker-js/faker";
 import EventsWithHeader from "../sections/EventsWithHeader.astro";
+import ContentWithHeader from "../sections/ContentWithHeader.astro";
+import Carousel from "../components/Carousel.astro";
+import NewsletterSignup from "../sections/NewsletterSignup.astro";
+import Footer from "../sections/Footer.astro"
 
 const fakeEvents = new Array(12).fill(null).map(() => {
 	return {
@@ -22,6 +21,13 @@ const fakeEvents = new Array(12).fill(null).map(() => {
 	};
 });
 
+const fakeSponsors = new Array(4).fill(null).map(() => {
+	return {
+		image: faker.image.urlPicsumPhotos(),
+		href: faker.internet.url(),
+		alt: faker.lorem.words(),
+	};
+});
 ---
 
 <Base
@@ -72,94 +78,19 @@ const fakeEvents = new Array(12).fill(null).map(() => {
 			{ label: "School Policy Hub", background: "blue", href: "/" },
 		]}
 	/>
-	<EventsWithHeader title="Upcoming Events" events={fakeEvents}/>
-	<section id="our-partners">
-		<p>
+	<EventsWithHeader title="Upcoming Events" events={fakeEvents} />
+	<ContentWithHeader title="Our Partners" color="white" background="black">
+		<p style={"font-size:1.2rem"}>
 			PRISM prides itself in being a collaborative member of the LGBT community
 			in South Florida. See some of our partners below! These organizations,
 			businesses, and individuals have shown their steadfast commitment to our
 			motto: "For Every Color, For Everyone" through partnered events,
 			fundraising initiatives, grants, sponsorships, and other collaborations.
 		</p>
-		<ul>
-			<li><a href=""><div></div> </a></li>
-			<li><a href=""><div></div> </a></li>
-			<li><a href=""><div></div> </a></li>
-			<li><a href=""><div></div> </a></li>
-			<li><a href=""><div></div> </a></li>
-		</ul>
-	</section>
-	<section id="newsletter-signup">
-		<form name="newsletter-signup">
-			<p>Subscribe to our Newsletter</p>
-			<div>
-				<label for="first-name">First Name</label>
-				<input type="text" name="first-name" />
-			</div>
-			<div>
-				<label for="last-name">Last Name</label>
-				<input type="text" name="last-name" />
-			</div>
-			<div>
-				<label for="email">Email</label>
-				<input type="email" name="email" />
-			</div>
-			<button type="submit">Subscribe</button>
-		</form>
-	</section>
-	<footer>
-		<div>
-			<div>
-				<Image src={logo} alt={"placeholder"} />
-				<p>© 2020-{`${new Date().getFullYear()}`}by PRISM FL, Inc.</p>
-			</div>
-			<div>
-				<p>Phone: (561) 291-9207</p>
-				<p>Email: info@prismfl.org</p>
-				<ul>
-					<li>
-						<a name="placeholder" href="/404"><Icon name="ri:discord-fill" /></a
-						>
-					</li>
-					<li>
-						<a name="placeholder" href="/404"><Icon name="ri:tiktok-fill" /></a>
-					</li>
-					<li>
-						<a name="placeholder" href="/404"
-							><Icon name="ri:youtube-fill" />
-						</a>
-					</li>
-					<li>
-						<a name="placeholder" href="/404"
-							><Icon name="ri:instagram-fill" />
-						</a>
-					</li>
-					<li>
-						<a name="placeholder" href="/404"
-							><Icon name="ri:facebook-fill" />
-						</a>
-					</li>
-				</ul>
-			</div>
-			<div>
-				<Image src={centerLink} alt="placeholder" />
-			</div>
-		</div>
-		<div>
-			<p>
-				PRISM FL, Inc (EIN: 85-0891778) is a tax-exempt non-profit organization
-				under Internal Revenue Code (IRC) section 501(c)(3). Donations and other
-				contributions to PRISM FL, Inc. are tax-deductible under IRC Section
-				170.
-			</p>
-			<p>
-				"A COPY OF THE OFFICIAL REGISTRATION AND FINANCIAL INFORMATION OF PRISM
-				FL, INC, CH62359, MAY BE OBTAINED FROM THE DIVISION OF CONSUMER SERVICES
-				BY CALLING TOLL-FREE (800-435-7352) WITHIN THE STATE. REGISTRATION DOES
-				NOT IMPLY ENDORSEMENT, APPROVAL, OR RECOMMENDATION BY THE STATE."
-			</p>
-		</div>
-	</footer>
+		<Carousel items={fakeSponsors} />
+	</ContentWithHeader>
+	<NewsletterSignup />
+	<Footer/>
 </Base>
 
 <style>

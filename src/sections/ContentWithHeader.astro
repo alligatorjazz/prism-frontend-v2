@@ -1,0 +1,30 @@
+---
+import slugify from "slugify";
+import ColoredHeader from "../components/ColoredHeader.astro";
+
+interface Props {
+	title: string;
+	background?: string;
+	color?: string;
+}
+
+const { title, background, color } = Astro.props;
+---
+
+<section id={slugify(title, { strict: true })} style={{ background, color }}>
+	<ColoredHeader background={background ?? "var(--bg-color)"}
+		><h1>{title}</h1></ColoredHeader
+	>
+	<div class="content"><slot /></div>
+</section>
+
+<style>
+	section {
+		padding: 8rem;
+	}
+
+	h1 {
+		text-align: center;
+		font-size: 4rem;
+	}
+</style>

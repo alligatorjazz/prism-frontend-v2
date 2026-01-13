@@ -1,0 +1,91 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/img/prism-logo-primary.png";
+import centerLink from "../assets/img/centerlink-badge.png";
+import { Icon } from "astro-icon/components";
+---
+
+<footer>
+	<div class="info">
+		<div class="logo">
+			<Image src={logo} alt={"placeholder"} />
+			<p>© 2020-{`${new Date().getFullYear()}`}by PRISM FL, Inc.</p>
+		</div>
+		<div class="contact">
+			<p>Phone: (561) 291-9207</p>
+			<p>Email: info@prismfl.org</p>
+			<ul class="socials">
+				<li>
+					<a name="placeholder" href="/404"
+						><Icon size={32} name="ri:discord-fill" /></a
+					>
+				</li>
+				<li>
+					<a name="placeholder" href="/404"
+						><Icon size={32} name="ri:tiktok-fill" /></a
+					>
+				</li>
+				<li>
+					<a name="placeholder" href="/404"
+						><Icon size={32} name="ri:youtube-fill" />
+					</a>
+				</li>
+				<li>
+					<a name="placeholder" href="/404"
+						><Icon size={32} name="ri:instagram-fill" />
+					</a>
+				</li>
+				<li>
+					<a name="placeholder" href="/404"
+						><Icon size={32} name="ri:facebook-fill" />
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="certifications">
+			<Image src={centerLink} alt="placeholder" />
+		</div>
+	</div>
+	<div class="disclaimer">
+		<p>
+			PRISM FL, Inc (EIN: 85-0891778) is a tax-exempt non-profit organization
+			under Internal Revenue Code (IRC) section 501(c)(3). Donations and other
+			contributions to PRISM FL, Inc. are tax-deductible under IRC Section 170.
+		</p>
+		<p>
+			"A COPY OF THE OFFICIAL REGISTRATION AND FINANCIAL INFORMATION OF PRISM
+			FL, INC, CH62359, MAY BE OBTAINED FROM THE DIVISION OF CONSUMER SERVICES
+			BY CALLING TOLL-FREE (800-435-7352) WITHIN THE STATE. REGISTRATION DOES
+			NOT IMPLY ENDORSEMENT, APPROVAL, OR RECOMMENDATION BY THE STATE."
+		</p>
+	</div>
+</footer>
+
+<style>
+	footer {
+		max-width: var(--lg);
+		margin: auto;
+
+		.info {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			.contact {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.socials {
+				display: flex;
+				justify-content: space-evenly;
+			}
+		}
+	}
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+</style>
