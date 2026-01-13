@@ -10,7 +10,7 @@
 - [ ] Events
 - [ ] STI Clinic Search
 - [ ] "Do Not Use My Personal Information" / Privacy Policy
-
+- [ ] linode backups
 ## Features
 - [ ] Section Backgrounds
 - [ ] Section Borders
