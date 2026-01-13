@@ -9,6 +9,7 @@
 - [ ] SPH
 - [ ] Events
 - [ ] STI Clinic Search
+- [ ] "Do Not Use My Personal Information" / Privacy Policy
 
 ## Features
 - [ ] Section Backgrounds
