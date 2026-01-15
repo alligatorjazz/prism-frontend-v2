@@ -1,6 +1,3 @@
-[submodule "inbox"]
-	path = inbox
-	url = https://github.com/alligatorjazz/webbed-site-types
 [submodule "src/inbox"]
 	path = src/inbox
 	url = https://github.com/alligatorjazz/prism-types-v2
