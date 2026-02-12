@@ -1,5 +1,6 @@
 import murmurhash from "murmurhash";
 import { siteBreakpoints } from "../config";
+import slugify from "slugify";
 
 export type ArrayElement<ArrayType extends readonly unknown[]> =
   ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
@@ -135,4 +136,8 @@ export function repeatRandom<T>(
 
 export function hash(value: string | object) {
   return murmurhash.v3(value.toString());
+}
+
+export function strictSlug(text: string) {
+  return slugify(text, { lower: true, strict: true });
 }

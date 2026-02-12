@@ -1,6 +1,7 @@
 import type { Route, SiteMetadata } from "../types";
 import * as API from "../inbox/payload-types";
 import urlJoin from "url-join";
+import { strictSlug } from "../lib";
 
 type Collection = keyof API.Config["collections"];
 type APIResponse<DocumentType extends Collection> = {
@@ -42,11 +43,17 @@ const api = {
   // Delete by ID	DELETE	/api/{collection-slug}/{id}
 };
 
-console.log(await api.find("pages"));
-
 // TODO: implement site route fetching
 export async function getSiteRoutes(): Promise<Route[]> {
-  return [];
+  const sitePages = await api.find("pages");
+  return (sitePages?.docs ?? []).map((page) => {
+    return {
+      type: "internal",
+      // TODO: implement slug / title separation
+      path: strictSlug(page.title),
+      displayName: page.title,
+    };
+  });
 }
 
 // TODO: implement real metadata fetching
