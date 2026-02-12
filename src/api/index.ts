@@ -4,7 +4,7 @@ import urlJoin from "url-join";
 import { strictSlug } from "../lib";
 
 type Collection = keyof API.Config["collections"];
-type APIResponse<DocumentType extends Collection> = {
+type PluralAPIResponse<DocumentType extends Collection> = {
   docs: API.Config["collections"][DocumentType][];
   hasNextPage: boolean;
   hasPrevPage: boolean;
@@ -25,7 +25,7 @@ const apiUrl =
 const api = {
   find: async <T extends Collection>(
     slug: T,
-  ): Promise<APIResponse<T> | null> => {
+  ): Promise<PluralAPIResponse<T> | null> => {
     try {
       const response = await fetch(urlJoin(apiUrl, slug));
       return await response.json();
@@ -34,6 +34,19 @@ const api = {
       return null;
     }
   },
+  findById: async <T extends Collection>(
+    slug: T,
+    id: string,
+  ): Promise<API.Config["collections"][T] | null> => {
+    try {
+      const response = await fetch(urlJoin(apiUrl, slug, id));
+      return await response.json();
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  },
+
   // Find By ID	GET	/api/{collection-slug}/{id}
   // Count	GET	/api/{collection-slug}/count
   // Create	POST	/api/{collection-slug}
@@ -50,10 +63,15 @@ export async function getSiteRoutes(): Promise<Route[]> {
     return {
       type: "internal",
       // TODO: implement slug / title separation
-      path: strictSlug(page.title),
+      path: "/" + strictSlug(page.title),
       displayName: page.title,
+      id: page.id,
     };
   });
+}
+
+export async function getPage(id: string): Promise<API.Page> | null {
+  return await api.findById("pages", id);
 }
 
 // TODO: implement real metadata fetching

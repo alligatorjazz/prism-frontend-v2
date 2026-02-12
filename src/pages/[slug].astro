@@ -1,0 +1,16 @@
+---
+import { getPage, getSiteRoutes } from "../api";
+
+const routes = (await getSiteRoutes()).filter(
+	(route) => route.type === "internal",
+);
+const { slug } = Astro.params;
+const id = routes.find((route) => route.path.replaceAll("/", "") === slug)?.id;
+if (!id) {
+	return Astro.redirect("/404");
+}
+
+const page = await getPage(id);
+---
+
+<p>{JSON.stringify(page)}</p>

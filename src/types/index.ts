@@ -31,4 +31,4 @@ export type Route = (
       type: "external";
       url: string;
     }
-) & { displayName: string; highlight?: boolean };
+) & { displayName: string; highlight?: boolean; id: string };

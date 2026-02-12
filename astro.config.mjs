@@ -10,4 +10,5 @@ export default defineConfig({
     ? "http://localhost:3009"
     : "https://prismfl.org",
   integrations: [icon()],
+  output: "server",
 });
