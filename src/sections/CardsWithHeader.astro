@@ -2,19 +2,10 @@
 import slugify from "slugify";
 import ColoredHeader from "../components/ColoredHeader.astro";
 import LinkCard from "../components/LinkCard.astro";
+import type { Block } from "../types/sections";
 
-interface Props {
-	title: string;
-	background?: string;
-	cards: {
-		label: string;
-		background: string;
-		href: string;
-		textColor?: string;
-	}[];
-}
-
-const { title, background, cards } = Astro.props;
+type Props = Block<"CardsWithHeader">;
+const { title, backgroundColor, cards } = Astro.props;
 ---
 
 <section id={slugify(title, { strict: true })}>
@@ -24,7 +15,7 @@ const { title, background, cards } = Astro.props;
 	>
 	<ul>
 		{
-			cards.map((card) => (
+			cards?.map((card) => (
 				<li>
 					<LinkCard {...card} />
 				</li>

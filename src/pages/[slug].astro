@@ -1,5 +1,7 @@
 ---
 import { getPage, getSiteRoutes } from "../api";
+import CardsWithHeader from "../sections/CardsWithHeader.astro";
+import Base from "../templates/Base.astro";
 
 const routes = (await getSiteRoutes()).filter(
 	(route) => route.type === "internal",
@@ -11,6 +13,30 @@ if (!id) {
 }
 
 const page = await getPage(id);
+if (!page) {
+	return Astro.redirect("/500");
+}
 ---
 
-<p>{JSON.stringify(page)}</p>
+<!-- // TODO: page loader -->
+<Base
+	pageMetadata={{
+		title: page.title,
+		description: page.description,
+		type: "website",
+		// TODO: implement page preview images & alt text
+		image: "https://picsum.photos/200",
+		"image:alt": page.description,
+	}}
+>
+	{
+		page.sections.map((section) => {
+			switch (section.blockType) {
+				case "CardsWithHeader":
+					return <CardsWithHeader {...section} />;
+				default:
+					return <p>{section.blockType}: unimplemented</p>;
+			}
+		})
+	}
+</Base>

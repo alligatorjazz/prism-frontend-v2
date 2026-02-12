@@ -1,32 +1,33 @@
 ---
-interface Props {
-	label: string;
-	background: string;
-	textColor?: string;
-	href: string;
-}
-const { label, background, href, textColor } = Astro.props;
+import type { ArrayElement, Exists } from "../lib";
+import type { Block } from "../types/sections";
+
+type Props = ArrayElement<Exists<Block<"CardsWithHeader">["cards"]>>;
+const { label, backgroundColor, href, textColor } = Astro.props;
 ---
 
 <div class="link-card rounded">
-	<a href={href} style={{ background: background }}>
+	<a href={href} style={{ background: backgroundColor }}>
 		<div>{label}</div>
 	</a>
 </div>
 
-<style define:vars={{ background, textColor }}>
+<style define:vars={{ backgroundColor, textColor }}>
 	.link-card {
 		background: var(--background);
 		--size: 16rem;
 		width: var(--size);
 		height: var(--size);
-		border: 2px solid white;
-		padding: 1rem;
 		font-weight: bold;
 		font-family: var(--header-font);
 		font-size: 1.2rem;
 
+		border: 2px solid white;
 		a {
+			padding: 1rem;
+			display: block;
+			width: 100%;
+			height: 100%;
 			color: var(--textColor);
 			text-decoration: none;
 		}

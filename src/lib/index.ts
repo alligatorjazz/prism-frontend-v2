@@ -2,8 +2,10 @@ import murmurhash from "murmurhash";
 import { siteBreakpoints } from "../config";
 import slugify from "slugify";
 
-export type ArrayElement<ArrayType extends readonly unknown[]> =
+export type ArrayElement<ArrayType extends readonly any[]> =
   ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+
+export type Exists<T> = Exclude<T, null | undefined>;
 
 export function multiclass(...args: (string | undefined)[]) {
   // combines several css module names into single class
