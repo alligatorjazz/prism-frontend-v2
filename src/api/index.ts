@@ -1,4 +1,53 @@
 import type { Route, SiteMetadata } from "../types";
+import * as API from "../inbox/payload-types";
+import urlJoin from "url-join";
+
+type Collection = keyof API.Config["collections"];
+type APIResponse<DocumentType extends Collection> = {
+  docs: API.Config["collections"][DocumentType][];
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+  limit: number;
+  nextPage: string | null;
+  page: number;
+  pagingCounter: number;
+  prevPage: null;
+  totalDocs: number;
+  totalPages: number;
+};
+
+const apiUrl =
+  import.meta.env.PUBLIC_PROD_OVERRIDE === "true" || import.meta.env.PROD
+    ? "https://admin.prismfl.org/api"
+    : "https://localhost:3009/api";
+
+const api = {
+  find: async <T extends Collection>(
+    slug: T,
+  ): Promise<APIResponse<T> | null> => {
+    try {
+      const response = await fetch(urlJoin(apiUrl, slug));
+      return await response.json();
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  },
+  // Find By ID	GET	/api/{collection-slug}/{id}
+  // Count	GET	/api/{collection-slug}/count
+  // Create	POST	/api/{collection-slug}
+  // Update	PATCH	/api/{collection-slug}
+  // Update By ID	PATCH	/api/{collection-slug}/{id}
+  // Delete	DELETE	/api/{collection-slug}
+  // Delete by ID	DELETE	/api/{collection-slug}/{id}
+};
+
+console.log(await api.find("pages"));
+
+// TODO: implement site route fetching
+export async function getSiteRoutes(): Promise<Route[]> {
+  return [];
+}
 
 // TODO: implement real metadata fetching
 export async function getSiteMetadata(): Promise<SiteMetadata> {
@@ -9,26 +58,6 @@ export async function getSiteMetadata(): Promise<SiteMetadata> {
       "PRISM works to expand access to LGBTQ-inclusive education and sexual health resources for youth in South Florida. It's our goal to make sure everyone feels included in their community, regardless of race, ethnicity, religion, sexual orientation, gender identity, or gender expression.",
     logo: "/img/prism-logo-primary.png",
   };
-  return new Promise((resolve) =>
-    setTimeout(() => resolve(dummy), Math.random() * 500),
-  );
-}
-
-export async function getSiteRoutes(): Promise<Route[]> {
-  const dummy: Route[] = [
-    { type: "internal", path: "/about", displayName: "About" },
-    { type: "internal", path: "/get-involved", displayName: "Get Involved" },
-    { type: "internal", path: "/resources", displayName: "Resources" },
-    { type: "internal", path: "/events", displayName: "Events" },
-    { type: "internal", path: "/more", displayName: "More" },
-    {
-      type: "internal",
-      path: "/events",
-      displayName: "Donate",
-      highlight: true,
-    },
-  ];
-
   return new Promise((resolve) =>
     setTimeout(() => resolve(dummy), Math.random() * 500),
   );

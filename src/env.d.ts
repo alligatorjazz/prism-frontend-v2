@@ -1,5 +1,6 @@
 interface ImportMetaEnv {
   readonly NODE_ENV: string;
+  readonly PUBLIC_PROD_OVERRIDE: string;
   // more env variables...
 }
 
