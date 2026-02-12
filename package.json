@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^9.5.3",
     "@faker-js/faker": "^10.2.0",
     "@iconify-json/ri": "^1.2.6",
     "@payloadcms/richtext-lexical": "^3.65.0",
