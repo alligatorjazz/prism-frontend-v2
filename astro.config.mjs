@@ -10,8 +10,11 @@ import node from "@astrojs/node";
 export default defineConfig({
   site: import.meta.env.NODE_ENV
     ? "http://localhost:3009"
-    : "https://prismfl.org",
-
+    : // TODO: change to prismfl.org on launch
+      "https://staging.prismfl.org",
+  server: {
+    port: import.meta.env.FRONTEND_LOCAL_PORT ?? 4321,
+  },
   integrations: [icon()],
   output: "server",
 
@@ -19,3 +22,4 @@ export default defineConfig({
     mode: "standalone",
   }),
 });
+
