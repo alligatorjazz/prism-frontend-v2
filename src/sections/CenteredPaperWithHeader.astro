@@ -1,7 +1,9 @@
 ---
 import slugify from "slugify";
 import { Image } from "astro:assets";
-import tornPaper from "../assets/img/torn-notebook-paper.png";
+import PaperBorder1 from "../assets/img/paper-border-1.svg";
+import PaperBorder2 from "../assets/img/paper-border-2.svg";
+
 interface Props {
 	title: string;
 }
@@ -12,8 +14,17 @@ const { title } = Astro.props;
 
 <section id={slugify(title, { strict: true })} title={title}>
 	<div class="header"><slot name="header" /></div>
-	<div class="content">
-		<slot name="content" />
+	<div class={"paper"}>
+		<div class="border top">
+			<PaperBorder1 />
+		</div>
+		<!-- <Image src={tornPaper} alt={"A torn piece of notebook paper."} /> -->
+		<!-- <div class="content"> -->
+		<!-- 	<slot name="content" /> -->
+		<!-- </div> -->
+		<div class="border bottom">
+			<PaperBorder2 />
+		</div>
 	</div>
 </section>
 
@@ -35,10 +46,29 @@ const { title } = Astro.props;
 			}
 		}
 
-		.content {
+		.paper {
 			max-width: var(--lg);
-			padding: 2rem;
-			background: var(--fg-color);
+
+			img {
+				width: 100%;
+				height: ;
+				object-fit: contain;
+			}
+
+			.border > svg {
+				width: 100%;
+			}
+
+			.border.top {
+				transform: scaleY(-1);
+				img {
+					object-fit: none;
+					object-position: -64px;
+				}
+			}
+			/* .content { */
+			/* 	width: 100%; */
+			/* } */
 		}
 	}
 </style>
