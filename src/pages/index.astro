@@ -10,7 +10,7 @@ import EventsWithHeader from "../sections/EventsWithHeader.astro";
 import ContentWithHeader from "../sections/ContentWithHeader.astro";
 import Carousel from "../components/Carousel.astro";
 import NewsletterSignup from "../sections/NewsletterSignup.astro";
-import Footer from "../sections/Footer.astro"
+import Footer from "../sections/Footer.astro";
 
 const fakeEvents = new Array(12).fill(null).map(() => {
 	return {
@@ -42,15 +42,7 @@ const fakeSponsors = new Array(4).fill(null).map(() => {
 	<section id="animated-hero"></section>
 	<FlagWithTagline title="Tagline" image={{ alt: "A pride flag.", ...flag }}>
 		<ToString slot="center">
-			<div
-				style={{
-					fontSize: "4.5rem",
-					fontFamily: "var(--header-font)",
-					fontWeight: "600",
-					lineHeight: "5rem",
-					color: "var(--fg-color)",
-				}}
-			>
+			<div>
 				<p>For every color,<br />For everyone</p>
 			</div>
 		</ToString>
@@ -87,10 +79,10 @@ const fakeSponsors = new Array(4).fill(null).map(() => {
 			motto: "For Every Color, For Everyone" through partnered events,
 			fundraising initiatives, grants, sponsorships, and other collaborations.
 		</p>
-		<Carousel items={fakeSponsors} />
+		<!-- <Carousel items={fakeSponsors} /> -->
 	</ContentWithHeader>
-	<NewsletterSignup />
-	<Footer/>
+	<!-- <NewsletterSignup /> -->
+	<Footer />
 </Base>
 
 <style>
