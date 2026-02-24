@@ -1,8 +1,9 @@
 ---
 import slugify from "slugify";
 import { Image } from "astro:assets";
-import PaperBorder1 from "../assets/img/paper-border-1.svg";
-import PaperBorder2 from "../assets/img/paper-border-2.svg";
+import TornPaperBorder from "../components/TornPaperBorder.astro";
+import paperNoise from "../assets/img/paper-noise.png";
+import { getImage } from "astro:assets";
 
 interface Props {
 	title: string;
@@ -10,20 +11,21 @@ interface Props {
 
 // TODO: implement tornPaper
 const { title } = Astro.props;
+const { src: noise } = await getImage({ src: paperNoise, format: "webp" });
+const backgroundImage = `url("${noise}")`;
 ---
 
 <section id={slugify(title, { strict: true })} title={title}>
 	<div class="header"><slot name="header" /></div>
 	<div class={"paper"}>
 		<div class="border top">
-			<PaperBorder1 />
+			<TornPaperBorder />
 		</div>
-		<!-- <Image src={tornPaper} alt={"A torn piece of notebook paper."} /> -->
-		<!-- <div class="content"> -->
-		<!-- 	<slot name="content" /> -->
-		<!-- </div> -->
+		<div class="content" style={{ backgroundImage }}>
+			<slot name="content" />
+		</div>
 		<div class="border bottom">
-			<PaperBorder2 />
+			<TornPaperBorder offset />
 		</div>
 	</div>
 </section>
@@ -48,27 +50,32 @@ const { title } = Astro.props;
 
 		.paper {
 			max-width: var(--lg);
-
-			img {
-				width: 100%;
-				height: ;
-				object-fit: contain;
-			}
-
-			.border > svg {
-				width: 100%;
-			}
+			display: flex;
+			flex-direction: column;
 
 			.border.top {
 				transform: scaleY(-1);
-				img {
-					object-fit: none;
-					object-position: -64px;
+			}
+
+			.border.bottom {
+				transform: scaleX(-1);
+			}
+
+			.content {
+				padding: 0rem 2rem;
+				display: block;
+				width: 100%;
+				p {
+					text-align: justify;
+					font-size: 1.25rem;
+					line-height: 2rem;
+					text-decoration: underline;
+					text-decoration-color: grey;
+					text-underline-offset: 9px;
+					border-bottom: 2px solid grey;
+					border-top: 2px solid grey;
 				}
 			}
-			/* .content { */
-			/* 	width: 100%; */
-			/* } */
 		}
 	}
 </style>
