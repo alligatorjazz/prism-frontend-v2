@@ -1,6 +1,5 @@
 ---
 import slugify from "slugify";
-import { Image } from "astro:assets";
 import TornPaperBorder from "../components/TornPaperBorder.astro";
 import paperNoise from "../assets/img/paper-noise.png";
 import { getImage } from "astro:assets";
@@ -38,7 +37,7 @@ const backgroundImage = `url("${noise}")`;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		padding: 2rem 0rem;
+		padding: 2rem 1rem;
 
 		.header {
 			margin: auto;
