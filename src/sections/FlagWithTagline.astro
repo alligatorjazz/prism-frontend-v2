@@ -1,10 +1,10 @@
 ---
-import slugify from "slugify";
+import { strictSlug } from "../lib";
 import LongFlag from "../components/LongFlag.astro";
 const { title, image } = Astro.props;
 ---
 
-<section id={slugify(title, { strict: true })} title={title}>
+<section id={strictSlug(title)} title={title}>
 	<div class="flag">
 		<LongFlag />
 	</div>

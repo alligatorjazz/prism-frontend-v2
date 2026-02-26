@@ -1,14 +1,14 @@
 ---
-import slugify from "slugify";
 import ColoredHeader from "../components/ColoredHeader.astro";
+import { strictSlug } from "../lib";
 import LinkCard from "../components/LinkCard.astro";
 import type { Block } from "../types/sections";
 
 type Props = Block<"CardsWithHeader">;
-const { title, backgroundColor, cards } = Astro.props;
+const { title, cards, backgroundImage, backgroundColor } = Astro.props;
 ---
 
-<section id={slugify(title, { strict: true })}>
+<section id={strictSlug(title)}>
 	<ColoredHeader
 		><slot name="header"><h1 class="cards-header">{title}</h1></slot
 		></ColoredHeader
@@ -24,20 +24,30 @@ const { title, backgroundColor, cards } = Astro.props;
 	</ul>
 </section>
 
-<style>
+<style lang="scss">
+	@use "../styles/utils" as *;
+
 	.cards-header {
-		font-size: 4rem;
 		text-align: center;
+		font-size: 3rem;
 		color: var(--fg-color);
+
+		@include breakpoint-up(md) {
+			font-size: 4rem;
+		}
 	}
 
 	ul {
 		background: lightgray;
-		padding: 4rem;
+		padding: 2rem;
 		list-style: none;
 		display: flex;
 		justify-content: space-evenly;
 		align-items: center;
 		flex-wrap: wrap;
+
+		@include breakpoint-up(md) {
+			padding: 4rem;
+		}
 	}
 </style>

@@ -1,5 +1,5 @@
 ---
-import slugify from "slugify";
+import {strictSlug} from "../lib";
 import ColoredHeader from "../components/ColoredHeader.astro";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 const { title, background, color } = Astro.props;
 ---
 
-<section id={slugify(title, { strict: true })} style={{ background, color }}>
+<section id={strictSlug(title)} style={{ background, color }}>
 	<ColoredHeader background={background ?? "var(--bg-color)"}
 		><h1>{title}</h1></ColoredHeader
 	>

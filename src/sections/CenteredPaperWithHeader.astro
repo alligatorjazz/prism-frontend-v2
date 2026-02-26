@@ -1,5 +1,5 @@
 ---
-import slugify from "slugify";
+import { strictSlug } from "../lib";
 import TornPaperBorder from "../components/TornPaperBorder.astro";
 import paperNoise from "../assets/img/paper-noise.png";
 import { getImage } from "astro:assets";
@@ -14,7 +14,7 @@ const { src: noise } = await getImage({ src: paperNoise, format: "webp" });
 const backgroundImage = `url("${noise}")`;
 ---
 
-<section id={slugify(title, { strict: true })} title={title}>
+<section id={strictSlug(title)} title={title}>
 	<div class="header"><slot name="header" /></div>
 	<div class={"paper"}>
 		<div class="border top">
