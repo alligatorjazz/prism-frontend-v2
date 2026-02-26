@@ -15,7 +15,7 @@ export type Section = {
   fullWidth?: boolean;
 };
 
-export type Block<BlockType> = Extract<
-  ArrayElement<API.Page["sections"]>,
-  { blockType: BlockType }
+export type Block<BlockType> = Omit<
+  Extract<ArrayElement<API.Page["sections"]>, { blockType: BlockType }>,
+  "blockType"
 >;
