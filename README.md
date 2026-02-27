@@ -18,3 +18,6 @@
 - [ ] Banner Alerts
 - [ ] Search Bar
 - [ ] OpenGraph Props for Pages
+
+## Tinkering
+- [ ] "image not found" link @ /image-not-found

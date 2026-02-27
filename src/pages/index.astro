@@ -60,10 +60,27 @@ const fakeSponsors = new Array(4).fill(null).map(() => {
 	<CardsWithHeader
 		title="Resources"
 		cards={[
-			{ label: "Learn",  href: "/", textColor: "black" },
-			{ label: "Student Ambassador Program",  href: "/" },
-			{ label: "Get Tested",  href: "/" },
-			{ label: "School Policy Hub",  href: "/" },
+			{
+				label: "Learn",
+				href: "/",
+				backgroundImage: "https://picsum.photos/500",
+			},
+			{
+				label: "Student Ambassador Program",
+				href: "/",
+				backgroundImage: "https://picsum.photos/500",
+			},
+			{
+				label: "Get Tested",
+				href: "/",
+				backgroundImage: "https://picsum.photos/500",
+			},
+			{
+				label: "School Policy Hub",
+				href: "/",
+				backgroundImage: "https://picsum.photos/500",
+				textColor: "green",
+			},
 		]}
 	/>
 	<EventsWithHeader title="Upcoming Events" events={fakeEvents} />

@@ -1,20 +1,51 @@
 ---
+import type { HTMLAttributes } from "astro/types";
 import type { ArrayElement, Exists } from "../lib";
 import type { Block } from "../types/sections";
+import { getImage } from "astro:assets";
+import { processColor, processMedia } from "../lib/payload";
+import CssFilterConverter from "css-filter-converter";
 
 type Props = ArrayElement<Exists<Block<"CardsWithHeader">["cards"]>>;
-const { label, backgroundColor, href, textColor } = Astro.props;
+const { label, backgroundColor, href, textColor, backgroundImage } =
+	Astro.props;
+
+let style: HTMLAttributes<"a">["style"] = {};
+const optimizedBackground = backgroundImage
+	? await getImage(processMedia(backgroundImage))
+	: null;
+const processedBgColor = processColor(backgroundColor);
+const processedTextColor = processColor(textColor);
+
+if (optimizedBackground) {
+	style = {
+		background: `url("${backgroundImage}")`,
+	};
+	if (processedBgColor) {
+		style = {
+			...style,
+			filter: CssFilterConverter.hexToFilter(processedBgColor),
+		};
+	}
+}
+
+if (!optimizedBackground && processedBgColor) {
+	style = { background: processedBgColor };
+}
+
+if (processedTextColor) {
+	style = { ...style, color: processedTextColor };
+}
 ---
 
-<div class="link-card rounded">
-	<a href={href} style={{ background: backgroundColor }}>
+<div class="link-card rounded" style={style}>
+	<a href={href}>
 		<div>{label}</div>
 	</a>
 </div>
 
-<style define:vars={{ backgroundColor, textColor }}>
+<style>
 	.link-card {
-		background: var(--background);
 		--size: 16rem;
 		width: var(--size);
 		height: var(--size);
@@ -24,11 +55,11 @@ const { label, backgroundColor, href, textColor } = Astro.props;
 
 		border: 2px solid white;
 		a {
+			color: inherit;
 			padding: 1rem;
 			display: block;
 			width: 100%;
 			height: 100%;
-			color: var(--textColor);
 			text-decoration: none;
 		}
 	}
