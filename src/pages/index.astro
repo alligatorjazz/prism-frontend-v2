@@ -8,6 +8,8 @@ import EventsWithHeader from "../sections/EventsWithHeader.astro";
 import type { SiteEvent } from "../types/payload";
 import { titleCase } from "../lib";
 import FlagWithTagline from "../sections/FlagWithTagline.astro";
+import ContentWithHeader from "../sections/ContentWithHeader.astro";
+import Carousel from "../components/Carousel.astro";
 
 const fakeEvents: SiteEvent[] = new Array(12).fill(null).map(() => {
 	return {
@@ -25,9 +27,9 @@ const fakeEvents: SiteEvent[] = new Array(12).fill(null).map(() => {
 	};
 });
 
-const fakeSponsors = new Array(4).fill(null).map(() => {
+const fakeSponsors = new Array(8).fill(null).map(() => {
 	return {
-		image: faker.image.urlPicsumPhotos(),
+		image: faker.image.urlPicsumPhotos({ width: 300, height: 300 }),
 		href: faker.internet.url(),
 		alt: faker.lorem.words(),
 	};
@@ -48,10 +50,7 @@ const fakeSponsors = new Array(4).fill(null).map(() => {
 		<p>For every color,<br />For everyone</p>
 	</FlagWithTagline>
 	<CenteredPaperWithHeader title="Our Mission">
-		<h1
-			style={{ fontSize: "4.5rem", fontWeight: "600", lineHeight: "5rem" }}
-			slot="header"
-		>
+		<h1 slot="header">
 			Our Mission
 		</h1>
 		<p slot="content">
@@ -89,28 +88,29 @@ const fakeSponsors = new Array(4).fill(null).map(() => {
 		]}
 	/>
 	<EventsWithHeader title="Upcoming Events" events={fakeEvents} />
-	<!-- <ContentWithHeader title="Our Partners" color="white" background="black"> -->
-	<!-- 	<p style={"font-size:1.2rem"}> -->
-	<!-- 		PRISM prides itself in being a collaborative member of the LGBT community -->
-	<!-- 		in South Florida. See some of our partners below! These organizations, -->
-	<!-- 		businesses, and individuals have shown their steadfast commitment to our -->
-	<!-- 		motto: "For Every Color, For Everyone" through partnered events, -->
-	<!-- 		fundraising initiatives, grants, sponsorships, and other collaborations. -->
-	<!-- 	</p> -->
-	<!-- <Carousel items={fakeSponsors} /> -->
-	<!-- </ContentWithHeader> -->
-	<!-- <NewsletterSignup /> -->
-	<!-- <Footer /> -->
-	<br />
-	<br />
-	<br />
-	<br />
-</Base>
+	<ContentWithHeader title="Our Partners" color="white" background="black">
+		<p>
+			PRISM prides itself in being a collaborative member of the LGBT community
+			in South Florida. See some of our partners below! These organizations,
+			businesses, and individuals have shown their steadfast commitment to our
+			motto: "For Every Color, For Everyone" through partnered events,
+			fundraising initiatives, grants, sponsorships, and other collaborations.
+		</p>
+		<Carousel items={fakeSponsors} />
+		<!-- </ContentWithHeader> -->
+		<!-- <NewsletterSignup /> -->
+		<!-- <Footer /> -->
+		<br />
+		<br />
+		<br />
+		<br />
+	</ContentWithHeader>
 
-<style>
-	#animated-hero {
-		/* temp */
-		height: 60vh;
-		background-color: darkmagenta;
-	}
-</style>
+	<style>
+		#animated-hero {
+			/* temp */
+			height: 60vh;
+			background-color: darkmagenta;
+		}
+	</style>
+</Base>
