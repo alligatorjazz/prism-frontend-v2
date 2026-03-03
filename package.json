@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "start": "node ./dist/server/entry.mjs",
-    "astro": "astro"
+    "astro": "astro",
+    "fetch-inbox": "(cd src/inbox && git pull)"
   },
   "dependencies": {
     "@astrojs/node": "^9.5.3",
@@ -18,7 +19,7 @@
     "astro-icon": "^1.1.5",
     "css-filter-converter": "^1.0.110",
     "dayjs": "^1.11.19",
-    "eslint": "^9.39.1",
+    "eslint": "^9.39.3",
     "murmurhash": "^2.0.1",
     "prettier": "^3.7.3",
     "prettier-plugin-astro": "^0.14.1",
@@ -28,6 +29,7 @@
     "url-join": "^5.0.0"
   },
   "devDependencies": {
-    "@sassi/breakpoints": "^1.1.0"
+    "@sassi/breakpoints": "^1.1.0",
+    "eslint-plugin-react-hooks": "^7.0.1"
   }
 }
