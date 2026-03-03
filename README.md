@@ -11,6 +11,7 @@
 - [ ] STI Clinic Search
 - [ ] "Do Not Use My Personal Information" / Privacy Policy
 - [ ] linode backups
+
 ## Features
 - [ ] Section Backgrounds
 - [ ] Section Borders
@@ -18,6 +19,8 @@
 - [ ] Banner Alerts
 - [ ] Search Bar
 - [ ] OpenGraph Props for Pages
+- [ ] Newsletter signup
+- [ ] Auto-carousel
 
 ## Tinkering
 - [ ] "image not found" link @ /image-not-found
