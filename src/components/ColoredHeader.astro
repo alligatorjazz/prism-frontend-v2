@@ -11,10 +11,16 @@ const { background } = Astro.props;
 
 <style define:vars={{ background }}>
 	.colored-header {
-		padding: 1rem 2rem;
+		margin-bottom: 2rem;
 		background: var(--background);
 		h1 {
 			margin: 0;
+			text-align: center;
+			font-size: 2.5rem;
+
+			@include breakpoint-up(md) {
+				font-size: 4rem;
+			}
 		}
 	}
 </style>
