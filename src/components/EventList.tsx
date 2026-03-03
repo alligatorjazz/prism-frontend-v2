@@ -10,7 +10,15 @@ interface Props {
   eventsPerPage?: number;
 }
 
-export function EventList({ events, eventsPerPage = 3, ...props }: Props) {
+export function EventList({
+  events: unsortedEvents,
+  eventsPerPage = 3,
+  ...props
+}: Props) {
+  // TODO: add multiple sort types
+  const events = unsortedEvents.sort((a, b) =>
+    dayjs(a.date).isAfter(b.date) ? 1 : -1,
+  );
   const uid = useMemo(() => hash(events), [events]);
   const numberOfPages = Math.ceil(events.length / eventsPerPage);
   const [currentPage, setCurrentPage] = useState(0);
@@ -60,7 +68,7 @@ export function EventList({ events, eventsPerPage = 3, ...props }: Props) {
                 </div>
                 <div className="info">
                   <h1>{title}</h1>
-                  <h2>{dayjs(date).format("DD/MM/YYYY hh:mm a")}</h2>
+                  <h2>{dayjs(date).format("MMM DD, YYYY")}</h2>
                   <h3>{location}</h3>
                 </div>
                 <div className="learn-more">
@@ -73,11 +81,17 @@ export function EventList({ events, eventsPerPage = 3, ...props }: Props) {
           },
         )}
       </ul>
-      <div>
-        <button onClick={() => previousPage()}>prev</button>
-        <button onClick={() => nextPage()}>next</button>
-        <div>{currentPage}</div>
-        <div>{JSON.stringify(pageEvents)}</div>
+      <div className="controls rounded">
+        <button onClick={() => previousPage()}>{"<"}</button>
+        {new Array(numberOfPages).fill(null).map((_, index) => (
+          <button
+            className={index === currentPage ? "current-page" : ""}
+            onClick={() => setCurrentPage(index)}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button onClick={() => nextPage()}>{">"}</button>
       </div>
     </div>
   );
