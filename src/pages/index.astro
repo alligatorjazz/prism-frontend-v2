@@ -10,6 +10,7 @@ import { titleCase } from "../lib";
 import FlagWithTagline from "../sections/FlagWithTagline.astro";
 import ContentWithHeader from "../sections/ContentWithHeader.astro";
 import Carousel from "../components/Carousel.astro";
+import NewsletterSignup from "../sections/NewsletterSignup.astro";
 
 const fakeEvents: SiteEvent[] = new Array(12).fill(null).map(() => {
 	return {
@@ -50,9 +51,7 @@ const fakeSponsors = new Array(8).fill(null).map(() => {
 		<p>For every color,<br />For everyone</p>
 	</FlagWithTagline>
 	<CenteredPaperWithHeader title="Our Mission">
-		<h1 slot="header">
-			Our Mission
-		</h1>
+		<h1 slot="header">Our Mission</h1>
 		<p slot="content">
 			PRISM works to expand access to LGBTQ-inclusive education and sexual
 			health resources for youth in South Florida. It's our goal to make sure
@@ -97,15 +96,9 @@ const fakeSponsors = new Array(8).fill(null).map(() => {
 			fundraising initiatives, grants, sponsorships, and other collaborations.
 		</p>
 		<Carousel items={fakeSponsors} />
-		<!-- </ContentWithHeader> -->
-		<!-- <NewsletterSignup /> -->
-		<!-- <Footer /> -->
-		<br />
-		<br />
-		<br />
-		<br />
 	</ContentWithHeader>
-
+	<NewsletterSignup />
+	<!-- <Footer /> -->
 	<style>
 		#animated-hero {
 			/* temp */
