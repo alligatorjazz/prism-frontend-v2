@@ -17,27 +17,47 @@ import { Icon } from "astro-icon/components";
 			<ul class="socials">
 				<li>
 					<a name="placeholder" href="/404"
-						><Icon color={"var(--text-color)"} size={42} name="ri:discord-fill" /></a
+						><Icon
+							color={"var(--text-color)"}
+							size={42}
+							name="ri:discord-fill"
+						/></a
 					>
 				</li>
 				<li>
 					<a name="placeholder" href="/404"
-						><Icon color={"var(--text-color)"} size={42} name="ri:tiktok-fill" /></a
+						><Icon
+							color={"var(--text-color)"}
+							size={42}
+							name="ri:tiktok-fill"
+						/></a
 					>
 				</li>
 				<li>
 					<a name="placeholder" href="/404"
-						><Icon color={"var(--text-color)"} size={42} name="ri:youtube-fill" />
+						><Icon
+							color={"var(--text-color)"}
+							size={42}
+							name="ri:youtube-fill"
+						/>
 					</a>
 				</li>
 				<li>
 					<a name="placeholder" href="/404"
-						><Icon color={"var(--text-color)"} size={42} name="ri:instagram-fill" />
+						><Icon
+							color={"var(--text-color)"}
+							size={42}
+							name="ri:instagram-fill"
+						/>
 					</a>
 				</li>
 				<li>
 					<a name="placeholder" href="/404"
-						><Icon color={"var(--text-color)"} size={42} name="ri:facebook-fill" />
+						><Icon
+							color={"var(--text-color)"}
+							size={42}
+							name="ri:facebook-fill"
+						/>
 					</a>
 				</li>
 			</ul>
@@ -61,7 +81,7 @@ import { Icon } from "astro-icon/components";
 	</div>
 </footer>
 
-<style>
+<style lang="scss">
 	@use "../styles/utils" as *;
 
 	footer {
@@ -73,8 +93,7 @@ import { Icon } from "astro-icon/components";
 			display: flex;
 			flex-direction: column;
 			@include breakpoint-up(md) {
-							flex-direction: row;
-
+				flex-direction: row;
 			}
 			justify-content: space-between;
 			align-items: center;
@@ -86,7 +105,7 @@ import { Icon } from "astro-icon/components";
 				gap: 0.25rem;
 				* {
 					margin: 0;
-					* }
+				}
 			}
 
 			.socials {
@@ -100,5 +119,4 @@ import { Icon } from "astro-icon/components";
 		padding: 0;
 		list-style: none;
 	}
-
 </style>
