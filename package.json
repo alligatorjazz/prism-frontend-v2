@@ -8,7 +8,7 @@
     "preview": "astro preview",
     "start": "node ./dist/server/entry.mjs",
     "astro": "astro",
-    "fetch-inbox": "(cd src/inbox && git pull)"
+    "fetch-inbox": "(cd src/inbox && git checkout main && git pull)"
   },
   "dependencies": {
     "@astrojs/node": "^9.5.3",
