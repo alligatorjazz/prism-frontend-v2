@@ -11,6 +11,7 @@ import FlagWithTagline from "../sections/FlagWithTagline.astro";
 import ContentWithHeader from "../sections/ContentWithHeader.astro";
 import Carousel from "../components/Carousel.astro";
 import NewsletterSignup from "../sections/NewsletterSignup.astro";
+import Footer from "../sections/Footer.astro";
 
 const fakeEvents: SiteEvent[] = new Array(12).fill(null).map(() => {
 	return {
@@ -98,7 +99,7 @@ const fakeSponsors = new Array(8).fill(null).map(() => {
 		<Carousel items={fakeSponsors} />
 	</ContentWithHeader>
 	<NewsletterSignup />
-	<!-- <Footer /> -->
+	<Footer />
 	<style>
 		#animated-hero {
 			/* temp */
