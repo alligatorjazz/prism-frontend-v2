@@ -1,27 +1,23 @@
 ---
 import Base from "../templates/Base.astro";
-import ToString from "../components/ToString.astro";
-import FlagWithTagline from "../sections/FlagWithTagline.astro";
 import flag from "../assets/img/long-pride-flag.png";
 import CenteredPaperWithHeader from "../sections/CenteredPaperWithHeader.astro";
 import CardsWithHeader from "../sections/CardsWithHeader.astro";
 import { faker } from "@faker-js/faker";
 import EventsWithHeader from "../sections/EventsWithHeader.astro";
-import ContentWithHeader from "../sections/ContentWithHeader.astro";
-import Carousel from "../components/Carousel.astro";
-import NewsletterSignup from "../sections/NewsletterSignup.astro";
-import Footer from "../sections/Footer.astro";
 import type { SiteEvent } from "../types/payload";
+import { titleCase } from "../lib";
+import FlagWithTagline from "../sections/FlagWithTagline.astro";
 
 const fakeEvents: SiteEvent[] = new Array(12).fill(null).map(() => {
 	return {
 		id: faker.internet.ipv6(),
 		updatedAt: faker.date.recent().toString(),
 		createdAt: faker.date.past().toString(),
-		title: faker.lorem.words({ min: 2, max: 6 }),
+		title: titleCase(faker.lorem.words({ min: 2, max: 6 })),
 		link: faker.internet.url(),
 		date: faker.date.future().toString(),
-		location: faker.lorem.words({ min: 1, max: 5 }),
+		location: titleCase(faker.lorem.words({ min: 1, max: 5 })),
 		image: {
 			square: `https://picsum.photos/${Math.floor(450 + 100 * Math.random())}`,
 			rectangular: `https://picsum.photos/${Math.floor(820 + 100 * Math.random())}/${504 + 100 * Math.random()}`,
