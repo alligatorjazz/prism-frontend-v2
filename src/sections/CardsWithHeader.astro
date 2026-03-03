@@ -3,12 +3,29 @@ import ColoredHeader from "../components/ColoredHeader.astro";
 import { strictSlug } from "../lib";
 import LinkCard from "../components/LinkCard.astro";
 import type { Block } from "../types/payload";
+import { processMedia } from "../lib/payload";
 
 type Props = Block<"CardsWithHeader">;
-const { title, cards } = Astro.props;
+const {
+	title,
+	cards,
+	backgroundImage: unprocessedBackgroundImage,
+} = Astro.props;
+
+const processedBackgroundImage = unprocessedBackgroundImage
+	? processMedia(unprocessedBackgroundImage)
+	: null;
+const backgroundImage = processedBackgroundImage
+	? `url("${processedBackgroundImage.src}")`
+	: "none";
 ---
 
-<section id={strictSlug(title)}>
+<section
+	id={strictSlug(title)}
+	style={{
+		backgroundImage,
+	}}
+>
 	<ColoredHeader
 		><slot name="header"><h1 class="cards-header">{title}</h1></slot
 		></ColoredHeader
@@ -38,7 +55,6 @@ const { title, cards } = Astro.props;
 	}
 
 	ul {
-		background: lightgray;
 		list-style: none;
 		display: flex;
 		justify-content: space-evenly;

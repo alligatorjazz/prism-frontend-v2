@@ -16,6 +16,7 @@ const optimizedBackground = backgroundImage
 const processedBgColor = processColor(backgroundColor);
 const processedTextColor = processColor(textColor);
 
+console.log(backgroundColor);
 if (optimizedBackground) {
 	style = {
 		background: `url("${backgroundImage}")`,
@@ -71,7 +72,7 @@ if (processedTextColor) {
 
 			div {
 				position: absolute;
-				background: red;
+				/* background: red; */
 				top: var(--topOffset);
 				left: var(--leftOffset);
 				right: var(--rightOffset);
