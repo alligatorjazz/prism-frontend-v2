@@ -1,5 +1,5 @@
 ---
-import {strictSlug} from "../lib";
+import { strictSlug } from "../lib";
 import ColoredHeader from "../components/ColoredHeader.astro";
 
 interface Props {
@@ -12,19 +12,37 @@ const { title, background, color } = Astro.props;
 ---
 
 <section id={strictSlug(title)} style={{ background, color }}>
-	<ColoredHeader background={background ?? "var(--bg-color)"}
-		><h1>{title}</h1></ColoredHeader
-	>
-	<div class="content"><slot /></div>
+	<div class="container">
+		<ColoredHeader background={background ?? "var(--bg-color)"}
+			><h1>{title}</h1></ColoredHeader
+		>
+		<div class="content"><slot /></div>
+	</div>
 </section>
 
 <style>
+	@use "../styles/utils" as *;
+
 	section {
-		padding: 8rem;
+		padding: 2rem;
 	}
 
-	h1 {
-		text-align: center;
-		font-size: 4rem;
+	.container {
+		max-width: var(--xl);
+		margin: auto;
+
+		* {
+			text-align: center;
+			font-size: 2.5rem;
+			@include breakpoint-up(md) {
+				font-size: 4rem;
+			}
+		}
+
+		p {
+			text-align: center;
+			font-size: 1.25rem;
+			line-height: 1.75rem;
+		}
 	}
 </style>
