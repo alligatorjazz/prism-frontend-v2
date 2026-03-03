@@ -11,13 +11,21 @@ import ContentWithHeader from "../sections/ContentWithHeader.astro";
 import Carousel from "../components/Carousel.astro";
 import NewsletterSignup from "../sections/NewsletterSignup.astro";
 import Footer from "../sections/Footer.astro";
+import type { SiteEvent } from "../types/payload";
 
-const fakeEvents = new Array(12).fill(null).map(() => {
+const fakeEvents: SiteEvent[] = new Array(12).fill(null).map(() => {
 	return {
-		name: faker.lorem.words({ min: 2, max: 6 }),
+		id: faker.internet.ipv6(),
+		updatedAt: faker.date.recent().toString(),
+		createdAt: faker.date.past().toString(),
+		title: faker.lorem.words({ min: 2, max: 6 }),
+		link: faker.internet.url(),
 		date: faker.date.future().toString(),
 		location: faker.lorem.words({ min: 1, max: 5 }),
-		image: faker.image.urlPicsumPhotos(),
+		image: {
+			square: `https://picsum.photos/${Math.floor(450 + 100 * Math.random())}`,
+			rectangular: `https://picsum.photos/${Math.floor(820 + 100 * Math.random())}/${504 + 100 * Math.random()}`,
+		},
 	};
 });
 
@@ -93,10 +101,14 @@ const fakeSponsors = new Array(4).fill(null).map(() => {
 	<!-- 		motto: "For Every Color, For Everyone" through partnered events, -->
 	<!-- 		fundraising initiatives, grants, sponsorships, and other collaborations. -->
 	<!-- 	</p> -->
-	<!-- 	<!-- <Carousel items={fakeSponsors} /> --> -->
+	<!-- <Carousel items={fakeSponsors} /> -->
 	<!-- </ContentWithHeader> -->
 	<!-- <NewsletterSignup /> -->
 	<!-- <Footer /> -->
+	<br />
+	<br />
+	<br />
+	<br />
 </Base>
 
 <style>

@@ -1,12 +1,11 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import type { ArrayElement, Exists } from "../lib";
-import type { Block } from "../types/sections";
 import { getImage } from "astro:assets";
 import { processColor, processMedia } from "../lib/payload";
 import CssFilterConverter from "css-filter-converter";
+import type { LinkCardData } from "../types/payload";
 
-type Props = ArrayElement<Exists<Block<"CardsWithHeader">["cards"]>>;
+type Props = LinkCardData;
 const { label, backgroundColor, href, textColor, backgroundImage, offset } =
 	Astro.props;
 

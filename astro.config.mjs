@@ -6,6 +6,8 @@ import icon from "astro-icon";
 
 import node from "@astrojs/node";
 
+import react from "@astrojs/react";
+
 // https://astro.build/config
 export default defineConfig({
   site: import.meta.env.NODE_ENV
@@ -15,7 +17,7 @@ export default defineConfig({
   server: {
     port: import.meta.env.FRONTEND_LOCAL_PORT ?? 4321,
   },
-  integrations: [icon()],
+  integrations: [icon(), react()],
   output: "server",
 
   adapter: node({

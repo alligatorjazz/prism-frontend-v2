@@ -2,10 +2,10 @@
 import ColoredHeader from "../components/ColoredHeader.astro";
 import { strictSlug } from "../lib";
 import LinkCard from "../components/LinkCard.astro";
-import type { Block } from "../types/sections";
+import type { Block } from "../types/payload";
 
 type Props = Block<"CardsWithHeader">;
-const { title, cards, backgroundImage, backgroundColor } = Astro.props;
+const { title, cards } = Astro.props;
 ---
 
 <section id={strictSlug(title)}>
@@ -39,7 +39,6 @@ const { title, cards, backgroundImage, backgroundColor } = Astro.props;
 
 	ul {
 		background: lightgray;
-		padding: 2rem;
 		list-style: none;
 		display: flex;
 		justify-content: space-evenly;

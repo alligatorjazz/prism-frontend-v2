@@ -7,19 +7,27 @@ export function processMedia(
     height?: number;
     format: ImageMetadata["format"];
   },
-): UnresolvedImageTransform {
+): {
+  src: string;
+  width: number;
+  height: number;
+  format: string;
+  alt: string | null;
+} {
   return typeof media === "string"
     ? {
         src: media,
         width: override?.width ?? 500,
         height: override?.height ?? 500,
         format: override?.format ?? "webp",
+        alt: null,
       }
     : {
         src: media.url ?? "/image-not-found",
         width: media.width ?? override?.width ?? 500,
         height: media.height ?? override?.height ?? 500,
         format: override?.format ?? "webp",
+        alt: media.alt,
       };
 }
 
