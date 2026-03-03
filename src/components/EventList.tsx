@@ -85,6 +85,7 @@ export function EventList({
         <button onClick={() => previousPage()}>{"<"}</button>
         {new Array(numberOfPages).fill(null).map((_, index) => (
           <button
+            key={`event-list-${uid}-page-button-${index}`}
             className={index === currentPage ? "current-page" : ""}
             onClick={() => setCurrentPage(index)}
           >
