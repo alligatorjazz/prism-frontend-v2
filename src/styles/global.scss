@@ -21,7 +21,12 @@ body {
   border-radius: 10px;
 }
 
-
-
-
-
+button {
+  border: unset;
+  background: inherit;
+  cursor: pointer;
+}
+input {
+  border: unset;
+  background: inherit;
+}

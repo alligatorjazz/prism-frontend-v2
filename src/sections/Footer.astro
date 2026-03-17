@@ -9,7 +9,7 @@ import { Icon } from "astro-icon/components";
 	<div class="info">
 		<div class="logo">
 			<Image src={logo} alt={"placeholder"} />
-			<p>© 2020-{`${new Date().getFullYear()}`}by PRISM FL, Inc.</p>
+			<p>© 2020-{`${new Date().getFullYear()}`} by PRISM FL, Inc.</p>
 		</div>
 		<div class="contact">
 			<p>Phone: (561) 291-9207</p>
@@ -17,27 +17,47 @@ import { Icon } from "astro-icon/components";
 			<ul class="socials">
 				<li>
 					<a name="placeholder" href="/404"
-						><Icon size={32} name="ri:discord-fill" /></a
+						><Icon
+							color={"var(--text-color)"}
+							size={42}
+							name="ri:discord-fill"
+						/></a
 					>
 				</li>
 				<li>
 					<a name="placeholder" href="/404"
-						><Icon size={32} name="ri:tiktok-fill" /></a
+						><Icon
+							color={"var(--text-color)"}
+							size={42}
+							name="ri:tiktok-fill"
+						/></a
 					>
 				</li>
 				<li>
 					<a name="placeholder" href="/404"
-						><Icon size={32} name="ri:youtube-fill" />
+						><Icon
+							color={"var(--text-color)"}
+							size={42}
+							name="ri:youtube-fill"
+						/>
 					</a>
 				</li>
 				<li>
 					<a name="placeholder" href="/404"
-						><Icon size={32} name="ri:instagram-fill" />
+						><Icon
+							color={"var(--text-color)"}
+							size={42}
+							name="ri:instagram-fill"
+						/>
 					</a>
 				</li>
 				<li>
 					<a name="placeholder" href="/404"
-						><Icon size={32} name="ri:facebook-fill" />
+						><Icon
+							color={"var(--text-color)"}
+							size={42}
+							name="ri:facebook-fill"
+						/>
 					</a>
 				</li>
 			</ul>
@@ -61,13 +81,20 @@ import { Icon } from "astro-icon/components";
 	</div>
 </footer>
 
-<style>
+<style lang="scss">
+	@use "../styles/utils" as *;
+
 	footer {
 		max-width: var(--lg);
 		margin: auto;
+		padding: 2rem;
 
 		.info {
 			display: flex;
+			flex-direction: column;
+			@include breakpoint-up(md) {
+				flex-direction: row;
+			}
 			justify-content: space-between;
 			align-items: center;
 			.contact {
@@ -75,6 +102,10 @@ import { Icon } from "astro-icon/components";
 				flex-direction: column;
 				justify-content: space-between;
 				align-items: center;
+				gap: 0.25rem;
+				* {
+					margin: 0;
+				}
 			}
 
 			.socials {

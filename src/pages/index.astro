@@ -1,29 +1,37 @@
 ---
 import Base from "../templates/Base.astro";
-import ToString from "../components/ToString.astro";
-import FlagWithTagline from "../sections/FlagWithTagline.astro";
 import flag from "../assets/img/long-pride-flag.png";
 import CenteredPaperWithHeader from "../sections/CenteredPaperWithHeader.astro";
 import CardsWithHeader from "../sections/CardsWithHeader.astro";
 import { faker } from "@faker-js/faker";
 import EventsWithHeader from "../sections/EventsWithHeader.astro";
+import type { SiteEvent } from "../types/payload";
+import { titleCase } from "../lib";
+import FlagWithTagline from "../sections/FlagWithTagline.astro";
 import ContentWithHeader from "../sections/ContentWithHeader.astro";
 import Carousel from "../components/Carousel.astro";
 import NewsletterSignup from "../sections/NewsletterSignup.astro";
 import Footer from "../sections/Footer.astro";
 
-const fakeEvents = new Array(12).fill(null).map(() => {
+const fakeEvents: SiteEvent[] = new Array(12).fill(null).map(() => {
 	return {
-		name: faker.lorem.words({ min: 2, max: 6 }),
+		id: faker.internet.ipv6(),
+		updatedAt: faker.date.recent().toString(),
+		createdAt: faker.date.past().toString(),
+		title: titleCase(faker.lorem.words({ min: 2, max: 6 })),
+		link: faker.internet.url(),
 		date: faker.date.future().toString(),
-		location: faker.lorem.words({ min: 1, max: 5 }),
-		image: faker.image.urlPicsumPhotos(),
+		location: titleCase(faker.lorem.words({ min: 1, max: 5 })),
+		image: {
+			square: `https://picsum.photos/${Math.floor(450 + 100 * Math.random())}`,
+			rectangular: `https://picsum.photos/${Math.floor(820 + 100 * Math.random())}/${504 + 100 * Math.random()}`,
+		},
 	};
 });
 
-const fakeSponsors = new Array(4).fill(null).map(() => {
+const fakeSponsors = new Array(8).fill(null).map(() => {
 	return {
-		image: faker.image.urlPicsumPhotos(),
+		image: faker.image.urlPicsumPhotos({ width: 300, height: 300 }),
 		href: faker.internet.url(),
 		alt: faker.lorem.words(),
 	};
@@ -41,27 +49,10 @@ const fakeSponsors = new Array(4).fill(null).map(() => {
 >
 	<section id="animated-hero"></section>
 	<FlagWithTagline title="Tagline" image={{ alt: "A pride flag.", ...flag }}>
-		<ToString slot="center">
-			<div
-				style={{
-					fontSize: "4.5rem",
-					fontFamily: "var(--header-font)",
-					fontWeight: "600",
-					lineHeight: "5rem",
-					color: "var(--fg-color)",
-				}}
-			>
-				<p>For every color,<br />For everyone</p>
-			</div>
-		</ToString>
+		<p>For every color,<br />For everyone</p>
 	</FlagWithTagline>
 	<CenteredPaperWithHeader title="Our Mission">
-		<h1
-			style={{ fontSize: "4.5rem", fontWeight: "600", lineHeight: "5rem" }}
-			slot="header"
-		>
-			Our Mission
-		</h1>
+		<h1 slot="header">Our Mission</h1>
 		<p slot="content">
 			PRISM works to expand access to LGBTQ-inclusive education and sexual
 			health resources for youth in South Florida. It's our goal to make sure
@@ -72,15 +63,33 @@ const fakeSponsors = new Array(4).fill(null).map(() => {
 	<CardsWithHeader
 		title="Resources"
 		cards={[
-			{ label: "Learn", background: "yellow", href: "/", textColor: "black" },
-			{ label: "Student Ambassador Program", background: "purple", href: "/" },
-			{ label: "Get Tested", background: "pink", href: "/" },
-			{ label: "School Policy Hub", background: "blue", href: "/" },
+			{
+				label: "Learn",
+				href: "/",
+				backgroundImage: "https://picsum.photos/500",
+				offset: { bottom: "2rem" },
+			},
+			{
+				label: "Student Ambassador Program",
+				href: "/",
+				backgroundImage: "https://picsum.photos/500",
+			},
+			{
+				label: "Get Tested",
+				href: "/",
+				backgroundImage: "https://picsum.photos/500",
+			},
+			{
+				label: "School Policy Hub",
+				href: "/",
+				backgroundImage: "https://picsum.photos/500",
+				textColor: "green",
+			},
 		]}
 	/>
 	<EventsWithHeader title="Upcoming Events" events={fakeEvents} />
 	<ContentWithHeader title="Our Partners" color="white" background="black">
-		<p style={"font-size:1.2rem"}>
+		<p>
 			PRISM prides itself in being a collaborative member of the LGBT community
 			in South Florida. See some of our partners below! These organizations,
 			businesses, and individuals have shown their steadfast commitment to our
@@ -91,12 +100,11 @@ const fakeSponsors = new Array(4).fill(null).map(() => {
 	</ContentWithHeader>
 	<NewsletterSignup />
 	<Footer />
+	<style>
+		#animated-hero {
+			/* temp */
+			height: 60vh;
+			background-color: darkmagenta;
+		}
+	</style>
 </Base>
-
-<style>
-	#animated-hero {
-		/* temp */
-		height: 60vh;
-		background-color: darkmagenta;
-	}
-</style>

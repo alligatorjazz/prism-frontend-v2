@@ -1,40 +1,39 @@
 ---
-import slugify from "slugify";
-import flagImage from "../assets/img/long-pride-flag.png";
-import { Image } from "astro:assets";
+import { strictSlug } from "../lib";
 import LongFlag from "../components/LongFlag.astro";
 const { title, image } = Astro.props;
 ---
 
-<section id={slugify(title, { strict: true })} title={title}>
+<section id={strictSlug(title)} title={title}>
 	<div class="flag">
 		<LongFlag />
 	</div>
-	<div class="tagline"><slot name="center" /></div>
+	<div class="tagline"><slot /></div>
 	<div class="spacer"></div>
 </section>
 
-<style lang={"scss"} >
+<style lang="scss">
 	@use "../styles/utils" as *;
 
 	section {
 		background: var(--bg-color);
-		display: grid;
-		grid-template-columns: 2fr 2fr 2fr;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
 		gap: 1rem;
 
 		&.full-width {
 			width: 100%;
 		}
 
-		& > div {
-			/* border: 1px solid magenta; */
-		}
-
 		.flag {
-			display: flex;
+			display: none;
 			align-items: center;
-			/* background: #20dd2233; */
+
+			@include breakpoint-up(md) {
+				display: flex;
+			}
 		}
 
 		.tagline {
@@ -42,17 +41,39 @@ const { title, image } = Astro.props;
 			justify-content: center;
 			flex: 1;
 			white-space: nowrap;
-			/* background: #d123ff33 */
+			font-size: 2.5rem;
+			font-family: var(--header-font);
+			color: var(--fg-color);
+			font-weight: 600;
+			padding: 1rem;
+
+			& > :global(p) {
+				margin: 0;
+			}
 		}
 
 		.spacer {
 			flex: 1;
-			/* background: #ff553333; */
+			display: none;
 		}
 
 		@include breakpoint-up(md) {
-			display: flex;
-			flex-direction: column;
+			display: grid;
+			grid-template-columns: 2fr 2fr 2fr;
+
+			padding: 2rem 0;
+			.tagline {
+				font-size: 4.5rem;
+				line-height: 5rem;
+			}
+
+			.spacer {
+				display: block;
+			}
+			.tagline p {
+				background-color: green;
+				margin: 0;
+			}
 		}
 	}
 </style>

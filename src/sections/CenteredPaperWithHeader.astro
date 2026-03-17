@@ -1,23 +1,35 @@
 ---
-import slugify from "slugify";
-import { Image } from "astro:assets";
-import tornPaper from "../assets/img/torn-notebook-paper.png";
+import { strictSlug } from "../lib";
+import TornPaperBorder from "../components/TornPaperBorder.astro";
+import paperNoise from "../assets/img/paper-noise.png";
+import { getImage } from "astro:assets";
+
 interface Props {
 	title: string;
 }
 
 // TODO: implement tornPaper
 const { title } = Astro.props;
+const { src: noise } = await getImage({ src: paperNoise, format: "webp" });
+const backgroundImage = `url("${noise}")`;
 ---
 
-<section id={slugify(title, { strict: true })} title={title}>
+<section id={strictSlug(title)} title={title}>
 	<div class="header"><slot name="header" /></div>
-	<div class="content">
-		<slot name="content" />
+	<div class={"paper"}>
+		<div class="border top">
+			<TornPaperBorder />
+		</div>
+		<div class="content" style={{ backgroundImage }}>
+			<slot name="content" />
+		</div>
+		<div class="border bottom">
+			<TornPaperBorder offset />
+		</div>
 	</div>
 </section>
 
-<style lang={"scss"} >
+<style lang="scss">
 	@use "../styles/utils" as *;
 
 	section {
@@ -25,20 +37,50 @@ const { title } = Astro.props;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		padding: 2rem 0rem;
+		padding: 2rem 1rem;
 
 		.header {
 			margin: auto;
-			text-align: center;
-			& > * {
+
+			:global(h1) {
 				margin: 0;
+				text-align: center;
+				font-size: 2.5rem;
+
+				@include breakpoint-up(md) {
+					font-size: 4rem;
+				}
 			}
 		}
 
-		.content {
+		.paper {
 			max-width: var(--lg);
-			padding: 2rem;
-			background: var(--fg-color);
+			display: flex;
+			flex-direction: column;
+
+			.border.top {
+				transform: scaleY(-1);
+			}
+
+			.border.bottom {
+				transform: scaleX(-1);
+			}
+
+			.content {
+				padding: 0rem 2rem;
+				display: block;
+				width: 100%;
+				:global(p) {
+					text-align: justify;
+					font-size: 1.25rem;
+					line-height: 2rem;
+					text-decoration: underline;
+					text-decoration-color: grey;
+					text-underline-offset: 9px;
+					border-bottom: 2px solid grey;
+					border-top: 2px solid grey;
+				}
+			}
 		}
 	}
 </style>

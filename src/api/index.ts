@@ -17,10 +17,12 @@ type PluralAPIResponse<DocumentType extends Collection> = {
   totalPages: number;
 };
 
-const apiUrl =
+export const backendUrl =
   import.meta.env.PUBLIC_PROD_OVERRIDE === "true" || import.meta.env.PROD
-    ? "https://admin.prismfl.org/api"
-    : "https://localhost:3009/api";
+    ? "https://admin.prismfl.org/"
+    : "https://localhost:3009/";
+
+const apiUrl = urlJoin(backendUrl, "/api");
 
 const api = {
   find: async <T extends Collection>(
