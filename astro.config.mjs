@@ -10,12 +10,9 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
-  site: import.meta.env.NODE_ENV
-    ? "http://localhost:3009"
-    : // TODO: change to prismfl.org on launch
-      "https://staging.prismfl.org",
+  site: "https://staging.prismfl.org",
   server: {
-    port: import.meta.env.FRONTEND_LOCAL_PORT ?? 4321,
+    port: 4321,
   },
   integrations: [icon(), react()],
   output: "server",
