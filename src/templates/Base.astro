@@ -32,8 +32,13 @@ const { pageMetadata } = Astro.props;
 	</head>
 	<body>
 		<Navbar routes={routes} siteMetadata={siteMetadata} />
+		<div class="spacer"></div>
 		<div class="w-full flex flex-col"><slot /></div>
 	</body>
 </html>
 
-<style></style>
+<style>
+	.spacer {
+		margin-bottom: 10rem;
+	}
+</style>
