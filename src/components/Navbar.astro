@@ -13,7 +13,7 @@ interface Props {
 const { siteMetadata, routes } = Astro.props;
 ---
 
-<header data-drawer="inactive" data-prev-scroll="up">
+<header>
 	<a href="/" class="site-logo">
 		<!-- TODO: add logo support -->
 		{
@@ -51,6 +51,10 @@ const { siteMetadata, routes } = Astro.props;
 <style lang="scss">
 	@use "../styles/utils" as *;
 
+	body[data-prev-scroll="down"] header {
+		height: 0;
+	}
+
 	header {
 		width: 100%;
 		padding: 0 2rem;
@@ -67,10 +71,6 @@ const { siteMetadata, routes } = Astro.props;
 		transition: height 300ms;
 		filter: var(--shadow);
 		z-index: 100;
-
-		&[data-prev-scroll="down"] {
-			height: 0;
-		}
 
 		a.site-logo {
 			width: 12rem;
@@ -178,7 +178,7 @@ const { siteMetadata, routes } = Astro.props;
 		}
 
 		const header = document.querySelector("header");
-		const prevDrawerState = header?.dataset["drawer"];
+		const prevDrawerState = document.body.dataset["drawer"];
 
 		if (!header) {
 			throw new Error("Couldn't update nav - header does not exist");
@@ -186,12 +186,12 @@ const { siteMetadata, routes } = Astro.props;
 
 		// set mobile expanded drawer
 		if (checkBreakpoint("md")) {
-			header.dataset["drawer"] = "inactive";
+			document.body.dataset["drawer"] = "inactive";
 		} else {
 			if (prevDrawerState === "inactive") {
-				header.dataset["drawer"] = "active";
+				document.body.dataset["drawer"] = "active";
 			} else {
-				header.dataset["drawer"] = "inactive";
+				document.body.dataset["drawer"] = "inactive";
 			}
 		}
 	}
@@ -214,7 +214,7 @@ const { siteMetadata, routes } = Astro.props;
 			throw new Error("Couldn't find the header element.");
 		}
 		const newScrollPosition = window.scrollY;
-		header.dataset["prevScroll"] =
+		document.body.dataset["prevScroll"] =
 			lastScrollPosition > newScrollPosition || window.scrollY < 250
 				? "up"
 				: "down";

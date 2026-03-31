@@ -30,7 +30,7 @@ const { pageMetadata } = Astro.props;
 		<MetadataLoader pageMetadata={pageMetadata} siteMetadata={siteMetadata} />
 		<link rel="stylesheet" href="/styles/theme.css" />
 	</head>
-	<body>
+	<body data-drawer="inactive" data-prev-scroll="up">
 		<Navbar routes={routes} siteMetadata={siteMetadata} />
 		<div class="spacer"></div>
 		<div class="w-full flex flex-col"><slot /></div>

@@ -33,8 +33,8 @@ const board = repeatRandom(fakeBoardMember, 5, 8);
 
 <Base
 	pageMetadata={{
-		title: "Quick Links",
-		description: "See the breath and depth of PRISM's work.",
+		title: "Our Team",
+		description: "Meet PRISM's team and board.",
 		type: "website",
 		image: "https://picsum.photos/200",
 		"image:alt": "test",
@@ -109,6 +109,10 @@ const board = repeatRandom(fakeBoardMember, 5, 8);
 
 <style>
 	section {
+		background: var(--blue);
+		h1 {
+			font-size: 4rem;
+		}
 		ul {
 			list-style: none;
 			margin: 0;
@@ -127,7 +131,7 @@ const board = repeatRandom(fakeBoardMember, 5, 8);
 					margin: 0;
 				}
 
-				border: 1px solid yellow;
+				border: 1px solid white;
 				border-radius: 10px;
 
 				div.image {
@@ -136,6 +140,7 @@ const board = repeatRandom(fakeBoardMember, 5, 8);
 					img {
 						width: 100%;
 						height: 100%;
+						border-radius: 10px;
 						object-fit: cover;
 					}
 				}

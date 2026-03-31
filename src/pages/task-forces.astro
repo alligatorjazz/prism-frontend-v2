@@ -1,0 +1,421 @@
+---
+import { faker } from "@faker-js/faker";
+import Base from "../templates/Base.astro";
+---
+
+<Base
+	pageMetadata={{
+		title: "Task Forces",
+		description: "See the meat and potatoes of PRISM's work.",
+		type: "website",
+		image: "https://picsum.photos/200",
+		"image:alt": "test",
+	}}
+>
+	<section id="introduction">
+		<h1>Task Forces</h1>
+		<p>
+			PRISM's work takes place in six task forces. Read about any of them below
+			to learn more and see how you can get involved!
+		</p>
+	</section>
+	<nav id="internal-nav">
+		<a href="#research">Research</a>
+		<a href="#content-creation">Content Creation</a>
+		<a href="#outreach">Outreach</a>
+		<!-- <a href="#psap">Student Ambassador Program</a> -->
+		<a href="#fundraising">Fundraising</a>
+		<a href="#policy">Policy</a>
+	</nav>
+	<section class="task-force" id="research">
+		<div class="container">
+			<div class="info">
+				<div class="text">
+					<h1>Research Task Force</h1>
+					<p>
+						PRISM’s Research Task Force digs deep to collect information and
+						data for key programs within our organization.
+					</p>
+					<p>
+						Between making sure our STI Clinic Search is up-to-date and
+						gathering insightful data about our community, <b
+							>our researchers provide us with the information we need to
+							address South Florida’s problems effectively.</b
+						>
+					</p>
+				</div>
+				<div class="image">
+					<img src={"https://picsum.photos/500"} />
+				</div>
+			</div>
+			<div class="team-member">
+				<div class="image">
+					<img src={"https://picsum.photos/500"} />
+				</div>
+				<div class="text">
+					<div class="topline">
+						<h2>Jordan Thompson</h2>
+						<p>Task Force Director</p>
+					</div>
+					<div class="description">
+						<p>{faker.lorem.paragraphs(1)}</p>
+						<p>{faker.lorem.paragraphs(1)}</p>
+					</div>
+				</div>
+			</div>
+			<div class="get-involved">
+				<h2>Get involved with our work!</h2>
+				<ul>
+					<li><a href="/">Way you can get involved</a></li>
+					<li><a href="/">Way you can get involved</a></li>
+					<li><a href="/">Way you can get involved</a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<section class="task-force" id="content-creation">
+		<div class="container">
+			<div class="info">
+				<div class="text">
+					<h1>Content Creation Task Force</h1>
+					<p>
+						CCTF is the backbone of the work PRISM does, providing
+						LGBT-inclusive education and other resources where young people turn
+						to most: online.
+					</p>
+					<p>
+						From cracking open the history books to tell us all about the
+						Stonewall riots to helping us define exactly what differentiates sex
+						from gender (Hint: a lot), <b
+							>our team helps us keep you informed.</b
+						>
+					</p>
+				</div>
+				<div class="image">
+					<img src={"https://picsum.photos/500"} />
+				</div>
+			</div>
+			<div class="team-member">
+				<div class="image">
+					<img src={"https://picsum.photos/500"} />
+				</div>
+				<div class="text">
+					<div class="topline">
+						<h2>Alexander Puga</h2>
+						<p></p>
+					</div>
+					<div class="description">
+						<p>{faker.lorem.paragraphs(1)}</p>
+						<p>{faker.lorem.paragraphs(1)}</p>
+					</div>
+				</div>
+			</div>
+			<div class="get-involved">
+				<h2>Get involved with our work!</h2>
+				<ul>
+					<li><a href="/">Way you can get involved</a></li>
+					<li><a href="/">Way you can get involved</a></li>
+					<li><a href="/">Way you can get involved</a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<section class="task-force" id="fundraising">
+		<div class="container">
+			<div class="info">
+				<div class="text">
+					<h1>Fundraising Task Force</h1>
+					<p>
+						The Fundraising Task Force works to develop events and promotions
+						that bring in funding for all of the many initiatives and services
+						that PRISM provides to LGBTQ+ youth and queer people of color.
+					</p>
+					<p>
+						From bake sales to fun runs to livestreams, <b
+							>these dedicated individuals work hard to keep the blood pumping
+							through PRISM's veins.</b
+						>
+					</p>
+				</div>
+				<div class="image">
+					<img src={"https://picsum.photos/500"} />
+				</div>
+			</div>
+			<div class="team-member">
+				<div class="image">
+					<img src={"https://picsum.photos/500"} />
+				</div>
+				<div class="text">
+					<div class="topline">
+						<h2>Hannah Neuman</h2>
+						<p>Task Force Director</p>
+					</div>
+					<div class="description">
+						<p>{faker.lorem.paragraphs(1)}</p>
+						<p>{faker.lorem.paragraphs(1)}</p>
+					</div>
+				</div>
+			</div>
+			<div class="get-involved">
+				<h2>Get involved with our work!</h2>
+				<ul>
+					<li><a href="/">Way you can get involved</a></li>
+					<li><a href="/">Way you can get involved</a></li>
+					<li><a href="/">Way you can get involved</a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<section class="task-force" id="outreach">
+		<div class="container">
+			<div class="info">
+				<div class="text">
+					<h1>Outreach Task Force</h1>
+					<p>
+						The Outreach Task Force coordinates events and other activities to
+						spread awareness of the amazing work PRISM does and build
+						connections with the community.
+					</p>
+					<p>
+						<b
+							>The Outreach Task Force coordinates events and other activities
+							to spread awareness of the amazing work PRISM does and build
+							connections with the community.</b
+						>
+					</p>
+				</div>
+				<div class="image">
+					<img src={"https://picsum.photos/500"} />
+				</div>
+			</div>
+			<div class="team-member">
+				<div class="image">
+					<img src={"https://picsum.photos/500"} />
+				</div>
+				<div class="text">
+					<div class="topline">
+						<h2>Avion Goordeen</h2>
+						<p>Task Force Director</p>
+					</div>
+					<div class="description">
+						<p>{faker.lorem.paragraphs(1)}</p>
+						<p>{faker.lorem.paragraphs(1)}</p>
+					</div>
+				</div>
+			</div>
+			<div class="get-involved">
+				<h2>Get involved with our work!</h2>
+				<ul>
+					<li><a href="/">Way you can get involved</a></li>
+					<li><a href="/">Way you can get involved</a></li>
+					<li><a href="/">Way you can get involved</a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<section class="task-force" id="policy">
+		<div class="container">
+			<div class="info">
+				<div class="text">
+					<h1>Policy Task Force</h1>
+					<p>
+						PRISM’s Policy Task Force works to advance innovative laws and
+						policies and pushes back against bad bills to ensure that no one
+						suffers discrimination or harassment on the basis of their sexual
+						orientation, race, or gender identity.
+					</p>
+					<p>
+						The Policy Task Force solves challenges at the local, state, and
+						national levels, with an emphasis on fighting for the LGBTQ+
+						community, <b
+							>especially LGBTQ+ people of color across South Florida.</b
+						>
+					</p>
+				</div>
+				<div class="image">
+					<img src={"https://picsum.photos/500"} />
+				</div>
+			</div>
+			<div class="team-member">
+				<div class="image">
+					<img src={"https://picsum.photos/500"} />
+				</div>
+				<div class="text">
+					<div class="topline">
+						<h2>Miles Davis</h2>
+						<p>Task Force Director</p>
+					</div>
+					<div class="description">
+						<p>{faker.lorem.paragraphs(1)}</p>
+						<p>{faker.lorem.paragraphs(1)}</p>
+					</div>
+				</div>
+			</div>
+			<div class="get-involved">
+				<h2>Get involved with our work!</h2>
+				<ul>
+					<li><a href="/">Way you can get involved</a></li>
+					<li><a href="/">Way you can get involved</a></li>
+					<li><a href="/">Way you can get involved</a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+</Base>
+
+<style>
+	#introduction {
+		color: white;
+		text-align: center;
+		padding: 2rem;
+		h1 {
+			font-size: 3rem;
+			margin: 0;
+		}
+		p {
+			margin: 0;
+			font-size: 1.5rem;
+		}
+	}
+
+	#internal-nav {
+		width: 100%;
+		display: flex;
+		position: sticky;
+		top: 10rem;
+		background: var(--bg-color);
+		transition: all 300ms;
+		a {
+			padding: 1rem;
+			display: block;
+			border-right: 1px solid white;
+			border-bottom: 1px solid white;
+			flex: 1;
+			text-align: center;
+			font-weight: bold;
+			&:last-child {
+				border-right: 0;
+			}
+			font-family: var(--header-font);
+			text-decoration: none;
+			color: white;
+			&:visited {
+				color: white;
+			}
+		}
+	}
+	body[data-prev-scroll="down"] #internal-nav {
+		top: 0rem;
+	}
+	#research {
+		color: white;
+		background: blue;
+	}
+
+	#content-creation {
+		color: black;
+		background: yellow;
+	}
+	#fundraising {
+		color: white;
+		background: green;
+	}
+	#outreach {
+		color: white;
+		background: orange;
+	}
+
+	#policy {
+		color: white;
+		background: red;
+	}
+
+	.task-force {
+		padding: 2rem;
+		width: 100%;
+		.container {
+			margin: auto;
+
+			max-width: var(--xl);
+		}
+
+		.info {
+			display: flex;
+			align-items: center;
+			gap: 2rem;
+			.text {
+				flex: 1;
+				h1 {
+					padding-bottom: 1rem;
+					font-size: 2.5rem;
+					border-bottom: 2px solid white;
+				}
+				p {
+					font-size: 1.5rem;
+				}
+			}
+			.image {
+				width: 30%;
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: contain;
+				}
+			}
+		}
+
+		.team-member {
+			display: flex;
+			align-items: center;
+			gap: 2rem;
+
+			.text {
+				flex: 1;
+				p {
+					font-size: 1.5rem;
+				}
+
+				.topline {
+					h2 {
+						font-size: 2rem;
+						margin: 0;
+					}
+					p {
+						margin: 0;
+						font-style: italic;
+					}
+					padding-bottom: 1rem;
+					border-bottom: 2px solid white;
+				}
+			}
+
+			.image {
+				width: 30%;
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: contain;
+				}
+			}
+		}
+
+		.get-involved {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 4rem;
+			a {
+				text-decoration: none;
+			}
+			a:visited {
+				color: inherit;
+			}
+			h2 {
+				font-size: 2rem;
+			}
+			ul {
+				font-size: 1.5rem;
+			}
+		}
+	}
+</style>
