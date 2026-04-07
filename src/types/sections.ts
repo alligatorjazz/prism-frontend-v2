@@ -7,7 +7,7 @@ export type Column = {
   // content: ColumnChild;
 };
 
-export type Section = {
+export type SectionProps = {
   title: string;
   fullWidth?: boolean;
 };
