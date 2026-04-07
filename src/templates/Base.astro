@@ -4,6 +4,8 @@ import MetadataLoader from "../components/MetadataLoader.astro";
 import Navbar from "../components/Navbar.astro";
 import type { SurfaceMetadata } from "../types";
 import "../styles/global.scss";
+import NewsletterSignup from "../sections/NewsletterSignup.astro";
+import Footer from "../sections/Footer.astro";
 
 interface Props {
 	pageMetadata: SurfaceMetadata;
@@ -33,7 +35,9 @@ const { pageMetadata } = Astro.props;
 	<body data-drawer="inactive" data-prev-scroll="up">
 		<Navbar routes={routes} siteMetadata={siteMetadata} />
 		<div class="spacer"></div>
-		<div class="w-full flex flex-col"><slot /></div>
+		<div><slot /></div>
+		<NewsletterSignup />
+		<Footer />
 	</body>
 </html>
 
