@@ -1,0 +1,180 @@
+---
+import SectionBorder from "../components/SectionBorder.astro";
+import ConstrainedSection from "../sections/ConstrainedSection.astro";
+import PageIntro from "../sections/PageIntro.astro";
+import Base from "../templates/Base.astro";
+---
+
+<Base
+	pageMetadata={{
+		title: "Our History",
+		description: "Read about PRISM's history.",
+		type: "website",
+		image: "https://picsum.photos/200",
+		"image:alt": "test",
+	}}
+>
+	<PageIntro title={"Our History"} description="Learn about PRISM's history!" />
+	<section id="beginning" class={"history lg"}>
+		<div class="container">
+			<div class="image">
+				<img src={"https://picsum.photos/200"} />
+			</div>
+			<div class="info">
+				<h2>The Beginning</h2>
+				<p>
+					On March 29th, 2019, four students met in a classroom at Boca Raton
+					Community High School. Feeling dejected by staff and student
+					leadership at the Gender and Sexuality Alliance, they were deadset on
+					getting a fresh start, creating a space where LGBTQ+ students could
+					feel safe and affirmed. Pushed into a corner by school administration,
+					we set our sights on expanding beyond the school to impact LGBTQ+
+					youth in South Florida.
+				</p>
+			</div>
+		</div>
+		<SectionBorder type="cookie-cutter" backgroundColor="red" />
+	</section>
+	<section id="non-profit" class={"history lg"}>
+		<div class="container">
+			<div class="image">
+				<img src={"https://picsum.photos/200"} />
+			</div>
+			<div class="info">
+				<h2>Forming a Non-Profit</h2>
+				<p>
+					On April 27th, 2020, PRISM Boca High became PRISM FL, Inc in the wake
+					of a global pandemic. As schools, restaurants, and businesses shut
+					down, so too did nonprofits that had served our community for decades.
+					The difference is that while others took to social media out of
+					survival, the Internet was already our home.
+				</p>
+			</div>
+		</div>
+		<SectionBorder type="spray-paint" />
+	</section>
+	<section id="advocacy" class={"history lg"}>
+		<div class="container">
+			<div class="image">
+				<img src={"https://picsum.photos/200"} />
+			</div>
+			<div class="info">
+				<h2>Getting Into Advocacy</h2>
+				<p>
+					In January 2022, the Florida House of Representatives introduced
+					HB1557. While supposedly meant to give parents more involvement in
+					their children’s education, it quickly found a new, much more accurate
+					nickname: the “Don’t Say LGBTQ” bill. PRISM sprang into action, making
+					several treks all the way up to the Capitol building in Tallahassee.
+					But this was just the beginning.
+				</p>
+			</div>
+		</div>
+		<SectionBorder type="squiggle" backgroundColor="orange" />
+	</section>
+	<section id="schools" class={"history lg"}>
+		<div class="container">
+			<div class="image">
+				<img src={"https://picsum.photos/200"} />
+			</div>
+			<div class="info">
+				<h2>Taking it to Schools</h2>
+				<p>
+					In April 2022, PRISM expanded its advocacy work on the local level
+					when we joined the fight for comprehensive sex education in Miami-Dade
+					County. Since then, we’ve continued fighting for inclusive schools and
+					curricula in South Florida. In September of that same year, we rallied
+					the community to push MDCPS to recognize October as LGBTQ+ History
+					Month.
+				</p>
+			</div>
+		</div>
+		<SectionBorder type="cookie-cutter" backgroundColor="purple" />
+	</section>
+
+	<section id="team" class={"history lg"}>
+		<div class="container">
+			<div class="image">
+				<img src={"https://picsum.photos/200"} />
+			</div>
+			<div class="info">
+				<h2>Growing The Team</h2>
+				<p>
+					What started as a small group of high school activists expanded into a
+					vibrant and diverse coalition of queer advocates in just three short
+					years. We now have a Board of Directors, a thriving volunteer base,
+					and a robust staff team that all include LGBTQ+ folx from many
+					different walks of life with many different talents. Most of our
+					unpaid volunteer positions are now fully paid freelancer roles. In
+					July 2023, we even hired our first Executive Director: PRISM's
+					founder, Maxx Fenning.
+				</p>
+			</div>
+		</div>
+		<SectionBorder type="cookie-cutter" backgroundColor="yellow" />
+	</section>
+	<section id="future" class={"history lg"}>
+		<div class="container">
+			<div class="image">
+				<img src={"https://picsum.photos/200"} />
+			</div>
+			<div class="info">
+				<h2>The Future</h2>
+				<p>
+					We know that youth are the future, and that's why we'll never stop
+					fighting for this community. As we continue to lead the charge against
+					anti-LGBTQ+ policies both in and outside of schools, we're cooking up
+					new ways to bring you critical, and oftentimes life-saving, resources
+					on sexual health and queer issues. Pushing forward, we want PRISM to
+					be a beacon of hope, safety, and community for all queer youth in
+					South Florida.
+				</p>
+			</div>
+		</div>
+	</section>
+</Base>
+
+<style lang="scss">
+	.history > .container {
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+		justify-content: center;
+		padding: 4rem 0;
+
+		.image {
+			width: 250px;
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+		.info {
+			flex: 1;
+		}
+	}
+
+	#beginning {
+		background-color: red;
+	}
+
+	#non-profit {
+		background-color: blue;
+	}
+
+	#advocacy {
+		background-color: orange;
+	}
+
+	#schools {
+		background-color: purple;
+	}
+
+	#team {
+		background-color: yellow;
+	}
+
+	#future {
+	}
+</style>

@@ -26,7 +26,26 @@ button {
   background: inherit;
   cursor: pointer;
 }
+
 input {
   border: unset;
   background: inherit;
 }
+
+section.lg {
+  &>.container {
+    margin: auto;
+    max-width: var(--lg);
+  }
+}
+
+section.xl {
+  &>.container {
+    margin: auto;
+    max-width: var(--xl);
+  }
+}
+
+// section:has(.border) {
+//   padding-bottom: 0;
+// }

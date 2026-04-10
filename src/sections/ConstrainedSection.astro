@@ -6,13 +6,13 @@ const { ...props } = Astro.props;
 ---
 
 <section {...props}>
-	<slot />
+	<div class="container"><slot /></div>
 </section>
 
-<style>
-	section {
-		width: 100%;
-		padding: 1rem;
-		background: var(--bg-color);
+<style lang="scss">
+	@use "../styles/utils" as *;
+	.container {
+		margin: auto;
+		max-width: var(--xl);
 	}
 </style>

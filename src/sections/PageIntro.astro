@@ -1,13 +1,14 @@
 ---
 import { strictSlug } from "../lib";
 import { type SectionProps } from "../types/sections";
+import ConstrainedSection from "./ConstrainedSection.astro";
 
 // TODO: implement rich text here
 type Props = { description: string } & SectionProps;
 const { title, description } = Astro.props;
 ---
 
-<section id={strictSlug(title)}>
+<ConstrainedSection id={strictSlug(title)}>
 	<div class="container">
 		<div class="text">
 			<h1>{title}</h1>
@@ -17,7 +18,7 @@ const { title, description } = Astro.props;
 			<img src={"https://picsum.photos/500"} />
 		</div>
 	</div>
-</section>
+</ConstrainedSection>
 
 <style lang="scss">
 	@use "../styles/utils" as *;
