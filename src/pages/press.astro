@@ -1,0 +1,34 @@
+---
+import ColoredHeader from "../components/ColoredHeader.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Base from "../templates/Base.astro";
+---
+
+<Base
+  pageMetadata={{
+    title: "Our History",
+    description: "Read about PRISM's history.",
+    type: "website",
+    image: "https://picsum.photos/200",
+    "image:alt": "test",
+  }}
+>
+  <PageHeader
+    title="News & Press"
+    description="For news and press inquiries, contact news@prismfl.org"
+    image={{
+      src: {
+        src: "https://picsum.photos/300",
+        width: 300,
+        height: 300,
+        format: "webp",
+      },
+      alt: "placeholder",
+    }}
+  />
+  <section id="header" class="lg">
+    <div class="container"></div>
+  </section>
+</Base>
+
+<style lang="scss"></style>
