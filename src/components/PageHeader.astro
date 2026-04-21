@@ -12,6 +12,7 @@ type Props = HTMLAttributes<"section"> & {
     alt: string;
   };
 };
+
 const {
   class: className,
   title,
@@ -25,9 +26,15 @@ const {
 <section class:list={["lg", className]} {...props}>
   <div class="container">
     <div class="text">
-      {backlink && <a href={backlink.url}>{backlink.text}</a>}
+      {
+        backlink && (
+          <a class="implicit" href={backlink.url}>
+            {"< Back to "}
+            {backlink.text}
+          </a>
+        )
+      }
       <h1>{title}</h1>
-      <hr />
       <p>{description}</p>
     </div>
     {
@@ -43,23 +50,37 @@ const {
 <style lang="scss">
   .container {
     display: flex;
-    align-items: center;
+    padding: 2rem 1rem;
+    gap: 2rem;
     .text {
-      flex: 2;
+      flex: 3;
       display: flex;
       flex-direction: column;
 
-      h1 {
-        font-size: 2rem;
+      a {
+        font-size: 1.25rem;
         font-family: var(--header-font);
-        font-weight: bold;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 3rem;
+        font-family: var(--header-font);
+        font-weight: 600;
+        border-bottom: 2px solid currentColor;
+        --border-margin: 1rem;
+        padding-bottom: var(--border-margin);
+        margin-bottom: var(--border-margin);
       }
 
       p {
+        font-family: var(--header-font);
+        margin: 0;
         font-size: 1.25rem;
       }
 
       hr {
+        width: 100%;
         padding: 0 2rem;
       }
     }
