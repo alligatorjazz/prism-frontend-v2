@@ -7,12 +7,13 @@
   --fg-color: white;
   --accent-color: var(--bright-gold);
 
-  --custom-color-1: #f19221;
-  --custom-color-2: #854e9e;
-  --custom-color-3: #74bf44;
-  --custom-color-4: purple;
-  --custom-color-5: crimson;
-  --custom-color-6: magenta;
+  --prism-orange: #f19221;
+  --prism-violet: #854e9e;
+  --prism-green: #74bf44;
+  --prism-purple: purple;
+  --prism-crimson: crimson;
+  --prism-magenta: magenta;
+
   --text-font: "Zilla Slab", serif;
   --header-font: "Poppins", sans-serif;
 
