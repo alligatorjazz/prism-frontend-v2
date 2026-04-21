@@ -16,7 +16,9 @@ export default defineConfig({
   },
   integrations: [icon(), react()],
   output: "server",
-
+  image: {
+    remotePatterns: [{ protocol: "https" }],
+  },
   adapter: node({
     mode: "standalone",
   }),
