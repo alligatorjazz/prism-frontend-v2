@@ -46,6 +46,9 @@ section.xl {
   }
 }
 
-// section:has(.border) {
-//   padding-bottom: 0;
-// }
+// for links outside of normal text (i.e. navbar)
+a.implicit {
+  color: inherit;
+  text-decoration: none;
+  font-family: inherit;
+}

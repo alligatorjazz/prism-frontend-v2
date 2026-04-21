@@ -1,21 +1,42 @@
 ---
-import ColoredHeader from "../components/ColoredHeader.astro";
+import { faker } from "@faker-js/faker";
 import PageHeader from "../components/PageHeader.astro";
+import { repeatRandom } from "../lib";
 import Base from "../templates/Base.astro";
+import dayjs from "dayjs";
+import { toTitleCase } from "../lib/dom";
+
+const placeholderNewsStories = repeatRandom(
+  () => {
+    return {
+      title: toTitleCase(faker.lorem.sentence()),
+      logo: faker.image.avatarGitHub(),
+      date: faker.date.recent(),
+      author: faker.person.fullName(),
+      lede: faker.lorem.paragraphs({ min: 1, max: 2 }),
+      picture: faker.image.urlPicsumPhotos(),
+    };
+  },
+  8,
+  12,
+);
 ---
 
 <Base
   pageMetadata={{
-    title: "Our History",
-    description: "Read about PRISM's history.",
+    title: "News & Press",
+    description: "For news and press inquiries, contact news@prismfl.org",
     type: "website",
     image: "https://picsum.photos/200",
     "image:alt": "test",
   }}
+  class={"page-content"}
 >
   <PageHeader
     title="News & Press"
+    id="header"
     description="For news and press inquiries, contact news@prismfl.org"
+    backlink={{ text: "About", url: "/about" }}
     image={{
       src: {
         src: "https://picsum.photos/300",
@@ -26,9 +47,106 @@ import Base from "../templates/Base.astro";
       alt: "placeholder",
     }}
   />
-  <section id="header" class="lg">
-    <div class="container"></div>
+
+  <section id="stories">
+    <ul>
+      {
+        placeholderNewsStories.map((story) => {
+          return (
+            <li>
+              <article>
+                <div class="logo">
+                  <img src={story.logo} />
+                </div>
+                <div class="info">
+                  <div class="title">
+                    <h1>{story.title}</h1>
+                  </div>
+                  <div class="attribution">
+                    <div class="timestamp">
+                      {dayjs(story.date).format("YYYY MM DD")}
+                    </div>
+                    <div class="author">{story.author}</div>
+                  </div>
+                  <p class="lede">{story.lede}</p>
+                  <a href="/" class="button">
+                    Read More
+                  </a>
+                </div>
+              </article>
+              <div class="picture">
+                <img src={story.picture} alt="temp" />
+              </div>
+            </li>
+          );
+        })
+      }
+    </ul>
   </section>
 </Base>
 
-<style lang="scss"></style>
+<style lang="scss">
+  .page-content {
+    background-color: blueviolet;
+  }
+  #header {
+    color: var(--fg-color);
+  }
+  #stories {
+    max-width: var(--xl);
+    margin: auto;
+
+    padding-bottom: 2rem;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+      li {
+        display: flex;
+        height: 24rem;
+        border-radius: 10px;
+        border: 1px solid currentColor;
+        padding: 2rem;
+
+        article {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          .logo {
+            width: 250px;
+            height: 250px;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+            }
+          }
+          .info {
+            flex: 1;
+            .attribution {
+              display: flex;
+              gap: 1rem;
+              align-items: center;
+            }
+          }
+        }
+
+        .picture {
+          width: 25%;
+          max-width: 250px;
+          height: 100%;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+</style>
