@@ -21,10 +21,17 @@ body {
   border-radius: 10px;
 }
 
-button {
+button,
+a.button {
   border: unset;
   background: inherit;
   cursor: pointer;
+  text-decoration: none;
+  border-radius: 10px;
+  font-family: var(--header-font);
+  padding: 0.5rem 1rem;
+  color: var(--fg-color);
+  background-color: var(--bright-gold);
 }
 
 input {

@@ -36,7 +36,7 @@ const { pageMetadata, ...props } = Astro.props;
   <body data-drawer="inactive" data-prev-scroll="up">
     <Navbar routes={routes} siteMetadata={siteMetadata} />
     <div class="spacer"></div>
-    <div {...props} class="page-content"><slot /></div>
+    <div {...props}><slot /></div>
     <NewsletterSignup />
     <Footer />
   </body>
