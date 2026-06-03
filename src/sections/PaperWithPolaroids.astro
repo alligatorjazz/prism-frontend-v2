@@ -2,16 +2,26 @@
 import { strictSlug } from "../lib";
 import { faker } from "@faker-js/faker";
 import { Image } from "astro:assets";
-import tileBg from "../assets/yellow-tile-bg.png";
+import tileBg from "../assets/img/yellow-tile-bg.png";
+import image1 from "../assets/img/ahf-0111.jpg";
+import image2 from "../assets/img/ahf-6232.jpg";
+import image3 from "../assets/img/ahf-6271.jpg";
 
 const { title } = Astro.props;
-const fakeImages = new Array(3).fill(null).map(() => {
-  return {
-    image: faker.image.urlPicsumPhotos({ width: 300, height: 300 }),
-    href: faker.internet.url(),
+const images = [
+  {
+    image: image1,
     alt: faker.lorem.words(),
-  };
-});
+  },
+  {
+    image: image2,
+    alt: faker.lorem.words(),
+  },
+  {
+    image: image3,
+    alt: faker.lorem.words(),
+  },
+];
 
 const backgroundImage = `url("${tileBg.src}")`;
 ---
@@ -38,7 +48,7 @@ const backgroundImage = `url("${tileBg.src}")`;
     </div>
     <div class="polaroids">
       {
-        fakeImages.map(({ image, alt, href }) => (
+        images.map(({ image, alt }) => (
           <div class="image">
             <Image src={image} alt={alt} width={500} height={500} />
           </div>
@@ -72,6 +82,7 @@ const backgroundImage = `url("${tileBg.src}")`;
       display: flex;
       gap: 2rem;
       h1 {
+        color: var(--fg-color);
         font-size: 4rem;
       }
       .text {
