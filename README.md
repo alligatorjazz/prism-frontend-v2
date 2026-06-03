@@ -22,5 +22,8 @@
 - [ ] Newsletter signup
 - [ ] Auto-carousel
 
+## Assets
+- [ ] Create bespoke images / generation formula for card backgrounds
+
 ## Tinkering
 - [ ] "image not found" link @ /image-not-found
