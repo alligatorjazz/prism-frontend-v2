@@ -1,48 +1,253 @@
 ---
 import { Image } from "astro:assets";
 
-interface Props {
-	items: { image: string; alt: string; href: string }[];
-	imageSize?: number;
+export interface Props {
+  items: Array<{
+    image: string;
+    alt: string;
+    href?: string;
+  }>;
+  imageWidth?: number;
+  imageHeight?: number;
+  autoScrollInterval?: number;
 }
 
-const { items, imageSize = 250 } = Astro.props;
+const {
+  items,
+  imageWidth = 300,
+  imageHeight = 200,
+  autoScrollInterval = 3000,
+} = Astro.props;
 ---
 
-<ul>
-	{
-		items.map(({ image, alt, href }) => (
-			<li>
-				<a href={href}>
-					<div class="image">
-						<Image src={image} alt={alt} width={imageSize} height={imageSize} />
-					</div>
-				</a>
-			</li>
-		))
-	}
-</ul>
+<div class="carousel" data-interval={autoScrollInterval}>
+  <div class="carousel-track">
+    {
+      items.map(({ image, alt, href }) => (
+        <div class="carousel-slide">
+          {href ? (
+            <a href={href} aria-label={alt}>
+              <Image
+                src={image}
+                alt={alt}
+                width={imageWidth}
+                height={imageHeight}
+              />
+            </a>
+          ) : (
+            <Image
+              src={image}
+              alt={alt}
+              width={imageWidth}
+              height={imageHeight}
+            />
+          )}
+        </div>
+      ))
+    }
+  </div>
 
-<style>
-	ul {
-		margin: 0;
-		padding: 0;
-		display: grid;
-		grid-template-columns: repeat(auto-fit, 16rem);
-		grid-auto-rows: 16rem;
-		gap: 1rem;
-		list-style: none;
-		justify-content: space-evenly;
+  <button class="carousel-btn carousel-btn--prev" aria-label="Previous slide"
+    >‹</button
+  >
+  <button class="carousel-btn carousel-btn--next" aria-label="Next slide"
+    >›</button
+  >
 
-		.image {
-			--size: 100%;
-			width: var(--size);
-			height: var(--size);
-			img {
-				width: 100%;
-				height: 100%;
-				object-fit: contain;
-			}
-		}
-	}
+  <div class="carousel-dots">
+    {
+      items.map((_, i) => (
+        <button
+          class="carousel-dot"
+          data-index={i}
+          aria-label={`Go to slide ${i + 1}`}
+        />
+      ))
+    }
+  </div>
+
+  <button class="carousel-toggle" aria-label="Play / Pause autoplay">⏸</button>
+</div>
+
+<script>
+  function createCarousel(root) {
+    const track = root.querySelector(".carousel-track");
+    const slides = [...root.querySelectorAll(".carousel-slide")];
+    const prevBtn = root.querySelector(".carousel-btn--prev");
+    const nextBtn = root.querySelector(".carousel-btn--next");
+    const dots = [...root.querySelectorAll(".carousel-dot")];
+    const toggleBtn = root.querySelector(".carousel-toggle");
+    const intervalMs = Number(root.dataset.interval) || 3000;
+
+    let currentIndex = 0;
+    let intervalId = undefined;
+    let isPaused = false;
+
+    function goTo(index) {
+      currentIndex = ((index % slides.length) + slides.length) % slides.length;
+      track.scrollTo({
+        left: slides[currentIndex].offsetLeft,
+        behavior: "smooth",
+      });
+      dots.forEach((dot, i) =>
+        dot.classList.toggle("active", i === currentIndex),
+      );
+    }
+
+    function next() {
+      goTo(currentIndex + 1);
+    }
+
+    function start() {
+      if (intervalId !== undefined) clearInterval(intervalId);
+      intervalId = setInterval(next, intervalMs);
+      isPaused = false;
+      toggleBtn.textContent = "⏸";
+    }
+
+    function pause() {
+      if (intervalId !== undefined) clearInterval(intervalId);
+      intervalId = undefined;
+      isPaused = true;
+      toggleBtn.textContent = "▶";
+    }
+
+    function toggle() {
+      isPaused ? start() : pause();
+    }
+
+    prevBtn.addEventListener("click", () => goTo(currentIndex - 1));
+    nextBtn.addEventListener("click", () => goTo(currentIndex + 1));
+    toggleBtn.addEventListener("click", toggle);
+    dots.forEach((dot) =>
+      dot.addEventListener("click", () => goTo(Number(dot.dataset.index))),
+    );
+
+    start();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".carousel").forEach(createCarousel);
+  });
+</script>
+
+<style lang="scss">
+  .carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    .carousel-track {
+      display: flex;
+      overflow-x: auto;
+      gap: 2rem;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .carousel-slide {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+
+        a {
+          display: block;
+        }
+
+        img {
+          display: block;
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      font-size: 2rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.8);
+      }
+      &--prev {
+        left: 0.5rem;
+      }
+      &--next {
+        right: 0.5rem;
+      }
+
+      @media (max-width: 640px) {
+        font-size: 1.5rem;
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+
+      .carousel-dot {
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+        border: 2px solid var(--fg-color, #333);
+        background: transparent;
+        cursor: pointer;
+        padding: 0;
+        transition: background 0.2s;
+
+        &.active {
+          background: var(--fg-color, #333);
+        }
+
+        @media (max-width: 640px) {
+          width: 0.6rem;
+          height: 0.6rem;
+        }
+      }
+    }
+
+    .carousel-toggle {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      font-size: 1rem;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.8);
+      }
+    }
+  }
 </style>

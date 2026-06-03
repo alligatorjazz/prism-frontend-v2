@@ -11,6 +11,7 @@ import FlagWithTagline from "../sections/FlagWithTagline.astro";
 import ContentWithHeader from "../sections/ContentWithHeader.astro";
 import Carousel from "../components/Carousel.astro";
 import PaperWithPolaroids from "../sections/PaperWithPolaroids.astro";
+import ruledBg from "../assets/img/ruled-bg.png";
 
 const fakeEvents: SiteEvent[] = new Array(12).fill(null).map(() => {
   return {
@@ -50,35 +51,34 @@ const fakeSponsors = new Array(8).fill(null).map(() => {
   <FlagWithTagline title="Tagline" image={{ alt: "A pride flag.", ...flag }}>
     <p>For every color,<br />For everyone</p>
   </FlagWithTagline>
-  <PaperWithPolaroids title="Our Mission" />
+  <PaperWithPolaroids title="Who We Are" />
   <CardsWithHeader
     title="Resources"
     cards={[
       {
         label: "Learn",
         href: "/",
-        backgroundImage: "https://picsum.photos/500",
-        offset: { bottom: "2rem" },
+        backgroundColor: "gold",
       },
       {
         label: "Student Ambassador Program",
         href: "/",
-        backgroundImage: "https://picsum.photos/500",
+        backgroundColor: "purple",
       },
       {
         label: "Get Tested",
         href: "/",
-        backgroundImage: "https://picsum.photos/500",
+        backgroundColor: "pink",
       },
       {
         label: "School Policy Hub",
         href: "/",
-        backgroundImage: "https://picsum.photos/500",
-        textColor: "green",
+        backgroundColor: "skyblue",
       },
     ]}
+    backgroundImage={ruledBg.src}
   />
-  <EventsWithHeader title="Upcoming Events" events={fakeEvents} />
+  <EventsWithHeader title="Upcoming Events" } backgroundImage={ruledBg.src} />
   <ContentWithHeader title="Our Partners" color="white" background="black">
     <p>
       PRISM prides itself in being a collaborative member of the LGBT community
