@@ -10,99 +10,90 @@ import { titleCase } from "../lib";
 import FlagWithTagline from "../sections/FlagWithTagline.astro";
 import ContentWithHeader from "../sections/ContentWithHeader.astro";
 import Carousel from "../components/Carousel.astro";
-import NewsletterSignup from "../sections/NewsletterSignup.astro";
-import Footer from "../sections/Footer.astro";
+import PaperWithPolaroids from "../sections/PaperWithPolaroids.astro";
 
 const fakeEvents: SiteEvent[] = new Array(12).fill(null).map(() => {
-	return {
-		id: faker.internet.ipv6(),
-		updatedAt: faker.date.recent().toString(),
-		createdAt: faker.date.past().toString(),
-		title: titleCase(faker.lorem.words({ min: 2, max: 6 })),
-		link: faker.internet.url(),
-		date: faker.date.future().toString(),
-		location: titleCase(faker.lorem.words({ min: 1, max: 5 })),
-		image: {
-			square: `https://picsum.photos/${Math.floor(450 + 100 * Math.random())}`,
-			rectangular: `https://picsum.photos/${Math.floor(820 + 100 * Math.random())}/${504 + 100 * Math.random()}`,
-		},
-	};
+  return {
+    id: faker.internet.ipv6(),
+    updatedAt: faker.date.recent().toString(),
+    createdAt: faker.date.past().toString(),
+    title: titleCase(faker.lorem.words({ min: 2, max: 6 })),
+    link: faker.internet.url(),
+    date: faker.date.future().toString(),
+    location: titleCase(faker.lorem.words({ min: 1, max: 5 })),
+    image: {
+      square: `https://picsum.photos/${Math.floor(450 + 100 * Math.random())}`,
+      rectangular: `https://picsum.photos/${Math.floor(820 + 100 * Math.random())}/${504 + 100 * Math.random()}`,
+    },
+  };
 });
 
 const fakeSponsors = new Array(8).fill(null).map(() => {
-	return {
-		image: faker.image.urlPicsumPhotos({ width: 300, height: 300 }),
-		href: faker.internet.url(),
-		alt: faker.lorem.words(),
-	};
+  return {
+    image: faker.image.urlPicsumPhotos({ width: 300, height: 300 }),
+    href: faker.internet.url(),
+    alt: faker.lorem.words(),
+  };
 });
 ---
 
 <Base
-	pageMetadata={{
-		title: "Website",
-		description: "Test",
-		type: "website",
-		image: "https://picsum.photos/200",
-		"image:alt": "test",
-	}}
+  pageMetadata={{
+    title: "Website",
+    description: "Test",
+    type: "website",
+    image: "https://picsum.photos/200",
+    "image:alt": "test",
+  }}
 >
-	<section id="animated-hero"></section>
-	<FlagWithTagline title="Tagline" image={{ alt: "A pride flag.", ...flag }}>
-		<p>For every color,<br />For everyone</p>
-	</FlagWithTagline>
-	<CenteredPaperWithHeader title="Our Mission">
-		<h1 slot="header">Our Mission</h1>
-		<p slot="content">
-			PRISM works to expand access to LGBTQ-inclusive education and sexual
-			health resources for youth in South Florida. It's our goal to make sure
-			everyone feels included in their community, regardless of race, ethnicity,
-			religion, sexual orientation, gender identity, or gender expression.
-		</p>
-	</CenteredPaperWithHeader>
-	<CardsWithHeader
-		title="Resources"
-		cards={[
-			{
-				label: "Learn",
-				href: "/",
-				backgroundImage: "https://picsum.photos/500",
-				offset: { bottom: "2rem" },
-			},
-			{
-				label: "Student Ambassador Program",
-				href: "/",
-				backgroundImage: "https://picsum.photos/500",
-			},
-			{
-				label: "Get Tested",
-				href: "/",
-				backgroundImage: "https://picsum.photos/500",
-			},
-			{
-				label: "School Policy Hub",
-				href: "/",
-				backgroundImage: "https://picsum.photos/500",
-				textColor: "green",
-			},
-		]}
-	/>
-	<EventsWithHeader title="Upcoming Events" events={fakeEvents} />
-	<ContentWithHeader title="Our Partners" color="white" background="black">
-		<p>
-			PRISM prides itself in being a collaborative member of the LGBT community
-			in South Florida. See some of our partners below! These organizations,
-			businesses, and individuals have shown their steadfast commitment to our
-			motto: "For Every Color, For Everyone" through partnered events,
-			fundraising initiatives, grants, sponsorships, and other collaborations.
-		</p>
-		<Carousel items={fakeSponsors} />
-	</ContentWithHeader>
-	<style>
-		#animated-hero {
-			/* temp */
-			height: 60vh;
-			background-color: darkmagenta;
-		}
-	</style>
+  <section id="animated-hero"></section>
+  <FlagWithTagline title="Tagline" image={{ alt: "A pride flag.", ...flag }}>
+    <p>For every color,<br />For everyone</p>
+  </FlagWithTagline>
+  <PaperWithPolaroids title="Our Mission" />
+  <CardsWithHeader
+    title="Resources"
+    cards={[
+      {
+        label: "Learn",
+        href: "/",
+        backgroundImage: "https://picsum.photos/500",
+        offset: { bottom: "2rem" },
+      },
+      {
+        label: "Student Ambassador Program",
+        href: "/",
+        backgroundImage: "https://picsum.photos/500",
+      },
+      {
+        label: "Get Tested",
+        href: "/",
+        backgroundImage: "https://picsum.photos/500",
+      },
+      {
+        label: "School Policy Hub",
+        href: "/",
+        backgroundImage: "https://picsum.photos/500",
+        textColor: "green",
+      },
+    ]}
+  />
+  <EventsWithHeader title="Upcoming Events" events={fakeEvents} />
+  <ContentWithHeader title="Our Partners" color="white" background="black">
+    <p>
+      PRISM prides itself in being a collaborative member of the LGBT community
+      in South Florida. See some of our partners below! These organizations,
+      businesses, and individuals have shown their steadfast commitment to our
+      motto: "For Every Color, For Everyone" through partnered events,
+      fundraising initiatives, grants, sponsorships, and other collaborations.
+    </p>
+    <Carousel items={fakeSponsors} />
+  </ContentWithHeader>
+  <style>
+    #animated-hero {
+      /* temp */
+      height: 60vh;
+      background-color: darkmagenta;
+    }
+  </style>
 </Base>

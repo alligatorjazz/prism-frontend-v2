@@ -32,7 +32,10 @@ a.button {
   padding: 0.5rem 1rem;
   color: var(--fg-color);
   background-color: var(--bright-gold);
+  display: block;
+  transition: all 300ms;
 }
+
 
 input {
   border: unset;

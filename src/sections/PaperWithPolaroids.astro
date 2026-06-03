@@ -1,0 +1,139 @@
+---
+import { strictSlug } from "../lib";
+import { faker } from "@faker-js/faker";
+import { Image } from "astro:assets";
+import tileBg from "../assets/yellow-tile-bg.png";
+
+const { title } = Astro.props;
+const fakeImages = new Array(3).fill(null).map(() => {
+  return {
+    image: faker.image.urlPicsumPhotos({ width: 300, height: 300 }),
+    href: faker.internet.url(),
+    alt: faker.lorem.words(),
+  };
+});
+
+const backgroundImage = `url("${tileBg.src}")`;
+---
+
+<section id={strictSlug(title)}>
+  <div class="background" style={{ backgroundImage }}></div>
+  <div class="content">
+    <div class="text">
+      <h1>{title}</h1>
+      <p>
+        PRISM works to expand access to LGBTQ-inclusive education and sexual
+        health resources for youth in South Florida. It's our goal to make sure
+        everyone feels included in their community, regardless of race,
+        ethnicity, religion, sexual orientation, gender identity, or gender
+        expression.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, iure
+        odit? Obcaecati consequuntur eveniet dicta aliquid tempora sunt
+        architecto iste autem omnis? Qui cupiditate ipsum voluptatibus dolores
+        iure alias asperiores.
+      </p>
+      <a class="button" href="/about">Learn More</a>
+    </div>
+    <div class="polaroids">
+      {
+        fakeImages.map(({ image, alt, href }) => (
+          <div class="image">
+            <Image src={image} alt={alt} width={500} height={500} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  section {
+    background-color: var(--accent-color);
+    position: relative;
+
+    .background {
+      position: absolute;
+      top: 0rem;
+      left: 0rem;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.5;
+
+      background-attachment: fixed;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 4rem;
+      display: flex;
+      gap: 2rem;
+      h1 {
+        font-size: 4rem;
+      }
+      .text {
+        flex: 6;
+        /* display: flex; */
+        /* flex-direction: column; */
+        p {
+          font-size: 1.5rem;
+          padding: 1rem;
+          background-color: var(--fg-color);
+        }
+
+        a.button {
+          background-color: var(--bg-color);
+          &:hover {
+            background-color: var(--fg-color);
+            color: var(--text-color);
+            font-weight: bold;
+          }
+          width: 100%;
+          font-size: 1.25rem;
+          text-align: center;
+        }
+      }
+
+      .polaroids {
+        flex: 4;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-gap: 2rem;
+
+        div {
+          border: 5px solid white;
+          border-bottom: 25px solid white;
+          width: 250px;
+          height: 250px;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+
+        div:nth-child(1) {
+          grid-row: 1 / 3;
+          grid-column: 2 / 3;
+          rotate: 8deg;
+        }
+
+        div:nth-child(2) {
+          grid-row: 2 / 4;
+          grid-column: 1 / 2;
+          rotate: -4deg;
+        }
+
+        div:nth-child(3) {
+          grid-row: 3 / 5;
+          grid-column: 2 / 3;
+          rotate: 6deg;
+        }
+      }
+    }
+  }
+</style>

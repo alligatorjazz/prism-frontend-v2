@@ -126,10 +126,10 @@ export async function getAllEvents(
     const queryParams: Record<string, string | number> = {};
 
     if (params?.includeNeon !== undefined) {
-      queryParams.includeNeon = params.includeNeon;
+      queryParams.includeNeon = params.includeNeon?.toString();
     }
     if (params?.includeVolunteer !== undefined) {
-      queryParams.includeVolunteer = params.includeVolunteer;
+      queryParams.includeVolunteer = params.includeVolunteer.toString();
     }
     if (params?.search) {
       queryParams.search = params.search;
