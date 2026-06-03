@@ -1,26 +1,26 @@
 ---
 interface Props {
-	background?: string;
+  background?: string;
 }
 const { background } = Astro.props;
 ---
 
 <div class="colored-header">
-	<slot />
+  <slot />
 </div>
 
 <style define:vars={{ background }}>
-	.colored-header {
-		padding: 2rem;
-		background: var(--background);
-		h1 {
-			margin: 0;
-			text-align: center;
-			font-size: 2.5rem;
+  .colored-header {
+    padding: 2rem;
+    background: var(--background);
+    h1 {
+      margin: 0;
+      text-align: center;
+      font-size: 3rem;
 
-			@include breakpoint-up(md) {
-				font-size: 4rem;
-			}
-		}
-	}
+      @include breakpoint-up(md) {
+        font-size: 5rem;
+      }
+    }
+  }
 </style>
