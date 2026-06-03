@@ -3,24 +3,46 @@ import { strictSlug } from "../lib";
 import ColoredHeader from "../components/ColoredHeader.astro";
 import { EventList } from "../components/EventList.tsx";
 import type { SiteEvent } from "../types/payload";
+import { processMedia } from "../lib/payload";
 interface Props {
-	title: string;
-	events: SiteEvent[];
+  title: string;
+  backgroundImage: string;
 }
 
-const { title, events } = Astro.props;
+const { title, backgroundImage: unprocessedBackgroundImage } = Astro.props;
+
+const processedBackgroundImage = unprocessedBackgroundImage
+  ? processMedia(unprocessedBackgroundImage)
+  : null;
+
+const backgroundImage = processedBackgroundImage
+  ? `url("${processedBackgroundImage.src}")`
+  : "none";
 ---
 
 <section id={strictSlug(title)}>
-	<ColoredHeader background="var(--bg-color)"><h1>{title}</h1></ColoredHeader>
-	<EventList client:load events={events} />
+  <ColoredHeader background="var(--bg-color)">
+    <h1>{title}</h1>
+  </ColoredHeader>
+  <div
+    class="content"
+    style={{
+      backgroundImage,
+    }}
+  >
+    <EventList client:load />
+  </div>
 </section>
 
 <style>
-	section {
-		padding: 2rem;
-	}
-	h1 {
-		text-align: center;
-	}
+  section {
+  }
+  h1 {
+    text-align: center;
+  }
+  .content {
+    padding: 2rem;
+    background-size: 2000px;
+    background-attachment: fixed;
+  }
 </style>

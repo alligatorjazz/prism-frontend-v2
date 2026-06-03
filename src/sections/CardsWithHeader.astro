@@ -7,63 +7,69 @@ import { processMedia } from "../lib/payload";
 
 type Props = Block<"CardsWithHeader">;
 const {
-	title,
-	cards,
-	backgroundImage: unprocessedBackgroundImage,
+  title,
+  cards,
+  backgroundImage: unprocessedBackgroundImage,
 } = Astro.props;
 
 const processedBackgroundImage = unprocessedBackgroundImage
-	? processMedia(unprocessedBackgroundImage)
-	: null;
+  ? processMedia(unprocessedBackgroundImage)
+  : null;
 const backgroundImage = processedBackgroundImage
-	? `url("${processedBackgroundImage.src}")`
-	: "none";
+  ? `url("${processedBackgroundImage.src}")`
+  : "none";
 ---
 
-<section
-	id={strictSlug(title)}
-	style={{
-		backgroundImage,
-	}}
->
-	<ColoredHeader
-		><slot name="header"><h1 class="cards-header">{title}</h1></slot
-		></ColoredHeader
-	>
-	<ul>
-		{
-			cards?.map((card) => (
-				<li>
-					<LinkCard {...card} />
-				</li>
-			))
-		}
-	</ul>
+<section id={strictSlug(title)}>
+  <ColoredHeader
+    ><slot name="header"><h1 class="cards-header">{title}</h1></slot
+    ></ColoredHeader
+  >
+  <div
+    class="content"
+    style={{
+      backgroundImage,
+    }}
+  >
+    <ul>
+      {
+        cards?.map((card) => (
+          <li>
+            <LinkCard {...card} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </section>
 
 <style lang="scss">
-	@use "../styles/utils" as *;
+  @use "../styles/utils" as *;
 
-	.cards-header {
-		text-align: center;
-		font-size: 3rem;
-		color: var(--fg-color);
+  .cards-header {
+    text-align: center;
+    font-size: 10rem;
+    color: var(--fg-color);
 
-		@include breakpoint-up(md) {
-			font-size: 4rem;
-		}
-	}
+    @include breakpoint-up(md) {
+      font-size: 4rem;
+    }
+  }
 
-	ul {
-		list-style: none;
-		display: flex;
-		justify-content: space-evenly;
-		align-items: center;
-		flex-wrap: wrap;
-		gap: 2rem;
+  .content {
+    background-size: 2000px;
+    background-attachment: fixed;
+    ul {
+      list-style: none;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
 
-		@include breakpoint-up(md) {
-			padding: 4rem;
-		}
-	}
+      @include breakpoint-up(md) {
+        padding: 4rem;
+      }
+    }
+  }
 </style>

@@ -1,83 +1,81 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { getImage } from "astro:assets";
-import { processColor, processMedia } from "../lib/payload";
-import CssFilterConverter from "css-filter-converter";
 import type { LinkCardData } from "../types/payload";
+import defaultBg from "../assets/img/default-card-bg.png";
 
 type Props = LinkCardData;
-const { label, backgroundColor, href, textColor, backgroundImage, offset } =
-	Astro.props;
+const { label, backgroundColor, href, textColor } = Astro.props;
 
 let style: HTMLAttributes<"a">["style"] = {};
-const optimizedBackground = backgroundImage
-	? await getImage(processMedia(backgroundImage))
-	: null;
-const processedBgColor = processColor(backgroundColor);
-const processedTextColor = processColor(textColor);
 
-console.log(backgroundColor);
-if (optimizedBackground) {
-	style = {
-		background: `url("${backgroundImage}")`,
-	};
-	if (processedBgColor) {
-		style = {
-			...style,
-			filter: CssFilterConverter.hexToFilter(processedBgColor),
-		};
-	}
-}
-
-if (!optimizedBackground && processedBgColor) {
-	style = { background: processedBgColor };
-}
-
-if (processedTextColor) {
-	style = { ...style, color: processedTextColor };
-}
+const backgroundImage = `url("${defaultBg.src}")`;
+const randomRotate = `${Math.floor(Math.random() * 10 * (Math.random() > 0.5 ? 1 : -1))}deg`;
 ---
 
-<div class="link-card rounded" style={style}>
-	<a href={href}>
-		<div>{label}</div>
-	</a>
+<div
+  class="link-card rounded"
+  style={{
+    backgroundColor,
+  }}
+>
+  <div class="background" style={{ backgroundImage }}></div>
+  <a href={href}>
+    <div>{label}</div>
+  </a>
 </div>
 
-<style
-	define:vars={{
-		topOffset: offset?.top ?? "initial",
-		leftOffset: offset?.left ?? "initial",
-		rightOffset: offset?.right ?? "initial",
-		bottomOffset: offset?.bottom ?? "initial",
-	}}
->
-	.link-card {
-		--size: 16rem;
-		width: var(--size);
-		height: var(--size);
-		font-weight: bold;
-		font-family: var(--header-font);
-		font-size: 1.2rem;
-		border: 2px solid white;
+<style define:vars={{ randomRotate }}>
+  .link-card {
+    --size: 16rem;
+    width: var(--size);
+    height: var(--size);
+    font-weight: bold;
+    font-family: var(--header-font);
+    font-size: 1.5rem;
+    border: 2px solid var(--fg-color);
+    background-size: 16rem;
 
-		a {
-			color: inherit;
-			padding: 1rem;
-			display: block;
-			width: 100%;
-			height: 100%;
-			text-decoration: none;
-			position: relative;
+    align-items: center;
+    position: relative;
+    rotate: var(--randomRotate);
+    transition: all 300ms;
 
-			div {
-				position: absolute;
-				/* background: red; */
-				top: var(--topOffset);
-				left: var(--leftOffset);
-				right: var(--rightOffset);
-				bottom: var(--bottomOffset);
-			}
-		}
-	}
+    &:hover {
+      rotate: 0deg;
+      filter: brightness(125%);
+      color: var(--text-color);
+    }
+
+    .background {
+      position: absolute;
+      top: 0rem;
+      left: 0rem;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.3;
+      background-size: var(--size);
+    }
+
+    a {
+      position: relative;
+      z-index: 1;
+      color: inherit;
+      padding: 1rem;
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+      position: relative;
+
+      display: flex;
+      justify-content: center;
+
+      text-align: center;
+      div {
+        margin: auto;
+        color: var(--fg-color);
+      }
+    }
+  }
 </style>
