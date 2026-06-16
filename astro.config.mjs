@@ -18,6 +18,7 @@ export default defineConfig({
   output: "server",
   image: {
     remotePatterns: [{ protocol: "https" }],
+    domains: ["static.wixstatic.com"],
   },
   adapter: node({
     mode: "standalone",

@@ -1,0 +1,69 @@
+---
+import { getItems } from "../api/wix";
+import Carousel from "../components/Carousel.astro";
+import ContentWithHeader from "./ContentWithHeader.astro";
+
+interface Props {
+  imageWidth?: number;
+  imageHeight?: number;
+  autoScrollInterval?: number;
+}
+
+const {
+  imageWidth = 225,
+  imageHeight = 225,
+  autoScrollInterval = 3000,
+} = Astro.props;
+
+/**
+ * Converts a Wix internal image URI into a public HTTPS URL.
+ *
+ * Wix Media Manager images use the format:
+ *   wix:image://v1/{mediaId}/{displayName}#originWidth=W&originHeight=H
+ *
+ * The static URL is: https://static.wixstatic.com/media/{mediaId}
+ * (see: https://forum.wixstudio.com/t/create-a-url-for-a-media-file-the-truth-about-getfileurl/36548)
+ */
+function wixImageToUrl(wixImageUri: string): string {
+  const match = wixImageUri.match(/^wix:image:\/\/v1\/([^/]+)\//);
+  if (!match) return wixImageUri; // already a URL or unrecognized format
+  return `https://static.wixstatic.com/media/${match[1]}`;
+}
+
+const partners = await getItems("Partners");
+
+const carouselItems = partners
+  .filter((partner) => partner.logo)
+  .map((partner) => ({
+    image: wixImageToUrl(partner.logo),
+    alt: partner.title || "Partner logo",
+    href: partner.website || undefined,
+  }));
+---
+
+<ContentWithHeader title="Our Partners" color="white" background="black">
+  <p>
+    PRISM prides itself in being a collaborative member of the LGBT community in
+    South Florida. See some of our partners below! These organizations,
+    businesses, and individuals have shown their steadfast commitment to our
+    motto: "For Every Color, For Everyone" through partnered events, fundraising
+    initiatives, grants, sponsorships, and other collaborations.
+  </p>
+  <Carousel
+    items={carouselItems}
+    imageWidth={imageWidth}
+    imageHeight={imageHeight}
+    autoScrollInterval={autoScrollInterval}
+  />
+</ContentWithHeader>
+<style>
+  .our-partners {
+    width: 100%;
+    padding: 2rem 0;
+  }
+
+  .our-partners h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+</style>

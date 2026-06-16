@@ -1,84 +1,76 @@
 import "./EventList.scss";
 import dayjs from "dayjs";
 import { hash } from "../lib";
-import { processMedia } from "../lib/payload";
-import { useCallback, useMemo, useState, useEffect } from "react";
-import { getAllEvents, type UnifiedEvent } from "../api";
+import { useMemo, useState } from "react";
 
-interface Props {
-  eventsPerPage?: number;
-  source?: ("neon" | "volunteer" | "cms")[];
-  includeNeon?: boolean;
-  includeVolunteer?: boolean;
-}
-
-type NormalizedEvent = {
+export interface NormalizedEvent {
   title: string;
   date: string;
   location: string;
-  image: { square: any; rectangular: any };
-  link?: string;
+  image: { url: string; width: number; height: number } | null;
+  link: string;
   source: string;
-};
-
-function normalizeEvent(event: UnifiedEvent): NormalizedEvent {
-  return {
-    title: event.title || event.name || "Untitled Event",
-    date: event.startDate || event.date || new Date().toISOString(),
-    location: event.location || "Location TBD",
-    image: {
-      square: null,
-      rectangular: null,
-    },
-    link: event.registrationUrl || event.link,
-    source: event.source,
-  };
 }
 
-export function EventList({
-  eventsPerPage = 3,
-  source,
-  includeNeon = true,
-  includeVolunteer = true,
-  ...props
-}: Props) {
-  const [events, setEvents] = useState<NormalizedEvent[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+interface Props {
+  events: NormalizedEvent[];
+  error?: string | null;
+  eventsPerPage?: number;
+}
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const response = await getAllEvents({
-          includeNeon,
-          includeVolunteer,
-          source,
-          sortBy: "date",
-          sortOrder: "asc",
-          limit: 50,
-        });
+/**
+ * Returns an array representing the visible page slots.
+ * Each slot is either a number (page index) or "...".
+ *
+ * Rules (0-indexed pages):
+ *  - If totalPages ≤ 7: show all pages, no ellipses.
+ *  - Otherwise, show at most 7 numeric slots comprising:
+ *      • The first two pages (0, 1)
+ *      • The last two pages (totalPages - 2, totalPages - 1)
+ *      • The current page
+ *      • The pages immediately previous and next to the current page
+ *    Duplicate slots are collapsed, and "..." fills any gaps.
+ */
+function paginate(currentPage: number, totalPages: number): (number | "...")[] {
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, i) => i);
+  }
 
-        if (response?.docs) {
-          const normalized = response.docs.map(normalizeEvent);
-          setEvents(normalized);
-        } else {
-          setEvents([]);
-        }
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to load events");
-        setEvents([]);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const slots = new Set<number>();
 
-    fetchEvents();
-  }, [source, includeNeon, includeVolunteer]);
+  // First two pages
+  slots.add(0);
+  slots.add(1);
 
+  // Last two pages
+  slots.add(totalPages - 2);
+  slots.add(totalPages - 1);
+
+  // Current page and its immediate neighbors
+  slots.add(currentPage);
+  if (currentPage > 0) slots.add(currentPage - 1);
+  if (currentPage < totalPages - 1) slots.add(currentPage + 1);
+
+  const sorted = Array.from(slots).sort((a, b) => a - b);
+
+  // Insert "..." between non-consecutive page numbers
+  const result: (number | "...")[] = [];
+  for (let i = 0; i < sorted.length; i++) {
+    if (i > 0 && sorted[i] - sorted[i - 1] > 1) {
+      result.push("...");
+    }
+    result.push(sorted[i]);
+  }
+
+  return result;
+}
+
+export function EventList({ events, error, eventsPerPage = 3 }: Props) {
   const sortedEvents = useMemo(
-    () => [...events].sort((a, b) => (dayjs(a.date).isAfter(b.date) ? 1 : -1)),
+    () =>
+      [...events].sort((a, b) =>
+        dayjs(a.date).isAfter(dayjs(b.date)) ? 1 : -1,
+      ),
     [events],
   );
 
@@ -86,49 +78,15 @@ export function EventList({
   const numberOfPages = Math.ceil(sortedEvents.length / eventsPerPage);
   const [currentPage, setCurrentPage] = useState(0);
 
-  const nextPage = useCallback(
-    () =>
-      setCurrentPage((prev) => {
-        if (prev < numberOfPages - 1) {
-          return prev + 1;
-        }
-        return 0;
-      }),
-    [numberOfPages],
+  const pageSlots = useMemo(
+    () => paginate(currentPage, numberOfPages),
+    [currentPage, numberOfPages],
   );
-
-  const previousPage = useCallback(
-    () =>
-      setCurrentPage((prev) => {
-        if (prev > 0) {
-          return prev - 1;
-        }
-        return numberOfPages - 1;
-      }),
-    [numberOfPages],
-  );
-
-  const pageEvents = useMemo(
-    () =>
-      sortedEvents.slice(
-        eventsPerPage * currentPage,
-        eventsPerPage * currentPage + eventsPerPage,
-      ),
-    [currentPage, sortedEvents, eventsPerPage],
-  );
-
-  if (loading) {
-    return (
-      <div className="event-list">
-        <p>Loading events...</p>
-      </div>
-    );
-  }
 
   if (error) {
     return (
       <div className="event-list">
-        <p>Error loading events: {error}</p>
+        <p className="error">Error loading events: {error}</p>
       </div>
     );
   }
@@ -141,52 +99,67 @@ export function EventList({
     );
   }
 
+  const nextPage = () =>
+    setCurrentPage((prev) => (prev < numberOfPages - 1 ? prev + 1 : 0));
+
+  const previousPage = () =>
+    setCurrentPage((prev) => (prev > 0 ? prev - 1 : numberOfPages - 1));
+
+  const pageEvents = sortedEvents.slice(
+    eventsPerPage * currentPage,
+    eventsPerPage * currentPage + eventsPerPage,
+  );
+
   return (
     <div data-uid={uid} className="event-list" data-page="1">
       <ul>
-        {pageEvents.map(({ title, date, location, image, link, source }) => {
-          const hasImage = image.square !== null;
-          return (
-            <li className="rounded" key={`${title}-${date}-${source}`}>
-              {hasImage && (
-                <div className="image">
-                  <img
-                    {...processMedia(image.square)}
-                    alt={`The event poster for ${title}.`}
-                  />
-                </div>
-              )}
-              <div className="info">
-                <div className="event-source-badge">{source}</div>
-                <h1>{title}</h1>
-                <h2>{dayjs(date).format("MMM DD, YYYY")}</h2>
-                <h3>{location}</h3>
+        {pageEvents.map(({ title, date, location, image, link, source }) => (
+          <li className="rounded" key={`${title}-${date}-${source}`}>
+            {image && (
+              <div className="image">
+                <img
+                  src={image.url}
+                  width={image.width}
+                  height={image.height}
+                  alt={`The event poster for ${title}.`}
+                />
               </div>
-              <div className="learn-more">
-                <a
-                  className="rounded"
-                  href={link || "#"}
-                  target={link ? "_blank" : undefined}
-                  rel={link ? "noopener noreferrer" : undefined}
-                >
-                  Learn More
-                </a>
-              </div>
-            </li>
-          );
-        })}
+            )}
+            <div className="info">
+              <h1>{title}</h1>
+              <h2>{dayjs(date).format("MMM DD, YYYY")}</h2>
+              <h3>{location}</h3>
+            </div>
+            <div className="learn-more">
+              <a
+                className="rounded"
+                href={link || "#"}
+                target={link ? "_blank" : undefined}
+                rel={link ? "noopener noreferrer" : undefined}
+              >
+                Learn More
+              </a>
+            </div>
+          </li>
+        ))}
       </ul>
       <div className="controls rounded">
         <button onClick={() => previousPage()}>{"<"}</button>
-        {new Array(numberOfPages).fill(null).map((_, index) => (
-          <button
-            key={`event-list-${uid}-page-button-${index}`}
-            className={index === currentPage ? "current-page" : ""}
-            onClick={() => setCurrentPage(index)}
-          >
-            {index + 1}
-          </button>
-        ))}
+        {pageSlots.map((slot, index) =>
+          slot === "..." ? (
+            <span key={`ellipsis-${index}`} className="ellipsis">
+              ...
+            </span>
+          ) : (
+            <button
+              key={`event-list-${uid}-page-button-${slot}`}
+              className={slot === currentPage ? "current-page" : ""}
+              onClick={() => setCurrentPage(slot)}
+            >
+              {slot + 1}
+            </button>
+          ),
+        )}
         <button onClick={() => nextPage()}>{">"}</button>
       </div>
     </div>

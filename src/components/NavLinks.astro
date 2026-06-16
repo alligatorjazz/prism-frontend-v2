@@ -2,65 +2,100 @@
 import type { HTMLAttributes } from "astro/types";
 import type { Route } from "../types";
 
-interface Props extends HTMLAttributes<"div"> {
-	routes: Route[];
+interface Props extends HTMLAttributes<"ul"> {
+  routes: Route[];
 }
 const { routes, ...props } = Astro.props;
 ---
 
-{
-	routes.map((route) => {
-		if (route.type === "internal") {
-			return (
-				<a
-					class:list={["nav-link", route.highlight ? "highlighted" : ""]}
-					href={route.path}
-				>
-					{route.displayName}
-				</a>
-			);
-		}
+<ul {...props}>
+  {
+    routes.map((route) => {
+      if (route.type === "internal") {
+        return (
+          <li class="nav-item">
+            <a
+              class:list={["nav-link", route.highlight ? "highlighted" : ""]}
+              href={route.path}
+            >
+              {route.displayName}
+            </a>
+            {route.children && (
+              <ul class="dropdown">
+                <li>
+                  <a href="#">Sub-1</a>
+                </li>
+                <li>
+                  <a href="#">Sub-2</a>
+                </li>
+                <li>
+                  <a href="#">Sub-3</a>
+                </li>
+              </ul>
+            )}
+          </li>
+        );
+      }
 
-		if (route.type === "external") {
-			return (
-				<a
-					class:list={["nav-link", route.highlight ? "highlighted" : ""]}
-					href={route.url}
-				>
-					{route.displayName}
-				</a>
-			);
-		}
+      if (route.type === "external") {
+        return (
+          <li>
+            <a
+              class:list={["nav-link", route.highlight ? "highlighted" : ""]}
+              href={route.url}
+            >
+              {route.displayName}
+            </a>
+          </li>
+        );
+      }
 
-		console.error("Could not parse route: ", route);
-		return null;
-	})
-}
+      console.error("Could not parse route: ", route);
+      return null;
+    })
+  }
+</ul>
 
 <style>
-	.nav-link {
-		color: var(--fg-color);
-		font-weight: 600;
-		transition: all 300ms;
-		text-decoration: none;
-		font-family: var(--header-font);
+  .nav-link {
+    color: var(--fg-color);
+    font-weight: 600;
+    transition: all 300ms;
+    text-decoration: none;
+    font-family: var(--header-font);
 
-		&:hover {
-			color: var(--accent-color);
-		}
-	}
+    &:hover {
+      color: var(--accent-color);
+    }
+  }
 
-	.nav-link.highlighted {
-		background: var(--accent-color);
-		padding: 0.5rem;
-		width: 16rem;
-		text-align: center;
-		flex: 1;
-		border-radius: var(--round-edge);
+  .nav-item {
+    position: relative;
+    .dropdown {
+      background: var(--accent-color);
 
-		&:hover {
-			background: white;
-			color: var(--accent-color);
-		}
-	}
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      transition: all 0.5s ease;
+      margin-top: 1rem;
+      left: 0;
+      display: none;
+      position: absolute;
+      top: 1rem;
+    }
+    &:hover {
+      .dropdown {
+        visibility: visible;
+        opacity: 1;
+        display: block;
+        list-style: none;
+        margin: 0;
+        li {
+          clear: both;
+          width: 100%;
+        }
+      }
+    }
+  }
 </style>

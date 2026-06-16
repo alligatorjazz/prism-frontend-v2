@@ -176,16 +176,17 @@ export async function getAllEvents(
 
 // TODO: implement site route fetching
 export async function getSiteRoutes(): Promise<Route[]> {
-  const sitePages = await api.find("pages");
-  return (sitePages?.docs ?? []).map((page) => {
-    return {
-      type: "internal",
-      // TODO: implement slug / title separation
-      path: "/" + strictSlug(page.title),
-      displayName: page.title,
-      id: page.id,
-    };
-  });
+  return [];
+  // const sitePages = await api.find("pages");
+  // return (sitePages?.docs ?? []).map((page) => {
+  //   return {
+  //     type: "internal",
+  //     // TODO: implement slug / title separation
+  //     path: "/" + strictSlug(page.title),
+  //     displayName: page.title,
+  //     id: page.id,
+  //   };
+  // });
 }
 
 export async function getPage(id: string): Promise<API.Page | null> {
