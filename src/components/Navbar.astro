@@ -43,7 +43,7 @@ const { siteMetadata, routes } = Astro.props;
       <input type="text" name="site-search" placeholder="Search..." value="" />
     </div>
     <nav role="navigation" class="links">
-      <NavLinks routes={routes} />
+      <NavLinks class={"nav-links"} routes={routes} />
     </nav>
   </div>
 </header>
@@ -53,6 +53,7 @@ const { siteMetadata, routes } = Astro.props;
 
   body[data-prev-scroll="down"] header {
     height: 0;
+    overflow: hidden;
   }
 
   header {
@@ -67,7 +68,6 @@ const { siteMetadata, routes } = Astro.props;
     left: 0;
     background-color: var(--bg-color);
     height: 10rem;
-    overflow: hidden;
     transition: height 300ms;
     filter: var(--shadow);
     z-index: 100;
@@ -139,16 +139,6 @@ const { siteMetadata, routes } = Astro.props;
       gap: 1.5rem;
 
       & > .search {
-      }
-
-      & > .links {
-        & > * {
-          list-style: none;
-          margin: 0;
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-        }
       }
     }
 

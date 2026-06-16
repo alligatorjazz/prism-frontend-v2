@@ -61,3 +61,28 @@ export async function getEvents() {
 
   return allEvents;
 }
+
+export async function getEventsPage(limit: number = 12, cursor?: string) {
+  const oneYearAgo = new Date();
+  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+
+  const response: any = await wix.wixEventsV2.queryEvents({
+    filter: {
+      status: { $in: ["UPCOMING"] },
+      "dateAndTimeSettings.startDate": {
+        $gte: oneYearAgo,
+      },
+    },
+    sort: [{ fieldName: "dateAndTimeSettings.startDate", order: "ASC" }],
+    paging: {
+      limit,
+      ...(cursor ? { cursor } : {}),
+    },
+  });
+
+  return {
+    events: response.events,
+    nextCursor: response.pagingMetadata?.cursors?.next ?? null,
+    hasMore: !!response.pagingMetadata?.cursors?.next,
+  };
+}

@@ -1,14 +1,24 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import type { Route } from "../types";
+
+interface Route {
+  type: "internal" | "external";
+  path?: string;
+  url?: string;
+  displayName: string;
+  highlight?: boolean;
+  children?: Route[];
+  id?: string;
+}
 
 interface Props extends HTMLAttributes<"ul"> {
   routes: Route[];
 }
-const { routes, ...props } = Astro.props;
+
+const { routes, class: className } = Astro.props;
 ---
 
-<ul {...props}>
+<ul class={"container"}>
   {
     routes.map((route) => {
       if (route.type === "internal") {
@@ -17,20 +27,25 @@ const { routes, ...props } = Astro.props;
             <a
               class:list={["nav-link", route.highlight ? "highlighted" : ""]}
               href={route.path}
+              {...(route.children ? { "aria-haspopup": "true" } : {})}
             >
               {route.displayName}
             </a>
             {route.children && (
-              <ul class="dropdown">
-                <li>
-                  <a href="#">Sub-1</a>
-                </li>
-                <li>
-                  <a href="#">Sub-2</a>
-                </li>
-                <li>
-                  <a href="#">Sub-3</a>
-                </li>
+              <ul class="dropdown" aria-label="submenu">
+                {route.children.map((child) => (
+                  <li class="dropdown-item">
+                    <a
+                      class="dropdown-link"
+                      href={child.type === "external" ? child.url : child.path}
+                      {...(child.type === "external"
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                    >
+                      {child.displayName}
+                    </a>
+                  </li>
+                ))}
               </ul>
             )}
           </li>
@@ -39,10 +54,12 @@ const { routes, ...props } = Astro.props;
 
       if (route.type === "external") {
         return (
-          <li>
+          <li class="nav-item">
             <a
               class:list={["nav-link", route.highlight ? "highlighted" : ""]}
               href={route.url}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               {route.displayName}
             </a>
@@ -50,52 +67,103 @@ const { routes, ...props } = Astro.props;
         );
       }
 
-      console.error("Could not parse route: ", route);
       return null;
     })
   }
 </ul>
 
 <style>
+  .container {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+  }
   .nav-link {
     color: var(--fg-color);
     font-weight: 600;
-    transition: all 300ms;
+    transition: color 300ms;
     text-decoration: none;
     font-family: var(--header-font);
 
     &:hover {
       color: var(--accent-color);
     }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .highlighted {
+    background: var(--accent-color);
+    padding: 0.5rem 4rem;
+    border-radius: var(--round-edge);
   }
 
   .nav-item {
     position: relative;
-    .dropdown {
-      background: var(--accent-color);
+    display: inline-block;
+    transition-duration: 0.3s;
 
+    &:hover {
+      cursor: pointer;
+    }
+
+    .dropdown {
       visibility: hidden;
       opacity: 0;
       position: absolute;
       transition: all 0.5s ease;
-      margin-top: 1rem;
-      left: 0;
+      /* margin-top: 1rem; */
+      /* top: 100%; */
+      /* left: 0; */
       display: none;
-      position: absolute;
-      top: 1rem;
+      background: var(--accent-color);
+      min-width: 10rem;
+      list-style: none;
+      padding: 0.5rem 0;
+      border-radius: 0 0 var(--round-edge) var(--round-edge);
+      z-index: 200;
     }
-    &:hover {
-      .dropdown {
-        visibility: visible;
-        opacity: 1;
-        display: block;
-        list-style: none;
-        margin: 0;
-        li {
-          clear: both;
-          width: 100%;
-        }
-      }
+
+    .dropdown-item {
+      clear: both;
+      width: 100%;
+    }
+
+    .dropdown-link {
+      display: block;
+      padding: 0.5rem 1rem;
+      /* color: var(--bg-color); */
+      color: var(--fg-color);
+      font-weight: 600;
+      text-decoration: none;
+      font-family: var(--header-font);
+      transition: background 150ms ease;
+
+      /* &:hover { */
+      /*   background: rgba(255, 255, 255, 0.15); */
+      /*   color: var(--bg-color); */
+      /* } */
+      /**/
+      /* &:focus { */
+      /*   outline: none; */
+      /* } */
+    }
+
+    /* Reveal dropdown on hover OR focus-within (keyboard navigation) */
+    &:hover > .dropdown,
+    &:focus-within > .dropdown,
+    .dropdown:hover {
+      visibility: visible;
+      opacity: 1;
+      display: block;
+    }
+
+    /* Apply hover style to parent link when focus is within the dropdown */
+    &:focus-within .nav-link {
+      color: var(--accent-color);
     }
   }
 </style>

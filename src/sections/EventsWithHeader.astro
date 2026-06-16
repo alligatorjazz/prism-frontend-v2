@@ -21,7 +21,7 @@ const { title, backgroundImage } = Astro.props;
  *
  * The static CDN URL is: https://static.wixstatic.com/media/{mediaId}
  */
-function wixImageToUrl(wixImageUri: string): string {
+export function wixImageToUrl(wixImageUri: string): string {
   const match = wixImageUri.match(/^wix:image:\/\/v1\/([^/]+)\//);
   if (!match) return wixImageUri; // already a URL or unrecognized format
   return `https://static.wixstatic.com/media/${match[1]}`;

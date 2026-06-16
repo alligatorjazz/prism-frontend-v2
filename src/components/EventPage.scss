@@ -1,0 +1,248 @@
+@use "../styles/utils" as *;
+
+.event-page {
+  overflow: hidden;
+  width: 100%;
+  max-width: var(--2xl);
+  margin: auto;
+  padding: 2rem 1rem;
+
+  .event-page-header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    h1 {
+      font-family: var(--header-font);
+      font-weight: 700;
+      font-size: 2rem;
+      color: var(--fg-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-family: var(--header-font);
+      font-size: 1.125rem;
+      color: var(--fg-color);
+      opacity: 0.8;
+    }
+  }
+
+  .event-page-content {
+    width: 100%;
+  }
+
+  // ── Event card grid ──────────────────────────────────
+  .event-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    gap: 1rem;
+    list-style: none;
+    align-items: stretch;
+
+    @include breakpoint-up(md) {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      justify-items: center;
+    }
+
+    @include breakpoint-up(lg) {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+
+  // ── Individual event card ────────────────────────────
+  .event-card {
+    display: flex;
+    flex-direction: column;
+    height: 28rem;
+    width: 20rem;
+    background: var(--accent-color);
+
+    .event-card-image {
+      height: 40%;
+      width: 100%;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px 10px 0px 0px;
+      }
+    }
+
+    .event-card-body {
+      padding: 0 1rem;
+      flex: 1;
+
+      * {
+        font-size: 1rem;
+        font-weight: normal;
+      }
+
+      .event-source-badge {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        opacity: 0.7;
+        margin-bottom: 0.25rem;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+        font-weight: bold;
+      }
+
+      h3 {
+        font-size: 0.95rem;
+        margin-top: 0.25rem;
+      }
+
+      h4 {
+        font-size: 0.9rem;
+        opacity: 0.85;
+        margin-top: 0.25rem;
+      }
+    }
+
+    .event-card-action {
+      padding: 0.5rem 1rem;
+      color: var(--fg-color);
+      width: 100%;
+
+      a {
+        width: 100%;
+        height: 100%;
+        display: block;
+        padding: 0.5rem 0rem;
+        background: var(--bg-color);
+        text-align: center;
+        color: var(--fg-color);
+        font-family: var(--header-font);
+        font-weight: 700;
+        font-size: 1.25rem;
+        text-decoration: none;
+      }
+    }
+  }
+
+  // ── Pagination controls ──────────────────────────────
+  .controls {
+    width: 100%;
+    max-width: 32rem;
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+    background: var(--accent-color);
+    margin: 1.5rem auto;
+
+    button {
+      font-weight: bold;
+      font-family: var(--header-font);
+
+      &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+    }
+
+    button.current-page {
+      color: var(--fg-color);
+      background: var(--bg-color);
+      border-radius: 100%;
+    }
+
+    .ellipsis {
+      display: flex;
+      align-items: center;
+      padding: 0 0.5rem;
+      font-weight: bold;
+      font-family: var(--header-font);
+      color: var(--fg-color);
+    }
+  }
+
+  // ── Loading spinner ──────────────────────────────────
+  .loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    gap: 1rem;
+
+    p {
+      font-family: var(--header-font);
+      font-size: 1.125rem;
+      color: var(--fg-color);
+      opacity: 0.7;
+    }
+
+    &.small {
+      padding: 1rem;
+      flex-direction: row;
+
+      p {
+        display: none;
+      }
+    }
+  }
+
+  .spinner {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0.3rem solid var(--fg-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    opacity: 0.6;
+
+    .loading-spinner.small & {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-width: 0.2rem;
+    }
+  }
+
+  // ── Empty / error states ─────────────────────────────
+  .no-events,
+  .error {
+    text-align: center;
+    padding: 3rem 1rem;
+    font-family: var(--header-font);
+    font-size: 1.125rem;
+  }
+
+  .error {
+    color: #c0392b;
+  }
+
+  .retry-button {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.5rem 2rem;
+    background: var(--accent-color);
+    color: var(--fg-color);
+    font-family: var(--header-font);
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
