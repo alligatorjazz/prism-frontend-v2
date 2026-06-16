@@ -2,45 +2,12 @@
 import Base from "../templates/Base.astro";
 import flag from "../assets/img/long-pride-flag.png";
 import CardsWithHeader from "../sections/CardsWithHeader.astro";
-import { faker } from "@faker-js/faker";
 import EventsWithHeader from "../sections/EventsWithHeader.astro";
-import type { SiteEvent } from "../types/payload";
-import { titleCase } from "../lib";
 import FlagWithTagline from "../sections/FlagWithTagline.astro";
-import ContentWithHeader from "../sections/ContentWithHeader.astro";
-import Carousel from "../components/Carousel.astro";
 import PaperWithPolaroids from "../sections/PaperWithPolaroids.astro";
 import ruledBg from "../assets/img/ruled-bg.png";
 import SectionBorder from "../components/SectionBorder.astro";
-import { getItems } from "../api/wix";
 import OurPartners from "../sections/OurPartners.astro";
-
-const fakeEvents: SiteEvent[] = new Array(12).fill(null).map(() => {
-  return {
-    id: faker.internet.ipv6(),
-    updatedAt: faker.date.recent().toString(),
-    createdAt: faker.date.past().toString(),
-    title: titleCase(faker.lorem.words({ min: 2, max: 6 })),
-    link: faker.internet.url(),
-    date: faker.date.future().toString(),
-    location: titleCase(faker.lorem.words({ min: 1, max: 5 })),
-    image: {
-      square: `https://picsum.photos/${Math.floor(450 + 100 * Math.random())}`,
-      rectangular: `https://picsum.photos/${Math.floor(820 + 100 * Math.random())}/${504 + 100 * Math.random()}`,
-    },
-  };
-});
-
-const fakeSponsors = new Array(8).fill(null).map(() => {
-  return {
-    image: faker.image.urlPicsumPhotos({ width: 300, height: 300 }),
-    href: faker.internet.url(),
-    alt: faker.lorem.words(),
-  };
-});
-
-// const partners = await getItems("Partners");
-// console.log(partners);
 ---
 
 <Base

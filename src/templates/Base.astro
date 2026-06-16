@@ -1,8 +1,8 @@
 ---
-import { getSiteMetadata, getSiteRoutes } from "../api";
+import { getSiteMetadata } from "../api";
 import MetadataLoader from "../components/MetadataLoader.astro";
 import Navbar from "../components/Navbar.astro";
-import type { SurfaceMetadata } from "../types";
+import type { Route, SurfaceMetadata } from "../types";
 import "../styles/global.scss";
 import NewsletterSignup from "../sections/NewsletterSignup.astro";
 import Footer from "../sections/Footer.astro";
@@ -13,7 +13,21 @@ interface Props extends HTMLAttributes<"div"> {
 }
 
 const siteMetadata = await getSiteMetadata();
-const routes = await getSiteRoutes();
+const routes: Route[] = [
+  { type: "internal", path: "/404", displayName: "Quick Links" },
+  { type: "internal", path: "/404", displayName: "About" },
+  {
+    type: "internal",
+    displayName: "Get Involved",
+    path: "/get-involved",
+    children: [
+      { type: "internal", path: "/task-forces", displayName: "Task Forces" },
+    ],
+  },
+  { type: "internal", path: "/404", displayName: "Resources" },
+  { type: "internal", path: "/404", displayName: "Events" },
+  { type: "internal", path: "/404", displayName: "Donate", highlight: true },
+];
 
 const { pageMetadata, ...props } = Astro.props;
 ---

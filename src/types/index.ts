@@ -26,9 +26,10 @@ export type Route = (
   | {
       type: "internal";
       path: string;
+      children?: Route[];
     }
   | {
       type: "external";
       url: string;
     }
-) & { displayName: string; highlight?: boolean; id: string };
+) & { displayName: string; highlight?: boolean };

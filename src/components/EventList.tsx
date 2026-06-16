@@ -110,8 +110,6 @@ export function EventList({ events, error, eventsPerPage = 3 }: Props) {
     eventsPerPage * currentPage + eventsPerPage,
   );
 
-  console.log(events);
-
   return (
     <div data-uid={uid} className="event-list" data-page="1">
       <ul>
