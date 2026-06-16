@@ -17,9 +17,8 @@ interface EventsPage {
   hasMore: boolean;
 }
 export function wixImageToUrl(wixImageUri: string): string {
-  const match = wixImageUri.match(/^wix:image:\/\/v1\/([^/]+)\//);
-  if (!match) return wixImageUri; // already a URL or unrecognized format
-  return `https://static.wixstatic.com/media/${match[1]}`;
+  const match = wixImageUri.replace(`wix:image://v1/`, "");
+  return `https://static.wixstatic.com/media/${match}`;
 }
 
 function normalizeEvent(event: any): NormalizedEvent {

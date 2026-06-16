@@ -19,7 +19,15 @@ import OurPartners from "../sections/OurPartners.astro";
     "image:alt": "test",
   }}
 >
-  <section id="animated-hero"></section>
+  <section id="animated-hero">
+    <video
+      src="/video/10 Second Countdown Timer - Film Beginning [RZEf9xNogqI].webm"
+      muted
+      autoplay
+      loop
+    >
+    </video>
+  </section>
   <SectionBorder type="spray-paint" backgroundColor="rgb(83, 193, 168)" flip />
   <FlagWithTagline title="Tagline" image={{ alt: "A pride flag.", ...flag }}>
     <p>For every color,<br />For everyone</p>
@@ -60,6 +68,10 @@ import OurPartners from "../sections/OurPartners.astro";
   #animated-hero {
     /* temp */
     height: 60vh;
-    background-color: darkmagenta;
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 </style>
