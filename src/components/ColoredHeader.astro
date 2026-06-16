@@ -1,17 +1,28 @@
 ---
+import SectionBorder from "./SectionBorder.astro";
+
 interface Props {
   background?: string;
+  border?: boolean;
 }
-const { background } = Astro.props;
+const { background, border } = Astro.props;
 ---
 
 <div class="colored-header">
   <slot />
 </div>
+{
+  border ? (
+    <SectionBorder type="spray-paint" backgroundColor="rgb(83, 193, 168)" />
+  ) : (
+    ""
+  )
+}
 
 <style define:vars={{ background }}>
   .colored-header {
     padding: 2rem;
+    padding-bottom: 0;
     background: var(--background);
     h1 {
       margin: 0;

@@ -21,7 +21,7 @@ const backgroundImage = processedBackgroundImage
 ---
 
 <section id={strictSlug(title)}>
-  <ColoredHeader background="var(--bg-color)">
+  <ColoredHeader background="var(--bg-color)" border>
     <h1>{title}</h1>
   </ColoredHeader>
   <div
@@ -39,6 +39,7 @@ const backgroundImage = processedBackgroundImage
   }
   h1 {
     text-align: center;
+    color: white;
   }
   .content {
     padding: 2rem;

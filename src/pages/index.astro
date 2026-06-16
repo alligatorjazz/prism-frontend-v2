@@ -12,6 +12,7 @@ import ContentWithHeader from "../sections/ContentWithHeader.astro";
 import Carousel from "../components/Carousel.astro";
 import PaperWithPolaroids from "../sections/PaperWithPolaroids.astro";
 import ruledBg from "../assets/img/ruled-bg.png";
+import SectionBorder from "../components/SectionBorder.astro";
 
 const fakeEvents: SiteEvent[] = new Array(12).fill(null).map(() => {
   return {
@@ -48,9 +49,11 @@ const fakeSponsors = new Array(8).fill(null).map(() => {
   }}
 >
   <section id="animated-hero"></section>
+  <SectionBorder type="spray-paint" backgroundColor="rgb(83, 193, 168)" flip />
   <FlagWithTagline title="Tagline" image={{ alt: "A pride flag.", ...flag }}>
     <p>For every color,<br />For everyone</p>
   </FlagWithTagline>
+  <SectionBorder type="spray-paint" backgroundColor="rgb(83, 193, 168)" />
   <PaperWithPolaroids title="Who We Are" />
   <CardsWithHeader
     title="Resources"
