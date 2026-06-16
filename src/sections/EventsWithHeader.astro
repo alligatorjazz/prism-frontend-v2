@@ -1,23 +1,70 @@
 ---
-import { strictSlug } from "../lib";
+import { getImageUrl } from "@wix/sdk/media";
+import { getEvents } from "../api/wix";
 import ColoredHeader from "../components/ColoredHeader.astro";
-import { EventList } from "../components/EventList.tsx";
-import type { SiteEvent } from "../types/payload";
-import { processMedia } from "../lib/payload";
+import { EventList, type NormalizedEvent } from "../components/EventList";
+import { strictSlug } from "../lib";
+import { inferRemoteSize } from "astro:assets";
+
 interface Props {
   title: string;
-  backgroundImage: string;
+  backgroundImage?: string;
 }
 
-const { title, backgroundImage: unprocessedBackgroundImage } = Astro.props;
+const { title, backgroundImage } = Astro.props;
 
-const processedBackgroundImage = unprocessedBackgroundImage
-  ? processMedia(unprocessedBackgroundImage)
-  : null;
+/**
+ * Converts a Wix internal image URI into a public HTTPS URL.
+ *
+ * Wix images use the format:
+ *   wix:image://v1/{mediaId}/{displayName}#originWidth=W&originHeight=H
+ *
+ * The static CDN URL is: https://static.wixstatic.com/media/{mediaId}
+ */
+function wixImageToUrl(wixImageUri: string): string {
+  const match = wixImageUri.match(/^wix:image:\/\/v1\/([^/]+)\//);
+  if (!match) return wixImageUri; // already a URL or unrecognized format
+  return `https://static.wixstatic.com/media/${match[1]}`;
+}
 
-const backgroundImage = processedBackgroundImage
-  ? `url("${processedBackgroundImage.src}")`
-  : "none";
+let events: NormalizedEvent[] = [];
+let error: string | null = null;
+
+try {
+  const rawEvents = await getEvents();
+
+  events = await Promise.all(
+    rawEvents.map(async (event) => {
+      const location =
+        event.location?.type === "VENUE"
+          ? event.location.venue?.name ||
+            event.location.venue?.address?.formatted ||
+            "Location TBD"
+          : event.location?.type === "ONLINE"
+            ? "Online Event"
+            : "Location TBD";
+
+      let image: NormalizedEvent["image"] = null;
+
+      if (event.mainImage) {
+        const remoteImageInfo = getImageUrl(event.mainImage as string);
+
+        image = { ...remoteImageInfo };
+      }
+
+      return {
+        title: event.title || "Untitled Event",
+        date: event.dateAndTimeSettings?.startDate || new Date().toISOString(),
+        location,
+        image,
+        link: event.eventPageUrl?.url || "#",
+        source: "wix",
+      };
+    }),
+  );
+} catch (err) {
+  error = err instanceof Error ? err.message : "Failed to load events";
+}
 ---
 
 <section id={strictSlug(title)}>
@@ -30,7 +77,7 @@ const backgroundImage = processedBackgroundImage
       backgroundImage,
     }}
   >
-    <EventList client:load />
+    <EventList client:load events={events} error={error} />
   </div>
 </section>
 
