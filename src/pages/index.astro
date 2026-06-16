@@ -1,7 +1,6 @@
 ---
 import Base from "../templates/Base.astro";
 import flag from "../assets/img/long-pride-flag.png";
-import CenteredPaperWithHeader from "../sections/CenteredPaperWithHeader.astro";
 import CardsWithHeader from "../sections/CardsWithHeader.astro";
 import { faker } from "@faker-js/faker";
 import EventsWithHeader from "../sections/EventsWithHeader.astro";
@@ -13,6 +12,8 @@ import Carousel from "../components/Carousel.astro";
 import PaperWithPolaroids from "../sections/PaperWithPolaroids.astro";
 import ruledBg from "../assets/img/ruled-bg.png";
 import SectionBorder from "../components/SectionBorder.astro";
+import { getItems } from "../api/wix";
+import OurPartners from "../sections/OurPartners.astro";
 
 const fakeEvents: SiteEvent[] = new Array(12).fill(null).map(() => {
   return {
@@ -37,6 +38,9 @@ const fakeSponsors = new Array(8).fill(null).map(() => {
     alt: faker.lorem.words(),
   };
 });
+
+// const partners = await getItems("Partners");
+// console.log(partners);
 ---
 
 <Base
@@ -82,21 +86,13 @@ const fakeSponsors = new Array(8).fill(null).map(() => {
     backgroundImage={ruledBg.src}
   />
   <EventsWithHeader title="Upcoming Events" } backgroundImage={ruledBg.src} />
-  <ContentWithHeader title="Our Partners" color="white" background="black">
-    <p>
-      PRISM prides itself in being a collaborative member of the LGBT community
-      in South Florida. See some of our partners below! These organizations,
-      businesses, and individuals have shown their steadfast commitment to our
-      motto: "For Every Color, For Everyone" through partnered events,
-      fundraising initiatives, grants, sponsorships, and other collaborations.
-    </p>
-    <Carousel items={fakeSponsors} />
-  </ContentWithHeader>
-  <style>
-    #animated-hero {
-      /* temp */
-      height: 60vh;
-      background-color: darkmagenta;
-    }
-  </style>
+  <OurPartners />
 </Base>
+
+<style>
+  #animated-hero {
+    /* temp */
+    height: 60vh;
+    background-color: darkmagenta;
+  }
+</style>
