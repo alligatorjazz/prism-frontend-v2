@@ -8,6 +8,7 @@ import PaperWithPolaroids from "../sections/PaperWithPolaroids.astro";
 import ruledBg from "../assets/img/ruled-bg.png";
 import SectionBorder from "../components/SectionBorder.astro";
 import OurPartners from "../sections/OurPartners.astro";
+import HeroVideo from "../sections/HeroVideo.astro";
 ---
 
 <Base
@@ -19,20 +20,7 @@ import OurPartners from "../sections/OurPartners.astro";
     "image:alt": "test",
   }}
 >
-  <section id="animated-hero">
-    <video
-      src="/video/10 Second Countdown Timer - Film Beginning [RZEf9xNogqI].webm"
-      muted
-      autoplay
-      loop
-    >
-    </video>
-  </section>
-  <SectionBorder type="spray-paint" backgroundColor="rgb(83, 193, 168)" flip />
-  <FlagWithTagline title="Tagline" image={{ alt: "A pride flag.", ...flag }}>
-    <p>For every color,<br />For everyone</p>
-  </FlagWithTagline>
-  <SectionBorder type="spray-paint" backgroundColor="rgb(83, 193, 168)" />
+  <HeroVideo />
   <PaperWithPolaroids title="Who We Are" />
   <CardsWithHeader
     title="Resources"
