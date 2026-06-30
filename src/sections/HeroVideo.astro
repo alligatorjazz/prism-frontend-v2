@@ -1,6 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import LongFlag from "../components/LongFlag.astro";
+import TornPaperBox from "../components/TornPaperBox.astro";
 
 interface Props extends HTMLAttributes<"section"> {}
 
@@ -9,9 +10,18 @@ const { ...props } = Astro.props;
 
 <section {...props}>
   <video src="/video/Websitevideov3.webm" muted autoplay loop> </video>
-  <div class="content">
-    <h1 class="tagline">For every color,<br />For everyone</h1>
-  </div>
+  <TornPaperBox class={"paper"}>
+    <div class="content">
+      <h1>Who We Are</h1>
+      <p>
+        PRISM works to expand access to LGBTQ-inclusive education and sexual
+        health resources for youth in South Florida. It's our goal to make sure
+        everyone feels included in their community, regardless of race,
+        ethnicity, religion, sexual orientation, gender identity, or gender
+        expression.
+      </p>
+    </div></TornPaperBox
+  >
 </section>
 
 <style>
@@ -19,6 +29,11 @@ const { ...props } = Astro.props;
     position: relative;
     width: 100%;
     height: calc(100vh - 10rem);
+    display: flex;
+    align-items: center;
+
+    padding: 4rem;
+
     video {
       position: absolute;
       top: 0;
@@ -29,51 +44,21 @@ const { ...props } = Astro.props;
       filter: brightness(75%);
     }
 
-    .content {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-
-      padding: 4rem;
-      .tagline {
-        font-family: var(--header-font);
-        font-size: 6rem;
-        line-height: 8rem;
-        background-image: repeating-linear-gradient(
-          to right,
-          red,
-          orange,
-          yellow,
-          green,
-          dodgerblue,
-          violet,
-          white,
-          red
-        );
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-fill-color: transparent;
-        background-size: 400% 100%;
-        background-repeat: repeat-x;
-        animation: HeroText 10s linear infinite;
-        filter: drop-shadow(5px 5px 0px black);
+    .paper {
+      width: 700px;
+      margin: auto 0;
+      .content {
+        h1 {
+          font-size: 4rem;
+          margin: 0;
+        }
+        p {
+          font-size: 1.5rem;
+        }
+        display: flex;
+        flex-direction: column;
+        z-index: 2;
       }
-    }
-  }
-
-  @keyframes HeroText {
-    0% {
-      background-position: 0% 50%;
-    }
-
-    100% {
-      background-position: 400% 50%;
     }
   }
 </style>

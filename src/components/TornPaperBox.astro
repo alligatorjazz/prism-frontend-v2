@@ -1,0 +1,57 @@
+---
+import TornPaperBorder from "../components/TornPaperBorder.astro";
+import paperNoise from "../assets/img/paper-noise.png";
+import { getImage } from "astro:assets";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {}
+
+const { class: className, ...props } = Astro.props;
+const { src: noise } = await getImage({ src: paperNoise, format: "webp" });
+const backgroundImage = `url("${noise}")`;
+---
+
+<div class:list={["paper", className]} {...props}>
+  <div class="border top">
+    <TornPaperBorder />
+  </div>
+  <div class="content" style={{ backgroundImage }}>
+    <slot />
+  </div>
+  <div class="border bottom">
+    <TornPaperBorder offset />
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../styles/utils" as *;
+
+  .paper {
+    display: flex;
+    flex-direction: column;
+
+    .border.top {
+      transform: scaleY(-1);
+    }
+
+    .border.bottom {
+      transform: scaleX(-1);
+    }
+
+    .content {
+      padding: 0rem 2rem;
+      background-size: repeat;
+
+      :global(p) {
+        /* text-align: justify; */
+        /* font-size: 1.25rem; */
+        /* line-height: 2rem; */
+        /* text-decoration: underline; */
+        /* text-decoration-color: grey; */
+        /* text-underline-offset: 9px; */
+        /* border-bottom: 1px solid grey; */
+        /* border-top: 1px solid grey; */
+      }
+    }
+  }
+</style>
