@@ -3,16 +3,28 @@ import SectionBorder from "./SectionBorder.astro";
 
 interface Props {
   background?: string;
-  border?: boolean;
+  borderTop?: boolean;
+  borderBottom?: boolean;
 }
-const { background, border } = Astro.props;
+const { background, borderTop, borderBottom } = Astro.props;
 ---
 
+{
+  borderTop ? (
+    <SectionBorder
+      flip
+      type="spray-paint"
+      backgroundColor="rgb(83, 193, 168)"
+    />
+  ) : (
+    ""
+  )
+}
 <div class="colored-header">
   <slot />
 </div>
 {
-  border ? (
+  borderBottom ? (
     <SectionBorder type="spray-paint" backgroundColor="rgb(83, 193, 168)" />
   ) : (
     ""
@@ -21,8 +33,7 @@ const { background, border } = Astro.props;
 
 <style define:vars={{ background }}>
   .colored-header {
-    padding: 2rem;
-    padding-bottom: 0;
+    padding: 0 2rem;
     background: var(--background);
     h1 {
       margin: 0;
