@@ -1,18 +1,22 @@
 * {
-  --prism-teal: rgb(83, 193, 168);
-  --bright-gold: #ffc038;
+  --activist-aqua: #51c0a7;
+  --youth-yellow-1: #ffe09d;
+  --youth-yellow-2: #ffc03a;
+  --youth-yellow-3: #eba000;
+  --bold-black: #000000;
+  --witty-white: #ffffff;
 
   --text-color: black;
-  --bg-color: var(--prism-teal);
-  --fg-color: white;
-  --accent-color: var(--bright-gold);
+  --bg-color: var(--activist-aqua);
+  --fg-color: var(--witty-white);
+  --accent-color: var(--youth-yellow-2);
 
-  --prism-orange: #f19221;
-  --prism-violet: #854e9e;
-  --prism-green: #74bf44;
-  --prism-purple: purple;
-  --prism-crimson: crimson;
-  --prism-magenta: magenta;
+  --rainbow-red: #d02c28;
+  --rainbow-orange: #f19221;
+  --rainbow-yellow: #fbed1f;
+  --rainbow-green: #74bf44;
+  --rainbow-blue: #07a8df;
+  --rainbow-purple: #854e9e;
 
   --text-font: "Zilla Slab", serif;
   --header-font: "Poppins", sans-serif;
