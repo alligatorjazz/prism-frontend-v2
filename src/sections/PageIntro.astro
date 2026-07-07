@@ -1,53 +1,63 @@
 ---
+import type { HTMLAttributes } from "astro/types";
 import { strictSlug } from "../lib";
 import { type SectionProps } from "../types/sections";
 import ConstrainedSection from "./ConstrainedSection.astro";
 
 // TODO: implement rich text here
-type Props = { description: string } & SectionProps;
-const { title, description } = Astro.props;
+type Props = {
+  description: string;
+  image?: HTMLAttributes<"img">;
+} & SectionProps;
+const { title, description, image } = Astro.props;
 ---
 
 <ConstrainedSection id={strictSlug(title)}>
-	<div class="container">
-		<div class="text">
-			<h1>{title}</h1>
-			{description.split("\n").map((line) => <p>{line}</p>)}
-		</div>
-		<div class="image">
-			<img src={"https://picsum.photos/500"} />
-		</div>
-	</div>
+  <div class="container">
+    <div class="text">
+      <h1>{title}</h1>
+      {description.split("\n").map((line) => <p>{line}</p>)}
+    </div>
+    {
+      image && (
+        <div class="image">
+          <img {...image} />
+        </div>
+      )
+    }
+  </div>
 </ConstrainedSection>
 
 <style lang="scss">
-	@use "../styles/utils" as *;
-	.container {
-		max-width: var(--xl);
-		display: flex;
-		align-items: center;
-		gap: 2rem;
-		padding: 3rem 0;
-		.text {
-			flex: 1;
-			text-align: left;
-			h1 {
-				padding-bottom: 1rem;
-				font-size: 2.5rem;
-				border-bottom: 2px solid white;
-			}
-			p {
-				font-size: 1.5rem;
-			}
-		}
+  @use "../styles/utils" as *;
+  .container {
+    max-width: var(--xl);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 3rem 0;
+    color: var(--fg-color);
 
-		.image {
-			width: 25%;
-			img {
-				width: 100%;
-				height: 100%;
-				object-fit: contain;
-			}
-		}
-	}
+    .text {
+      flex: 1;
+      text-align: left;
+      h1 {
+        padding-bottom: 1rem;
+        font-size: 2.5rem;
+        border-bottom: 2px solid white;
+      }
+      p {
+        font-size: 1.5rem;
+      }
+    }
+
+    .image {
+      width: 25%;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
 </style>
