@@ -1,9 +1,16 @@
 ---
-import SectionBorder from "../components/SectionBorder.astro";
 import PageIntro from "../sections/PageIntro.astro";
+import ThreeIconCluster from "../components/ThreeIconCluster.astro";
 import Base from "../templates/Base.astro";
 import prismLogo from "../assets/img/prism-logo-primary.png";
+import { Icon } from "astro-icon/components";
+import boca from "../assets/img/boca-raton-hs.avif";
+import march from "../assets/img/early-march.avif";
+import { Image, getImage } from "astro:assets";
+import ruledBg from "../assets/img/ruled-bg.png";
 import { faker } from "@faker-js/faker";
+
+const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).src})`;
 ---
 
 <Base
@@ -20,13 +27,59 @@ import { faker } from "@faker-js/faker";
     description={"We envision a community where race, ethnicity, sexual orientation, gender identity, and gender expression are not deciding factors in young people’s ability to maintain their physical, sexual, and mental health."}
     image={{ ...prismLogo }}
   />
-  <div class="our-history"></div>
-  <div class="our-team"></div>
-  <div class="news"></div>
-  <div class="partners"></div>
+  <main>
+    <div class="our-history" style={{ backgroundImage: ruledPaper }}>
+      <div class="content">
+        <ThreeIconCluster class={"icons"}>
+          <Icon slot="top" name="ri:time-line" size={300} />
+          <Image
+            slot="middle"
+            src={boca}
+            alt="A photo of Boca Raton High School."
+          />
+          <Image slot="bottom" src={march} alt="A photo of a pride march." />
+        </ThreeIconCluster>
+        <div class="info">
+          <h1>Our History</h1>
+          <p>{faker.lorem.paragraphs(2)}</p>
+        </div>
+      </div>
+    </div>
+    <div class="our-team"></div>
+    <div class="news"></div>
+    <div class="partners"></div>
+  </main>
 </Base>
 
 <style lang="scss">
-  .our-team {
+  main > div {
+    padding: 2rem;
+    .content {
+      max-width: var(--xl);
+      margin: auto;
+    }
+  }
+
+  .our-history {
+    background-size: 2000px;
+
+    .content {
+      display: flex;
+
+      gap: 2rem;
+      align-items: center;
+      .icons {
+        flex: 1;
+      }
+
+      .info {
+        h1 {
+          font-size: 3rem;
+        }
+        p {
+          font-size: 1.5rem;
+        }
+      }
+    }
   }
 </style>
