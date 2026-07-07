@@ -1,0 +1,32 @@
+---
+import SectionBorder from "../components/SectionBorder.astro";
+import PageIntro from "../sections/PageIntro.astro";
+import Base from "../templates/Base.astro";
+import prismLogo from "../assets/img/prism-logo-primary.png";
+import { faker } from "@faker-js/faker";
+---
+
+<Base
+  pageMetadata={{
+    title: "About Us",
+    description: "This is who we are, what we do, and why our work matters.",
+    type: "website",
+    image: "https://picsum.photos/200",
+    "image:alt": "test",
+  }}
+>
+  <PageIntro
+    title={"About Us"}
+    description={"We envision a community where race, ethnicity, sexual orientation, gender identity, and gender expression are not deciding factors in young people’s ability to maintain their physical, sexual, and mental health."}
+    image={{ ...prismLogo }}
+  />
+  <div class="our-history"></div>
+  <div class="our-team"></div>
+  <div class="news"></div>
+  <div class="partners"></div>
+</Base>
+
+<style lang="scss">
+  .our-team {
+  }
+</style>
