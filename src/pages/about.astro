@@ -9,8 +9,25 @@ import march from "../assets/img/early-march.avif";
 import { Image, getImage } from "astro:assets";
 import ruledBg from "../assets/img/ruled-bg.png";
 import { faker } from "@faker-js/faker";
+import teamPhoto from "../assets/img/team-group-photo-faw-26.jpg";
+import SectionBorder from "../components/SectionBorder.astro";
 
 const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).src})`;
+
+const newsArticles = Array.from({ length: 8 }, () => {
+  const title = faker.lorem.sentence({ min: 4, max: 8 });
+  return {
+    title: title.charAt(0).toUpperCase() + title.slice(1),
+    excerpt: faker.lorem.paragraph({ min: 2, max: 4 }),
+    date: faker.date.recent({ days: 180 }).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }),
+    image: faker.image.urlPicsumPhotos({ width: 640, height: 360 }),
+    href: `/news/${faker.string.uuid()}`,
+  };
+});
 ---
 
 <Base
@@ -41,20 +58,122 @@ const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).sr
         </ThreeIconCluster>
         <div class="info">
           <h1>Our History</h1>
-          <p>{faker.lorem.paragraphs(2)}</p>
+          <p>{faker.lorem.paragraphs(3)}</p>
+          <a href="/our-history" class="button">Learn More</a>
         </div>
       </div>
     </div>
-    <div class="our-team"></div>
-    <div class="news"></div>
-    <div class="partners"></div>
+    <SectionBorder type="squiggle" flip backgroundColor="#07a8df" />
+    <div class="our-team">
+      <div class="content">
+        <div class="info">
+          <h1>Our Team</h1>
+          <p>{faker.lorem.paragraphs(2)}</p>
+          <a href="/our-history" class="button">Learn More</a>
+        </div>
+        <div class="photo">
+          <Image src={teamPhoto} alt="A photo of the PRISM FL team." />
+        </div>
+      </div>
+    </div>
+    <SectionBorder type="squiggle" backgroundColor="#07a8df" />
+    <div class="news">
+      <div class="content">
+        <h1>PRISM in the News</h1>
+        <div class="carousel" role="region" aria-label="Latest news articles">
+          <button
+            class="carousel-control prev"
+            aria-label="Previous article"
+            type="button"
+          >
+            <Icon name="ri:arrow-left-s-line" size={32} />
+          </button>
+          <div class="carousel-track">
+            {
+              newsArticles.map((article) => (
+                <article class="news-card">
+                  <a href={article.href} class="card-link">
+                    <img
+                      src={article.image}
+                      alt=""
+                      loading="lazy"
+                      width="640"
+                      height="360"
+                    />
+                    <div class="card-body">
+                      <time datetime={article.date}>{article.date}</time>
+                      <h2>{article.title}</h2>
+                      <p>{article.excerpt}</p>
+                      <span class="read-more">
+                        Read More <Icon name="ri:arrow-right-line" size={16} />
+                      </span>
+                    </div>
+                  </a>
+                </article>
+              ))
+            }
+          </div>
+          <button
+            class="carousel-control next"
+            aria-label="Next article"
+            type="button"
+          >
+            <Icon name="ri:arrow-right-s-line" size={32} />
+          </button>
+        </div>
+        <a href="/our-history" class="full-width button">See All Articles</a>
+      </div>
+    </div>
+    <div class="partners">
+      <h1 style={{ textAlign: "center", padding: "4rem", fontSize: "3rem" }}>
+        TEMP
+      </h1>
+    </div>
   </main>
 </Base>
 
+<script>
+  function initCarousels() {
+    document.querySelectorAll(".carousel").forEach((carousel) => {
+      const track = carousel.querySelector(".carousel-track") as HTMLElement;
+      const prev = carousel.querySelector(".prev") as HTMLButtonElement;
+      const next = carousel.querySelector(".next") as HTMLButtonElement;
+      if (!track || !prev || !next) return;
+
+      const scrollAmount = () => {
+        const card = track.querySelector(".news-card") as HTMLElement;
+        return card
+          ? card.offsetWidth + parseFloat(getComputedStyle(track).gap || "0")
+          : 320;
+      };
+
+      const updateButtons = () => {
+        prev.disabled = track.scrollLeft <= 0;
+        next.disabled =
+          track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+      };
+
+      prev.addEventListener("click", () => {
+        track.scrollBy({ left: -scrollAmount(), behavior: "smooth" });
+      });
+
+      next.addEventListener("click", () => {
+        track.scrollBy({ left: scrollAmount(), behavior: "smooth" });
+      });
+
+      track.addEventListener("scroll", updateButtons, { passive: true });
+      updateButtons();
+    });
+  }
+
+  initCarousels();
+  document.addEventListener("astro:after-swap", initCarousels);
+</script>
+
 <style lang="scss">
   main > div {
-    padding: 2rem;
     .content {
+      padding: 2rem;
       max-width: var(--xl);
       margin: auto;
     }
@@ -71,14 +190,188 @@ const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).sr
       .icons {
         flex: 1;
       }
+    }
+  }
 
-      .info {
-        h1 {
-          font-size: 3rem;
+  .our-team {
+    background-color: var(--rainbow-blue);
+    color: var(--fg-color);
+    .content {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+
+      .photo {
+        max-width: var(--sm);
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
         }
-        p {
-          font-size: 1.5rem;
+      }
+    }
+  }
+
+  .our-history .info,
+  .our-team .info {
+    h1 {
+      font-size: 3rem;
+    }
+    p {
+      font-size: 1.5rem;
+    }
+    a {
+      width: 100%;
+      background-color: var(--accent-color);
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  }
+
+  a.full-width {
+    width: 100%;
+    background-color: var(--accent-color);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .news {
+    background-color: var(--rainbow-green);
+    padding: 4rem 0;
+
+    .content {
+      h1 {
+        text-align: center;
+        font-size: 3rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    .carousel {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .carousel-control {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: row;
+
+        width: 3rem;
+        height: 3rem;
+        border: none;
+        border-radius: 50%;
+        background-color: var(--accent-color);
+        color: var(--fg-color);
+        cursor: pointer;
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
+
+        &:disabled {
+          opacity: 0.35;
+          cursor: not-allowed;
         }
+
+        &:hover:not(:disabled) {
+          transform: scale(1.05);
+        }
+      }
+
+      .carousel-track {
+        flex: 1 1 auto;
+        display: flex;
+        gap: 1.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        padding: 1rem 0.25rem;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+
+      .news-card {
+        flex: 0 0 clamp(280px, 85vw, 360px);
+        scroll-snap-align: start;
+        border-radius: 1rem;
+        overflow: hidden;
+        background-color: var(--card-bg, #f8f9fa);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+
+        &:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-link {
+          display: block;
+          color: inherit;
+          text-decoration: none;
+
+          img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+          }
+
+          .card-body {
+            padding: 1.25rem;
+
+            time {
+              display: block;
+              font-size: 0.875rem;
+              color: var(--muted-color, #6c757d);
+              margin-bottom: 0.5rem;
+            }
+
+            h2 {
+              font-size: 1.25rem;
+              line-height: 1.3;
+              margin-bottom: 0.75rem;
+            }
+
+            p {
+              font-size: 1rem;
+              line-height: 1.5;
+              color: var(--muted-color, #555);
+              display: -webkit-box;
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+            }
+
+            .read-more {
+              display: inline-flex;
+              align-items: center;
+              gap: 0.25rem;
+              margin-top: 1rem;
+              font-weight: bold;
+              color: var(--accent-color);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .news .carousel {
+      .carousel-control {
+        display: none;
+      }
+
+      .carousel-track {
+        padding: 1rem;
       }
     }
   }
