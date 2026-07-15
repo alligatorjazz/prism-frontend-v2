@@ -1,0 +1,242 @@
+---
+import { faker } from "@faker-js/faker";
+import { repeatRandom } from "../lib";
+import Base from "../templates/Base.astro";
+import dayjs from "dayjs";
+import { toTitleCase } from "../lib/dom";
+import PageIntro from "../sections/PageIntro.astro";
+import ruledBg from "../assets/img/ruled-bg.png";
+import { getImage } from "astro:assets";
+import SectionBorder from "../components/SectionBorder.astro";
+
+const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).src})`;
+
+const placeholderNewsStories = repeatRandom(
+  () => {
+    return {
+      title: toTitleCase(faker.lorem.sentence()),
+      logo: faker.image.avatarGitHub(),
+      date: faker.date.recent(),
+      author: faker.person.fullName(),
+      lede: faker.lorem.paragraphs(1),
+      picture: faker.image.urlPicsumPhotos(),
+    };
+  },
+  8,
+  12,
+);
+
+const STORIES_PER_PAGE = 6;
+
+const url = new URL(Astro.request.url);
+const rawPage = url.searchParams.get("page");
+let currentPage = parseInt(rawPage ?? "1", 10);
+if (Number.isNaN(currentPage) || currentPage < 1) currentPage = 1;
+
+const totalPages = Math.max(
+  1,
+  Math.ceil(placeholderNewsStories.length / STORIES_PER_PAGE),
+);
+currentPage = Math.min(currentPage, totalPages);
+
+const start = (currentPage - 1) * STORIES_PER_PAGE;
+const pageStories = placeholderNewsStories.slice(
+  start,
+  start + STORIES_PER_PAGE,
+);
+
+const pageLink = (page: number) => {
+  const next = new URL(url);
+  if (page === 1) {
+    next.searchParams.delete("page");
+  } else {
+    next.searchParams.set("page", String(page));
+  }
+  return next.pathname + next.search;
+};
+---
+
+<Base
+  pageMetadata={{
+    title: "News & Press",
+    description: "For news and press inquiries, contact news@prismfl.org",
+    type: "website",
+    image: "https://picsum.photos/200",
+    "image:alt": "test",
+  }}
+  class={"page-content"}
+>
+  <PageIntro
+    title="News & Press"
+    description="For news and press inquiries, contact news@prismfl.org"
+    image={{
+      src: "https://picsum.photos/500/300",
+      width: 300,
+      height: 300,
+      alt: "placeholder",
+    }}
+  />
+  <SectionBorder type="spray-paint" backgroundColor="#07a8df" />
+  <section id="stories" style={{ backgroundImage: ruledPaper }}>
+    <ul>
+      {
+        pageStories.map((story, index) => {
+          const tilt = index % 2 === 0 ? "-0.5deg" : "0.5deg";
+          return (
+            <li style={{ transform: `rotate(${tilt})` }}>
+              <article>
+                <div class="logo">
+                  <img src={story.logo} />
+                </div>
+                <div class="info">
+                  <div class="title">
+                    <h1>{story.title}</h1>
+                  </div>
+                  <div class="attribution">
+                    <div class="timestamp">
+                      {dayjs(story.date).format("MMM DD, YYYY")}
+                    </div>
+                    <span>|</span>
+                    <div class="author">{story.author}</div>
+                  </div>
+                  <p class="lede">{story.lede}</p>
+                  <a href="/" class="button">
+                    Read More
+                  </a>
+                </div>
+              </article>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    {
+      totalPages > 1 && (
+        <nav class="pagination" aria-label="News stories pagination">
+          <a
+            href={currentPage > 1 ? pageLink(currentPage - 1) : undefined}
+            class={currentPage <= 1 ? "disabled" : ""}
+            aria-disabled={currentPage <= 1}
+          >
+            Previous
+          </a>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <a
+            href={
+              currentPage < totalPages ? pageLink(currentPage + 1) : undefined
+            }
+            class={currentPage >= totalPages ? "disabled" : ""}
+            aria-disabled={currentPage >= totalPages}
+          >
+            Next
+          </a>
+        </nav>
+      )
+    }
+  </section>
+</Base>
+
+<style lang="scss">
+  .page-content {
+    background-color: var(--rainbow-blue);
+    /* color: var(--fg-color); */
+  }
+
+  #stories {
+    margin: auto;
+    padding-bottom: 2rem;
+
+    background-size: 2000px;
+    ul {
+      max-width: var(--xl);
+      list-style: none;
+      margin: 0 auto;
+      padding: 4rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+      li {
+        display: flex;
+        background: var(--accent-color);
+        color: var(--text-color);
+        padding: 2rem;
+        gap: 1rem;
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: rotate(0deg) !important;
+        }
+
+        article {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          .logo {
+            width: 250px;
+            height: 250px;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+            }
+          }
+          .info {
+            flex: 1;
+            font-size: 1.25rem;
+            .title {
+              /* font-size: 1.5rem; */
+            }
+            .attribution {
+              display: flex;
+              gap: 1rem;
+              align-items: center;
+            }
+
+            a.button {
+              background: var(--activist-aqua);
+              width: min-content;
+              white-space: nowrap;
+            }
+          }
+        }
+
+        .picture {
+          width: 25%;
+          max-width: 250px;
+          height: 100%;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+
+    .pagination {
+      max-width: var(--xl);
+      margin: 0 auto 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.25rem;
+
+      a {
+        color: var(--text-color);
+        text-decoration: underline;
+
+        &.disabled {
+          pointer-events: none;
+          opacity: 0.5;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+</style>
