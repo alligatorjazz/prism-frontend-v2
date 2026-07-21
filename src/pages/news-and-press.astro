@@ -59,7 +59,7 @@ const pageLink = (page: number) => {
 <Base
   pageMetadata={{
     title: "News & Press",
-    description: "For news and press inquiries, contact news@prismfl.org",
+    description: "For news and press inquiries, contact press@prismfl.org",
     type: "website",
     image: "https://picsum.photos/200",
     "image:alt": "test",
@@ -68,7 +68,7 @@ const pageLink = (page: number) => {
 >
   <PageIntro
     title="News & Press"
-    description="For news and press inquiries, contact news@prismfl.org"
+    description="For news and press inquiries, contact press@prismfl.org"
     image={{
       src: "https://picsum.photos/500/300",
       width: 300,
@@ -188,6 +188,9 @@ const pageLink = (page: number) => {
           .info {
             flex: 1;
             font-size: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             .title {
               /* font-size: 1.5rem; */
             }
