@@ -40,20 +40,23 @@ const filter = CssFilterConverter.hexToFilter(Color(backgroundColor).hex());
 	.container {
 		position: relative;
 		height: 0;
-		/* &:not(.flipped) { */
-		/* 	border-top: 1rem; */
-		/* } */
+		&:not(.flipped) {
+			.border {
+				/* top: 2.2rem; */
+			}
+		}
+
 	}
 
 	.container.flipped {
 		.border {
+			bottom: 2.2rem;
 			transform: scaleY(-1);
-			bottom: 2rem;
 		}
 	}
 	.border {
 		width: 100%;
-		height: 2rem;
+		height: 4rem;
 		z-index: 2;
 	}
 

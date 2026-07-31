@@ -1,0 +1,300 @@
+---
+import Base from "../../templates/Base.astro";
+import PageIntro from "../../sections/PageIntro.astro";
+import SectionBorder from "../../components/SectionBorder.astro";
+import { faker } from "@faker-js/faker";
+import Polaroid from "../../components/Polaroid.astro";
+import computer from "../../assets/img/computer-yellow.avif";
+import CenteredPaperWithHeader from "../../sections/CenteredPaperWithHeader.astro";
+import ruledBg from "../../assets/img/ruled-bg.png";
+import { getImage } from "astro:assets";
+
+const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).src})`;
+---
+
+<Base
+  pageMetadata={{
+    title: "Content Creation Task Force",
+    description:
+      "CCTF is the backbone of the work PRISM does, providing LGBT-inclusive education and other resources where young people turn to most: online.",
+    type: "website",
+    image: "https://picsum.photos/200",
+    "image:alt": "test",
+  }}
+  class={"page-content"}
+>
+  <PageIntro
+    title="Content Creation Task Force (CCTF)"
+    description="CCTF is the backbone of the work PRISM does, providing LGBT-inclusive education and other resources where young people turn to most: online. From cracking open the history books to tell us all about the Stonewall riots to helping us define exactly what differentiates sex from gender (Hint: a lot), our team helps us keep you informed."
+    image={computer}
+    pointBackTo={{ href: "/task-forces", label: "Task Forces" }}
+    class={"intro"}
+  />
+
+  <main>
+    <!-- <section id="about"> -->
+    <!--   <h2>What does the Content Creation Task Force do?</h2> -->
+    <!--   <p> -->
+    <!--     The Content Creation Task Force is the backbone of the work PRISM does, -->
+    <!--     providing LGBT-inclusive education and other resources where young -->
+    <!--     people turn to most: online. From cracking open the history books to -->
+    <!--     tell us all about <a href="/post/stonewall-riots">the Stonewall riots</a -->
+    <!--     > to helping us define exactly what differentiates <a -->
+    <!--       href="/post/sex-vs-gender">sex from gender</a -->
+    <!--     > (Hint: a lot), our team helps us keep you informed. -->
+    <!--   </p> -->
+    <!--   <p> -->
+    <!--     The Content Creation Task Force also keeps PRISM looking its best! From -->
+    <!--     social media posts to the website you're on now, everything your eyes -->
+    <!--     take in was made by these Adobe wizards and photography experts. -->
+    <!--   </p> -->
+    <!-- </section> -->
+    <CenteredPaperWithHeader title="who?">
+      <h2 slot="content">Who makes up the Content Creation Task Force?</h2>
+    </CenteredPaperWithHeader>
+    <SectionBorder type="cookie-cutter" backgroundColor="#ffe09d" flip />
+    <section id="staff">
+      <div class="container">
+        <h3>Staff</h3>
+        <div class="content">
+          <article>
+            <div class="person">
+              <Polaroid
+                class="portrait"
+                image={{
+                  src: faker.image.avatarGitHub(),
+                  alt: "fake",
+                  format: "webp",
+                  width: 250,
+                  height: 250,
+                }}
+                label={faker.person.fullName()}
+              />
+            </div>
+            <div class="description">
+              <h4>Content Creation Director</h4>
+              <p>
+                The Content Creation Director keeps deadlines met, young people
+                educated, and our brand shining, PRISM's Content Creation
+                Director ensures everyone knows what's expected and how they can
+                help.
+              </p>
+            </div>
+          </article>
+          <article>
+            <div class="person">
+              <Polaroid
+                class="portrait"
+                image={{
+                  src: faker.image.avatarGitHub(),
+                  alt: "fake",
+                  format: "webp",
+                  width: 250,
+                  height: 250,
+                }}
+                label={faker.person.fullName()}
+              />
+            </div>
+            <div class="description">
+              <h4>Website Design Manager</h4>
+              <p>
+                Our Website Design Manager develops and maintains our website
+                and monitors social media trends, including developments in
+                design, applications, strategy, and innovation to stay relevant
+                and effective.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    <SectionBorder type="cookie-cutter" backgroundColor="#ffe09d" />
+    <section id="contractors" style={{ backgroundImage: ruledPaper }}>
+      <div class="container">
+        <h3>Contractors</h3>
+        <div class="content">
+          <article>
+            <h4>Visual Designers</h4>
+            <p>
+              Masters of the graphics tablet and conquerors of the pen tool,
+              Visual Designers utilize Adobe Creative Suite programs and other
+              design software to create graphics and designs for social media,
+              our website, and promotional material (flyers, info cards,
+              signage, etc.).
+            </p>
+            <a href="/job-application/visual-designer">Click here to apply!</a>
+          </article>
+
+          <article>
+            <h4>Videographers</h4>
+            <p>
+              Videographers use their filming and editing skills to bolster our
+              educational resources with engaging video content.
+            </p>
+            <a href="/job-application/videographer">Click here to apply!</a>
+          </article>
+
+          <article>
+            <h4>Writers</h4>
+            <p>
+              If you've read any of our <a href="/learn">resources</a>, you've
+              benefited from the hard work of these folks. Writers work
+              tirelessly to gather accurate, up-to-date information and put it
+              into a format that can be read and consumed by anyone who needs
+              it.
+            </p>
+            <a href="/job-application/writer">Click here to apply!</a>
+          </article>
+
+          <article>
+            <h4>Editors</h4>
+            <p>
+              These folx have some real fine attention to detail. Editors make
+              sure the articles on PRISM's site are pristine and free of errors.
+            </p>
+            <a href="/job-application/editor">Click here to apply!</a>
+          </article>
+
+          <article>
+            <h4>Photographers</h4>
+            <p>
+              PRISM's very own paparazzi make sure that every smile, laugh, and
+              picture-perfect moment is captured at PRISM events so we can show
+              just how lively our initiatives are (or how cute our outfits were
+              that day.... whatever works).
+            </p>
+            <a href="/job-application/photographer">Click here to apply!</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section id="join"> -->
+    <!--   <h2>How do I join the Content Creation Task Force?</h2> -->
+    <!--   <p> -->
+    <!--     We'd love to have you apply for one of the many <a -->
+    <!--       href="/open-positions">open positions</a -->
+    <!--     > in the Content Creation Task Force. These are contract-based jobs wherein -->
+    <!--     you join our projects as a freelancer. -->
+    <!--   </p> -->
+    <!--   <p> -->
+    <!--     If you have any questions, please reach out to <a -->
+    <!--       href="mailto:info@prismfl.org?subject=Content%20Creation%20Task%20Force" -->
+    <!--       >info@prismfl.org</a -->
+    <!--     >. -->
+    <!--   </p> -->
+    <!-- </section> -->
+  </main>
+</Base>
+
+<style>
+  .page-content {
+    background-color: var(--youth-yellow-2);
+  }
+  main {
+    background: var();
+    margin: auto;
+    font-size: 1.25rem;
+
+    h2 {
+      font-size: 2rem;
+
+      text-align: center;
+    }
+
+    h3 {
+      font-size: 1.75rem;
+    }
+
+    h4 {
+      font-size: 1.5rem;
+    }
+  }
+
+  #staff {
+    background-color: var(--youth-yellow-1);
+    .container {
+      max-width: var(--xl);
+      margin: auto;
+
+      .content {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: auto;
+        padding: 2rem 0;
+
+        article {
+          display: flex;
+          gap: 1rem;
+          .person {
+            display: flex;
+            flex-direction: column;
+
+            .portrait {
+              width: 220px;
+              height: 250px;
+            }
+
+            .name {
+              white-space: nowrap;
+              font-family: var(--header-font);
+              text-align: center;
+            }
+          }
+          .description {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            * {
+              margin: 0;
+            }
+            /* justify-content: space-between; */
+          }
+        }
+      }
+    }
+  }
+
+  #contractors {
+    background-size: 2000px;
+    padding: 4rem 0;
+    .container {
+      max-width: var(--xl);
+      margin: auto;
+      .content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        article {
+          flex: 1;
+          min-width: 45%;
+          background-color: var(--fg-color);
+          filter: var(--shadow);
+          padding: 2rem;
+          display: flex;
+          flex-direction: column;
+          h4 {
+            height: 2rem;
+          }
+          p {
+            flex: 1;
+          }
+          & > a:last-of-type {
+            background-color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            border-radius: var(--round-edge);
+            color: var(--fg-color);
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            transition: all 300ms;
+            &:hover {
+              filter: brightness(110%);
+            }
+          }
+        }
+      }
+    }
+  }
+</style>

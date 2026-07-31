@@ -1,0 +1,252 @@
+---
+import Base from "@templates/Base.astro";
+import PageIntro from "@sections/PageIntro.astro";
+import CenteredPaperWithHeader from "@sections/CenteredPaperWithHeader.astro";
+import SectionBorder from "@components/SectionBorder.astro";
+import Polaroid from "@components/Polaroid.astro";
+import givingIcon from "@assets/img/giving-icon.avif";
+import { faker } from "@faker-js/faker";
+---
+
+<Base
+  pageMetadata={{
+    title: "Fundraising Task Force",
+    description:
+      "The Fundraising Task Force works to develop events and promotions that bring in funding for all of the many initiatives and services that PRISM provides to LGBTQ+ youth and queer people of color.",
+    type: "website",
+    image: "https://picsum.photos/200",
+    "image:alt": "test",
+  }}
+  class={"page-content"}
+>
+  <PageIntro
+    title="Fundraising Task Force (FTF)"
+    description="The Fundraising Task Force works to develop events and promotions that bring in funding for all of the many initiatives and services that PRISM provides to LGBTQ+ youth and queer people of color. From bake sales to fun runs to livestreams, these dedicated individuals work hard to keep the blood pumping through PRISM's veins."
+    image={givingIcon}
+    pointBackTo={{ href: "/task-forces", label: "Task Forces" }}
+    class={"intro"}
+  />
+
+  <main>
+    <CenteredPaperWithHeader title="about">
+      <h2 slot="content">What does the Fundraising Task Force do?</h2>
+    </CenteredPaperWithHeader>
+
+    <section id="about">
+      <div class="container">
+        <p>
+          The Fundraising Task Force works to develop events and promotions that
+          bring in funding for all of the many initiatives and services that
+          PRISM provides to LGBTQ+ youth and queer people of color. From bake
+          sales to fun runs to livestreams, these dedicated individuals work
+          hard to keep the blood pumping through PRISM's veins.
+        </p>
+      </div>
+    </section>
+
+    <SectionBorder type="cookie-cutter" backgroundColor="#74bf44" flip />
+
+    <CenteredPaperWithHeader title="who?">
+      <h2 slot="content">Who makes up the Fundraising Task Force?</h2>
+    </CenteredPaperWithHeader>
+
+    <section id="members">
+      <div class="container">
+        <article>
+          <div class="person">
+            <Polaroid
+              class="portrait"
+              image={{
+                src: faker.image.avatarGitHub(),
+                alt: "fake",
+                format: "webp",
+                width: 250,
+                height: 250,
+              }}
+              label="Fundraising Director"
+            />
+          </div>
+          <div class="description">
+            <h4>Fundraising Director</h4>
+            <p>{faker.lorem.paragraph()}</p>
+            <a href="/job-application/fundraising-director"
+              >Interested? Click here to apply!</a
+            >
+          </div>
+        </article>
+
+        <article>
+          <div class="person">
+            <Polaroid
+              class="portrait"
+              image={{
+                src: faker.image.avatarGitHub(),
+                alt: "fake",
+                format: "webp",
+                width: 250,
+                height: 250,
+              }}
+              label="Grant Writers"
+            />
+          </div>
+          <div class="description">
+            <h4>Grant Writers</h4>
+            <p>{faker.lorem.paragraph()}</p>
+            <a href="/job-application/grant-writer"
+              >Interested? Click here to apply!</a
+            >
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <SectionBorder type="cookie-cutter" backgroundColor="#74bf44" />
+
+    <section id="join">
+      <div class="container">
+        <div class="content">
+          <article>
+            <h4>Interested in helping out?</h4>
+            <p>
+              We'd love to have you! You can start by filling out a <a
+                href="/volunteer-form">Volunteer Application Form</a
+              >, applying to one of the many <a href="/open-positions"
+                >positions</a
+              > in the Fundraising Task Force, or contacting us directly.
+            </p>
+            <a href="/volunteer-form">Click here to apply!</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .page-content {
+    background-color: var(--rainbow-green);
+  }
+
+  main {
+    margin: auto;
+    font-size: 1.25rem;
+
+    h2 {
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    h3 {
+      font-size: 1.75rem;
+    }
+
+    h4 {
+      font-size: 1.5rem;
+    }
+  }
+
+  #about {
+    background-color: var(--witty-white);
+    padding: 4rem 0;
+    .container {
+      max-width: var(--xl);
+      margin: auto;
+      text-align: center;
+    }
+  }
+
+  #members {
+    background-color: var(--witty-white);
+    padding: 4rem 0;
+    .container {
+      max-width: var(--xl);
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      article {
+        display: flex;
+        gap: 1rem;
+        .person {
+          display: flex;
+          flex-direction: column;
+
+          .portrait {
+            width: 220px;
+            height: 250px;
+          }
+
+          .name {
+            white-space: nowrap;
+            font-family: var(--header-font);
+            text-align: center;
+          }
+        }
+        .description {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          * {
+            margin: 0;
+          }
+
+          a {
+            background-color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            border-radius: var(--round-edge);
+            color: var(--fg-color);
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            transition: all 300ms;
+            &:hover {
+              filter: brightness(110%);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #join {
+    padding: 4rem 0;
+    .container {
+      max-width: var(--xl);
+      margin: auto;
+      .content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        article {
+          flex: 1;
+          min-width: 45%;
+          background-color: var(--fg-color);
+          filter: var(--shadow);
+          padding: 2rem;
+          display: flex;
+          flex-direction: column;
+          h4 {
+            height: 2rem;
+          }
+          p {
+            flex: 1;
+          }
+          & > a:last-of-type {
+            background-color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            border-radius: var(--round-edge);
+            color: var(--fg-color);
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            transition: all 300ms;
+            &:hover {
+              filter: brightness(110%);
+            }
+          }
+        }
+      }
+    }
+  }
+</style>
