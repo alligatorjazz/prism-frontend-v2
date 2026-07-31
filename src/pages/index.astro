@@ -5,6 +5,8 @@ import EventsWithHeader from "../sections/EventsWithHeader.astro";
 import ruledBg from "../assets/img/ruled-bg.png";
 import OurPartners from "../sections/OurPartners.astro";
 import HeroVideo from "../sections/HeroVideo.astro";
+import { faker } from "@faker-js/faker";
+import AlternatingRibbons from "../sections/AlternatingRibbons.astro";
 ---
 
 <Base
@@ -40,6 +42,32 @@ import HeroVideo from "../sections/HeroVideo.astro";
         label: "School Policy Hub",
         href: "/",
         backgroundColor: "skyblue",
+      },
+    ]}
+    backgroundImage={ruledBg.src}
+  />
+
+  <AlternatingRibbons
+    ribbons={[
+      {
+        title: "Outreach",
+        color: "var(--rainbow-orange)",
+        description: faker.lorem.sentences(2),
+      },
+      {
+        title: "Policy",
+        color: "var(--rainbow-red)",
+        description: faker.lorem.sentences(2),
+      },
+      {
+        title: "Creative Fellowship",
+        color: "var(--rainbow-green)",
+        description: faker.lorem.sentences(2),
+      },
+      {
+        title: "Student Ambassador Program",
+        color: "var(--rainbow-purple)",
+        description: faker.lorem.sentences(2),
       },
     ]}
     backgroundImage={ruledBg.src}

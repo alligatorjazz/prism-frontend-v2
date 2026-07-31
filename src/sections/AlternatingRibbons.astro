@@ -1,0 +1,157 @@
+---
+import { processMedia } from "../lib/payload";
+
+interface Props {
+  ribbons: {
+    title: string;
+    color: string;
+    description: string;
+  }[];
+  backgroundImage: string;
+}
+
+const { ribbons, backgroundImage: unprocessedBackgroundImage } = Astro.props;
+
+const processedBackgroundImage = unprocessedBackgroundImage
+  ? processMedia(unprocessedBackgroundImage)
+  : null;
+const backgroundImage = processedBackgroundImage
+  ? `url("${processedBackgroundImage.src}")`
+  : "none";
+---
+
+<div
+  class="container"
+  style={{
+    backgroundImage,
+  }}
+>
+  <ul>
+    {
+      ribbons.map(({ title, color, description }) => (
+        <li class="ribbon">
+          <a href="/404" class="link">
+            <div class="content" style={{ backgroundColor: color }}>
+              <h1>{title}</h1>
+            </div>
+            <div
+              class="crimp"
+              style={{ backgroundColor: color, borderColor: color }}
+            />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .container {
+    --transition: all 1s ease;
+    background-size: 2000px;
+    padding: 2rem 0;
+    transition: var(--transition);
+    ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      flex-direction: column;
+      gap: 2rem;
+
+      li {
+        width: 100%;
+
+        &:nth-child(odd) {
+          .link {
+            margin-right: 2rem;
+            flex-direction: row;
+            .content {
+              display: flex;
+              align-items: center;
+              justify-content: end;
+            }
+            .crimp {
+              clip-path: polygon(
+                100% 0%,
+                50% 50%,
+                100% 100%,
+                0% 100%,
+                0% 50%,
+                0% 0%
+              );
+              border-left: 10px solid;
+            }
+            &:hover {
+              transform: translateX(-50%);
+            }
+          }
+        }
+
+        &:nth-child(even) {
+          .link {
+            margin-left: 2rem;
+            flex-direction: row-reverse;
+            .content {
+              display: flex;
+              align-items: center;
+            }
+
+            .crimp {
+              clip-path: polygon(
+                100% 0%,
+                100% 50%,
+                100% 100%,
+                0% 100%,
+                50% 50%,
+                0% 0%
+              );
+              border-right: 10px solid;
+            }
+
+            &:hover {
+              transform: translateX(50%);
+            }
+          }
+        }
+      }
+    }
+
+    .link {
+      transition: var(--transition);
+      text-decoration: none;
+      display: flex;
+      align-items: stretch;
+      height: 12rem;
+      filter: brightness(100%) drop-shadow(10px 10px 4px #333333);
+      .content {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        color: var(--fg-color);
+        padding: 0 6rem;
+        h1 {
+          font-size: 4rem;
+        }
+      }
+
+      .crimp {
+        width: 4rem;
+        border-bottom: 5px solid;
+      }
+    }
+
+    li:hover {
+      .link {
+        filter: brightness(120%) drop-shadow(10px 10px 4px #333333);
+        &:nth-child(odd) {
+          transform: translateX(-50%);
+        }
+
+        &:nth-child(even) {
+          transform: translateX(50%);
+        }
+      }
+    }
+  }
+</style>
