@@ -1,4 +1,5 @@
 ---
+import { faker } from "@faker-js/faker";
 import { processMedia } from "../lib/payload";
 
 interface Props {
@@ -39,6 +40,11 @@ const backgroundImage = processedBackgroundImage
               style={{ backgroundColor: color, borderColor: color }}
             />
           </a>
+          <div class="under">
+            <div>
+              <p>{faker.lorem.sentences(3)}</p>
+            </div>
+          </div>
         </li>
       ))
     }
@@ -51,6 +57,7 @@ const backgroundImage = processedBackgroundImage
     background-size: 2000px;
     padding: 2rem 0;
     transition: var(--transition);
+
     ul {
       list-style: none;
       display: flex;
@@ -124,6 +131,7 @@ const backgroundImage = processedBackgroundImage
       align-items: stretch;
       height: 12rem;
       filter: brightness(100%) drop-shadow(10px 10px 4px #333333);
+
       .content {
         flex: 1;
         display: flex;
@@ -150,6 +158,47 @@ const backgroundImage = processedBackgroundImage
 
         &:nth-child(even) {
           transform: translateX(50%);
+        }
+      }
+    }
+
+    li {
+      display: grid;
+      & > * {
+        grid-column-start: 1;
+        grid-row-start: 1;
+      }
+
+      .link {
+        top: 0rem;
+        left: 0rem;
+      }
+
+      .under {
+        top: 0rem;
+        left: 0rem;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        font-size: 1.5rem;
+        font-family: var(--header-font);
+
+        div {
+          width: calc(50% - 4rem);
+        }
+      }
+
+      &:nth-child(odd) {
+        .under {
+          justify-content: end;
+          padding-right: 4rem;
+        }
+      }
+
+      &:nth-child(even) {
+        .under {
+          justify-content: start;
+          margin-left: 4rem;
         }
       }
     }
