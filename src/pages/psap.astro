@@ -1,0 +1,510 @@
+---
+import Base from "@templates/Base.astro";
+import PageIntro from "@sections/PageIntro.astro";
+import CenteredPaperWithHeader from "@sections/CenteredPaperWithHeader.astro";
+import SectionBorder from "@components/SectionBorder.astro";
+import Polaroid from "@components/Polaroid.astro";
+import { Image } from "astro:assets";
+import { faker } from "@faker-js/faker";
+
+import psapFlag from "@assets/img/rainbow-flag.avif";
+import gsaNetwork from "@assets/img/gsa-network.avif";
+import psapGroup from "@assets/img/psap-group.avif";
+import psapLeadersCouncil from "@assets/img/psap-leaders-council.avif";
+---
+
+<Base
+  pageMetadata={{
+    title: "Student Ambassador Program",
+    description:
+      "The PRISM Student Ambassador Program (P-SAP) is a network of GSAs and other LGBTQ+ student organizations empowering the next generation of leaders.",
+    type: "website",
+    image: "https://picsum.photos/200",
+    "image:alt": "test",
+  }}
+  class={"page-content"}
+>
+  <PageIntro
+    title="PRISM Student Ambassador Program"
+    description="With attacks against LGBTQ+ youth across the state, extracurricular programs and clubs will be even more of a safe haven for queer students. As the school year approaches, consider becoming part of PRISM's Student Ambassador Program!"
+    image={psapFlag}
+    pointBackTo={{ href: "/task-forces", label: "Task Forces" }}
+    class={"intro"}
+  />
+
+  <main>
+    <CenteredPaperWithHeader title="what?">
+      <h2 slot="content">What is the PRISM Student Ambassador Program?</h2>
+    </CenteredPaperWithHeader>
+
+    <SectionBorder type="cookie-cutter" backgroundColor="#854e9e" />
+
+    <section id="about">
+      <div class="container">
+        <p>
+          The PRISM Student Ambassador Program (P-SAP) is a network of GSAs
+          (Gender and Sexuality Alliances) and other LGBTQ+ student
+          organizations empowering the next generation of leaders.
+        </p>
+
+        <div class="affiliate">
+          <p>A Proud Affiliate Of</p>
+          <a href="https://gsanetwork.org/">
+            <Image src={gsaNetwork} alt="GSA Network" width={216} height={80} />
+          </a>
+        </div>
+
+        <Image
+          class="group-photo"
+          src={psapGroup}
+          alt="P-SAP group photo"
+          width={540}
+          height={251}
+        />
+
+        <h3>By joining P-SAP, you get:</h3>
+        <ul class="benefits">
+          <li>
+            An exclusive P-SAP listserv and Discord channel, and in-person
+            activities!
+          </li>
+          <li>
+            Volunteer opportunities with PRISM and other community
+            organizations!
+          </li>
+          <li>
+            The opportunity to actively connect with other LGBTQ+ student
+            leaders through monthly meetings!
+          </li>
+          <li>
+            Trainings and workshops about community organizing, LGBTQ+ topics,
+            and volunteer opportunities with PRISM and other community
+            organizations!
+          </li>
+        </ul>
+
+        <h3>Requirements to Join</h3>
+        <ul class="requirements">
+          <li>
+            Be enrolled in a high school or university in Palm Beach County,
+            Miami-Dade County, or Broward County
+          </li>
+          <li>
+            Be a member of your school's GSA or LGBTQ+ student organization!
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <SectionBorder type="cookie-cutter" backgroundColor="#854e9e" flip />
+
+    <section id="leaders-council">
+      <div class="container">
+        <h3>What is the PRISM Student Leaders Council?</h3>
+
+        <Image
+          class="group-photo"
+          src={psapLeadersCouncil}
+          alt="PRISM Student Leaders Council"
+          width={540}
+          height={251}
+        />
+
+        <p>
+          The PRISM Student Leaders Council (P-SLC) is for leaders of their
+          school's or university's LGBTQ+ student organization. P-SLC allows
+          LGBTQ+ clubs and student organizations at high schools and
+          universities in South Florida to select a student to represent them as
+          a PRISM Student Leader.
+        </p>
+
+        <h3>By joining P-SLC, you get:</h3>
+        <ul class="benefits">
+          <li>Individual support to start, sustain, or grow your club</li>
+          <li>Access to guest speakers for your club meetings</li>
+          <li>
+            The opportunity to actively connect with other LGBTQ+ student
+            leaders through monthly meetings, an exclusive P-SAP listserv and
+            Discord channel, and in-person activities
+          </li>
+          <li>
+            Guidance on laws and policies that might affect your clubs and club
+            members
+          </li>
+          <li>
+            Help navigating discussions on hard-hitting topics in club or group
+            meetings
+          </li>
+          <li>Assistance with LGBTQ-related observances on campus</li>
+          <li>
+            Volunteer opportunities with PRISM and other community organizations
+          </li>
+        </ul>
+
+        <h3>Requirements to Join</h3>
+        <p>
+          Meet all the requirements for P-SAP, and meet one* of the following
+          requirements:
+        </p>
+        <ul class="requirements">
+          <li>
+            Have a leadership position in an LGBTQ-focused club or student
+            organization at your school
+          </li>
+          <li>
+            Intend to start an LGBTQ-focused club or student organization at
+            your school by the end of the school year
+          </li>
+          <li>
+            Be designated as a PRISM Student Ambassador by someone with such a
+            leadership position
+          </li>
+        </ul>
+        <p class="note">
+          * High school students must also receive written permission from your
+          staff sponsor to participate in P-SAP as a representative of your club
+          or student organization
+        </p>
+      </div>
+    </section>
+
+    <SectionBorder type="cookie-cutter" backgroundColor="#854e9e" />
+
+    <section id="staff">
+      <div class="container">
+        <h3>Staff</h3>
+        <div class="content">
+          <article>
+            <div class="person">
+              <Polaroid
+                class="portrait"
+                image={{
+                  src: faker.image.avatarGitHub(),
+                  alt: "Portrait of Auxmary Valdez",
+                  format: "webp",
+                  width: 250,
+                  height: 250,
+                }}
+                label="Auxmary Valdez"
+              />
+            </div>
+            <div class="description">
+              <h4>P-SAP Manager</h4>
+              <p>
+                Auxmary Valdez is a queer woman and daughter of first-generation
+                Venezuelan and Nicaraguan immigrants. She is a former sex
+                educator and current University of Central Florida student,
+                double majoring in Political Science and Biomedical Sciences.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <SectionBorder type="cookie-cutter" backgroundColor="#854e9e" flip />
+
+    <section id="calendar">
+      <div class="container">
+        <h3>P-SAP Calendar</h3>
+        <p>
+          P-SAP members and leaders are expected to attend monthly meetings and
+          leadership council gatherings.
+        </p>
+
+        <div class="events">
+          <article>
+            <h4>P-SAP Monthly Meeting</h4>
+            <p>
+              <strong>When:</strong> First Friday of every month
+            </p>
+            <p>
+              <strong>Host:</strong> Auxmary
+            </p>
+            <p>
+              Community building, leadership development, and updates on
+              upcoming opportunities. Open to all P-SAP members.
+            </p>
+          </article>
+
+          <article>
+            <h4>Student Leaders Council Meeting</h4>
+            <p>
+              <strong>When:</strong> Third Friday of every month
+            </p>
+            <p>
+              <strong>Host:</strong> Auxmary
+            </p>
+            <p>
+              Strategic planning and peer support for club leaders. Open to
+              P-SLC representatives.
+            </p>
+          </article>
+
+          <article>
+            <h4>Strategic Planning Call</h4>
+            <p>
+              <strong>When:</strong> First and third Monday of every month
+            </p>
+            <p>
+              <strong>Host:</strong> MV
+            </p>
+            <p>
+              Core operational alignment for leaders across all tracks. P-SLC
+              representatives attend.
+            </p>
+          </article>
+
+          <article>
+            <h4>All-Member Training</h4>
+            <p>
+              <strong>When:</strong> Second Thursday of every month
+            </p>
+            <p>
+              <strong>Host:</strong> Rotating
+            </p>
+            <p>
+              Universal organizing skill building and organizational updates.
+              All members and leaders are encouraged to attend.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <SectionBorder type="cookie-cutter" backgroundColor="#854e9e" />
+
+    <section id="join">
+      <div class="container">
+        <div class="content">
+          <article>
+            <h4>Want to join?</h4>
+            <p>You can fill out an application here:</p>
+            <a href="https://www.prismfl.org/psap-application">Apply Today</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .page-content {
+    background-color: var(--rainbow-purple);
+  }
+
+  main {
+    margin: auto;
+    font-size: 1.25rem;
+
+    h2 {
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    h3 {
+      font-size: 1.75rem;
+    }
+
+    h4 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .container {
+    max-width: var(--xl);
+    margin: auto;
+    padding: 0 1rem;
+  }
+
+  #about {
+    background-color: white;
+    padding: 4rem 0;
+
+    .affiliate {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0;
+
+      p {
+        font-weight: bold;
+        margin: 0;
+      }
+
+      img {
+        display: block;
+      }
+    }
+
+    .group-photo {
+      width: 100%;
+      max-width: 540px;
+      height: auto;
+      display: block;
+      margin: 2rem 0;
+      border-radius: var(--round-edge);
+    }
+
+    .benefits,
+    .requirements {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      padding-left: 1.5rem;
+
+      li {
+        margin-bottom: 0.75rem;
+      }
+    }
+  }
+
+  #leaders-council {
+    background-color: var(--rainbow-purple);
+    color: white;
+    padding: 4rem 0;
+
+    h3 {
+      color: white;
+    }
+
+    .group-photo {
+      width: 100%;
+      max-width: 540px;
+      height: auto;
+      display: block;
+      margin: 2rem 0;
+      border-radius: var(--round-edge);
+    }
+
+    .benefits,
+    .requirements {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      padding-left: 1.5rem;
+
+      li {
+        margin-bottom: 0.75rem;
+      }
+    }
+
+    .note {
+      font-size: 1rem;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+
+  #staff {
+    background-color: white;
+    padding: 4rem 0;
+
+    .content {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: auto;
+      padding: 2rem 0;
+
+      article {
+        display: flex;
+        gap: 1rem;
+
+        .person {
+          display: flex;
+          flex-direction: column;
+
+          .portrait {
+            width: 220px;
+            height: 250px;
+          }
+
+          .name {
+            white-space: nowrap;
+            font-family: var(--header-font);
+            text-align: center;
+          }
+        }
+
+        .description {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+
+          * {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  #calendar {
+    background-color: white;
+    padding: 4rem 0;
+
+    .events {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+
+      article {
+        border: 2px solid var(--rainbow-purple);
+        border-radius: var(--round-edge);
+        padding: 1.5rem;
+
+        h4 {
+          margin: 0 0 0.5rem;
+        }
+
+        p {
+          margin: 0.25rem 0;
+        }
+      }
+    }
+  }
+
+  #join {
+    background-size: 2000px;
+    padding: 4rem 0;
+
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      article {
+        flex: 1;
+        min-width: 45%;
+        background-color: var(--fg-color);
+        filter: var(--shadow);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+
+        h4 {
+          height: 2rem;
+        }
+
+        p {
+          flex: 1;
+        }
+
+        & > a:last-of-type {
+          background-color: var(--accent-color);
+          padding: 0.5rem 1rem;
+          border-radius: var(--round-edge);
+          color: var(--fg-color);
+          font-weight: bold;
+          text-align: center;
+          text-decoration: none;
+          transition: all 300ms;
+
+          &:hover {
+            filter: brightness(110%);
+          }
+        }
+      }
+    }
+  }
+</style>

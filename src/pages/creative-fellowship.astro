@@ -1,0 +1,356 @@
+---
+import Base from "@templates/Base.astro";
+import PageIntro from "@sections/PageIntro.astro";
+import CenteredPaperWithHeader from "@sections/CenteredPaperWithHeader.astro";
+import SectionBorder from "@components/SectionBorder.astro";
+import { faker } from "@faker-js/faker";
+
+import creative from "@assets/img/computer-yellow.avif";
+---
+
+<Base
+  pageMetadata={{
+    title: "Creative Fellowship",
+    description:
+      "The Creative Fellowship is a specialized leadership program for storytellers, designers, and artists helping PRISM advance LGBTQ-inclusive education.",
+    type: "website",
+    image: "https://picsum.photos/200",
+    "image:alt": "test",
+  }}
+  class={"page-content"}
+>
+  <PageIntro
+    title="Creative Fellowship"
+    description={faker.lorem.sentences(4)}
+    image={creative}
+    pointBackTo={{ href: "/task-forces", label: "Task Forces" }}
+    class={"intro"}
+  />
+
+  <main>
+    <CenteredPaperWithHeader title="who?">
+      <h2 slot="content">Who makes up the Creative Fellowship?</h2>
+    </CenteredPaperWithHeader>
+
+    <SectionBorder type="cookie-cutter" backgroundColor="#eba000" />
+
+    <section id="about">
+      <div class="container">
+        <h3>About the Fellowship</h3>
+        <p>
+          The Creative Fellowship is a specialized leadership program for
+          storytellers, designers, and artists who want to use their creative
+          skills to advance LGBTQ-inclusive education and sexual health
+          resources for youth in South Florida.
+        </p>
+        <p>
+          Fellows work directly with PRISM's Content Creation Task Force to
+          produce digital content, educational materials, and campaign assets
+          that reach young people where they are: online.
+        </p>
+      </div>
+    </section>
+
+    <SectionBorder type="cookie-cutter" backgroundColor="#eba000" flip />
+
+    <section id="roles">
+      <div class="container">
+        <h3>Fellow Roles</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Responsibilities</th>
+                <th>Time Commitment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Visual Design Fellow</td>
+                <td>
+                  Creates graphics, social media assets, and print materials
+                  using Adobe Creative Cloud.
+                </td>
+                <td>5-10 hrs/week</td>
+              </tr>
+              <tr>
+                <td>Video Production Fellow</td>
+                <td>
+                  Films, edits, and produces video content for campaigns,
+                  tutorials, and event coverage.
+                </td>
+                <td>5-10 hrs/week</td>
+              </tr>
+              <tr>
+                <td>Writing Fellow</td>
+                <td>
+                  Writes blog posts, social copy, educational resources, and
+                  campaign narratives.
+                </td>
+                <td>5-10 hrs/week</td>
+              </tr>
+              <tr>
+                <td>Photography Fellow</td>
+                <td>
+                  Captures photos at events and for portraits to support PRISM's
+                  visual storytelling.
+                </td>
+                <td>Event-based</td>
+              </tr>
+              <tr>
+                <td>Brand Strategy Fellow</td>
+                <td>
+                  Helps shape messaging, campaign themes, and audience
+                  engagement strategies.
+                </td>
+                <td>3-5 hrs/week</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <SectionBorder type="cookie-cutter" backgroundColor="#eba000" />
+
+    <section id="calendar">
+      <div class="container">
+        <h3>Fellowship Calendar</h3>
+        <p>
+          Creative Fellows are expected to attend monthly cohort meetings and
+          Content Creation Task Force check-ins.
+        </p>
+
+        <div class="events">
+          <article>
+            <h4>Fellowship Cohort Meeting</h4>
+            <p>
+              <strong>When:</strong> Third Wednesday of every month
+            </p>
+            <p>
+              <strong>Host:</strong> Creative Fellowship Coordinator
+            </p>
+            <p>
+              Portfolio review, skill-building workshops, and project planning.
+              Open to all fellows.
+            </p>
+          </article>
+
+          <article>
+            <h4>Content Creation Power Hour</h4>
+            <p>
+              <strong>When:</strong> Third Thursday of every month
+            </p>
+            <p>
+              <strong>Host:</strong> Content Creation Director
+            </p>
+            <p>
+              Editorial calendar review, content feedback, and campaign
+              coordination. Fellows attend alongside the Content Creation team.
+            </p>
+          </article>
+
+          <article>
+            <h4>Strategic Planning Call</h4>
+            <p>
+              <strong>When:</strong> First and third Monday of every month
+            </p>
+            <p>
+              <strong>Host:</strong> MV
+            </p>
+            <p>
+              Core operational alignment for leaders across all tracks. Creative
+              Fellows in leadership roles attend.
+            </p>
+          </article>
+
+          <article>
+            <h4>All-Member Training</h4>
+            <p>
+              <strong>When:</strong> Second Thursday of every month
+            </p>
+            <p>
+              <strong>Host:</strong> Rotating
+            </p>
+            <p>
+              Universal organizing skill building and organizational updates.
+              All fellows are encouraged to attend.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <SectionBorder type="cookie-cutter" backgroundColor="#eba000" flip />
+
+    <section id="join">
+      <div class="container">
+        <div class="content">
+          <article>
+            <h4>Interested in becoming a Creative Fellow?</h4>
+            <p>
+              We'd love to have you! You can start by filling out a
+              <a href="/volunteer-form">Volunteer Application Form</a>
+              or contacting us directly.
+            </p>
+            <a href="/volunteer-form">Click here to apply!</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .page-content {
+    background-color: var(--youth-yellow-3);
+  }
+
+  main {
+    margin: auto;
+    font-size: 1.25rem;
+
+    h2 {
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    h3 {
+      font-size: 1.75rem;
+    }
+
+    h4 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .container {
+    max-width: var(--xl);
+    margin: auto;
+    padding: 0 1rem;
+  }
+
+  #about {
+    background-color: var(--fg-color);
+    padding: 4rem 0;
+
+    p {
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+  }
+
+  #roles {
+    background-color: var(--youth-yellow-3);
+    padding: 4rem 0;
+
+    h3 {
+      color: var(--text-color);
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      margin-top: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: var(--fg-color);
+      border-radius: var(--round-edge);
+      overflow: hidden;
+
+      th,
+      td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--youth-yellow-3);
+      }
+
+      th {
+        background-color: var(--text-color);
+        color: var(--fg-color);
+        font-family: var(--header-font);
+      }
+
+      td {
+        color: var(--text-color);
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+    }
+  }
+
+  #calendar {
+    background-color: var(--fg-color);
+    padding: 4rem 0;
+
+    .events {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+
+      article {
+        border: 2px solid var(--youth-yellow-3);
+        border-radius: var(--round-edge);
+        padding: 1.5rem;
+
+        h4 {
+          margin: 0 0 0.5rem;
+        }
+
+        p {
+          margin: 0.25rem 0;
+        }
+      }
+    }
+  }
+
+  #join {
+    background-size: 2000px;
+    padding: 4rem 0;
+
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      article {
+        flex: 1;
+        min-width: 45%;
+        background-color: var(--fg-color);
+        filter: var(--shadow);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+
+        h4 {
+          height: 2rem;
+        }
+
+        p {
+          flex: 1;
+        }
+
+        & > a:last-of-type {
+          background-color: var(--accent-color);
+          padding: 0.5rem 1rem;
+          border-radius: var(--round-edge);
+          color: var(--fg-color);
+          font-weight: bold;
+          text-align: center;
+          text-decoration: none;
+          transition: all 300ms;
+
+          &:hover {
+            filter: brightness(110%);
+          }
+        }
+      }
+    }
+  }
+</style>

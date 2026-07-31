@@ -33,7 +33,18 @@ const routes: Route[] = [
     displayName: "Get Involved",
     path: "/get-involved",
     children: [
-      { type: "internal", path: "/task-forces", displayName: "Task Forces" },
+      { type: "internal", path: "/outreach", displayName: "Outreach" },
+      { type: "internal", path: "/policy", displayName: "Policy" },
+      {
+        type: "internal",
+        path: "/creative-fellowship",
+        displayName: "Creative Fellowship",
+      },
+      {
+        type: "internal",
+        path: "/psap",
+        displayName: "Student Ambassador Program",
+      },
     ],
   },
   { type: "internal", path: "/404", displayName: "Resources" },
