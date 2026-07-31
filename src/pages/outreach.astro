@@ -7,6 +7,38 @@ import Polaroid from "@components/Polaroid.astro";
 import { faker } from "@faker-js/faker";
 
 import megaphone from "@assets/img/megaphone.avif";
+import Calendar from "@components/Calendar.astro";
+
+const tags = ["Volunteer", "P-SAP", "Creative Fellowship", "Policy"];
+
+function generateEvents(count: number) {
+  const events = [];
+  const today = new Date();
+
+  for (let i = 0; i < count; i++) {
+    const date = faker.date.soon({ days: 90, refDate: today });
+    const tag = faker.helpers.arrayElement(tags);
+
+    events.push({
+      title: faker.company.catchPhrase(),
+      date: date.toISOString(),
+      location: faker.location.city(),
+      image: null,
+      link: faker.internet.url(),
+      source: "faker",
+      tags: [
+        tag,
+        faker.helpers.arrayElement(["All Members", "Track Leaders", "Public"]),
+      ],
+    });
+  }
+
+  return events.sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+  );
+}
+
+const events = generateEvents(24);
 ---
 
 <Base
@@ -107,288 +139,208 @@ import megaphone from "@assets/img/megaphone.avif";
     <SectionBorder type="cookie-cutter" backgroundColor="#f19221" />
 
     <section id="calendar">
-      <div class="container">
-        <h3>Outreach Calendar</h3>
-        <p>
-          Outreach track members and leaders are expected to attend the monthly
-          Outreach Power Hour and any pre-event huddles before tabling or
-          community events.
-        </p>
-
-        <div class="events">
-          <article>
-            <h4>Outreach Power Hour</h4>
-            <p>
-              <strong>When:</strong> Second Tuesday of every month
-            </p>
-            <p>
-              <strong>Host:</strong> Avion
-            </p>
-            <p>
-              Overview of upcoming events, tabling assignments, and volunteer
-              coordination. Open to Outreach Volunteers, Members, Track Leaders,
-              and Outreach Fellows.
-            </p>
-          </article>
-
-          <article>
-            <h4>Pre-Event Huddles</h4>
-            <p>
-              <strong>When:</strong> As needed, before tabling or events
-            </p>
-            <p>
-              <strong>Host:</strong> Avion
-            </p>
-            <p>
-              15-30 minute tactical briefings before events, covering logistics,
-              talking points, and safety protocols.
-            </p>
-          </article>
-
-          <article>
-            <h4>Strategic Planning Call</h4>
-            <p>
-              <strong>When:</strong> First and third Monday of every month
-            </p>
-            <p>
-              <strong>Host:</strong> MV
-            </p>
-            <p>
-              Core operational alignment for leaders across all tracks. Outreach
-              Track Leaders attend to coordinate cross-track events.
-            </p>
-          </article>
-
-          <article>
-            <h4>All-Member Training</h4>
-            <p>
-              <strong>When:</strong> Second Thursday of every month
-            </p>
-            <p>
-              <strong>Host:</strong> Rotating
-            </p>
-            <p>
-              Universal organizing skill building and organizational updates.
-              All Members and Leaders are encouraged to attend.
-            </p>
-          </article>
-        </div>
-      </div>
+      <Calendar
+        events={events}
+        title="Test Calendar"
+        backgroundColor={"var(--rainbow-orange)"}
+      />
     </section>
 
-    <SectionBorder type="cookie-cutter" backgroundColor="#f19221" flip />
+    <style>
+      .page-content {
+        background-color: var(--rainbow-orange);
+      }
 
-    <section id="join">
-      <div class="container">
-        <div class="content">
-          <article>
-            <h4>Interested in helping out?</h4>
-            <p>
-              We'd love to have you! You can start by filling out a
-              <a href="/volunteer-form">Volunteer Application Form</a>
-              or contacting us directly.
-            </p>
-            <a href="/volunteer-form">Click here to apply!</a>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
-</Base>
+      main {
+        margin: auto;
+        font-size: 1.25rem;
 
-<style>
-  .page-content {
-    background-color: var(--rainbow-orange);
-  }
-
-  main {
-    margin: auto;
-    font-size: 1.25rem;
-
-    h2 {
-      font-size: 2rem;
-      text-align: center;
-    }
-
-    h3 {
-      font-size: 1.75rem;
-    }
-
-    h4 {
-      font-size: 1.5rem;
-    }
-  }
-
-  .container {
-    max-width: var(--xl);
-    margin: auto;
-    padding: 0 1rem;
-  }
-
-  #staff {
-    background-color: white;
-    padding: 4rem 0;
-
-    .content {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: auto;
-      padding: 2rem 0;
-
-      article {
-        display: flex;
-        gap: 1rem;
-
-        .person {
-          display: flex;
-          flex-direction: column;
-
-          .portrait {
-            width: 220px;
-            height: 250px;
-          }
-
-          .name {
-            white-space: nowrap;
-            font-family: var(--header-font);
-            text-align: center;
-          }
+        h2 {
+          font-size: 2rem;
+          text-align: center;
         }
 
-        .description {
+        h3 {
+          font-size: 1.75rem;
+        }
+
+        h4 {
+          font-size: 1.5rem;
+        }
+      }
+
+      .container {
+        max-width: var(--xl);
+        margin: auto;
+        padding: 0 1rem;
+      }
+
+      #staff {
+        background-color: white;
+        padding: 4rem 0;
+
+        .content {
           display: flex;
-          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+          margin: auto;
+          padding: 2rem 0;
+
+          article {
+            display: flex;
+            gap: 1rem;
+
+            .person {
+              display: flex;
+              flex-direction: column;
+
+              .portrait {
+                width: 220px;
+                height: 250px;
+              }
+
+              .name {
+                white-space: nowrap;
+                font-family: var(--header-font);
+                text-align: center;
+              }
+            }
+
+            .description {
+              display: flex;
+              flex-direction: column;
+              gap: 1rem;
+
+              * {
+                margin: 0;
+              }
+            }
+          }
+        }
+      }
+
+      #pathway {
+        background-color: var(--rainbow-orange);
+        padding: 4rem 0;
+
+        .tiers {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.5rem;
+          margin-top: 2rem;
+
+          article {
+            border: 2px solid var(--fg-color);
+            border-radius: var(--round-edge);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            color: var(--fg-color);
+
+            .tier-label {
+              align-self: flex-start;
+              background-color: var(--text-color);
+              color: var(--fg-color);
+
+              font-family: var(--header-font);
+              font-weight: bold;
+              padding: 0.25rem 0.75rem;
+              border-radius: var(--round-edge);
+              text-transform: uppercase;
+              font-size: 0.875rem;
+
+              &.member {
+                background-color: var(--rainbow-orange);
+                color: var(--fg-color);
+                border: 1px solid var(--fg-color);
+              }
+
+              &.leader {
+                background-color: var(--text-color);
+                color: var(--fg-color);
+              }
+            }
+
+            .trainings {
+              font-size: 1rem;
+              color: var(--fg-color);
+              margin-top: auto;
+            }
+          }
+        }
+      }
+
+      #calendar {
+        background-color: white;
+        padding: 4rem 0;
+
+        .events {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
+          margin-top: 2rem;
+
+          article {
+            border: 2px solid var(--rainbow-orange);
+            border-radius: var(--round-edge);
+            padding: 1.5rem;
+
+            h4 {
+              margin: 0 0 0.5rem;
+            }
+
+            p {
+              margin: 0.25rem 0;
+            }
+          }
+        }
+      }
+
+      #join {
+        background-size: 2000px;
+        padding: 4rem 0;
+
+        .content {
+          display: flex;
+          flex-wrap: wrap;
           gap: 1rem;
 
-          * {
-            margin: 0;
+          article {
+            flex: 1;
+            min-width: 45%;
+            background-color: var(--fg-color);
+            filter: var(--shadow);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+
+            h4 {
+              height: 2rem;
+            }
+
+            p {
+              flex: 1;
+            }
+
+            & > a:last-of-type {
+              background-color: var(--accent-color);
+              padding: 0.5rem 1rem;
+              border-radius: var(--round-edge);
+              color: var(--fg-color);
+              font-weight: bold;
+              text-align: center;
+              text-decoration: none;
+              transition: all 300ms;
+
+              &:hover {
+                filter: brightness(110%);
+              }
+            }
           }
         }
       }
-    }
-  }
-
-  #pathway {
-    background-color: var(--rainbow-orange);
-    padding: 4rem 0;
-
-    .tiers {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 2rem;
-
-      article {
-        border: 2px solid var(--fg-color);
-        border-radius: var(--round-edge);
-        padding: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-
-        color: var(--fg-color);
-
-        .tier-label {
-          align-self: flex-start;
-          background-color: var(--text-color);
-          color: var(--fg-color);
-
-          font-family: var(--header-font);
-          font-weight: bold;
-          padding: 0.25rem 0.75rem;
-          border-radius: var(--round-edge);
-          text-transform: uppercase;
-          font-size: 0.875rem;
-
-          &.member {
-            background-color: var(--rainbow-orange);
-            color: var(--fg-color);
-            border: 1px solid var(--fg-color);
-          }
-
-          &.leader {
-            background-color: var(--text-color);
-            color: var(--fg-color);
-          }
-        }
-
-        .trainings {
-          font-size: 1rem;
-          color: var(--fg-color);
-          margin-top: auto;
-        }
-      }
-    }
-  }
-
-  #calendar {
-    background-color: white;
-    padding: 4rem 0;
-
-    .events {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      margin-top: 2rem;
-
-      article {
-        border: 2px solid var(--rainbow-orange);
-        border-radius: var(--round-edge);
-        padding: 1.5rem;
-
-        h4 {
-          margin: 0 0 0.5rem;
-        }
-
-        p {
-          margin: 0.25rem 0;
-        }
-      }
-    }
-  }
-
-  #join {
-    background-size: 2000px;
-    padding: 4rem 0;
-
-    .content {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-
-      article {
-        flex: 1;
-        min-width: 45%;
-        background-color: var(--fg-color);
-        filter: var(--shadow);
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-
-        h4 {
-          height: 2rem;
-        }
-
-        p {
-          flex: 1;
-        }
-
-        & > a:last-of-type {
-          background-color: var(--accent-color);
-          padding: 0.5rem 1rem;
-          border-radius: var(--round-edge);
-          color: var(--fg-color);
-          font-weight: bold;
-          text-align: center;
-          text-decoration: none;
-          transition: all 300ms;
-
-          &:hover {
-            filter: brightness(110%);
-          }
-        }
-      }
-    }
-  }
-</style>
+    </style>
+  </main></Base
+>

@@ -1,0 +1,350 @@
+---
+import dayjs from "dayjs";
+
+export interface CalendarEvent {
+  title: string;
+  date: string;
+  location: string;
+  image: { url: string; width: number; height: number } | null;
+  link: string;
+  source: string;
+  tags: string[];
+}
+
+interface Props {
+  events: CalendarEvent[];
+  filters?: string[];
+  title?: string;
+  backgroundColor?: string;
+}
+
+const {
+  events,
+  filters = ["Volunteer", "P-SAP", "Creative Fellowship", "Policy"],
+  title = "Calendar",
+  backgroundColor,
+} = Astro.props;
+
+const tagColors: Record<string, string> = {
+  Volunteer: "#f19221",
+  "P-SAP": "#854e9e",
+  "Creative Fellowship": "#74bf44",
+  Policy: "#d02c28",
+};
+
+const searchParams = Astro.url.searchParams;
+const activeFilters = filters.filter((f) => searchParams.has(`filter-${f}`));
+const showAll = activeFilters.length === 0;
+
+const filteredEvents = showAll
+  ? events
+  : events.filter((event) =>
+      event.tags.some((tag) => activeFilters.includes(tag)),
+    );
+
+const currentMonthParam = searchParams.get("month");
+const currentMonth = currentMonthParam ? dayjs(currentMonthParam) : dayjs();
+
+const firstDayOfMonth = currentMonth.startOf("month").day();
+const daysInMonth = currentMonth.daysInMonth();
+const totalCells = Math.ceil((firstDayOfMonth + daysInMonth) / 7) * 7;
+
+const eventsByDay = new Map<number, CalendarEvent[]>();
+filteredEvents.forEach((event) => {
+  const eventDate = dayjs(event.date);
+  if (
+    eventDate.month() === currentMonth.month() &&
+    eventDate.year() === currentMonth.year()
+  ) {
+    const day = eventDate.date();
+    const existing = eventsByDay.get(day) || [];
+    eventsByDay.set(day, [...existing, event]);
+  }
+});
+
+const prevMonth = currentMonth.subtract(1, "month").format("YYYY-MM");
+const nextMonth = currentMonth.add(1, "month").format("YYYY-MM");
+
+const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+function buildHref(month: string, filters: string[]) {
+  const params = new URLSearchParams();
+  params.set("month", month);
+  filters.forEach((f) => params.set(`filter-${f}`, "1"));
+  return `?${params.toString()}`;
+}
+---
+
+<section
+  id="calendar"
+  class="calendar-section"
+  style={backgroundColor ? { "--bg-color": backgroundColor } : {}}
+>
+  <div class="container">
+    <h3>{title}</h3>
+
+    <form method="get" class="calendar-controls">
+      <input
+        type="hidden"
+        name="month"
+        value={currentMonth.format("YYYY-MM")}
+      />
+
+      <div class="filters">
+        {
+          filters.map((filter) => (
+            <label
+              class={`filter-chip ${activeFilters.includes(filter) ? "active" : ""}`}
+              style={
+                activeFilters.includes(filter)
+                  ? `background-color: ${tagColors[filter]}; color: var(--fg-color); border-color: transparent;`
+                  : undefined
+              }
+            >
+              <input
+                type="checkbox"
+                name={`filter-${filter}`}
+                value="1"
+                checked={activeFilters.includes(filter)}
+              />
+              {filter}
+            </label>
+          ))
+        }
+      </div>
+
+      <button type="submit" class="apply-filters">Apply Filters</button>
+    </form>
+
+    <div class="month-nav">
+      <a href={buildHref(prevMonth, activeFilters)} class="nav-button">
+        &lt; Prev
+      </a>
+      <h4>{currentMonth.format("MMMM YYYY")}</h4>
+      <a href={buildHref(nextMonth, activeFilters)} class="nav-button">
+        Next &gt;
+      </a>
+    </div>
+
+    <div class="grid">
+      <div class="days-of-week">
+        {daysOfWeek.map((day) => <div class="day-label">{day}</div>)}
+      </div>
+
+      <div class="cells">
+        {
+          Array.from({ length: totalCells }).map((_, index) => {
+            const dayNumber = index - firstDayOfMonth + 1;
+            const isValidDay = dayNumber > 0 && dayNumber < daysInMonth + 1;
+            const dayEvents = isValidDay
+              ? eventsByDay.get(dayNumber) || []
+              : [];
+
+            return (
+              <div class={`cell ${!isValidDay ? "empty" : ""}`}>
+                {isValidDay && <span class="date-number">{dayNumber}</span>}
+                {dayEvents.map((event) => (
+                  <a
+                    href={event.link || "#"}
+                    class="event-pill"
+                    style={`background-color: ${tagColors[event.tags.find((tag) => tagColors[tag]) || ""] || "#333"};`}
+                    title={`${event.title} — ${event.location}`}
+                  >
+                    {event.title}
+                  </a>
+                ))}
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .calendar-section {
+    background-color: var(--fg-color);
+    padding: 4rem 0;
+
+    .container {
+      max-width: var(--xl);
+      margin: auto;
+      padding: 0 1rem;
+    }
+
+    h3 {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .calendar-controls {
+    margin-bottom: 1.5rem;
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+
+      .filter-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border: 2px solid var(--text-color);
+        border-radius: var(--round-edge);
+        background: var(--fg-color);
+        font-family: var(--header-font);
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 200ms;
+
+        &:hover {
+          background-color: var(--text-color);
+          color: var(--fg-color);
+        }
+
+        input {
+          position: absolute;
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
+    }
+
+    .apply-filters {
+      background-color: var(--accent-color);
+      color: var(--fg-color);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: var(--round-edge);
+      font-weight: bold;
+      cursor: pointer;
+
+      &:hover {
+        filter: brightness(110%);
+      }
+    }
+  }
+
+  .month-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--text-color);
+    color: var(--fg-color);
+    padding: 0.75rem 1rem;
+    border-radius: var(--round-edge) var(--round-edge) 0 0;
+
+    .nav-button {
+      background-color: var(--fg-color);
+      color: var(--text-color);
+      padding: 0.5rem 1rem;
+      border-radius: var(--round-edge);
+      font-weight: bold;
+      text-decoration: none;
+
+      &:hover {
+        filter: drop-shadow(5px 5px 5px var(--text-color));
+      }
+    }
+
+    h4 {
+      margin: 0;
+      font-family: var(--header-font);
+      text-transform: uppercase;
+    }
+  }
+
+  .grid {
+    border: 2px solid var(--text-color);
+    border-radius: 0 0 var(--round-edge) var(--round-edge);
+    overflow: hidden;
+
+    .days-of-week {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      background-color: var(--bg-color);
+      border-bottom: 2px solid var(--text-color);
+
+      .day-label {
+        padding: 0.5rem;
+        text-align: center;
+        font-family: var(--header-font);
+        font-weight: bold;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+      }
+    }
+
+    .cells {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+
+      .cell {
+        min-height: 100px;
+        padding: 0.5rem;
+        border-right: 1px solid var(--text-color);
+        border-bottom: 1px solid var(--text-color);
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        &:nth-child(7n) {
+          border-right: none;
+        }
+
+        &.empty {
+          background-color: var(--bg-color);
+        }
+
+        .date-number {
+          align-self: flex-end;
+          font-size: 0.75rem;
+          font-weight: bold;
+          color: var(--text-muted);
+        }
+
+        .event-pill {
+          display: block;
+          padding: 0.25rem 0.5rem;
+          border-radius: var(--round-edge);
+          color: var(--fg-color);
+          font-size: 0.75rem;
+          font-weight: bold;
+          text-decoration: none;
+          var(--fg-color)-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          &:hover {
+            filter: brightness(110%);
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .grid {
+      .cells {
+        .cell {
+          min-height: 60px;
+          padding: 0.25rem;
+
+          .event-pill {
+            font-size: 0.625rem;
+            padding: 0.125rem 0.25rem;
+          }
+        }
+      }
+
+      .days-of-week .day-label {
+        font-size: 0.625rem;
+        padding: 0.25rem;
+      }
+    }
+  }
+</style>
