@@ -1,11 +1,12 @@
 ---
-import sprayPaintBorder from "../assets/img/png-border-blue.png";
+import sprayPaintBorder from "@assets/img/png-border-blue.png";
 import { getImage } from "astro:assets";
 import CssFilterConverter from "css-filter-converter";
 import Color from "color";
+import waveBorder from "@assets/img/wave-border.svg";
 
 interface Props {
-  type: "cookie-cutter" | "spray-paint" | "squiggle";
+  type: "cookie-cutter" | "spray-paint" | "squiggle" | "wave";
   backgroundColor?: string;
   flip?: boolean;
 }
@@ -14,6 +15,8 @@ const optimizedSprayPaint = await getImage({
   src: sprayPaintBorder,
   format: "webp",
 });
+
+const optimizedWaveBorder = await getImage({ src: waveBorder, format: "svg" });
 
 const getBackgroundData = () => {
   if (type === "spray-paint") {
@@ -27,7 +30,10 @@ const filter = CssFilterConverter.hexToFilter(Color(backgroundColor).hex());
   <div
     class:list={["border", type]}
     style={{
-      backgroundImage: `url(${getBackgroundData()?.src ?? ""})`,
+      backgroundImage:
+        type === "spray-paint"
+          ? `url(${getBackgroundData()?.src ?? ""})`
+          : undefined,
       backgroundColor:
         type === "spray-paint" ? "rgba(0,0,0,0)" : backgroundColor,
       filter: type === "spray-paint" ? filter.color : "",
@@ -36,46 +42,62 @@ const filter = CssFilterConverter.hexToFilter(Color(backgroundColor).hex());
   </div>
 </div>
 
-<style lang={"scss"} >
-	.container {
-		position: relative;
-		height: 0;
-		&:not(.flipped) {
-			.border {
-				/* top: 2.2rem; */
-			}
-		}
+<style define:vars={{ "wave-border": `url(${optimizedWaveBorder.src})` }}>
+  .container {
+    position: relative;
+    height: 0;
+    &:not(.flipped) {
+      .border {
+        /* top: 2.2rem; */
+      }
+    }
+  }
 
-	}
+  .container.flipped {
+    .border {
+      bottom: 2rem;
+      transform: scaleY(-1);
+    }
+  }
 
-	.container.flipped {
-		.border {
-			bottom: 2rem;
-			transform: scaleY(-1);
-		}
-	}
-	.border {
-		width: 100%;
-		height: 4rem;
-		z-index: 2;
-	}
+  .border {
+    width: 100%;
+    height: 4rem;
+    z-index: 2;
+  }
 
-	.border.cookie-cutter {
-		position: relative;
-		mask: conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 20%/2rem 100%;
-	}
+  .border.cookie-cutter {
+    position: relative;
+    mask: conic-gradient(
+        from -45deg at bottom,
+        #0000,
+        #000 1deg 89deg,
+        #0000 90deg
+      )
+      20%/2rem 100%;
+  }
 
-	.border.squiggle {
-		position: relative;
-		mask:
-			  radial-gradient(16px at 75% 100%,#0000 98%,#000) 50% calc(100% - 16px)/64px 100% repeat-x,
-    radial-gradient(16px at 25% 50%,#000 99%,#0000 101%) bottom/64px 32px repeat-x
-	}
+  .border.squiggle {
+    position: relative;
+    mask:
+      radial-gradient(16px at 75% 100%, #0000 98%, #000) 50% calc(100% - 16px) /
+        64px 100% repeat-x,
+      radial-gradient(16px at 25% 50%, #000 99%, #0000 101%) bottom/64px 32px
+        repeat-x;
+  }
 
-	.border.spray-paint {
-		height: 2rem;
-		position: relative;
-		background-repeat: repeat-x;
-		background-size: contain;
-	}
+  .border.spray-paint {
+    height: 2rem;
+    position: relative;
+    background-repeat: repeat-x;
+    background-size: contain;
+  }
+
+  .border.wave {
+    position: relative;
+    mask: var(--wave-border);
+    mask-size: 100% auto;
+    mask-repeat: no-repeat;
+    height: 7rem;
+  }
 </style>
