@@ -7,6 +7,7 @@ interface Props {
     title: string;
     color: string;
     description: string;
+    link: string;
   }[];
   backgroundImage: string;
 }
@@ -29,9 +30,9 @@ const backgroundImage = processedBackgroundImage
 >
   <ul>
     {
-      ribbons.map(({ title, color, description }) => (
+      ribbons.map(({ title, color, description, link }) => (
         <li class="ribbon">
-          <a href="/404" class="link">
+          <a href={link} class="link">
             <div class="content" style={{ backgroundColor: color }}>
               <h1>{title}</h1>
             </div>
@@ -54,9 +55,11 @@ const backgroundImage = processedBackgroundImage
 <style>
   .container {
     --transition: all 1s ease;
+    margin-top: 2rem;
     background-size: 2000px;
     padding: 2rem 0;
     transition: var(--transition);
+    overflow: hidden;
 
     ul {
       list-style: none;

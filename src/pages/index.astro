@@ -7,6 +7,7 @@ import OurPartners from "../sections/OurPartners.astro";
 import HeroVideo from "../sections/HeroVideo.astro";
 import { faker } from "@faker-js/faker";
 import AlternatingRibbons from "../sections/AlternatingRibbons.astro";
+import ColoredHeader from "@components/ColoredHeader.astro";
 ---
 
 <Base
@@ -29,15 +30,11 @@ import AlternatingRibbons from "../sections/AlternatingRibbons.astro";
         backgroundColor: "gold",
       },
       {
-        label: "Student Ambassador Program",
-        href: "/",
-        backgroundColor: "purple",
-      },
-      {
-        label: "Get Tested",
+        label: "STI Clinic Search",
         href: "/",
         backgroundColor: "pink",
       },
+
       {
         label: "School Policy Hub",
         href: "/",
@@ -47,27 +44,36 @@ import AlternatingRibbons from "../sections/AlternatingRibbons.astro";
     backgroundImage={ruledBg.src}
   />
 
+  <ColoredHeader borderTop borderBottom
+    ><slot name="header"><h1 class="cards-header">Get Involved</h1></slot
+    ></ColoredHeader
+  >
+
   <AlternatingRibbons
     ribbons={[
       {
         title: "Outreach",
         color: "var(--rainbow-orange)",
         description: faker.lorem.sentences(2),
+        link: "/outreach",
       },
       {
         title: "Policy",
         color: "var(--rainbow-red)",
         description: faker.lorem.sentences(2),
+        link: "/policy",
       },
       {
         title: "Creative Fellowship",
         color: "var(--rainbow-green)",
         description: faker.lorem.sentences(2),
+        link: "/creative-fellowship",
       },
       {
         title: "Student Ambassador Program",
         color: "var(--rainbow-purple)",
         description: faker.lorem.sentences(2),
+        link: "/psap",
       },
     ]}
     backgroundImage={ruledBg.src}
@@ -84,6 +90,10 @@ import AlternatingRibbons from "../sections/AlternatingRibbons.astro";
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    .cards-header {
+      margin-bottom: 1rem;
     }
   }
 </style>

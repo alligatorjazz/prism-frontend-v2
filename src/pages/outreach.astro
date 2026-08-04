@@ -8,37 +8,7 @@ import { faker } from "@faker-js/faker";
 
 import megaphone from "@assets/img/megaphone.avif";
 import Calendar from "@components/Calendar.astro";
-
-const tags = ["Volunteer", "P-SAP", "Creative Fellowship", "Policy"];
-
-function generateEvents(count: number) {
-  const events = [];
-  const today = new Date();
-
-  for (let i = 0; i < count; i++) {
-    const date = faker.date.soon({ days: 90, refDate: today });
-    const tag = faker.helpers.arrayElement(tags);
-
-    events.push({
-      title: faker.company.catchPhrase(),
-      date: date.toISOString(),
-      location: faker.location.city(),
-      image: null,
-      link: faker.internet.url(),
-      source: "faker",
-      tags: [
-        tag,
-        faker.helpers.arrayElement(["All Members", "Track Leaders", "Public"]),
-      ],
-    });
-  }
-
-  return events.sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-  );
-}
-
-const events = generateEvents(24);
+import { dummyEvents } from "./api/events";
 ---
 
 <Base
@@ -140,7 +110,7 @@ const events = generateEvents(24);
 
     <section id="calendar">
       <Calendar
-        events={events}
+        events={dummyEvents}
         title="Test Calendar"
         backgroundColor={"var(--rainbow-orange)"}
       />

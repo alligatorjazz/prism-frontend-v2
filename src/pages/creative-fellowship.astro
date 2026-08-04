@@ -6,6 +6,8 @@ import SectionBorder from "@components/SectionBorder.astro";
 import { faker } from "@faker-js/faker";
 
 import creative from "@assets/img/computer-yellow.avif";
+import { dummyEvents } from "./api/events";
+import Calendar from "@components/Calendar.astro";
 ---
 
 <Base
@@ -115,71 +117,11 @@ import creative from "@assets/img/computer-yellow.avif";
     <SectionBorder type="cookie-cutter" backgroundColor="#eba000" />
 
     <section id="calendar">
-      <div class="container">
-        <h3>Fellowship Calendar</h3>
-        <p>
-          Creative Fellows are expected to attend monthly cohort meetings and
-          Content Creation Task Force check-ins.
-        </p>
-
-        <div class="events">
-          <article>
-            <h4>Fellowship Cohort Meeting</h4>
-            <p>
-              <strong>When:</strong> Third Wednesday of every month
-            </p>
-            <p>
-              <strong>Host:</strong> Creative Fellowship Coordinator
-            </p>
-            <p>
-              Portfolio review, skill-building workshops, and project planning.
-              Open to all fellows.
-            </p>
-          </article>
-
-          <article>
-            <h4>Content Creation Power Hour</h4>
-            <p>
-              <strong>When:</strong> Third Thursday of every month
-            </p>
-            <p>
-              <strong>Host:</strong> Content Creation Director
-            </p>
-            <p>
-              Editorial calendar review, content feedback, and campaign
-              coordination. Fellows attend alongside the Content Creation team.
-            </p>
-          </article>
-
-          <article>
-            <h4>Strategic Planning Call</h4>
-            <p>
-              <strong>When:</strong> First and third Monday of every month
-            </p>
-            <p>
-              <strong>Host:</strong> MV
-            </p>
-            <p>
-              Core operational alignment for leaders across all tracks. Creative
-              Fellows in leadership roles attend.
-            </p>
-          </article>
-
-          <article>
-            <h4>All-Member Training</h4>
-            <p>
-              <strong>When:</strong> Second Thursday of every month
-            </p>
-            <p>
-              <strong>Host:</strong> Rotating
-            </p>
-            <p>
-              Universal organizing skill building and organizational updates.
-              All fellows are encouraged to attend.
-            </p>
-          </article>
-        </div>
-      </div>
+      <Calendar
+        events={dummyEvents}
+        title="Test Calendar"
+        backgroundColor={"var(--rainbow-orange)"}
+      />
     </section>
 
     <SectionBorder type="cookie-cutter" backgroundColor="#eba000" flip />
