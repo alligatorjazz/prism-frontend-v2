@@ -1,8 +1,8 @@
 ---
 import SectionBorder from "../components/SectionBorder.astro";
-import ConstrainedSection from "../sections/ConstrainedSection.astro";
 import PageIntro from "../sections/PageIntro.astro";
 import Base from "../templates/Base.astro";
+import Polaroid from "@components/Polaroid.astro";
 ---
 
 <Base
@@ -17,9 +17,16 @@ import Base from "../templates/Base.astro";
   <PageIntro title={"Our History"} description="Learn about PRISM's history!" />
   <section id="beginning" class={"history lg"}>
     <div class="container">
-      <div class="image">
-        <img src={"https://picsum.photos/200"} />
-      </div>
+      <Polaroid
+        class={"image"}
+        image={{
+          src: "https://picsum.photos/500",
+          width: 500,
+          height: 500,
+          format: "webp",
+          alt: "dummy",
+        }}
+      />
       <div class="info">
         <h2>The Beginning</h2>
         <p>
@@ -37,9 +44,17 @@ import Base from "../templates/Base.astro";
   <SectionBorder type={"wave-left"} backgroundColor="var(--rainbow-red)" />
   <section id="non-profit" class={"history lg"}>
     <div class="container">
-      <div class="image">
-        <img src={"https://picsum.photos/200"} />
-      </div>
+      <Polaroid
+        class={"image"}
+        image={{
+          src: "https://picsum.photos/500",
+          width: 500,
+          height: 500,
+          format: "webp",
+          alt: "dummy",
+        }}
+      />
+
       <div class="info">
         <h2>Forming a Non-Profit</h2>
         <p>
@@ -55,9 +70,17 @@ import Base from "../templates/Base.astro";
   <SectionBorder type={"wave-right"} backgroundColor="var(--rainbow-blue)" />
   <section id="advocacy" class={"history lg"}>
     <div class="container">
-      <div class="image">
-        <img src={"https://picsum.photos/200"} />
-      </div>
+      <Polaroid
+        class={"image"}
+        image={{
+          src: "https://picsum.photos/500",
+          width: 500,
+          height: 500,
+          format: "webp",
+          alt: "dummy",
+        }}
+      />
+
       <div class="info">
         <h2>Getting Into Advocacy</h2>
         <p>
@@ -74,9 +97,17 @@ import Base from "../templates/Base.astro";
   <SectionBorder type={"wave-left"} backgroundColor="var(--rainbow-orange)" />
   <section id="schools" class={"history lg"}>
     <div class="container">
-      <div class="image">
-        <img src={"https://picsum.photos/200"} />
-      </div>
+      <Polaroid
+        class={"image"}
+        image={{
+          src: "https://picsum.photos/500",
+          width: 500,
+          height: 500,
+          format: "webp",
+          alt: "dummy",
+        }}
+      />
+
       <div class="info">
         <h2>Taking it to Schools</h2>
         <p>
@@ -94,9 +125,17 @@ import Base from "../templates/Base.astro";
   <SectionBorder type={"wave-right"} backgroundColor="var(--rainbow-purple)" />
   <section id="team" class={"history lg"}>
     <div class="container">
-      <div class="image">
-        <img src={"https://picsum.photos/200"} />
-      </div>
+      <Polaroid
+        class={"image"}
+        image={{
+          src: "https://picsum.photos/500",
+          width: 500,
+          height: 500,
+          format: "webp",
+          alt: "dummy",
+        }}
+      />
+
       <div class="info">
         <h2>Growing The Team</h2>
         <p>
@@ -115,9 +154,17 @@ import Base from "../templates/Base.astro";
   <SectionBorder type={"wave-left"} backgroundColor="var(--rainbow-yellow)" />
   <section id="future" class={"history lg"}>
     <div class="container">
-      <div class="image">
-        <img src={"https://picsum.photos/200"} />
-      </div>
+      <Polaroid
+        class={"image"}
+        image={{
+          src: "https://picsum.photos/500",
+          width: 500,
+          height: 500,
+          format: "webp",
+          alt: "dummy",
+        }}
+      />
+
       <div class="info">
         <h2>The Future</h2>
         <p>
