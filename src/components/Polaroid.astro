@@ -2,11 +2,14 @@
 import type { ImageMetadata } from "astro";
 import type { HTMLAttributes } from "astro/types";
 import { Image } from "astro:assets";
+import tapeImage from "@assets/img/tape-img.png";
+
 interface Props extends HTMLAttributes<"div"> {
   image: ImageMetadata & { alt: string };
   label?: string;
+  tape?: "top" | "vertical";
 }
-const { class: className, image, label, ...props } = Astro.props;
+const { class: className, image, label, tape, ...props } = Astro.props;
 ---
 
 <div class:list={["container", className]} {...props}>
@@ -14,6 +17,14 @@ const { class: className, image, label, ...props } = Astro.props;
   <p class="label">
     {label}
   </p>
+  {
+    tape && (
+      <div class="tape">
+        <Image src={tapeImage} alt={"A piece of scotch tape."} />
+        <Image src={tapeImage} alt={"A piece of scotch tape."} />
+      </div>
+    )
+  }
 </div>
 
 <style>
@@ -22,6 +33,7 @@ const { class: className, image, label, ...props } = Astro.props;
     --border-size: 12px;
     border: var(--border-size) solid var(--fg-color);
     background-color: var(--fg-color);
+    position: relative;
   }
 
   img {
@@ -40,5 +52,28 @@ const { class: className, image, label, ...props } = Astro.props;
     font-style: var(--header-font);
     white-space: nowrap;
     width: 100%;
+  }
+  .tape {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    --size: 35%;
+    img {
+      position: absolute;
+      width: var(--size);
+      height: var(--size);
+      object-fit: contain;
+    }
+    img:nth-child(1) {
+      top: calc(var(--size) * -0.5);
+      left: calc(var(--size) * -0.5);
+    }
+    img:nth-child(2) {
+      top: calc(var(--size) * -0.5);
+      right: calc(var(--size) * -0.5);
+      transform: scaleX(-1);
+    }
   }
 </style>
