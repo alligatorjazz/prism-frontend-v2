@@ -34,7 +34,7 @@ import Base from "../templates/Base.astro";
       </div>
     </div>
   </section>
-  <SectionBorder type={"wave"} backgroundColor="red" />
+  <SectionBorder type={"wave-left"} backgroundColor="var(--rainbow-red)" />
   <section id="non-profit" class={"history lg"}>
     <div class="container">
       <div class="image">
@@ -52,6 +52,8 @@ import Base from "../templates/Base.astro";
       </div>
     </div>
   </section>
+
+  <SectionBorder type={"wave-right"} backgroundColor="var(--rainbow-blue)" />
   <section id="advocacy" class={"history lg"}>
     <div class="container">
       <div class="image">
@@ -70,6 +72,7 @@ import Base from "../templates/Base.astro";
       </div>
     </div>
   </section>
+  <SectionBorder type={"wave-left"} backgroundColor="var(--rainbow-orange)" />
   <section id="schools" class={"history lg"}>
     <div class="container">
       <div class="image">
@@ -89,6 +92,7 @@ import Base from "../templates/Base.astro";
     </div>
   </section>
 
+  <SectionBorder type={"wave-left"} backgroundColor="var(--rainbow-purple)" />
   <section id="team" class={"history lg"}>
     <div class="container">
       <div class="image">
@@ -103,12 +107,13 @@ import Base from "../templates/Base.astro";
           and a robust staff team that all include LGBTQ+ folx from many
           different walks of life with many different talents. Most of our
           unpaid volunteer positions are now fully paid freelancer roles. In
-          July 2023, we even hired our first Executive Director: PRISM's
+          July 2023, we even himagenta our first Executive Director: PRISM's
           founder, Maxx Fenning.
         </p>
       </div>
     </div>
   </section>
+  <SectionBorder type={"wave-left"} backgroundColor="var(--rainbow-yellow)" />
   <section id="future" class={"history lg"}>
     <div class="container">
       <div class="image">
@@ -131,6 +136,9 @@ import Base from "../templates/Base.astro";
 </Base>
 
 <style lang="scss">
+  section {
+    padding: 2rem 0;
+  }
   .history > .container {
     display: flex;
     align-items: center;
@@ -152,23 +160,23 @@ import Base from "../templates/Base.astro";
   }
 
   #beginning {
-    background-color: red;
+    background-color: var(--rainbow-red);
   }
 
   #non-profit {
-    background-color: blue;
+    background-color: var(--rainbow-blue);
   }
 
   #advocacy {
-    background-color: orange;
+    background-color: var(--rainbow-orange);
   }
 
   #schools {
-    background-color: purple;
+    background-color: var(--rainbow-purple);
   }
 
   #team {
-    background-color: yellow;
+    background-color: var(--rainbow-yellow);
   }
 
   #future {

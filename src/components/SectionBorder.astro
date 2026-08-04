@@ -3,10 +3,16 @@ import sprayPaintBorder from "@assets/img/png-border-blue.png";
 import { getImage } from "astro:assets";
 import CssFilterConverter from "css-filter-converter";
 import Color from "color";
-import waveBorder from "@assets/img/wave-border.svg";
+import waveLeft from "@assets/img/wave-border-left.svg";
+import waveRight from "@assets/img/wave-border-right.svg";
 
 interface Props {
-  type: "cookie-cutter" | "spray-paint" | "squiggle" | "wave";
+  type:
+    | "cookie-cutter"
+    | "spray-paint"
+    | "squiggle"
+    | "wave-left"
+    | "wave-right";
   backgroundColor?: string;
   flip?: boolean;
 }
@@ -16,14 +22,20 @@ const optimizedSprayPaint = await getImage({
   format: "webp",
 });
 
-const optimizedWaveBorder = await getImage({ src: waveBorder, format: "svg" });
+const optimizedWaveBorder = await getImage({
+  src: type === "wave-left" ? waveLeft : waveRight,
+  format: "svg",
+});
 
 const getBackgroundData = () => {
   if (type === "spray-paint") {
     return optimizedSprayPaint;
   }
 };
-const filter = CssFilterConverter.hexToFilter(Color(backgroundColor).hex());
+const filter =
+  type === "spray-paint"
+    ? CssFilterConverter.hexToFilter(Color(backgroundColor).hex())
+    : undefined;
 ---
 
 <div class:list={["container", flip ? "flipped" : ""]}>
@@ -36,7 +48,7 @@ const filter = CssFilterConverter.hexToFilter(Color(backgroundColor).hex());
           : undefined,
       backgroundColor:
         type === "spray-paint" ? "rgba(0,0,0,0)" : backgroundColor,
-      filter: type === "spray-paint" ? filter.color : "",
+      filter: type === "spray-paint" ? filter?.color : "",
     }}
   >
   </div>
@@ -93,7 +105,8 @@ const filter = CssFilterConverter.hexToFilter(Color(backgroundColor).hex());
     background-size: contain;
   }
 
-  .border.wave {
+  .border.wave-left,
+  .border.wave-right {
     position: relative;
     mask: var(--wave-border);
     mask-size: 100% auto;
