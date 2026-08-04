@@ -52,7 +52,6 @@ import Base from "../templates/Base.astro";
       </div>
     </div>
   </section>
-
   <SectionBorder type={"wave-right"} backgroundColor="var(--rainbow-blue)" />
   <section id="advocacy" class={"history lg"}>
     <div class="container">
@@ -92,7 +91,7 @@ import Base from "../templates/Base.astro";
     </div>
   </section>
 
-  <SectionBorder type={"wave-left"} backgroundColor="var(--rainbow-purple)" />
+  <SectionBorder type={"wave-right"} backgroundColor="var(--rainbow-purple)" />
   <section id="team" class={"history lg"}>
     <div class="container">
       <div class="image">
@@ -137,7 +136,7 @@ import Base from "../templates/Base.astro";
 
 <style lang="scss">
   section {
-    padding: 2rem 0;
+    padding-top: 4rem;
   }
   .history > .container {
     display: flex;
@@ -160,6 +159,7 @@ import Base from "../templates/Base.astro";
   }
 
   #beginning {
+    padding-top: 0rem;
     background-color: var(--rainbow-red);
   }
 
@@ -180,5 +180,9 @@ import Base from "../templates/Base.astro";
   }
 
   #future {
+  }
+
+  .history:nth-of-type(odd) > .container {
+    flex-direction: row-reverse;
   }
 </style>
