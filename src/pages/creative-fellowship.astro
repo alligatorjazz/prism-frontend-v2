@@ -34,7 +34,10 @@ import Calendar from "@components/Calendar.astro";
       <h2 slot="content">Who makes up the Creative Fellowship?</h2>
     </CenteredPaperWithHeader>
 
-    <SectionBorder type="cookie-cutter" backgroundColor="#eba000" />
+    <SectionBorder
+      type="cookie-cutter"
+      backgroundColor="var(--rainbow-green)"
+    />
 
     <section id="about">
       <div class="container">
@@ -53,7 +56,11 @@ import Calendar from "@components/Calendar.astro";
       </div>
     </section>
 
-    <SectionBorder type="cookie-cutter" backgroundColor="#eba000" flip />
+    <SectionBorder
+      type="cookie-cutter"
+      backgroundColor="var(--rainbow-green)"
+      flip
+    />
 
     <section id="roles">
       <div class="container">
@@ -114,17 +121,24 @@ import Calendar from "@components/Calendar.astro";
       </div>
     </section>
 
-    <SectionBorder type="cookie-cutter" backgroundColor="#eba000" />
+    <SectionBorder
+      type="cookie-cutter"
+      backgroundColor="var(--rainbow-green)"
+    />
 
     <section id="calendar">
       <Calendar
         events={dummyEvents}
         title="Test Calendar"
-        backgroundColor={"var(--rainbow-orange)"}
+        backgroundColor={"var(--rainbow-green)"}
       />
     </section>
 
-    <SectionBorder type="cookie-cutter" backgroundColor="#eba000" flip />
+    <SectionBorder
+      type="cookie-cutter"
+      backgroundColor="var(--rainbow-green)"
+      flip
+    />
 
     <section id="join">
       <div class="container">
@@ -146,7 +160,7 @@ import Calendar from "@components/Calendar.astro";
 
 <style>
   .page-content {
-    background-color: var(--youth-yellow-3);
+    background-color: var(--rainbow-green);
   }
 
   main {
@@ -184,7 +198,7 @@ import Calendar from "@components/Calendar.astro";
   }
 
   #roles {
-    background-color: var(--youth-yellow-3);
+    background-color: var(--rainbow-green);
     padding: 4rem 0;
 
     h3 {
@@ -207,7 +221,7 @@ import Calendar from "@components/Calendar.astro";
       td {
         padding: 1rem;
         text-align: left;
-        border-bottom: 1px solid var(--youth-yellow-3);
+        border-bottom: 1px solid var(--rainbow-green);
       }
 
       th {
@@ -237,7 +251,7 @@ import Calendar from "@components/Calendar.astro";
       margin-top: 2rem;
 
       article {
-        border: 2px solid var(--youth-yellow-3);
+        border: 2px solid var(--rainbow-green);
         border-radius: var(--round-edge);
         padding: 1.5rem;
 
