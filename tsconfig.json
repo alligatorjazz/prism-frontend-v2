@@ -6,12 +6,11 @@
       "@sections/*": ["./src/sections/*"],
       "@components/*": ["./src/components/*"],
       "@templates/*": ["./src/templates/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@api/*": ["./src/api/*"]
     }
   },
-
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"]
 }
-
