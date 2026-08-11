@@ -1,0 +1,137 @@
+---
+import Base from "@templates/Base.astro";
+import PageIntro from "@sections/PageIntro.astro";
+import CenteredPaperWithHeader from "@sections/CenteredPaperWithHeader.astro";
+import SectionBorder from "@components/SectionBorder.astro";
+import TierGrid from "@components/TierGrid.astro";
+import fistSticker from "@assets/img/fist-sticker.avif";
+
+const businessBenefits = [
+  "Exclusive Movement Builders Monthly Newsletter",
+  "Access to interactive Newsletter content (Advice Column, Q&A, Interviews, etc.)",
+  "Handwritten “Thank You” card",
+  "Pride stickers",
+  "Name on our website",
+  "(1) Social media post thanking all PRISM Gala sponsors",
+  "Logo on PRISM Gala Program",
+  "15% discount on up to (4) tickets to PRISM Gala",
+];
+
+const tiers = [
+  {
+    name: "Partner",
+    price: "$500",
+    frequency: "yr",
+    benefits: businessBenefits,
+  },
+  {
+    name: "Sponsor",
+    price: "$1,000",
+    frequency: "yr",
+    benefits: businessBenefits,
+  },
+  {
+    name: "Advocate",
+    price: "$2,500",
+    frequency: "yr",
+    benefits: businessBenefits,
+  },
+  {
+    name: "Champion",
+    price: "$5,000",
+    frequency: "yr",
+    benefits: businessBenefits,
+  },
+  {
+    name: "Legend",
+    price: "$10,000",
+    frequency: "yr",
+    benefits: businessBenefits,
+    highlighted: true,
+  },
+].map((tier) => ({
+  ...tier,
+  ctaHref: "https://prismfl.app.neoncrm.com/forms/22?utm_source=web",
+  ctaLabel: "Become a Movement Builder",
+}));
+---
+
+<Base
+  pageMetadata={{
+    title: "Movement Builders: Business Sponsorship",
+    description:
+      "Starting at just $500/year, each business sponsorship tier comes with exciting perks and opportunities.",
+    type: "website",
+  }}
+  class={"page-content"}
+>
+  <PageIntro
+    title="Movement Builders: Business Sponsorship"
+    description="Starting at just $500/year, each business sponsorship tier comes with exciting perks and opportunities, as well as an exclusive monthly newsletter featuring an LGBTQ+ advice column and queer culture news. Show your business's commitment to South Florida's LGBTQ+ youth and sign up today!"
+    image={fistSticker}
+    pointBackTo={{ href: "/donate", label: "Donate" }}
+    class={"intro"}
+  />
+
+  <main>
+    <SectionBorder
+      type="cookie-cutter"
+      backgroundColor="var(--rainbow-green)"
+    />
+
+    <section id="tiers">
+      <div class="container">
+        <TierGrid tiers={tiers} />
+      </div>
+    </section>
+
+    <SectionBorder
+      type="cookie-cutter"
+      backgroundColor="var(--rainbow-green)"
+      flip
+    />
+
+    <section id="note">
+      <div class="container">
+        <p class="note">
+          Note: Newsletter perks are immediately accessible. Physical prizes and
+          gala-related perks will be received seasonally.
+        </p>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style lang="scss">
+  .page-content {
+    background-color: var(--rainbow-green);
+  }
+
+  main {
+    margin: auto;
+    font-size: 1.25rem;
+  }
+
+  .container {
+    max-width: var(--xl);
+    margin: auto;
+    padding: 4rem 1rem;
+  }
+
+  #tiers {
+    padding: 4rem 1rem;
+    background-color: white;
+  }
+
+  #note {
+    background-color: var(--rainbow-green);
+    color: white;
+    text-align: center;
+
+    .note {
+      max-width: 700px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+  }
+</style>

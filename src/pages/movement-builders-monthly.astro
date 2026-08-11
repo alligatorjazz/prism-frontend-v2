@@ -1,0 +1,111 @@
+---
+import Base from "@templates/Base.astro";
+import PageIntro from "@sections/PageIntro.astro";
+import CenteredPaperWithHeader from "@sections/CenteredPaperWithHeader.astro";
+import SectionBorder from "@components/SectionBorder.astro";
+import TierGrid from "@components/TierGrid.astro";
+
+import fistSticker from "@assets/img/fist-sticker.avif";
+
+const baseBenefits = ["Exclusive Movement Builders Monthly Newsletter"];
+
+const tiers = [
+  { name: "Supporter", price: "$5", frequency: "mo", benefits: baseBenefits },
+  { name: "Friend", price: "$10", frequency: "mo", benefits: baseBenefits },
+  { name: "Ally", price: "$25", frequency: "mo", benefits: baseBenefits },
+  { name: "Advocate", price: "$50", frequency: "mo", benefits: baseBenefits },
+  { name: "Champion", price: "$100", frequency: "mo", benefits: baseBenefits },
+  {
+    name: "Legend",
+    price: "$250",
+    frequency: "mo",
+    benefits: baseBenefits,
+    highlighted: true,
+  },
+].map((tier) => ({
+  ...tier,
+  ctaHref:
+    "https://prismfl.app.neoncrm.com/forms/movement-builders?utm_source=web",
+  ctaLabel: "Become a Movement Builder",
+}));
+---
+
+<Base
+  pageMetadata={{
+    title: "Movement Builders: Monthly Membership",
+    description:
+      "Starting at just $5/month, each donorship tier comes with exciting perks and opportunities.",
+    type: "website",
+  }}
+  class={"page-content"}
+>
+  <PageIntro
+    title="Movement Builders: Monthly Membership"
+    description="Starting at just $5/month, each donorship tier comes with exciting perks and opportunities, as well as an exclusive monthly newsletter featuring an LGBTQ+ advice column and queer culture news. Show your commitment to South Florida's LGBTQ+ youth and sign up today!"
+    image={fistSticker}
+    pointBackTo={{ href: "/donate", label: "Donate" }}
+    class={"intro"}
+  />
+
+  <main>
+    <SectionBorder
+      type="cookie-cutter"
+      backgroundColor="var(--rainbow-green)"
+    />
+
+    <section id="tiers">
+      <div class="container">
+        <TierGrid tiers={tiers} />
+      </div>
+    </section>
+
+    <SectionBorder
+      type="cookie-cutter"
+      backgroundColor="var(--rainbow-green)"
+      flip
+    />
+
+    <section id="note">
+      <div class="container">
+        <p class="note">
+          Note: Newsletter perks are immediately accessible. Physical prizes and
+          gala-related perks will be received seasonally.
+        </p>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style lang="scss">
+  .page-content {
+    background-color: var(--rainbow-green);
+  }
+
+  main {
+    margin: auto;
+    font-size: 1.25rem;
+  }
+
+  .container {
+    max-width: var(--xl);
+    margin: auto;
+    padding: 4rem 1rem;
+  }
+
+  #tiers {
+    padding: 4rem 1rem;
+    background-color: white;
+  }
+
+  #note {
+    background-color: var(--rainbow-green);
+    color: white;
+    text-align: center;
+
+    .note {
+      max-width: 700px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+  }
+</style>

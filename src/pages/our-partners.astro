@@ -11,8 +11,6 @@ interface Partner {
   _createdDate: string;
   _updatedDate: string;
   title: string;
-  organization: boolean;
-  donor: boolean;
   gala: boolean;
   website?: string;
   logo?: string;
@@ -307,6 +305,9 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
 <style lang="scss">
   .page-content {
     background-color: var(--rainbow-purple);
+    * {
+      transition: all 300ms;
+    }
   }
 
   main {
@@ -330,7 +331,7 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
   h2 {
     font-size: 2rem;
     text-align: center;
-    color: var(--fg-color);
+    /* color: var(--fg-color); */
     margin-bottom: 2rem;
   }
 

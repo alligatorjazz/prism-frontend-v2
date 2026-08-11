@@ -1,31 +1,30 @@
-# ========================================
-# Optimized Multi-Stage Dockerfile
-# Node.js TypeScript Application
-# ========================================
-
-ARG NODE_VERSION=24.11.1-alpine
-FROM node:${NODE_VERSION} AS base
-WORKDIR /app
+# prism-frontend
+FROM node:24 AS base
+WORKDIR /usr/src/app
 
 FROM base AS deps
-
+# Copy package.json and package-lock.json (if available)
 COPY package*.json ./
-# stopgap while issue gets fixed: https://github.com/npm/cli/issues/8726; eventually replace with npm ci
-RUN npm i
 
-FROM deps AS build
-COPY . . 
+# Install project dependencies
+RUN --mount=type=cache,target=/root/.npm \
+    --mount=type=bind,source=package.json,target=package.json \
+    npm install
+
+FROM deps AS project
+
+COPY . .
+
+FROM project AS build
+
+# Build the project
 RUN npm run build
 
-FROM build AS security
-# Create non-root user for security
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S nodejs -u 1001 -G nodejs && \
-    chown -R nodejs:nodejs /app
+FROM build AS prod
 
-FROM build AS start
+# Expose the desired port (if needed, e.g., 3000)
+EXPOSE 3000
+
+ENV NODE_ENV=production
+# Command to run the application
 CMD ["npm", "run", "start"]
-
-
-
-

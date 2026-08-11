@@ -1,0 +1,31 @@
+---
+import MembershipTier from "./MembershipTier.astro";
+
+interface Tier {
+  name: string;
+  price: string;
+  frequency: string;
+  benefits: string[];
+  highlighted?: boolean;
+  ctaHref?: string;
+  ctaLabel?: string;
+}
+
+interface Props {
+  tiers: Tier[];
+}
+
+const { tiers } = Astro.props;
+---
+
+<div class="tier-grid">
+  {tiers.map((tier) => <MembershipTier {...tier} />)}
+</div>
+
+<style lang="scss">
+  .tier-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+</style>
