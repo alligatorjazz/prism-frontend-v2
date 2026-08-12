@@ -5,6 +5,7 @@ import CenteredPaperWithHeader from "@sections/CenteredPaperWithHeader.astro";
 import SectionBorder from "@components/SectionBorder.astro";
 import Polaroid from "@components/Polaroid.astro";
 import { faker } from "@faker-js/faker";
+import ThreeIconCluster from "@components/ThreeIconCluster.astro";
 
 import megaphone from "@assets/img/megaphone.avif";
 import Calendar from "@components/Calendar.astro";
@@ -103,214 +104,352 @@ import { dummyEvents } from "./api/events";
             </p>
           </article>
         </div>
+        <section id="impact">
+          <div class="container">
+            <div class="impact-wrapper">
+              <div class="cluster">
+                <ThreeIconCluster class={"icons"}>
+                  <Polaroid
+                    slot="top"
+                    image={{
+                      src: faker.image.urlPicsumPhotos({
+                        width: 250,
+                        height: 250,
+                      }),
+                      alt: "Creative Fellow",
+                      format: "webp",
+                      width: 250,
+                      height: 250,
+                    }}
+                  />
+                  <Polaroid
+                    slot="middle"
+                    image={{
+                      src: faker.image.urlPicsumPhotos({
+                        width: 250,
+                        height: 250,
+                      }),
+                      alt: "Creative Fellow",
+                      format: "webp",
+                      width: 250,
+                      height: 250,
+                    }}
+                  />
+                  <Polaroid
+                    slot="bottom"
+                    image={{
+                      src: faker.image.urlPicsumPhotos({
+                        width: 250,
+                        height: 250,
+                      }),
+                      alt: "Creative Fellow",
+                      format: "webp",
+                      width: 250,
+                      height: 250,
+                    }}
+                  />
+                </ThreeIconCluster>
+              </div>
+              <div class="wins">
+                <h3>Our Outreach Has Impact</h3>
+                <ul>
+                  <li>
+                    <strong>93</strong> unique volunteers mobilized across South Florida
+                  </li>
+                  <li>
+                    <strong>943.66</strong> service hours accrued by PRISM Outreach
+                  </li>
+                  <li>
+                    <strong>66</strong> outreach events hosted across the tri-county
+                    area
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
+
+      <SectionBorder type="cookie-cutter" backgroundColor="#f19221" />
+
+      <section id="calendar">
+        <Calendar
+          events={dummyEvents}
+          title="Test Calendar"
+          backgroundColor={"var(--rainbow-orange)"}
+        />
+      </section>
     </section>
+  </main>
 
-    <SectionBorder type="cookie-cutter" backgroundColor="#f19221" />
+  <style>
+    .page-content {
+      background-color: var(--rainbow-orange);
+    }
 
-    <section id="calendar">
-      <Calendar
-        events={dummyEvents}
-        title="Test Calendar"
-        backgroundColor={"var(--rainbow-orange)"}
-      />
-    </section>
+    main {
+      margin: auto;
+      font-size: 1.25rem;
 
-    <style>
-      .page-content {
-        background-color: var(--rainbow-orange);
+      h2 {
+        font-size: 2rem;
+        text-align: center;
       }
 
-      main {
+      h3 {
+        font-size: 1.75rem;
+      }
+
+      h4 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .container {
+      max-width: var(--xl);
+      margin: auto;
+      padding: 0 1rem;
+    }
+
+    #staff {
+      background-color: white;
+      padding: 4rem 0;
+
+      .content {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
         margin: auto;
-        font-size: 1.25rem;
+        padding: 2rem 0;
 
-        h2 {
-          font-size: 2rem;
-          text-align: center;
-        }
-
-        h3 {
-          font-size: 1.75rem;
-        }
-
-        h4 {
-          font-size: 1.5rem;
-        }
-      }
-
-      .container {
-        max-width: var(--xl);
-        margin: auto;
-        padding: 0 1rem;
-      }
-
-      #staff {
-        background-color: white;
-        padding: 4rem 0;
-
-        .content {
+        article {
           display: flex;
-          align-items: center;
           gap: 1rem;
-          margin: auto;
-          padding: 2rem 0;
 
-          article {
+          .person {
             display: flex;
-            gap: 1rem;
+            flex-direction: column;
 
-            .person {
-              display: flex;
-              flex-direction: column;
-
-              .portrait {
-                width: 220px;
-                height: 250px;
-              }
-
-              .name {
-                white-space: nowrap;
-                font-family: var(--header-font);
-                text-align: center;
-              }
+            .portrait {
+              width: 220px;
+              height: 250px;
             }
 
-            .description {
-              display: flex;
-              flex-direction: column;
-              gap: 1rem;
-
-              * {
-                margin: 0;
-              }
+            .name {
+              white-space: nowrap;
+              font-family: var(--header-font);
+              text-align: center;
             }
           }
-        }
-      }
 
-      #pathway {
-        background-color: var(--rainbow-orange);
-        padding: 4rem 0;
-
-        .tiers {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
-          margin-top: 2rem;
-
-          article {
-            border: 2px solid var(--fg-color);
-            border-radius: var(--round-edge);
-            padding: 1.5rem;
+          .description {
             display: flex;
             flex-direction: column;
             gap: 1rem;
 
-            color: var(--fg-color);
-
-            .tier-label {
-              align-self: flex-start;
-              background-color: var(--text-color);
-              color: var(--fg-color);
-
-              font-family: var(--header-font);
-              font-weight: bold;
-              padding: 0.25rem 0.75rem;
-              border-radius: var(--round-edge);
-              text-transform: uppercase;
-              font-size: 0.875rem;
-
-              &.member {
-                background-color: var(--rainbow-orange);
-                color: var(--fg-color);
-                border: 1px solid var(--fg-color);
-              }
-
-              &.leader {
-                background-color: var(--text-color);
-                color: var(--fg-color);
-              }
-            }
-
-            .trainings {
-              font-size: 1rem;
-              color: var(--fg-color);
-              margin-top: auto;
+            * {
+              margin: 0;
             }
           }
         }
       }
+    }
+    #impact {
+      background-color: var(--rainbow-orange);
+      padding: 6rem 0;
 
-      #calendar {
-        background-color: white;
-        padding: 4rem 0;
-
-        .events {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1.5rem;
-          margin-top: 2rem;
-
-          article {
-            border: 2px solid var(--rainbow-orange);
-            border-radius: var(--round-edge);
-            padding: 1.5rem;
-
-            h4 {
-              margin: 0 0 0.5rem;
-            }
-
-            p {
-              margin: 0.25rem 0;
-            }
-          }
-        }
+      .impact-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
       }
 
-      #join {
-        background-size: 2000px;
-        padding: 4rem 0;
+      .cluster {
+        flex: 1 1 300px;
+        display: flex;
+        justify-content: center;
+      }
 
-        .content {
+      .wins {
+        flex: 1 1 400px;
+        background-color: var(--fg-color);
+        filter: var(--shadow);
+        padding: 2rem;
+        border-radius: var(--round-edge);
+
+        h3 {
+          color: var(--text-color);
+          font-size: 2rem;
+          margin-top: 0;
+        }
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          width: 100%;
+          gap: 1rem;
+        }
+
+        li {
+          font-size: 1.25rem;
+          flex: 1;
+          color: var(--text-color);
+          line-height: 1.5;
+        }
+
+        strong {
+          color: var(--rainbow-orange);
+          font-size: 2rem;
+        }
+
+        .counties {
           display: flex;
           flex-wrap: wrap;
           gap: 1rem;
 
-          article {
-            flex: 1;
-            min-width: 45%;
-            background-color: var(--fg-color);
-            filter: var(--shadow);
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
+          span {
+            background-color: var(--rainbow-orange);
+            color: var(--fg-color);
+            padding: 0.5rem 1rem;
+            border-radius: var(--round-edge);
+            font-weight: 600;
+          }
 
-            h4 {
-              height: 2rem;
-            }
+          strong {
+            color: var(--fg-color);
+            font-size: 1.25rem;
+          }
+        }
+      }
+    }
 
-            p {
-              flex: 1;
-            }
+    #pathway {
+      background-color: var(--rainbow-orange);
+      padding: 4rem 0;
 
-            & > a:last-of-type {
-              background-color: var(--accent-color);
-              padding: 0.5rem 1rem;
-              border-radius: var(--round-edge);
+      .tiers {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+
+        article {
+          border: 2px solid var(--fg-color);
+          border-radius: var(--round-edge);
+          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+
+          color: var(--fg-color);
+
+          .tier-label {
+            align-self: flex-start;
+            background-color: var(--text-color);
+            color: var(--fg-color);
+
+            font-family: var(--header-font);
+            font-weight: bold;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--round-edge);
+            text-transform: uppercase;
+            font-size: 0.875rem;
+
+            &.member {
+              background-color: var(--rainbow-orange);
               color: var(--fg-color);
-              font-weight: bold;
-              text-align: center;
-              text-decoration: none;
-              transition: all 300ms;
+              border: 1px solid var(--fg-color);
+            }
 
-              &:hover {
-                filter: brightness(110%);
-              }
+            &.leader {
+              background-color: var(--text-color);
+              color: var(--fg-color);
+            }
+          }
+
+          .trainings {
+            font-size: 1rem;
+            color: var(--fg-color);
+            margin-top: auto;
+          }
+        }
+      }
+    }
+
+    #calendar {
+      background-color: white;
+      padding: 4rem 0;
+
+      .events {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+
+        article {
+          border: 2px solid var(--rainbow-orange);
+          border-radius: var(--round-edge);
+          padding: 1.5rem;
+
+          h4 {
+            margin: 0 0 0.5rem;
+          }
+
+          p {
+            margin: 0.25rem 0;
+          }
+        }
+      }
+    }
+
+    #join {
+      background-size: 2000px;
+      padding: 4rem 0;
+
+      .content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        article {
+          flex: 1;
+          min-width: 45%;
+          background-color: var(--fg-color);
+          filter: var(--shadow);
+          padding: 2rem;
+          display: flex;
+          flex-direction: column;
+
+          h4 {
+            height: 2rem;
+          }
+
+          p {
+            flex: 1;
+          }
+
+          & > a:last-of-type {
+            background-color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            border-radius: var(--round-edge);
+            color: var(--fg-color);
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            transition: all 300ms;
+
+            &:hover {
+              filter: brightness(110%);
             }
           }
         }
       }
-    </style>
-  </main></Base
->
+    }
+  </style>
+</Base>

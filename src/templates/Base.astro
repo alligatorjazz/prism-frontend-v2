@@ -7,6 +7,7 @@ import "../styles/global.scss";
 import NewsletterSignup from "../sections/NewsletterSignup.astro";
 import Footer from "../sections/Footer.astro";
 import type { HTMLAttributes } from "astro/types";
+import { Font } from "astro:assets";
 
 interface Props extends HTMLAttributes<"div"> {
   pageMetadata: SurfaceMetadata;
@@ -75,6 +76,7 @@ const { pageMetadata, ...props } = Astro.props;
     />
     <MetadataLoader pageMetadata={pageMetadata} siteMetadata={siteMetadata} />
     <link rel="stylesheet" href="/styles/theme.css" />
+    <Font cssVariable="--crudex" />
   </head>
   <body data-drawer="inactive" data-prev-scroll="up">
     <Navbar routes={routes} siteMetadata={siteMetadata} />

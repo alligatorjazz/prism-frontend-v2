@@ -1,0 +1,213 @@
+.
+├── AGENTS.md
+├── astro.config.mjs
+├── design
+│   └── wave-border.afdesign
+├── Dockerfile
+├── download.js
+├── eslint.config.js
+├── file-tree.txt
+├── package-lock.json
+├── package.json
+├── public
+│   ├── favicon.svg
+│   ├── fonts
+│   │   ├── Crudex.otf
+│   │   ├── museo-slab
+│   │   │   ├── Museo_Slab_100.otf
+│   │   │   ├── Museo_Slab_100italic.otf
+│   │   │   ├── Museo_Slab_300.otf
+│   │   │   ├── Museo_Slab_300italic.otf
+│   │   │   ├── Museo_Slab_500.otf
+│   │   │   ├── Museo_Slab_500italic.otf
+│   │   │   ├── Museo_Slab_700.otf
+│   │   │   ├── Museo_Slab_700italic.otf
+│   │   │   ├── Museo_Slab_900.otf
+│   │   │   ├── Museo_Slab_900italic.otf
+│   │   │   ├── Museo_Slab_1000.otf
+│   │   │   └── Museo_Slab_1000italic.otf
+│   │   └── poppins
+│   │       ├── OFL.txt
+│   │       ├── Poppins-Black.ttf
+│   │       ├── Poppins-BlackItalic.ttf
+│   │       ├── Poppins-Bold.ttf
+│   │       ├── Poppins-BoldItalic.ttf
+│   │       ├── Poppins-ExtraBold.ttf
+│   │       ├── Poppins-ExtraBoldItalic.ttf
+│   │       ├── Poppins-ExtraLight.ttf
+│   │       ├── Poppins-ExtraLightItalic.ttf
+│   │       ├── Poppins-Italic.ttf
+│   │       ├── Poppins-Light.ttf
+│   │       ├── Poppins-LightItalic.ttf
+│   │       ├── Poppins-Medium.ttf
+│   │       ├── Poppins-MediumItalic.ttf
+│   │       ├── Poppins-Regular.ttf
+│   │       ├── Poppins-SemiBold.ttf
+│   │       ├── Poppins-SemiBoldItalic.ttf
+│   │       ├── Poppins-Thin.ttf
+│   │       └── Poppins-ThinItalic.ttf
+│   ├── img
+│   │   └── prism-logo-primary.png
+│   ├── stickers
+│   ├── styles
+│   │   └── theme.css
+│   └── video
+│       ├── '10 Second Countdown Timer - Film Beginning [RZEf9xNogqI].webm'
+│       └── Websitevideov3.webm
+├── README.md
+├── src
+│   ├── api
+│   │   ├── index.ts
+│   │   └── wix.ts
+│   ├── assets
+│   │   ├── fonts
+│   │   │   ├── Crudex.otf
+│   │   │   └── Crudex.ttf
+│   │   └── img
+│   │       ├── ahf-0111.jpg
+│   │       ├── ahf-6232.jpg
+│   │       ├── ahf-6271.jpg
+│   │       ├── 'Application Icon_3x.png'
+│   │       ├── 'Application Sticker_3x.png'
+│   │       ├── arrow-purple.png
+│   │       ├── arrow-purple_edited.png
+│   │       ├── arrow-purpple.png
+│   │       ├── arrow-purpple_edited.png
+│   │       ├── arrow1.png
+│   │       ├── arrow2.png
+│   │       ├── arrow3.png
+│   │       ├── arrow3_blue.png
+│   │       ├── arrow3_blue_edited.png
+│   │       ├── arrow3_edited.png
+│   │       ├── arrow3_teal.png
+│   │       ├── arrow3_teal_edited.png
+│   │       ├── arrow4.png
+│   │       ├── arrow4_edited.png
+│   │       ├── arrow5.png
+│   │       ├── arrow6.png
+│   │       ├── blood-drop.png
+│   │       ├── blue-book.png
+│   │       ├── boca-raton-hs.avif
+│   │       ├── book-sticker.png
+│   │       ├── Book_edited.png
+│   │       ├── Book_edited_edited.png
+│   │       ├── Book_edited_edited_edited.png
+│   │       ├── Book_edited_edited_edited_edited.png
+│   │       ├── Book_purple.png
+│   │       ├── centerlink-badge.png
+│   │       ├── computer-yellow.avif
+│   │       ├── default-card-bg.png
+│   │       ├── early-march.avif
+│   │       ├── fist-sticker.avif
+│   │       ├── fist-sticker.png
+│   │       ├── flag-sticker.png
+│   │       ├── florida-minus-sfl.avif
+│   │       ├── giving-icon.avif
+│   │       ├── giving-sticker.png
+│   │       ├── gsa-network.avif
+│   │       ├── hands-with-heart.avif
+│   │       ├── laptop-sticker.png
+│   │       ├── long-pride-flag.png
+│   │       ├── megaphone-sticker.png
+│   │       ├── megaphone.avif
+│   │       ├── output-onlinepngtools.png
+│   │       ├── paper-noise.png
+│   │       ├── png-border-blue.png
+│   │       ├── png-border.png
+│   │       ├── prism-logo-primary.png
+│   │       ├── psap-group.avif
+│   │       ├── psap-leaders-council.avif
+│   │       ├── rainbow-flag.avif
+│   │       ├── ruled-bg.png
+│   │       ├── scale.avif
+│   │       ├── sfl.avif
+│   │       ├── tape-img.png
+│   │       ├── team-group-photo-faw-26.jpg
+│   │       ├── torn-notebook-paper.png
+│   │       ├── wave-border-left.svg
+│   │       ├── wave-border-right.svg
+│   │       └── yellow-tile-bg.png
+│   ├── components
+│   │   ├── Calendar.astro
+│   │   ├── Carousel.astro
+│   │   ├── ColoredHeader.astro
+│   │   ├── EventList.scss
+│   │   ├── EventList.tsx
+│   │   ├── EventPage.scss
+│   │   ├── EventPage.tsx
+│   │   ├── LinkCard.astro
+│   │   ├── LongFlag.astro
+│   │   ├── MembershipTier.astro
+│   │   ├── MetadataLoader.astro
+│   │   ├── Navbar.astro
+│   │   ├── NavLinks.astro
+│   │   ├── PageHeader.astro
+│   │   ├── Polaroid.astro
+│   │   ├── SectionBorder.astro
+│   │   ├── StickerWithTitle.astro
+│   │   ├── ThreeIconCluster.astro
+│   │   ├── TierGrid.astro
+│   │   ├── TornPaperBorder.astro
+│   │   ├── TornPaperBox.astro
+│   │   └── ToString.astro
+│   ├── config.ts
+│   ├── env.d.ts
+│   ├── inbox
+│   │   └── payload-types.ts
+│   ├── lib
+│   │   ├── dates.ts
+│   │   ├── dom.ts
+│   │   ├── index.ts
+│   │   └── payload.ts
+│   ├── pages
+│   │   ├── [slug].astro
+│   │   ├── about.astro
+│   │   ├── api
+│   │   │   └── events.ts
+│   │   ├── creative-fellowship.astro
+│   │   ├── donate.astro
+│   │   ├── events.astro
+│   │   ├── index.astro
+│   │   ├── movement-builders-business.astro
+│   │   ├── movement-builders-monthly.astro
+│   │   ├── movement-builders-yearly.astro
+│   │   ├── news-and-press.astro
+│   │   ├── our-history.astro
+│   │   ├── our-partners.astro
+│   │   ├── our-team.astro
+│   │   ├── outreach.astro
+│   │   ├── policy.astro
+│   │   ├── psap.astro
+│   │   ├── quick-links.astro
+│   │   └── task-forces
+│   │       ├── content-creation-task-force.astro
+│   │       └── fundraising-task-force.astro
+│   ├── sections
+│   │   ├── AlternatingRibbons.astro
+│   │   ├── CardsWithHeader.astro
+│   │   ├── CenteredPaperWithHeader.astro
+│   │   ├── ConstrainedSection.astro
+│   │   ├── ContentWithHeader.astro
+│   │   ├── EventsWithHeader.astro
+│   │   ├── FlagWithTagline.astro
+│   │   ├── Footer.astro
+│   │   ├── HeroVideo.astro
+│   │   ├── NewsletterForm.scss
+│   │   ├── NewsletterForm.tsx
+│   │   ├── NewsletterSignup.astro
+│   │   ├── OurPartners.astro
+│   │   ├── PageIntro.astro
+│   │   ├── PaperWithPolaroids.astro
+│   │   ├── StickersWithHeader.astro
+│   │   └── ThreeColumns.astro
+│   ├── styles
+│   │   ├── global.scss
+│   │   └── utils.scss
+│   ├── templates
+│   │   └── Base.astro
+│   └── types
+│       ├── index.ts
+│       ├── openGraph.ts
+│       ├── payload.ts
+│       └── sections.ts
+└── tsconfig.json

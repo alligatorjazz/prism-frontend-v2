@@ -7,7 +7,8 @@
       "@components/*": ["./src/components/*"],
       "@templates/*": ["./src/templates/*"],
       "@assets/*": ["./src/assets/*"],
-      "@api/*": ["./src/api/*"]
+      "@api/*": ["./src/api/*"],
+      "@lib/*": ["./src/lib/*"]
     }
   },
   "extends": "astro/tsconfigs/strict",

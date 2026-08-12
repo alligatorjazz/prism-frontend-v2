@@ -3,11 +3,26 @@ import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
 import CenteredPaperWithHeader from "@sections/CenteredPaperWithHeader.astro";
 import SectionBorder from "@components/SectionBorder.astro";
+import Calendar from "@components/Calendar.astro";
+import ThreeIconCluster from "@components/ThreeIconCluster.astro";
+import Polaroid from "@components/Polaroid.astro";
 import { faker } from "@faker-js/faker";
 
-import creative from "@assets/img/computer-yellow.avif";
-import { dummyEvents } from "./api/events";
-import Calendar from "@components/Calendar.astro";
+import ruledBg from "@assets/img/ruled-bg.png";
+import creative from "@assets/img/Book_purple.png";
+
+const dummyEvents = Array.from({ length: 12 }).map(() => ({
+  title: faker.company.catchPhrase(),
+  date: faker.date.soon({ days: 90 }).toISOString(),
+  location: faker.location.city(),
+  image: null,
+  link: faker.internet.url(),
+  source: "faker",
+  tags: faker.helpers.arrayElements(
+    ["Volunteer", "P-SAP", "Creative Fellowship", "Policy"],
+    { min: 1, max: 2 },
+  ),
+}));
 ---
 
 <Base
@@ -23,7 +38,7 @@ import Calendar from "@components/Calendar.astro";
 >
   <PageIntro
     title="Creative Fellowship"
-    description={faker.lorem.sentences(4)}
+    description="The PRISM Creative Fellowship is a six-month leadership program for LGBTQ+ high school and college students under the age of 24 who are passionate about advocacy, organizing, and creative storytelling."
     image={creative}
     pointBackTo={{ href: "/task-forces", label: "Task Forces" }}
     class={"intro"}
@@ -39,19 +54,23 @@ import Calendar from "@components/Calendar.astro";
       backgroundColor="var(--rainbow-green)"
     />
 
-    <section id="about">
+    <section id="about" style={{ backgroundImage: `url(${ruledBg.src})` }}>
       <div class="container">
         <h3>About the Fellowship</h3>
         <p>
-          The Creative Fellowship is a specialized leadership program for
-          storytellers, designers, and artists who want to use their creative
-          skills to advance LGBTQ-inclusive education and sexual health
-          resources for youth in South Florida.
+          The PRISM Creative Fellowship is a six-month leadership program for
+          LGBTQ+ high school and college students under the age of 24 who are
+          passionate about advocacy, organizing, and creative storytelling.
         </p>
         <p>
-          Fellows work directly with PRISM's Content Creation Task Force to
-          produce digital content, educational materials, and campaign assets
-          that reach young people where they are: online.
+          Fellows work alongside PRISM's team to create impactful content that
+          educates, inspires, and mobilizes communities across South Florida.
+        </p>
+        <p>
+          Through hands-on projects, mentorship, and workshops, Fellows develop
+          skills in writing, design, video production, research, and digital
+          advocacy while building a professional portfolio and gaining
+          real-world organizing experience.
         </p>
       </div>
     </section>
@@ -60,6 +79,85 @@ import Calendar from "@components/Calendar.astro";
       type="cookie-cutter"
       backgroundColor="var(--rainbow-green)"
       flip
+    />
+
+    <section id="impact">
+      <div class="container">
+        <ThreeIconCluster class={"icons"}>
+          <Polaroid
+            slot="top"
+            image={{
+              src: faker.image.urlPicsumPhotos({ width: 250, height: 250 }),
+              alt: "Creative Fellow",
+              format: "webp",
+              width: 250,
+              height: 250,
+            }}
+          />
+          <Polaroid
+            slot="middle"
+            image={{
+              src: faker.image.urlPicsumPhotos({ width: 250, height: 250 }),
+              alt: "Creative Fellow",
+              format: "webp",
+              width: 250,
+              height: 250,
+            }}
+          />
+          <Polaroid
+            slot="bottom"
+            image={{
+              src: faker.image.urlPicsumPhotos({ width: 250, height: 250 }),
+              alt: "Creative Fellow",
+              format: "webp",
+              width: 250,
+              height: 250,
+            }}
+          />
+        </ThreeIconCluster>
+
+        <div class="impact-content">
+          <h3>Impact at a Glance</h3>
+          <p class="impact-intro">
+            From July 2025 through June 2026, the Content Creation Task Force
+            transformed PRISM's digital platforms into trusted spaces for LGBTQ+
+            education, advocacy, and community engagement.
+          </p>
+
+          <div class="stats">
+            <article>
+              <span class="number">3.9M+</span>
+              <span class="label">Total Views</span>
+            </article>
+            <article>
+              <span class="number">421K+</span>
+              <span class="label">People Reached</span>
+            </article>
+            <article>
+              <span class="number">95.9K+</span>
+              <span class="label">Content Interactions</span>
+            </article>
+            <article>
+              <span class="number">3.8M+</span>
+              <span class="label">Organic Views</span>
+            </article>
+          </div>
+
+          <p>
+            Through timely educational campaigns, advocacy-focused storytelling,
+            and accessible resources, CCTF helped hundreds of thousands of
+            people better understand LGBTQ+ issues, public education, civic
+            engagement, and community organizing. These results demonstrate the
+            power of strategic storytelling to educate, mobilize, and inspire
+            action.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <SectionBorder
+      type="cookie-cutter"
+      backgroundColor="var(--rainbow-green)"
     />
 
     <section id="roles">
@@ -121,17 +219,8 @@ import Calendar from "@components/Calendar.astro";
       </div>
     </section>
 
-    <SectionBorder
-      type="cookie-cutter"
-      backgroundColor="var(--rainbow-green)"
-    />
-
     <section id="calendar">
-      <Calendar
-        events={dummyEvents}
-        title="Test Calendar"
-        backgroundColor={"var(--rainbow-green)"}
-      />
+      <Calendar events={dummyEvents} title="Fellowship Calendar" />
     </section>
 
     <SectionBorder
@@ -161,6 +250,9 @@ import Calendar from "@components/Calendar.astro";
 <style>
   .page-content {
     background-color: var(--rainbow-green);
+  }
+  section {
+    padding: 4;
   }
 
   main {
@@ -197,8 +289,89 @@ import Calendar from "@components/Calendar.astro";
     }
   }
 
-  #roles {
+  #impact {
     background-color: var(--rainbow-green);
+    padding: 4rem 0;
+    color: var(--text-color);
+
+    & > .container {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .icons {
+      flex: 1;
+    }
+
+    .impact-content {
+    }
+
+    .impact-intro {
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin: 2rem 0;
+
+      article {
+        background-color: var(--fg-color);
+        border-radius: var(--round-edge);
+        padding: 1.5rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .number {
+          font-size: 2.5rem;
+          font-weight: bold;
+          font-family: var(--header-font);
+          color: var(--rainbow-green);
+        }
+
+        .label {
+          font-size: 1rem;
+          font-weight: bold;
+        }
+      }
+    }
+
+    p {
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+  }
+
+  #education {
+    background-color: var(--fg-color);
+    padding: 4rem 0;
+
+    p {
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+  }
+
+  #action {
+    background-color: var(--rainbow-green);
+    padding: 4rem 0;
+    color: var(--text-color);
+
+    p {
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+  }
+
+  #roles {
+    background-color: var(--fg-color);
     padding: 4rem 0;
 
     h3 {
@@ -243,27 +416,6 @@ import Calendar from "@components/Calendar.astro";
   #calendar {
     background-color: var(--fg-color);
     padding: 4rem 0;
-
-    .events {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      margin-top: 2rem;
-
-      article {
-        border: 2px solid var(--rainbow-green);
-        border-radius: var(--round-edge);
-        padding: 1.5rem;
-
-        h4 {
-          margin: 0 0 0.5rem;
-        }
-
-        p {
-          margin: 0.25rem 0;
-        }
-      }
-    }
   }
 
   #join {
@@ -307,6 +459,12 @@ import Calendar from "@components/Calendar.astro";
           }
         }
       }
+    }
+  }
+
+  @media (min-width: 768px) {
+    #impact .stats {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 </style>
