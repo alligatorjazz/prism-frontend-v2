@@ -1,0 +1,45 @@
+---
+import { strictSlug } from "../lib";
+import StickerWithTitle, {
+  type StickerProps,
+} from "@components/StickerWithTitle.astro";
+import type { ImageMetadata } from "astro";
+
+type Props = {
+  title: string;
+  backgroundImage: ImageMetadata;
+  stickers: StickerProps[];
+};
+
+const {
+  title,
+  stickers,
+  backgroundImage: { src: bgSrc },
+} = Astro.props;
+const backgroundImage = `url(${bgSrc})`;
+---
+
+<section id={strictSlug(title)} style={{ backgroundImage }}>
+  <div class="stickers">
+    {stickers.map((sticker) => <StickerWithTitle {...sticker} />)}
+  </div>
+</section>
+
+<style>
+  section {
+    background-size: 2000px;
+    padding: 4rem 2rem;
+
+    .stickers {
+      list-style: none;
+
+      margin-left: 0;
+      margin: auto;
+      max-width: var(--xl);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+  }
+</style>

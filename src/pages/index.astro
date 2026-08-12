@@ -1,13 +1,17 @@
 ---
 import Base from "../templates/Base.astro";
-import CardsWithHeader from "../sections/CardsWithHeader.astro";
-import EventsWithHeader from "../sections/EventsWithHeader.astro";
+import StickersWithHeader from "@sections/StickersWithHeader.astro";
+import EventsWithHeader from "@sections/EventsWithHeader.astro";
 import ruledBg from "@assets/img/ruled-bg.png";
-import OurPartners from "../sections/OurPartners.astro";
-import HeroVideo from "../sections/HeroVideo.astro";
+import OurPartners from "@sections/OurPartners.astro";
+import HeroVideo from "@sections/HeroVideo.astro";
 import { faker } from "@faker-js/faker";
-import AlternatingRibbons from "../sections/AlternatingRibbons.astro";
+import AlternatingRibbons from "@sections/AlternatingRibbons.astro";
 import ColoredHeader from "@components/ColoredHeader.astro";
+import book from "@assets/img/Book_edited.png";
+import scale from "@assets/img/scale.avif";
+import sti from "@assets/img/blood-drop.png";
+import book2 from "@assets/img/megaphone.avif";
 ---
 
 <Base
@@ -20,28 +24,28 @@ import ColoredHeader from "@components/ColoredHeader.astro";
   }}
 >
   <HeroVideo />
-  <!-- <PaperWithPolaroids title="Who We Are" /> -->
-  <CardsWithHeader
-    title="Resources"
-    cards={[
+  <ColoredHeader borderTop borderBottom
+    ><slot name="header"><h1 class="cards-header">Resources</h1></slot
+    ></ColoredHeader
+  >
+  <StickersWithHeader
+    title="test"
+    backgroundImage={ruledBg}
+    stickers={[
+      { title: "Learn", image: book, href: "/learn" },
       {
-        label: "Learn",
-        href: "/",
-        backgroundColor: "gold",
+        title: "School Policy Hub",
+        image: scale,
+        outlineTransform: "scalex(1.05) scaley(1.025) scale(1.05)",
+        href: "/policy-hub",
       },
       {
-        label: "STI Clinic Search",
-        href: "/",
-        backgroundColor: "pink",
-      },
-
-      {
-        label: "School Policy Hub",
-        href: "/",
-        backgroundColor: "skyblue",
+        title: "STI Clinic Search",
+        image: book2,
+        outlineTransform: "scale(1.025)",
+        href: "/std-clinics",
       },
     ]}
-    backgroundImage={ruledBg.src}
   />
 
   <ColoredHeader borderTop borderBottom
@@ -79,7 +83,7 @@ import ColoredHeader from "@components/ColoredHeader.astro";
     backgroundImage={ruledBg.src}
   />
   <EventsWithHeader title="Upcoming Events" } backgroundImage={ruledBg.src} />
-  <OurPartners />
+  <!-- <OurPartners /> -->
 </Base>
 
 <style>

@@ -1,0 +1,93 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+export interface StickerProps {
+  title: string;
+  image: ImageMetadata;
+  outlineTransform?: string;
+  href: string;
+}
+
+type Props = StickerProps;
+const { title, image, outlineTransform, href } = Astro.props;
+---
+
+<a class="container" href={href}>
+  <div class="sticker">
+    <Image src={image} alt={title} class={"image"} />
+    <Image
+      src={image}
+      alt={title}
+      class={"outline"}
+      style={{ transform: outlineTransform }}
+    />
+  </div>
+  <div class="label">
+    <p>{title}</p>
+  </div>
+</a>
+
+<style>
+  a.container {
+    display: block;
+    text-decoration: none;
+    --transition: all 300ms;
+    transition: var(--transition);
+    * {
+      transition: var(--transition);
+    }
+    .sticker {
+      --size: 250px;
+      width: var(--size);
+      height: var(--size);
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+
+      img {
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        object-fit: contain;
+        grid-row: 1;
+        grid-column: 1;
+      }
+
+      .outline {
+        filter: brightness(0) invert(1);
+        transform: scale(1.075);
+      }
+      .image {
+        z-index: 2;
+      }
+    }
+
+    .label {
+      font-family: var(--handwriting);
+      font-size: 2rem;
+      text-align: center;
+      p {
+        color: var(--text-color);
+      }
+    }
+
+    &:nth-child(even) {
+      .sticker {
+        rotate: 4deg;
+      }
+    }
+    &:nth-child(odd) {
+      .sticker {
+        rotate: -3deg;
+      }
+    }
+
+    &:hover {
+      .sticker {
+        rotate: 0deg;
+        filter: drop-shadow(1px 1px 2px var(--text-color));
+      }
+    }
+  }
+</style>
