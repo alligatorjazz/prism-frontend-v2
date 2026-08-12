@@ -12,7 +12,8 @@ import react from "@astrojs/react";
 export default defineConfig({
   site: "https://staging.prismfl.org",
   server: {
-    port: 4321,
+    port: 3000,
+		host: "0.0.0.0"
   },
   integrations: [icon(), react()],
   output: "server",
