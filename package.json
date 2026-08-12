@@ -11,7 +11,7 @@
     "fetch-inbox": "(cd src/inbox && git checkout main && git pull)"
   },
   "dependencies": {
-    "@astrojs/node": "^9.5.3",
+    "@astrojs/node": "10",
     "@astrojs/react": "^4.4.2",
     "@faker-js/faker": "^10.2.0",
     "@iconify-json/ri": "^1.2.6",
@@ -22,12 +22,13 @@
     "@wix/data": "^1.0.474",
     "@wix/events": "^1.0.785",
     "@wix/sdk": "^1.21.12",
-    "astro": "^5.15.9",
+    "astro": "^6.4.8",
     "astro-icon": "^1.1.5",
     "color": "^5.0.3",
     "css-filter-converter": "^1.0.112",
     "dayjs": "^1.11.19",
     "eslint": "^9.39.3",
+    "jimp": "^1.6.1",
     "murmurhash": "^2.0.1",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",

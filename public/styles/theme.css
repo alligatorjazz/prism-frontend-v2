@@ -20,6 +20,7 @@ html {
 
   --text-font: "Zilla Slab", serif;
   --header-font: "Poppins", sans-serif;
+  --handwriting: var(--crudex);
 
   --round-edge: 10px;
   --shadow: drop-shadow(0 35px 35px rgba(0, 0, 0, 0.25));

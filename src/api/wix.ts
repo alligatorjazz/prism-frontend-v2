@@ -1,28 +1,28 @@
 import { createClient, ApiKeyStrategy } from "@wix/sdk";
-import { items } from "@wix/data";
 import { wixEventsV2 } from "@wix/events";
 
+// REMOVE SECTION
 const wix = createClient({
   auth: ApiKeyStrategy({
     apiKey: import.meta.env.WIX_API_KEY,
     siteId: import.meta.env.WIX_SITE_ID,
   }),
-  modules: { items, wixEventsV2 },
+  modules: { wixEventsV2 },
 });
 
-export async function getItems(collection: string) {
-  const collectionQuery = await wix.items.query(collection).find();
-  let hasNext = collectionQuery.hasNext();
-  let items = collectionQuery.items;
-
-  while (hasNext) {
-    const nextQuery = await collectionQuery.next();
-    items = [...items, ...nextQuery.items];
-    hasNext = nextQuery.hasNext();
-  }
-
-  return items;
-}
+// export async function getItems(collection: string) {
+//   const collectionQuery = await wix.items.query(collection).find();
+//   let hasNext = collectionQuery.hasNext();
+//   let items = collectionQuery.items;
+//
+//   while (hasNext) {
+//     const nextQuery = await collectionQuery.next();
+//     items = [...items, ...nextQuery.items];
+//     hasNext = nextQuery.hasNext();
+//   }
+//
+//   return items;
+// }
 
 export async function getEvents() {
   const allEvents: any[] = [];
@@ -57,7 +57,7 @@ export async function getEvents() {
     }
   }
 
-  console.log(allEvents);
+  // console.log(allEvents);
 
   return allEvents;
 }

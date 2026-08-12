@@ -1,12 +1,12 @@
 ---
 import Base from "../templates/Base.astro";
-import CardsWithHeader from "../sections/CardsWithHeader.astro";
-import EventsWithHeader from "../sections/EventsWithHeader.astro";
+import StickersWithHeader from "@sections/StickersWithHeader.astro";
+import EventsWithHeader from "@sections/EventsWithHeader.astro";
 import ruledBg from "@assets/img/ruled-bg.png";
-import OurPartners from "../sections/OurPartners.astro";
-import HeroVideo from "../sections/HeroVideo.astro";
+import OurPartners from "@sections/OurPartners.astro";
+import HeroVideo from "@sections/HeroVideo.astro";
 import { faker } from "@faker-js/faker";
-import AlternatingRibbons from "../sections/AlternatingRibbons.astro";
+import AlternatingRibbons from "@sections/AlternatingRibbons.astro";
 import ColoredHeader from "@components/ColoredHeader.astro";
 ---
 
@@ -21,28 +21,7 @@ import ColoredHeader from "@components/ColoredHeader.astro";
 >
   <HeroVideo />
   <!-- <PaperWithPolaroids title="Who We Are" /> -->
-  <CardsWithHeader
-    title="Resources"
-    cards={[
-      {
-        label: "Learn",
-        href: "/",
-        backgroundColor: "gold",
-      },
-      {
-        label: "STI Clinic Search",
-        href: "/",
-        backgroundColor: "pink",
-      },
-
-      {
-        label: "School Policy Hub",
-        href: "/",
-        backgroundColor: "skyblue",
-      },
-    ]}
-    backgroundImage={ruledBg.src}
-  />
+  <StickersWithHeader title="test" backgroundImage={ruledBg.src} />
 
   <ColoredHeader borderTop borderBottom
     ><slot name="header"><h1 class="cards-header">Get Involved</h1></slot
@@ -79,7 +58,7 @@ import ColoredHeader from "@components/ColoredHeader.astro";
     backgroundImage={ruledBg.src}
   />
   <EventsWithHeader title="Upcoming Events" } backgroundImage={ruledBg.src} />
-  <OurPartners />
+  <!-- <OurPartners /> -->
 </Base>
 
 <style>

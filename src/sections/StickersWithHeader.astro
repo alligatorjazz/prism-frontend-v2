@@ -1,0 +1,47 @@
+---
+import { strictSlug } from "../lib";
+import type { Block } from "../types/payload";
+import { processMedia } from "../lib/payload";
+import StickerWithTitle from "@components/StickerWithTitle.astro";
+
+type Props = Block<"CardsWithHeader">;
+const {
+  title,
+  cards,
+  backgroundImage: unprocessedBackgroundImage,
+} = Astro.props;
+
+const processedBackgroundImage = unprocessedBackgroundImage
+  ? processMedia(unprocessedBackgroundImage)
+  : null;
+const backgroundImage = processedBackgroundImage
+  ? `url("${processedBackgroundImage.src}")`
+  : "none";
+---
+
+<section id={strictSlug(title)} style={{ backgroundImage }}>
+  <div class="stickers">
+    <StickerWithTitle title="Learn" />
+    <StickerWithTitle title="School Policy Hub" />
+    <StickerWithTitle title="STI Clinic Search" />
+  </div>
+</section>
+
+<style>
+  section {
+    background-size: 2000px;
+    padding: 2rem;
+
+    .stickers {
+      list-style: none;
+
+      margin-left: 0;
+      margin: auto;
+      max-width: var(--xl);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+  }
+</style>
