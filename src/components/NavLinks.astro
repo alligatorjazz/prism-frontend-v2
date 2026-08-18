@@ -18,7 +18,7 @@ interface Props extends HTMLAttributes<"ul"> {
 const { routes, class: className } = Astro.props;
 ---
 
-<ul class={"container"}>
+<ul class:list={["container", className]}>
   {
     routes.map((route) => {
       if (route.type === "internal") {
