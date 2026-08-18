@@ -37,7 +37,8 @@ if (!selectedBorderPath) {
     "Could not find selected border for " + `${type}-${backgroundColor}`,
   );
 }
-const selectedBorder = await imageBorders[selectedBorderPath]();
+const selectedBorderObject = await imageBorders[selectedBorderPath]();
+const selectedBorder = await getImage({ src: selectedBorderObject.default });
 ---
 
 <div class:list={["container", flip ? "flipped" : ""]}>
@@ -46,14 +47,14 @@ const selectedBorder = await imageBorders[selectedBorderPath]();
     style={{
       backgroundImage:
         type === "spray-paint" || type === "marker"
-          ? `url(${selectedBorderPath})`
+          ? `url(${selectedBorder.src})`
           : undefined,
     }}
   >
   </div>
 </div>
 
-<style define:vars={{ "wave-border": `url(${selectedBorder.default.src})` }}>
+<style define:vars={{ "wave-border": `url(${selectedBorder.src})` }}>
   .container {
     position: relative;
     height: 0;
