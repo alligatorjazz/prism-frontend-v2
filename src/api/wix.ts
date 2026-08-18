@@ -2,7 +2,16 @@ import { createClient, ApiKeyStrategy } from "@wix/sdk";
 import { wixEventsV2 } from "@wix/events";
 import { items } from "@wix/data";
 
-// REMOVE SECTION
+const apiKey = import.meta.env.WIX_API_KEY;
+const siteId = import.meta.env.WIX_SITE_ID;
+
+if (!apiKey || !siteId) {
+  console.error("Missing Wix credentials:", {
+    hasApiKey: !!apiKey,
+    hasSiteId: !!siteId,
+  });
+  throw new Error("WIX_API_KEY and WIX_SITE_ID must be set");
+}
 const wix = createClient({
   auth: ApiKeyStrategy({
     apiKey: import.meta.env.WIX_API_KEY,
