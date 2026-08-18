@@ -19,7 +19,7 @@
     "@types/node": "^25.9.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@wix/data": "^1.0.474",
+    "@wix/data": "^1.0.506",
     "@wix/events": "^1.0.785",
     "@wix/sdk": "^1.21.12",
     "astro": "^6.4.8",

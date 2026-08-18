@@ -2,7 +2,7 @@
 import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
 import SectionBorder from "@components/SectionBorder.astro";
-// import { getItems } from "@api/wix";
+import { getItems } from "@api/wix";
 import ruledPaper from "@assets/img/ruled-bg.png";
 
 interface Partner {
@@ -71,8 +71,7 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
     pointBackTo={{ href: "/about", label: "About" }}
   />
 
-  <SectionBorder type="spray-paint" backgroundColor="#854e9e" />
-
+  <SectionBorder type="marker" backgroundColor="rainbow-purple" />
   <main>
     <section
       id="organizations"
@@ -161,8 +160,8 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
       </div>
     </section>
 
-    <SectionBorder type="spray-paint" backgroundColor="#854e9e" flip />
-    <SectionBorder type="spray-paint" backgroundColor="#854e9e" />
+    <SectionBorder type="marker" backgroundColor="rainbow-purple" flip />
+    <SectionBorder type="marker" backgroundColor="rainbow-purple" />
 
     <section
       id="donors"

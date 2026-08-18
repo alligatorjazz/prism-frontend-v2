@@ -1,6 +1,5 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import LongFlag from "../components/LongFlag.astro";
 import TornPaperBox from "../components/TornPaperBox.astro";
 
 interface Props extends HTMLAttributes<"section"> {}
@@ -31,9 +30,10 @@ const { ...props } = Astro.props;
     width: 100%;
     height: calc(100vh - 10rem);
     min-height: 500px;
-    align-items: center;
+    display: flex;
 
-    padding: 4rem;
+    align-items: end;
+    padding: 4rem 1rem;
 
     video {
       position: absolute;
@@ -46,17 +46,15 @@ const { ...props } = Astro.props;
     }
 
     .paper {
-      display: none;
-      width: 700px;
-      margin: auto 0;
-			position: relative;
+      width: auto;
+      position: relative;
       .content {
         h1 {
-          font-size: 4rem;
+          font-size: 2rem;
           margin: 0;
         }
         p {
-          font-size: 1.5rem;
+          font-size: 1rem;
         }
         display: flex;
         flex-direction: column;
@@ -65,8 +63,23 @@ const { ...props } = Astro.props;
     }
 
     @include breakpoint-up(md) {
+      padding: 4rem;
+      align-items: center;
+
       .paper {
-        display: inherit;
+        width: 700px;
+        .content {
+          h1 {
+            font-size: 4rem;
+            margin: 0;
+          }
+          p {
+            font-size: 1.5rem;
+          }
+          display: flex;
+          flex-direction: column;
+          z-index: 2;
+        }
       }
     }
   }

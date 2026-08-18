@@ -1,213 +1,556 @@
-.
-├── AGENTS.md
-├── astro.config.mjs
-├── design
-│   └── wave-border.afdesign
-├── Dockerfile
-├── download.js
-├── eslint.config.js
-├── file-tree.txt
-├── package-lock.json
-├── package.json
-├── public
-│   ├── favicon.svg
-│   ├── fonts
-│   │   ├── Crudex.otf
-│   │   ├── museo-slab
-│   │   │   ├── Museo_Slab_100.otf
-│   │   │   ├── Museo_Slab_100italic.otf
-│   │   │   ├── Museo_Slab_300.otf
-│   │   │   ├── Museo_Slab_300italic.otf
-│   │   │   ├── Museo_Slab_500.otf
-│   │   │   ├── Museo_Slab_500italic.otf
-│   │   │   ├── Museo_Slab_700.otf
-│   │   │   ├── Museo_Slab_700italic.otf
-│   │   │   ├── Museo_Slab_900.otf
-│   │   │   ├── Museo_Slab_900italic.otf
-│   │   │   ├── Museo_Slab_1000.otf
-│   │   │   └── Museo_Slab_1000italic.otf
-│   │   └── poppins
-│   │       ├── OFL.txt
-│   │       ├── Poppins-Black.ttf
-│   │       ├── Poppins-BlackItalic.ttf
-│   │       ├── Poppins-Bold.ttf
-│   │       ├── Poppins-BoldItalic.ttf
-│   │       ├── Poppins-ExtraBold.ttf
-│   │       ├── Poppins-ExtraBoldItalic.ttf
-│   │       ├── Poppins-ExtraLight.ttf
-│   │       ├── Poppins-ExtraLightItalic.ttf
-│   │       ├── Poppins-Italic.ttf
-│   │       ├── Poppins-Light.ttf
-│   │       ├── Poppins-LightItalic.ttf
-│   │       ├── Poppins-Medium.ttf
-│   │       ├── Poppins-MediumItalic.ttf
-│   │       ├── Poppins-Regular.ttf
-│   │       ├── Poppins-SemiBold.ttf
-│   │       ├── Poppins-SemiBoldItalic.ttf
-│   │       ├── Poppins-Thin.ttf
-│   │       └── Poppins-ThinItalic.ttf
-│   ├── img
-│   │   └── prism-logo-primary.png
-│   ├── stickers
-│   ├── styles
-│   │   └── theme.css
-│   └── video
-│       ├── '10 Second Countdown Timer - Film Beginning [RZEf9xNogqI].webm'
-│       └── Websitevideov3.webm
-├── README.md
-├── src
-│   ├── api
-│   │   ├── index.ts
-│   │   └── wix.ts
-│   ├── assets
-│   │   ├── fonts
-│   │   │   ├── Crudex.otf
-│   │   │   └── Crudex.ttf
-│   │   └── img
-│   │       ├── ahf-0111.jpg
-│   │       ├── ahf-6232.jpg
-│   │       ├── ahf-6271.jpg
-│   │       ├── 'Application Icon_3x.png'
-│   │       ├── 'Application Sticker_3x.png'
-│   │       ├── arrow-purple.png
-│   │       ├── arrow-purple_edited.png
-│   │       ├── arrow-purpple.png
-│   │       ├── arrow-purpple_edited.png
-│   │       ├── arrow1.png
-│   │       ├── arrow2.png
-│   │       ├── arrow3.png
-│   │       ├── arrow3_blue.png
-│   │       ├── arrow3_blue_edited.png
-│   │       ├── arrow3_edited.png
-│   │       ├── arrow3_teal.png
-│   │       ├── arrow3_teal_edited.png
-│   │       ├── arrow4.png
-│   │       ├── arrow4_edited.png
-│   │       ├── arrow5.png
-│   │       ├── arrow6.png
-│   │       ├── blood-drop.png
-│   │       ├── blue-book.png
-│   │       ├── boca-raton-hs.avif
-│   │       ├── book-sticker.png
-│   │       ├── Book_edited.png
-│   │       ├── Book_edited_edited.png
-│   │       ├── Book_edited_edited_edited.png
-│   │       ├── Book_edited_edited_edited_edited.png
-│   │       ├── Book_purple.png
-│   │       ├── centerlink-badge.png
-│   │       ├── computer-yellow.avif
-│   │       ├── default-card-bg.png
-│   │       ├── early-march.avif
-│   │       ├── fist-sticker.avif
-│   │       ├── fist-sticker.png
-│   │       ├── flag-sticker.png
-│   │       ├── florida-minus-sfl.avif
-│   │       ├── giving-icon.avif
-│   │       ├── giving-sticker.png
-│   │       ├── gsa-network.avif
-│   │       ├── hands-with-heart.avif
-│   │       ├── laptop-sticker.png
-│   │       ├── long-pride-flag.png
-│   │       ├── megaphone-sticker.png
-│   │       ├── megaphone.avif
-│   │       ├── output-onlinepngtools.png
-│   │       ├── paper-noise.png
-│   │       ├── png-border-blue.png
-│   │       ├── png-border.png
-│   │       ├── prism-logo-primary.png
-│   │       ├── psap-group.avif
-│   │       ├── psap-leaders-council.avif
-│   │       ├── rainbow-flag.avif
-│   │       ├── ruled-bg.png
-│   │       ├── scale.avif
-│   │       ├── sfl.avif
-│   │       ├── tape-img.png
-│   │       ├── team-group-photo-faw-26.jpg
-│   │       ├── torn-notebook-paper.png
-│   │       ├── wave-border-left.svg
-│   │       ├── wave-border-right.svg
-│   │       └── yellow-tile-bg.png
-│   ├── components
-│   │   ├── Calendar.astro
-│   │   ├── Carousel.astro
-│   │   ├── ColoredHeader.astro
-│   │   ├── EventList.scss
-│   │   ├── EventList.tsx
-│   │   ├── EventPage.scss
-│   │   ├── EventPage.tsx
-│   │   ├── LinkCard.astro
-│   │   ├── LongFlag.astro
-│   │   ├── MembershipTier.astro
-│   │   ├── MetadataLoader.astro
-│   │   ├── Navbar.astro
-│   │   ├── NavLinks.astro
-│   │   ├── PageHeader.astro
-│   │   ├── Polaroid.astro
-│   │   ├── SectionBorder.astro
-│   │   ├── StickerWithTitle.astro
-│   │   ├── ThreeIconCluster.astro
-│   │   ├── TierGrid.astro
-│   │   ├── TornPaperBorder.astro
-│   │   ├── TornPaperBox.astro
-│   │   └── ToString.astro
-│   ├── config.ts
-│   ├── env.d.ts
-│   ├── inbox
-│   │   └── payload-types.ts
-│   ├── lib
-│   │   ├── dates.ts
-│   │   ├── dom.ts
-│   │   ├── index.ts
-│   │   └── payload.ts
-│   ├── pages
-│   │   ├── [slug].astro
-│   │   ├── about.astro
-│   │   ├── api
-│   │   │   └── events.ts
-│   │   ├── creative-fellowship.astro
-│   │   ├── donate.astro
-│   │   ├── events.astro
-│   │   ├── index.astro
-│   │   ├── movement-builders-business.astro
-│   │   ├── movement-builders-monthly.astro
-│   │   ├── movement-builders-yearly.astro
-│   │   ├── news-and-press.astro
-│   │   ├── our-history.astro
-│   │   ├── our-partners.astro
-│   │   ├── our-team.astro
-│   │   ├── outreach.astro
-│   │   ├── policy.astro
-│   │   ├── psap.astro
-│   │   ├── quick-links.astro
-│   │   └── task-forces
-│   │       ├── content-creation-task-force.astro
-│   │       └── fundraising-task-force.astro
-│   ├── sections
-│   │   ├── AlternatingRibbons.astro
-│   │   ├── CardsWithHeader.astro
-│   │   ├── CenteredPaperWithHeader.astro
-│   │   ├── ConstrainedSection.astro
-│   │   ├── ContentWithHeader.astro
-│   │   ├── EventsWithHeader.astro
-│   │   ├── FlagWithTagline.astro
-│   │   ├── Footer.astro
-│   │   ├── HeroVideo.astro
-│   │   ├── NewsletterForm.scss
-│   │   ├── NewsletterForm.tsx
-│   │   ├── NewsletterSignup.astro
-│   │   ├── OurPartners.astro
-│   │   ├── PageIntro.astro
-│   │   ├── PaperWithPolaroids.astro
-│   │   ├── StickersWithHeader.astro
-│   │   └── ThreeColumns.astro
-│   ├── styles
-│   │   ├── global.scss
-│   │   └── utils.scss
-│   ├── templates
-│   │   └── Base.astro
-│   └── types
-│       ├── index.ts
-│       ├── openGraph.ts
-│       ├── payload.ts
-│       └── sections.ts
-└── tsconfig.json
+ .
+├──  AGENTS.md
+├──  astro.config.mjs
+├──  design
+│   ├──  arrow-7.afdesign
+│   ├──  marker-border.afdesign
+│   └──  wave-border.afdesign
+├──  Dockerfile
+├──  download.js
+├──  eslint.config.js
+├──  file-tree.txt
+├──  package-lock.json
+├──  package.json
+├──  public
+│   ├── 󰕙 favicon.svg
+│   ├──  fonts
+│   │   ├──  Crudex.otf
+│   │   ├──  museo-slab
+│   │   │   ├──  Museo_Slab_100.otf
+│   │   │   ├──  Museo_Slab_100italic.otf
+│   │   │   ├──  Museo_Slab_300.otf
+│   │   │   ├──  Museo_Slab_300italic.otf
+│   │   │   ├──  Museo_Slab_500.otf
+│   │   │   ├──  Museo_Slab_500italic.otf
+│   │   │   ├──  Museo_Slab_700.otf
+│   │   │   ├──  Museo_Slab_700italic.otf
+│   │   │   ├──  Museo_Slab_900.otf
+│   │   │   ├──  Museo_Slab_900italic.otf
+│   │   │   ├──  Museo_Slab_1000.otf
+│   │   │   └──  Museo_Slab_1000italic.otf
+│   │   └──  poppins
+│   │       ├──  OFL.txt
+│   │       ├──  Poppins-Black.ttf
+│   │       ├──  Poppins-BlackItalic.ttf
+│   │       ├──  Poppins-Bold.ttf
+│   │       ├──  Poppins-BoldItalic.ttf
+│   │       ├──  Poppins-ExtraBold.ttf
+│   │       ├──  Poppins-ExtraBoldItalic.ttf
+│   │       ├──  Poppins-ExtraLight.ttf
+│   │       ├──  Poppins-ExtraLightItalic.ttf
+│   │       ├──  Poppins-Italic.ttf
+│   │       ├──  Poppins-Light.ttf
+│   │       ├──  Poppins-LightItalic.ttf
+│   │       ├──  Poppins-Medium.ttf
+│   │       ├──  Poppins-MediumItalic.ttf
+│   │       ├──  Poppins-Regular.ttf
+│   │       ├──  Poppins-SemiBold.ttf
+│   │       ├──  Poppins-SemiBoldItalic.ttf
+│   │       ├──  Poppins-Thin.ttf
+│   │       └──  Poppins-ThinItalic.ttf
+│   ├──  img
+│   │   └──  prism-logo-primary.png
+│   ├──  styles
+│   │   └──  theme.css
+│   └──  video
+│       ├──  '10 Second Countdown Timer - Film Beginning [RZEf9xNogqI].webm'
+│       └──  Websitevideov3.webm
+├── 󰂺 README.md
+├── 󰣞 src
+│   ├──  api
+│   │   ├──  index.ts
+│   │   └──  wix.ts
+│   ├──  assets
+│   │   ├──  arrow7.png
+│   │   ├──  fonts
+│   │   │   ├──  Crudex.otf
+│   │   │   └──  Crudex.ttf
+│   │   └──  img
+│   │       ├──  ahf-0111.jpg
+│   │       ├──  ahf-6232.jpg
+│   │       ├──  ahf-6271.jpg
+│   │       ├──  arrow-purple.png
+│   │       ├──  arrow-purple_edited.png
+│   │       ├──  arrow-purpple.png
+│   │       ├──  arrow-purpple_edited.png
+│   │       ├──  arrow1.png
+│   │       ├──  arrow2.png
+│   │       ├──  arrow3.png
+│   │       ├──  arrow3_blue.png
+│   │       ├──  arrow3_blue_edited.png
+│   │       ├──  arrow3_edited.png
+│   │       ├──  arrow3_teal.png
+│   │       ├──  arrow3_teal_edited.png
+│   │       ├──  arrow4.png
+│   │       ├──  arrow4_edited.png
+│   │       ├──  arrow5.png
+│   │       ├──  arrow6.png
+│   │       ├──  arrow7.png
+│   │       ├──  blood-drop.png
+│   │       ├──  blue-book.png
+│   │       ├──  blurry-concrete.jpg
+│   │       ├──  boca-raton-hs.avif
+│   │       ├──  book-sticker.png
+│   │       ├──  Book_edited.png
+│   │       ├──  Book_edited_edited.png
+│   │       ├──  Book_edited_edited_edited.png
+│   │       ├──  Book_edited_edited_edited_edited.png
+│   │       ├──  Book_purple.png
+│   │       ├──  borders
+│   │       │   ├──  colorize.sh
+│   │       │   ├──  marker-activist-aqua.png
+│   │       │   ├──  marker-bold-black.png
+│   │       │   ├──  marker-rainbow-blue.png
+│   │       │   ├──  marker-rainbow-green.png
+│   │       │   ├──  marker-rainbow-orange.png
+│   │       │   ├──  marker-rainbow-purple.png
+│   │       │   ├──  marker-rainbow-red.png
+│   │       │   ├──  marker-rainbow-yellow.png
+│   │       │   ├──  marker-witty-white.png
+│   │       │   ├──  marker-youth-yellow-1.png
+│   │       │   ├──  marker-youth-yellow-2.png
+│   │       │   ├──  marker-youth-yellow-3.png
+│   │       │   ├──  marker.png
+│   │       │   ├──  spray-paint-activist-aqua.png
+│   │       │   ├──  spray-paint-bold-black.png
+│   │       │   ├──  spray-paint-rainbow-blue.png
+│   │       │   ├──  spray-paint-rainbow-green.png
+│   │       │   ├──  spray-paint-rainbow-orange.png
+│   │       │   ├──  spray-paint-rainbow-purple.png
+│   │       │   ├──  spray-paint-rainbow-red.png
+│   │       │   ├──  spray-paint-rainbow-yellow.png
+│   │       │   ├──  spray-paint-witty-white.png
+│   │       │   ├──  spray-paint-youth-yellow-1.png
+│   │       │   ├──  spray-paint-youth-yellow-2.png
+│   │       │   ├──  spray-paint-youth-yellow-3.png
+│   │       │   ├──  spray-paint.png
+│   │       │   ├── 󰕙 wave-left-activist-aqua.svg
+│   │       │   ├── 󰕙 wave-left-bold-black.svg
+│   │       │   ├── 󰕙 wave-left-rainbow-blue.svg
+│   │       │   ├── 󰕙 wave-left-rainbow-green.svg
+│   │       │   ├── 󰕙 wave-left-rainbow-orange.svg
+│   │       │   ├── 󰕙 wave-left-rainbow-purple.svg
+│   │       │   ├── 󰕙 wave-left-rainbow-red.svg
+│   │       │   ├── 󰕙 wave-left-rainbow-yellow.svg
+│   │       │   ├── 󰕙 wave-left-witty-white.svg
+│   │       │   ├── 󰕙 wave-left-youth-yellow-1.svg
+│   │       │   ├── 󰕙 wave-left-youth-yellow-2.svg
+│   │       │   ├── 󰕙 wave-left-youth-yellow-3.svg
+│   │       │   ├── 󰕙 wave-left.svg
+│   │       │   ├── 󰕙 wave-right-activist-aqua.svg
+│   │       │   ├── 󰕙 wave-right-bold-black.svg
+│   │       │   ├── 󰕙 wave-right-rainbow-blue.svg
+│   │       │   ├── 󰕙 wave-right-rainbow-green.svg
+│   │       │   ├── 󰕙 wave-right-rainbow-orange.svg
+│   │       │   ├── 󰕙 wave-right-rainbow-purple.svg
+│   │       │   ├── 󰕙 wave-right-rainbow-red.svg
+│   │       │   ├── 󰕙 wave-right-rainbow-yellow.svg
+│   │       │   ├── 󰕙 wave-right-witty-white.svg
+│   │       │   ├── 󰕙 wave-right-youth-yellow-1.svg
+│   │       │   ├── 󰕙 wave-right-youth-yellow-2.svg
+│   │       │   ├── 󰕙 wave-right-youth-yellow-3.svg
+│   │       │   └── 󰕙 wave-right.svg
+│   │       ├──  centerlink-badge.png
+│   │       ├──  computer-yellow.avif
+│   │       ├──  convert-icons.sh
+│   │       ├──  default-card-bg.png
+│   │       ├──  early-march.avif
+│   │       ├──  fist-sticker.avif
+│   │       ├──  fist-sticker.png
+│   │       ├──  flag-sticker.png
+│   │       ├──  florida-minus-sfl.avif
+│   │       ├──  giving-icon.avif
+│   │       ├──  giving-sticker.png
+│   │       ├──  gsa-network.avif
+│   │       ├──  hands-with-heart.avif
+│   │       ├──  icons
+│   │       │   ├──  ace_circle.png
+│   │       │   ├──  ace_flag.png
+│   │       │   ├──  ace_of_spades.png
+│   │       │   ├──  ace_triangle.png
+│   │       │   ├──  agender_flag.png
+│   │       │   ├──  aro_flag.png
+│   │       │   ├──  Ashley.png
+│   │       │   ├──  bacteria_1.png
+│   │       │   ├──  bacteria_2.png
+│   │       │   ├──  Ballot.png
+│   │       │   ├──  bi_pan.png
+│   │       │   ├──  bi_symbol.png
+│   │       │   ├──  blood_drop.png
+│   │       │   ├──  Book.png
+│   │       │   ├──  Calendar.png
+│   │       │   ├──  charity_1__non_vector.png
+│   │       │   ├──  charity_1__non_vector___0.png
+│   │       │   ├──  charity_2__non_vector.png
+│   │       │   ├──  charity_2__non_vector___0.png
+│   │       │   ├──  Computer.png
+│   │       │   ├──  condom_package.png
+│   │       │   ├──  Doctor.png
+│   │       │   ├──  dollar_signs__2.png
+│   │       │   ├──  Eggplant.png
+│   │       │   ├──  Enrique.png
+│   │       │   ├──  external_condom.png
+│   │       │   ├──  Female.png
+│   │       │   ├──  fist_1.png
+│   │       │   ├──  fist_2.png
+│   │       │   ├──  fist_3.png
+│   │       │   ├──  fist_4.png
+│   │       │   ├──  fist_5.png
+│   │       │   ├──  fist_long_1.png
+│   │       │   ├──  fist_long_2.png
+│   │       │   ├──  fist_long_3.png
+│   │       │   ├──  fist_long_4.png
+│   │       │   ├──  fist_long_5.png
+│   │       │   ├──  Flame.png
+│   │       │   ├──  flame_2.png
+│   │       │   ├──  Genderqueer.png
+│   │       │   ├──  Health.png
+│   │       │   ├──  Heart.png
+│   │       │   ├──  hiv_virus.png
+│   │       │   ├──  intersex_flag.png
+│   │       │   ├──  LesbianFlag.png
+│   │       │   ├──  lips__red.png
+│   │       │   ├──  Male.png
+│   │       │   ├──  male_and_female.png
+│   │       │   ├──  matilda__shaded.png
+│   │       │   ├──  matilda__shaded__2x.png
+│   │       │   ├──  Megaphone.png
+│   │       │   ├──  MLM.png
+│   │       │   ├──  Needle.png
+│   │       │   ├──  new_rainbow_flag.png
+│   │       │   ├──  new_rainbow_flag__2.png
+│   │       │   ├──  new_rainbow_flag__3.png
+│   │       │   ├──  non_binary.png
+│   │       │   ├──  nonbinary_flag.png
+│   │       │   ├──  orange_book.png
+│   │       │   ├──  pan_symbol.png
+│   │       │   ├──  Peach.png
+│   │       │   ├──  pep_1.png
+│   │       │   ├──  pep__2.png
+│   │       │   ├──  pill_bottle.png
+│   │       │   ├──  Pills.png
+│   │       │   ├──  pregnancy_test.png
+│   │       │   ├──  queer_flag.png
+│   │       │   ├──  queer_flag_2x.png
+│   │       │   ├──  red_book.png
+│   │       │   ├──  red_book_2x.png
+│   │       │   ├──  Sasha.png
+│   │       │   ├──  Scale.png
+│   │       │   ├──  Speech.png
+│   │       │   ├──  speech_2x.png
+│   │       │   ├──  Swab.png
+│   │       │   ├──  Syringe.png
+│   │       │   ├──  teal_pc.png
+│   │       │   ├──  terrance__small.png
+│   │       │   ├──  terrance__small__2x.png
+│   │       │   ├──  trans_flag.png
+│   │       │   ├──  trans_symbol.png
+│   │       │   ├──  virus_1.png
+│   │       │   ├──  Vote.png
+│   │       │   ├──  white_pc.png
+│   │       │   └──  WLW.png
+│   │       ├──  laptop-sticker.png
+│   │       ├──  logos
+│   │       │   ├──  alphabet
+│   │       │   │   ├──  Characters.cclibs
+│   │       │   │   └──  Font
+│   │       │   │       ├── 󰕙 (.svg
+│   │       │   │       ├── 󰕙 ).svg
+│   │       │   │       ├── 󰕙 0.svg
+│   │       │   │       ├── 󰕙 1.svg
+│   │       │   │       ├── 󰕙 2.svg
+│   │       │   │       ├── 󰕙 3.svg
+│   │       │   │       ├── 󰕙 4.svg
+│   │       │   │       ├── 󰕙 5.svg
+│   │       │   │       ├── 󰕙 6.svg
+│   │       │   │       ├── 󰕙 7.svg
+│   │       │   │       ├── 󰕙 8.svg
+│   │       │   │       ├── 󰕙 9.svg
+│   │       │   │       ├── 󰕙 _.svg
+│   │       │   │       ├── 󰕙 A.svg
+│   │       │   │       ├── 󰕙 'Asset 1.svg'
+│   │       │   │       ├── 󰕙 B.svg
+│   │       │   │       ├── 󰕙 C.svg
+│   │       │   │       ├── 󰕙 D.svg
+│   │       │   │       ├── 󰕙 E.svg
+│   │       │   │       ├── 󰕙 F.svg
+│   │       │   │       ├── 󰕙 G.svg
+│   │       │   │       ├── 󰕙 H.svg
+│   │       │   │       ├── 󰕙 I.svg
+│   │       │   │       ├── 󰕙 J.svg
+│   │       │   │       ├── 󰕙 K.svg
+│   │       │   │       ├── 󰕙 L.svg
+│   │       │   │       ├── 󰕙 M.svg
+│   │       │   │       ├── 󰕙 N.svg
+│   │       │   │       ├── 󰕙 O.svg
+│   │       │   │       ├── 󰕙 P.svg
+│   │       │   │       ├── 󰕙 Q.svg
+│   │       │   │       ├── 󰕙 R.svg
+│   │       │   │       ├── 󰕙 S.svg
+│   │       │   │       ├── 󰕙 T.svg
+│   │       │   │       ├── 󰕙 U.svg
+│   │       │   │       ├── 󰕙 V.svg
+│   │       │   │       ├── 󰕙 W.svg
+│   │       │   │       ├── 󰕙 X.svg
+│   │       │   │       ├── 󰕙 Y.svg
+│   │       │   │       └── 󰕙 Z.svg
+│   │       │   ├──  animated
+│   │       │   │   ├──  'Icon Animated.gif'
+│   │       │   │   ├──  'Icon Animated Border.mp4'
+│   │       │   │   ├──  'Icon Looping Shifted.gif'
+│   │       │   │   ├──  'Logo Animated Border.mp4'
+│   │       │   │   ├──  'Logo Animated No Border.mov'
+│   │       │   │   └──  'Logo Animated No Border.mp4'
+│   │       │   ├──  backgrounds
+│   │       │   │   ├──  'Logo (Background).png'
+│   │       │   │   ├──  'Logo (Background) hirez.png'
+│   │       │   │   ├──  'Logo (Fundraising)-01.png'
+│   │       │   │   ├──  'Logo (Network Builders)-01.png'
+│   │       │   │   ├──  'Logo (Outreach)-01.png'
+│   │       │   │   ├──  'Logo (POC Advocates)-01.png'
+│   │       │   │   ├──  'Logo (Research)-01.png'
+│   │       │   │   ├──  'Logo (SMDC)-01.png'
+│   │       │   │   └──  'Logo Background (HiRez).jpg'
+│   │       │   ├──  defunct
+│   │       │   │   ├──  Alphabet
+│   │       │   │   ├──  Banner
+│   │       │   │   │   ├──  'Logo (Background).png'
+│   │       │   │   │   ├──  'Logo (Background) hirez.png'
+│   │       │   │   │   ├──  'Logo (Fundraising)-01.png'
+│   │       │   │   │   ├──  'Logo (Network Builders)-01.png'
+│   │       │   │   │   ├──  'Logo (Outreach)-01.png'
+│   │       │   │   │   ├──  'Logo (POC Advocates)-01.png'
+│   │       │   │   │   ├──  'Logo (Research)-01.png'
+│   │       │   │   │   └──  'Logo (SMDC)-01.png'
+│   │       │   │   ├──  'DEFUNCT BLM Logo Fists.png'
+│   │       │   │   ├──  'DEFUNCT BLM Logo Fists hirez.png'
+│   │       │   │   ├──  'DEFUNCT Logo (Border Plain).png'
+│   │       │   │   ├──  'DEFUNCT Logo (Drop Shadow).png'
+│   │       │   │   ├──  'DEFUNCT Logo (Drop Shadow) HiRez.png'
+│   │       │   │   ├──  'DEFUNCT Logo (Plain).png'
+│   │       │   │   ├──  'DEFUNCT Logo Slogan (Drop Shadow).png'
+│   │       │   │   ├──  'DEFUNCT Logo Slogan V2 (Drop Shadow).png'
+│   │       │   │   ├──  'DEFUNCT Logo Slogan V2 (Drop Shadow, White).png'
+│   │       │   │   └──  'PRISM Party.png'
+│   │       │   ├──  fecfe
+│   │       │   │   ├──  'Logo FECFE Black (Small).png'
+│   │       │   │   ├──  'Logo FECFE Black.png'
+│   │       │   │   └──  'Logo FECFE White.png'
+│   │       │   ├──  icon
+│   │       │   │   ├──  'BoD Icon.png'
+│   │       │   │   ├──  'Identity Icons'
+│   │       │   │   │   ├──  'All PRISM Icons.psd'
+│   │       │   │   │   ├──  'Asexual PRISM.jpg'
+│   │       │   │   │   ├──  'Bisexual PRISM.jpg'
+│   │       │   │   │   ├──  'Gay PRISM.jpg'
+│   │       │   │   │   ├──  'Lesbian PRISM.jpg'
+│   │       │   │   │   ├──  'NonBinary PRISM.jpg'
+│   │       │   │   │   ├──  'Pansexual PRISM.jpg'
+│   │       │   │   │   └──  'Transgender PRISM.jpg'
+│   │       │   │   ├──  prismicon1.png
+│   │       │   │   ├──  prismicon2.png
+│   │       │   │   ├──  Snapchat-124061424.jpg
+│   │       │   │   ├──  Snapchat-647364156.jpg
+│   │       │   │   ├──  Snapchat-667889862.jpg
+│   │       │   │   ├──  Snapchat-1014707486.jpg
+│   │       │   │   ├──  Snapchat-1187864086.jpg
+│   │       │   │   └──  Snapchat-1592729504.jpg
+│   │       │   ├──  logo-primary.png
+│   │       │   ├──  'one color'
+│   │       │   │   ├──  'Asset 1@3x.png'
+│   │       │   │   └──  'PRISM Outline.png'
+│   │       │   └──  pride
+│   │       │       ├──  'PRISM Ace@1.5x.png'
+│   │       │       ├──  'PRISM Bi@1.5x.png'
+│   │       │       ├──  'PRISM Gay@1.5x.png'
+│   │       │       ├──  'PRISM Lesbian@1.5x.png'
+│   │       │       ├──  'PRISM NB@1.5x.png'
+│   │       │       ├──  'PRISM Pan@1.5x.png'
+│   │       │       └──  'PRISM Trans@1.5x.png'
+│   │       ├──  long-pride-flag.png
+│   │       ├──  megaphone-sticker.png
+│   │       ├──  megaphone.avif
+│   │       ├──  output-onlinepngtools.png
+│   │       ├──  paper-noise.png
+│   │       ├──  prism-logo-primary.png
+│   │       ├──  psap-group.avif
+│   │       ├──  psap-leaders-council.avif
+│   │       ├──  rainbow-flag.avif
+│   │       ├──  'Red Book@2x.png'
+│   │       ├──  ruled-bg.png
+│   │       ├──  scale.avif
+│   │       ├──  sfl.avif
+│   │       ├──  stickers
+│   │       │   ├──  ace_circle-sticker.png
+│   │       │   ├──  ace_flag-sticker.png
+│   │       │   ├──  ace_of_spades-sticker.png
+│   │       │   ├──  ace_triangle-sticker.png
+│   │       │   ├──  agender_flag-sticker.png
+│   │       │   ├──  aro_flag-sticker.png
+│   │       │   ├──  ashley-sticker.png
+│   │       │   ├──  bacteria_1-sticker.png
+│   │       │   ├──  bacteria_2-sticker.png
+│   │       │   ├──  ballot-sticker.png
+│   │       │   ├──  bi_pan-sticker.png
+│   │       │   ├──  bi_symbol-sticker.png
+│   │       │   ├──  blood_drop-sticker.png
+│   │       │   ├──  book-sticker.png
+│   │       │   ├──  calendar-sticker.png
+│   │       │   ├──  charity_1__non_vector-sticker.png
+│   │       │   ├──  charity_1__non_vector___0-sticker.png
+│   │       │   ├──  charity_2__non_vector-sticker.png
+│   │       │   ├──  charity_2__non_vector___0-sticker.png
+│   │       │   ├──  computer-sticker.png
+│   │       │   ├──  condom_package-sticker.png
+│   │       │   ├──  doctor-sticker.png
+│   │       │   ├──  dollar_signs__2-sticker.png
+│   │       │   ├──  eggplant-sticker.png
+│   │       │   ├──  enrique-sticker.png
+│   │       │   ├──  external_condom-sticker.png
+│   │       │   ├──  female-sticker.png
+│   │       │   ├──  fist_1-sticker.png
+│   │       │   ├──  fist_2-sticker.png
+│   │       │   ├──  fist_3-sticker.png
+│   │       │   ├──  fist_4-sticker.png
+│   │       │   ├──  fist_5-sticker.png
+│   │       │   ├──  fist_long_1-sticker.png
+│   │       │   ├──  fist_long_2-sticker.png
+│   │       │   ├──  fist_long_3-sticker.png
+│   │       │   ├──  fist_long_4-sticker.png
+│   │       │   ├──  fist_long_5-sticker.png
+│   │       │   ├──  flame-sticker.png
+│   │       │   ├──  flame_2-sticker.png
+│   │       │   ├──  genderqueer-sticker.png
+│   │       │   ├──  health-sticker.png
+│   │       │   ├──  heart-sticker.png
+│   │       │   ├──  hiv_virus-sticker.png
+│   │       │   ├──  intersex_flag-sticker.png
+│   │       │   ├──  lesbianflag-sticker.png
+│   │       │   ├──  lips__red-sticker.png
+│   │       │   ├──  male-sticker.png
+│   │       │   ├──  male_and_female-sticker.png
+│   │       │   ├──  matilda__shaded-sticker.png
+│   │       │   ├──  matilda__shaded__2x-sticker.png
+│   │       │   ├──  megaphone-sticker.png
+│   │       │   ├──  mlm-sticker.png
+│   │       │   ├──  needle-sticker.png
+│   │       │   ├──  new_rainbow_flag-sticker.png
+│   │       │   ├──  new_rainbow_flag__2-sticker.png
+│   │       │   ├──  new_rainbow_flag__3-sticker.png
+│   │       │   ├──  non_binary-sticker.png
+│   │       │   ├──  nonbinary_flag-sticker.png
+│   │       │   ├──  orange_book-sticker.png
+│   │       │   ├──  pan_symbol-sticker.png
+│   │       │   ├──  peach-sticker.png
+│   │       │   ├──  pep_1-sticker.png
+│   │       │   ├──  pep__2-sticker.png
+│   │       │   ├──  pill_bottle-sticker.png
+│   │       │   ├──  pills-sticker.png
+│   │       │   ├──  pregnancy_test-sticker.png
+│   │       │   ├──  queer_flag-sticker.png
+│   │       │   ├──  queer_flag_2x-sticker.png
+│   │       │   ├──  red_book-sticker.png
+│   │       │   ├──  red_book_2x-sticker.png
+│   │       │   ├──  sasha-sticker.png
+│   │       │   ├──  scale-sticker.png
+│   │       │   ├──  speech-sticker.png
+│   │       │   ├──  speech_2x-sticker.png
+│   │       │   ├──  swab-sticker.png
+│   │       │   ├──  syringe-sticker.png
+│   │       │   ├──  teal_pc-sticker.png
+│   │       │   ├──  terrance__small-sticker.png
+│   │       │   ├──  terrance__small__2x-sticker.png
+│   │       │   ├──  trans_flag-sticker.png
+│   │       │   ├──  trans_symbol-sticker.png
+│   │       │   ├──  virus_1-sticker.png
+│   │       │   ├──  vote-sticker.png
+│   │       │   ├──  white_pc-sticker.png
+│   │       │   └──  wlw-sticker.png
+│   │       ├──  tape-img.png
+│   │       ├──  team-group-photo-faw-26.jpg
+│   │       ├──  torn-notebook-paper.png
+│   │       └──  yellow-tile-bg.png
+│   ├──  components
+│   │   ├──  Calendar.astro
+│   │   ├──  Carousel.astro
+│   │   ├──  ColoredHeader.astro
+│   │   ├──  EventList.scss
+│   │   ├──  EventList.tsx
+│   │   ├──  EventPage.scss
+│   │   ├──  EventPage.tsx
+│   │   ├──  LinkCard.astro
+│   │   ├──  LongFlag.astro
+│   │   ├──  MembershipTier.astro
+│   │   ├──  MetadataLoader.astro
+│   │   ├──  Navbar.astro
+│   │   ├──  NavLinks.astro
+│   │   ├──  PageHeader.astro
+│   │   ├──  Polaroid.astro
+│   │   ├──  SectionBorder.astro
+│   │   ├──  StickerWithTitle.astro
+│   │   ├──  ThreeIconCluster.astro
+│   │   ├──  TierGrid.astro
+│   │   ├──  TornPaperBorder.astro
+│   │   ├──  TornPaperBox.astro
+│   │   └──  ToString.astro
+│   ├──  config.ts
+│   ├──  env.d.ts
+│   ├──  inbox
+│   │   └──  payload-types.ts
+│   ├──  lib
+│   │   ├──  dates.ts
+│   │   ├──  dom.ts
+│   │   ├──  index.ts
+│   │   └──  payload.ts
+│   ├──  pages
+│   │   ├──  [slug].astro
+│   │   ├──  about.astro
+│   │   ├──  api
+│   │   │   └──  events.ts
+│   │   ├──  creative-fellowship.astro
+│   │   ├──  donate.astro
+│   │   ├──  events.astro
+│   │   ├──  index.astro
+│   │   ├──  movement-builders-business.astro
+│   │   ├──  movement-builders-monthly.astro
+│   │   ├──  movement-builders-yearly.astro
+│   │   ├──  news-and-press.astro
+│   │   ├──  our-history.astro
+│   │   ├──  our-partners.astro
+│   │   ├──  our-team.astro
+│   │   ├──  outreach.astro
+│   │   ├──  policy.astro
+│   │   ├──  psap.astro
+│   │   ├──  quick-links.astro
+│   │   └──  task-forces
+│   │       ├──  content-creation-task-force.astro
+│   │       └──  fundraising-task-force.astro
+│   ├──  sections
+│   │   ├──  AlternatingRibbons.astro
+│   │   ├──  CardsWithHeader.astro
+│   │   ├──  CenteredPaperWithHeader.astro
+│   │   ├──  ConstrainedSection.astro
+│   │   ├──  ContentWithHeader.astro
+│   │   ├──  EventsWithHeader.astro
+│   │   ├──  FlagWithTagline.astro
+│   │   ├──  Footer.astro
+│   │   ├──  HeroVideo.astro
+│   │   ├──  NewsletterForm.scss
+│   │   ├──  NewsletterForm.tsx
+│   │   ├──  NewsletterSignup.astro
+│   │   ├──  OurPartners.astro
+│   │   ├──  PageIntro.astro
+│   │   ├──  PaperWithPolaroids.astro
+│   │   ├──  StickersWithHeader.astro
+│   │   └──  ThreeColumns.astro
+│   ├──  styles
+│   │   ├──  global.scss
+│   │   └──  utils.scss
+│   ├──  templates
+│   │   └──  Base.astro
+│   └──  types
+│       ├──  index.ts
+│       ├──  openGraph.ts
+│       ├──  payload.ts
+│       └──  sections.ts
+└──  tsconfig.json
