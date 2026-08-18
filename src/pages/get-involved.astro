@@ -1,0 +1,251 @@
+---
+import Base from "@templates/Base.astro";
+import PageIntro from "@sections/PageIntro.astro";
+import SectionBorder from "@components/SectionBorder.astro";
+import { Icon } from "astro-icon";
+import { Image } from "astro:assets";
+import teamPhoto from "@assets/img/team-group-photo-faw-26.jpg";
+import handsWithHeart from "@assets/img/hands-with-heart.avif";
+import fistSticker from "@assets/img/fist-sticker.avif";
+import givingSticker from "@assets/img/giving-sticker.png";
+import megaphoneSticker from "@assets/img/megaphone-sticker.png";
+import psapGroup from "@assets/img/psap-group.avif";
+---
+
+<Base
+  pageMetadata={{
+    title: "Get Involved",
+    description:
+      "Join PRISM FL in supporting LGBTQ+ youth through volunteering, advocacy, and community engagement.",
+    type: "website",
+    image: "https://picsum.photos/200",
+    "image:alt": "Get involved hub",
+  }}
+>
+  <PageIntro
+    title="Get Involved"
+    description="There are many ways to support LGBTQ+ youth in South Florida. Join our team, volunteer your time, or contribute your skills to make a difference."
+    image={{ src: fistSticker.src, alt: "Fist sticker" }}
+    pointBackTo={{ href: "/", label: "Home" }}
+  />
+  <main>
+    <SectionBorder type="spray-paint" backgroundColor="rainbow-purple" />
+    <div class="outreach">
+      <div class="content">
+        <div class="info">
+          <h1>Community Outreach</h1>
+          <p>
+            Help us expand our reach across South Florida. Participate in
+            community events, school presentations, and advocacy campaigns to
+            support LGBTQ+ youth.
+          </p>
+          <a href="/outreach" class="button">Get Started</a>
+        </div>
+        <div class="visual">
+          <Image src={givingSticker} alt="Outreach" />
+        </div>
+      </div>
+    </div>
+    <SectionBorder type="marker" backgroundColor="rainbow-blue" />
+    <div class="creative-fellowship">
+      <div class="content">
+        <div class="visual">
+          <Image src={teamPhoto} alt="Creative team" />
+        </div>
+        <div class="info">
+          <h1>Creative Fellowship</h1>
+          <p>
+            Are you an artist, writer, or creator? Join our creative fellowship
+            to use your talents in service of LGBTQ+ youth advocacy and
+            education.
+          </p>
+          <a href="/creative-fellowship" class="button">Learn More</a>
+        </div>
+      </div>
+    </div>
+    <SectionBorder type="marker" flip backgroundColor="rainbow-green" />
+    <div class="policy">
+      <div class="content">
+        <div class="info">
+          <h1>School Policy Advocacy</h1>
+          <p>
+            Navigate LGBTQ+ rights and policies in Miami-Dade, Broward, and Palm
+            Beach county schools. Know your rights and find guidance on school
+            policies.
+          </p>
+          <a href="/policy" class="button">View Policies</a>
+        </div>
+        <div class="visual">
+          <Image src={megaphoneSticker} alt="Policy advocacy" />
+        </div>
+      </div>
+    </div>
+    <SectionBorder type="wave-left" backgroundColor="rainbow-orange" flip />
+    <div class="psap">
+      <div class="content">
+        <div class="visual">
+          <Image src={psapGroup} alt="Student ambassadors" />
+        </div>
+        <div class="info">
+          <h1>Student Ambassador Program</h1>
+          <p>
+            The PRISM Student Ambassador Program (P-SAP) provides resources and
+            support for LGBTQ+ student organization leaders across South
+            Florida.
+          </p>
+          <a href="/psap" class="button">Learn About P-SAP</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "../styles/utils.scss" as *;
+
+  main > div {
+    .content {
+      padding: 2rem;
+      max-width: var(--xl);
+      margin: auto;
+    }
+  }
+
+  .outreach {
+    background-color: var(--rainbow-purple);
+    color: white;
+    padding: 4rem 0;
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+      @include breakpoint-up("md") {
+        flex-direction: row;
+      }
+      .visual {
+        max-width: 100%;
+        @include breakpoint-up("md") {
+          flex: 1;
+          max-width: 300px;
+        }
+        img {
+          width: 100%;
+          height: auto;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+
+  .creative-fellowship {
+    background-color: var(--rainbow-blue);
+    color: white;
+    padding: 4rem 0;
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+      @include breakpoint-up("md") {
+        flex-direction: row;
+      }
+      .visual {
+        max-width: 100%;
+        @include breakpoint-up("md") {
+          flex: 1;
+          max-width: 500px;
+        }
+        img {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+          border-radius: var(--round-edge);
+        }
+      }
+    }
+  }
+
+  .policy {
+    background-color: var(--rainbow-green);
+    color: white;
+    padding: 4rem 0;
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+      @include breakpoint-up("md") {
+        flex-direction: row;
+      }
+      .visual {
+        max-width: 100%;
+        @include breakpoint-up("md") {
+          flex: 1;
+          max-width: 300px;
+        }
+        img {
+          width: 100%;
+          height: auto;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+
+  .psap {
+    background-color: var(--rainbow-orange);
+    padding: 4rem 0;
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+      @include breakpoint-up("md") {
+        flex-direction: row;
+      }
+      .visual {
+        max-width: 100%;
+        @include breakpoint-up("md") {
+          flex: 1;
+          max-width: 500px;
+        }
+        img {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+          border-radius: var(--round-edge);
+        }
+      }
+    }
+  }
+
+  .outreach .info,
+  .creative-fellowship .info,
+  .policy .info,
+  .psap .info {
+    flex: 1;
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .button {
+      display: inline-block;
+      background-color: var(--accent-color);
+      padding: 0.75rem 2rem;
+      border-radius: var(--round-edge);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.25rem;
+      transition: filter 0.2s ease;
+      &:hover {
+        filter: brightness(110%);
+      }
+    }
+  }
+</style>

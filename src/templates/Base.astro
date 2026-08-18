@@ -20,33 +20,28 @@ const routes: Route[] = [
     path: "/about",
     displayName: "About",
     children: [
-      { type: "internal", path: "/our-history", displayName: "History" },
+      { type: "internal", path: "/our-history", displayName: "Our History" },
       { type: "internal", path: "/our-team", displayName: "Our Team" },
       { type: "internal", path: "/our-partners", displayName: "Our Partners" },
       {
         type: "internal",
         path: "/news-and-press",
-        displayName: "News and Press",
-      },
-      {
-        type: "external",
-        url: "mailto:info@prismfl.org",
-        displayName: "Contact Us",
+        displayName: "News & Press",
       },
     ],
   },
   {
     type: "internal",
-    displayName: "Get Involved",
     path: "/get-involved",
+    displayName: "Get Involved",
     children: [
       { type: "internal", path: "/outreach", displayName: "Outreach" },
-      { type: "internal", path: "/policy", displayName: "Policy" },
       {
         type: "internal",
         path: "/creative-fellowship",
         displayName: "Creative Fellowship",
       },
+      { type: "internal", path: "/policy", displayName: "Policy" },
       {
         type: "internal",
         path: "/psap",
@@ -54,9 +49,49 @@ const routes: Route[] = [
       },
     ],
   },
-  { type: "internal", path: "/404", displayName: "Resources" },
-  { type: "internal", path: "/events", displayName: "Events" },
-  { type: "internal", path: "/donate", displayName: "Donate", highlight: true },
+  {
+    type: "internal",
+    path: "/resources",
+    displayName: "Resources",
+    children: [
+      {
+        type: "internal",
+        path: "/sti-clinic-search",
+        displayName: "STI Clinic Search",
+      },
+      {
+        type: "internal",
+        path: "/psap",
+        displayName: "Student Ambassador Program",
+      },
+      { type: "internal", path: "/policy", displayName: "School Policy Hub" },
+      { type: "internal", path: "/events", displayName: "Events" },
+      { type: "internal", path: "/quick-links", displayName: "Quick Links" },
+    ],
+  },
+  {
+    type: "internal",
+    path: "/donate",
+    displayName: "Donate",
+    highlight: true,
+    children: [
+      {
+        type: "internal",
+        path: "/movement-builders-monthly",
+        displayName: "Monthly Giving",
+      },
+      {
+        type: "internal",
+        path: "/movement-builders-yearly",
+        displayName: "Yearly Giving",
+      },
+      {
+        type: "internal",
+        path: "/movement-builders-business",
+        displayName: "Business Sponsorship",
+      },
+    ],
+  },
 ];
 
 const { pageMetadata, ...props } = Astro.props;
