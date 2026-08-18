@@ -3,19 +3,15 @@ import SectionBorder from "./SectionBorder.astro";
 
 interface Props {
   background?: string;
-  borderTop?: boolean;
-  borderBottom?: boolean;
+  borderTop?: "spray-paint" | "marker";
+  borderBottom?: "spray-paint" | "marker";
 }
 const { background, borderTop, borderBottom } = Astro.props;
 ---
 
 {
   borderTop ? (
-    <SectionBorder
-      flip
-      type="spray-paint"
-      backgroundColor="rgb(83, 193, 168)"
-    />
+    <SectionBorder flip type={borderTop} backgroundColor="activist-aqua" />
   ) : (
     ""
   )
@@ -25,7 +21,7 @@ const { background, borderTop, borderBottom } = Astro.props;
 </div>
 {
   borderBottom ? (
-    <SectionBorder type="spray-paint" backgroundColor="rgb(83, 193, 168)" />
+    <SectionBorder type={borderBottom} backgroundColor="activist-aqua" />
   ) : (
     ""
   )

@@ -3,39 +3,41 @@ import sprayPaintBorder from "@assets/img/png-border-blue.png";
 import { getImage } from "astro:assets";
 import CssFilterConverter from "css-filter-converter";
 import Color from "color";
-import waveLeft from "@assets/img/wave-border-left.svg";
-import waveRight from "@assets/img/wave-border-right.svg";
+import waveLeft from "@assets/img/borders/wave-border-left.svg";
+import waveRight from "@assets/img/borders/wave-border-right.svg";
 
 interface Props {
-  type:
-    | "cookie-cutter"
-    | "spray-paint"
-    | "squiggle"
-    | "wave-left"
-    | "wave-right";
-  backgroundColor?: string;
+  type: "spray-paint" | "wave-left" | "wave-right" | "marker";
+  backgroundColor:
+    | "activist-aqua"
+    | "youth-yellow-1"
+    | "youth-yellow-2"
+    | "youth-yellow-3"
+    | "rainbow-red"
+    | "rainbow-orange"
+    | "rainbow-yellow"
+    | "rainbow-green"
+    | "rainbow-blue"
+    | "rainbow-purple"
+    | "bold-black"
+    | "witty-white";
+
   flip?: boolean;
 }
+
 const { type, backgroundColor, flip } = Astro.props;
-const optimizedSprayPaint = await getImage({
-  src: sprayPaintBorder,
-  format: "webp",
-});
-
-const optimizedWaveBorder = await getImage({
-  src: type === "wave-left" ? waveLeft : waveRight,
-  format: "svg",
-});
-
-const getBackgroundData = () => {
-  if (type === "spray-paint") {
-    return optimizedSprayPaint;
-  }
-};
-const filter =
-  type === "spray-paint"
-    ? CssFilterConverter.hexToFilter(Color(backgroundColor).hex())
-    : undefined;
+const imageBorders = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/img/borders/*.{png,svg}",
+);
+const selectedBorderPath = Object.keys(imageBorders).find((key) =>
+  key.includes(`${type}-${backgroundColor}`),
+);
+if (!selectedBorderPath) {
+  throw new Error(
+    "Could not find selected border for " + `${type}-${backgroundColor}`,
+  );
+}
+const selectedBorder = await imageBorders[selectedBorderPath]();
 ---
 
 <div class:list={["container", flip ? "flipped" : ""]}>
@@ -43,18 +45,15 @@ const filter =
     class:list={["border", type]}
     style={{
       backgroundImage:
-        type === "spray-paint"
-          ? `url(${getBackgroundData()?.src ?? ""})`
+        type === "spray-paint" || type === "marker"
+          ? `url(${selectedBorderPath})`
           : undefined,
-      backgroundColor:
-        type === "spray-paint" ? "rgba(0,0,0,0)" : backgroundColor,
-      filter: type === "spray-paint" ? filter?.color : "",
     }}
   >
   </div>
 </div>
 
-<style define:vars={{ "wave-border": `url(${optimizedWaveBorder.src})` }}>
+<style define:vars={{ "wave-border": `url(${selectedBorder.default.src})` }}>
   .container {
     position: relative;
     height: 0;
@@ -75,6 +74,10 @@ const filter =
     .border.wave-right {
       bottom: 7rem;
     }
+
+    .border.marker {
+      transform: scaleY(-1) scaleX(-1);
+    }
   }
 
   .border {
@@ -83,31 +86,18 @@ const filter =
     z-index: 2;
   }
 
-  .border.cookie-cutter {
-    position: relative;
-    mask: conic-gradient(
-        from -45deg at bottom,
-        #0000,
-        #000 1deg 89deg,
-        #0000 90deg
-      )
-      20%/2rem 100%;
-  }
-
-  .border.squiggle {
-    position: relative;
-    mask:
-      radial-gradient(16px at 75% 100%, #0000 98%, #000) 50% calc(100% - 16px) /
-        64px 100% repeat-x,
-      radial-gradient(16px at 25% 50%, #000 99%, #0000 101%) bottom/64px 32px
-        repeat-x;
-  }
-
   .border.spray-paint {
     height: 2rem;
     position: relative;
     background-repeat: repeat-x;
     background-size: contain;
+  }
+
+  .border.marker {
+    height: 3rem;
+    position: relative;
+    background-repeat: repeat-x;
+    background-size: cover;
   }
 
   .border.wave-left,
@@ -118,4 +108,24 @@ const filter =
     mask-repeat: no-repeat;
     height: 7rem;
   }
+
+  /* .border.cookie-cutter { */
+  /*   position: relative; */
+  /*   mask: conic-gradient( */
+  /*       from -45deg at bottom, */
+  /*       #0000, */
+  /*       #000 1deg 89deg, */
+  /*       #0000 90deg */
+  /*     ) */
+  /*     20%/2rem 100%; */
+  /* } */
+
+  /* .border.squiggle { */
+  /*   position: relative; */
+  /*   mask: */
+  /*     radial-gradient(16px at 75% 100%, #0000 98%, #000) 50% calc(100% - 16px) / */
+  /*       64px 100% repeat-x, */
+  /*     radial-gradient(16px at 25% 50%, #000 99%, #0000 101%) bottom/64px 32px */
+  /*       repeat-x; */
+  /* } */
 </style>
