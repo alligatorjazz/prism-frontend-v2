@@ -1,5 +1,5 @@
 ---
-import paperNoise from "../assets/img/paper-noise.png";
+import paperNoise from "../assets/img/ruled-bg.png";
 interface Props {
   offset?: boolean;
 }
@@ -52,6 +52,7 @@ const background = `url("${paperNoise.src}")`;
   .container {
     width: 100%;
     height: 3.5rem;
+    background-size: 2000px;
     mask: url("#edge");
     svg {
       width: 100%;

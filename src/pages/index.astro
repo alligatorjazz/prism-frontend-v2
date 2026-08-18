@@ -3,15 +3,16 @@ import Base from "../templates/Base.astro";
 import StickersWithHeader from "@sections/StickersWithHeader.astro";
 import EventsWithHeader from "@sections/EventsWithHeader.astro";
 import ruledBg from "@assets/img/ruled-bg.png";
-import OurPartners from "@sections/OurPartners.astro";
 import HeroVideo from "@sections/HeroVideo.astro";
-import { faker } from "@faker-js/faker";
-import AlternatingRibbons from "@sections/AlternatingRibbons.astro";
 import ColoredHeader from "@components/ColoredHeader.astro";
-import book from "@assets/img/Book_edited.png";
-import scale from "@assets/img/scale.avif";
-import sti from "@assets/img/blood-drop.png";
-import book2 from "@assets/img/megaphone.avif";
+import book from "@assets/img/stickers/book-sticker.png";
+import scale from "@assets/img/stickers/scale-sticker.png";
+import sti from "@assets/img/stickers/blood_drop-sticker.png";
+import OurPartners from "@sections/OurPartners.astro";
+import megaphone from "@assets/img/stickers/megaphone-sticker.png";
+import fist1 from "@assets/img/stickers/fist_1-sticker.png";
+import book2 from "@assets/img/stickers/orange_book-sticker.png";
+import speech from "@assets/img/stickers/speech_2x-sticker.png";
 ---
 
 <Base
@@ -24,7 +25,7 @@ import book2 from "@assets/img/megaphone.avif";
   }}
 >
   <HeroVideo />
-  <ColoredHeader borderTop borderBottom
+  <ColoredHeader borderTop="marker" borderBottom="marker"
     ><slot name="header"><h1 class="cards-header">Resources</h1></slot
     ></ColoredHeader
   >
@@ -32,58 +33,62 @@ import book2 from "@assets/img/megaphone.avif";
     title="test"
     backgroundImage={ruledBg}
     stickers={[
-      { title: "Learn", image: book, href: "/learn" },
+      { title: "Learn", image: book, href: "/learn", arrow: "top-left" },
       {
         title: "School Policy Hub",
         image: scale,
-        outlineTransform: "scalex(1.05) scaley(1.025) scale(1.05)",
         href: "/policy-hub",
+        arrow: "bottom-right",
       },
       {
         title: "STI Clinic Search",
-        image: book2,
-        outlineTransform: "scale(1.025)",
+        image: sti,
         href: "/std-clinics",
+        arrow: "top-right",
       },
     ]}
   />
 
-  <ColoredHeader borderTop borderBottom
+  <ColoredHeader borderTop="marker" borderBottom="marker"
     ><slot name="header"><h1 class="cards-header">Get Involved</h1></slot
     ></ColoredHeader
   >
-
-  <AlternatingRibbons
-    ribbons={[
+  <StickersWithHeader
+    title="test"
+    backgroundImage={ruledBg}
+    stickers={[
       {
         title: "Outreach",
-        color: "var(--rainbow-orange)",
-        description: faker.lorem.sentences(2),
-        link: "/outreach",
+        image: megaphone,
+        href: "/outreach",
+        hideArrow: true,
       },
       {
         title: "Policy",
-        color: "var(--rainbow-red)",
-        description: faker.lorem.sentences(2),
-        link: "/policy",
+        image: book2,
+        href: "/policy",
+        arrow: "top-right",
+        hideArrow: true,
       },
       {
         title: "Creative Fellowship",
-        color: "var(--rainbow-green)",
-        description: faker.lorem.sentences(2),
-        link: "/creative-fellowship",
+        image: speech,
+        href: "/creative-fellowship",
+        arrow: "bottom-right",
+        hideArrow: true,
       },
       {
         title: "Student Ambassador Program",
-        color: "var(--rainbow-purple)",
-        description: faker.lorem.sentences(2),
-        link: "/psap",
+        image: fist1,
+        href: "/psap",
+        arrow: "top-right",
+        hideArrow: true,
       },
     ]}
-    backgroundImage={ruledBg.src}
   />
+
   <EventsWithHeader title="Upcoming Events" } backgroundImage={ruledBg.src} />
-  <!-- <OurPartners /> -->
+  <OurPartners />
 </Base>
 
 <style>

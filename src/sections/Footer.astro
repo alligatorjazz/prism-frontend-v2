@@ -6,117 +6,118 @@ import { Icon } from "astro-icon/components";
 ---
 
 <footer>
-	<div class="info">
-		<div class="logo">
-			<Image src={logo} alt={"placeholder"} />
-			<p>© 2020-{`${new Date().getFullYear()}`} by PRISM FL, Inc.</p>
-		</div>
-		<div class="contact">
-			<p>Phone: (561) 291-9207</p>
-			<p>Email: info@prismfl.org</p>
-			<ul class="socials">
-				<li>
-					<a name="placeholder" href="/404"
-						><Icon
-							color={"var(--text-color)"}
-							size={42}
-							name="ri:discord-fill"
-						/></a
-					>
-				</li>
-				<li>
-					<a name="placeholder" href="/404"
-						><Icon
-							color={"var(--text-color)"}
-							size={42}
-							name="ri:tiktok-fill"
-						/></a
-					>
-				</li>
-				<li>
-					<a name="placeholder" href="/404"
-						><Icon
-							color={"var(--text-color)"}
-							size={42}
-							name="ri:youtube-fill"
-						/>
-					</a>
-				</li>
-				<li>
-					<a name="placeholder" href="/404"
-						><Icon
-							color={"var(--text-color)"}
-							size={42}
-							name="ri:instagram-fill"
-						/>
-					</a>
-				</li>
-				<li>
-					<a name="placeholder" href="/404"
-						><Icon
-							color={"var(--text-color)"}
-							size={42}
-							name="ri:facebook-fill"
-						/>
-					</a>
-				</li>
-			</ul>
-		</div>
-		<div class="certifications">
-			<Image src={centerLink} alt="placeholder" />
-		</div>
-	</div>
-	<div class="disclaimer">
-		<p>
-			PRISM FL, Inc (EIN: 85-0891778) is a tax-exempt non-profit organization
-			under Internal Revenue Code (IRC) section 501(c)(3). Donations and other
-			contributions to PRISM FL, Inc. are tax-deductible under IRC Section 170.
-		</p>
-		<p>
-			"A COPY OF THE OFFICIAL REGISTRATION AND FINANCIAL INFORMATION OF PRISM
-			FL, INC, CH62359, MAY BE OBTAINED FROM THE DIVISION OF CONSUMER SERVICES
-			BY CALLING TOLL-FREE (800-435-7352) WITHIN THE STATE. REGISTRATION DOES
-			NOT IMPLY ENDORSEMENT, APPROVAL, OR RECOMMENDATION BY THE STATE."
-		</p>
-	</div>
+  <div class="info">
+    <div class="logo">
+      <Image src={logo} alt={"placeholder"} />
+      <p>© 2020-{`${new Date().getFullYear()}`} by PRISM FL, Inc.</p>
+    </div>
+    <div class="contact">
+      <p>Phone: (561) 291-9207</p>
+      <p>Email: info@prismfl.org</p>
+      <ul class="socials">
+        <li>
+          <a name="placeholder" href="https://discord.gg/nHuWYXkpr6"
+            ><Icon
+              color={"var(--fg-color)"}
+              size={42}
+              name="ri:discord-fill"
+            /></a
+          >
+        </li>
+        <li>
+          <a name="placeholder" href="https://www.tiktok.com/@prismfl"
+            ><Icon
+              color={"var(--fg-color)"}
+              size={42}
+              name="ri:tiktok-fill"
+            /></a
+          >
+        </li>
+        <li>
+          <a
+            name="placeholder"
+            href="https://www.youtube.com/channel/UCTMnzrpJ9zofVsTELHmcN7A/"
+            ><Icon color={"var(--fg-color)"} size={42} name="ri:youtube-fill" />
+          </a>
+        </li>
+        <li>
+          <a name="placeholder" href="https://www.instagram.com/prism.fl/"
+            ><Icon
+              color={"var(--fg-color)"}
+              size={42}
+              name="ri:instagram-fill"
+            />
+          </a>
+        </li>
+        <li>
+          <a name="placeholder" href="https://www.facebook.com/prismfl"
+            ><Icon
+              color={"var(--fg-color)"}
+              size={42}
+              name="ri:facebook-fill"
+            />
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="certifications">
+      <a href="https://www.lgbtcenters.org/LGBTCenters/Center/7324/PRISM"
+        ><Image src={centerLink} alt="placeholder" /></a
+      >
+    </div>
+  </div>
+  <div class="disclaimer">
+    <p>
+      PRISM FL, Inc (EIN: 85-0891778) is a tax-exempt non-profit organization
+      under Internal Revenue Code (IRC) section 501(c)(3). Donations and other
+      contributions to PRISM FL, Inc. are tax-deductible under IRC Section 170.
+    </p>
+    <p>
+      "A COPY OF THE OFFICIAL REGISTRATION AND FINANCIAL INFORMATION OF PRISM
+      FL, INC, CH62359, MAY BE OBTAINED FROM THE DIVISION OF CONSUMER SERVICES
+      BY CALLING TOLL-FREE (800-435-7352) WITHIN THE STATE. REGISTRATION DOES
+      NOT IMPLY ENDORSEMENT, APPROVAL, OR RECOMMENDATION BY THE STATE."
+    </p>
+  </div>
 </footer>
 
 <style lang="scss">
-	@use "../styles/utils" as *;
+  @use "../styles/utils" as *;
 
-	footer {
-		max-width: var(--lg);
-		margin: auto;
-		padding: 2rem;
+  footer {
+    max-width: var(--lg);
+    margin: auto;
+    padding: 2rem;
+    color: var(--fg-color);
 
-		.info {
-			display: flex;
-			flex-direction: column;
-			@include breakpoint-up(md) {
-				flex-direction: row;
-			}
-			justify-content: space-between;
-			align-items: center;
-			.contact {
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-				align-items: center;
-				gap: 0.25rem;
-				* {
-					margin: 0;
-				}
-			}
+    .info {
+      display: flex;
+      flex-direction: column;
+      @include breakpoint-up(md) {
+        flex-direction: row;
+      }
+      justify-content: space-between;
+      align-items: center;
+      .contact {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.25rem;
+        * {
+          margin: 0;
+        }
+      }
 
-			.socials {
-				display: flex;
-				justify-content: space-evenly;
-			}
-		}
-	}
-	ul {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
+      .socials {
+        display: flex;
+        justify-content: space-evenly;
+      }
+    }
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 </style>

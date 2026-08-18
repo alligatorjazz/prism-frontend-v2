@@ -5,6 +5,7 @@ import Base from "../templates/Base.astro";
 import prismLogo from "../assets/img/prism-logo-primary.png";
 import { Icon } from "astro-icon/components";
 import boca from "../assets/img/boca-raton-hs.avif";
+import concrete from "../assets/img/blurry-concrete.jpg";
 import march from "../assets/img/early-march.avif";
 import { Image, getImage } from "astro:assets";
 import ruledBg from "../assets/img/ruled-bg.png";
@@ -46,11 +47,15 @@ const newsArticles = Array.from({ length: 8 }, () => {
     image={{ ...prismLogo }}
   />
   <main>
-    <SectionBorder type="spray-paint" backgroundColor="#51c0a7" />
+    <SectionBorder type="spray-paint" backgroundColor="activist-aqua" />
     <div class="our-history" style={{ backgroundImage: ruledPaper }}>
       <div class="content">
         <ThreeIconCluster class={"icons"}>
-          <Icon slot="top" name="ri:time-line" size={300} />
+          <Image
+            slot="top"
+            src={concrete}
+            alt="A photo of PRISM volunteers celebrating after a march."
+          />
           <Image
             slot="middle"
             src={boca}
@@ -60,17 +65,25 @@ const newsArticles = Array.from({ length: 8 }, () => {
         </ThreeIconCluster>
         <div class="info">
           <h1>Our History</h1>
-          <p>{faker.lorem.paragraphs(3)}</p>
+          <p>
+            {
+              "On March 29th, 2019, four students met in a classroom at Boca Raton Community High School. Feeling dejected by staff and student leadership at the Gender and Sexuality Alliance, they were deadset on getting a fresh start, creating a space where LGBTQ+ students could feel safe and affirmed. Pushed into a corner by school administration, we set our sights on expanding beyond the school to impact LGBTQ+ youth in South Florida."
+            }
+          </p>
           <a href="/our-history" class="button">Learn More</a>
         </div>
       </div>
     </div>
-    <SectionBorder type="cookie-cutter" flip backgroundColor="#74bf44" />
+    <SectionBorder type="marker" flip backgroundColor="rainbow-green" />
     <div class="our-team">
       <div class="content">
         <div class="info">
           <h1>Our Team</h1>
-          <p>{faker.lorem.paragraphs(2)}</p>
+          <p>
+            {
+              "PRISM's vital work runs on the back of a talented and dedicated team that represents the very best of what our community has to offer. Click below to learn more about them."
+            }
+          </p>
           <a href="/our-history" class="button">Learn More</a>
         </div>
         <div class="photo">
@@ -78,7 +91,7 @@ const newsArticles = Array.from({ length: 8 }, () => {
         </div>
       </div>
     </div>
-    <SectionBorder type="cookie-cutter" backgroundColor="#74bf44" />
+    <SectionBorder type="marker" backgroundColor="rainbow-green" />
     <div class="news">
       <div class="content">
         <h1>PRISM in the News</h1>
@@ -126,7 +139,7 @@ const newsArticles = Array.from({ length: 8 }, () => {
         <a href="/news-and-press" class="full-width button">See All Articles</a>
       </div>
     </div>
-    <!-- <OurPartners /> -->
+    <OurPartners />
   </main>
 </Base>
 
@@ -180,6 +193,7 @@ const newsArticles = Array.from({ length: 8 }, () => {
   .our-history {
     background-size: 2000px;
 
+    padding: 4rem 0;
     .content {
       display: flex;
 

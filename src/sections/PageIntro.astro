@@ -47,9 +47,10 @@ const { title, description, image, pointBackTo, ...props } = Astro.props;
   .container {
     max-width: var(--xl);
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 2rem;
-    padding: 3rem 0;
+    padding: 3rem 1rem;
     color: var(--fg-color);
 
     .text {
@@ -80,11 +81,20 @@ const { title, description, image, pointBackTo, ...props } = Astro.props;
     }
 
     .image {
-      width: 25%;
+      width: 100%;
       img {
         width: 100%;
         height: 100%;
         object-fit: contain;
+      }
+    }
+  }
+
+  @include breakpoint-up(md) {
+    .container {
+      flex-direction: row;
+      .image {
+        width: 25%;
       }
     }
   }
