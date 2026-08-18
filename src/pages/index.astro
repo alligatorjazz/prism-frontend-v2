@@ -50,36 +50,35 @@ import sti from "@assets/img/stickers/blood_drop-sticker.png";
     ><slot name="header"><h1 class="cards-header">Get Involved</h1></slot
     ></ColoredHeader
   >
-
-  <AlternatingRibbons
-    ribbons={[
-      {
-        title: "Outreach",
-        color: "var(--rainbow-orange)",
-        description: faker.lorem.sentences(2),
-        link: "/outreach",
-      },
+  <StickersWithHeader
+    title="test"
+    backgroundImage={ruledBg}
+    stickers={[
+      { title: "Outreach", image: sti, href: "/outreach", hideArrow: true },
       {
         title: "Policy",
-        color: "var(--rainbow-red)",
-        description: faker.lorem.sentences(2),
-        link: "/policy",
+        image: sti,
+        href: "/policy",
+        arrow: "top-right",
+        hideArrow: true,
       },
       {
         title: "Creative Fellowship",
-        color: "var(--rainbow-green)",
-        description: faker.lorem.sentences(2),
-        link: "/creative-fellowship",
+        image: sti,
+        href: "/creative-fellowship",
+        arrow: "bottom-right",
+        hideArrow: true,
       },
       {
         title: "Student Ambassador Program",
-        color: "var(--rainbow-purple)",
-        description: faker.lorem.sentences(2),
-        link: "/psap",
+        image: sti,
+        href: "/psap",
+        arrow: "top-right",
+        hideArrow: true,
       },
     ]}
-    backgroundImage={ruledBg.src}
   />
+
   <EventsWithHeader title="Upcoming Events" } backgroundImage={ruledBg.src} />
   <!-- <OurPartners /> -->
 </Base>
