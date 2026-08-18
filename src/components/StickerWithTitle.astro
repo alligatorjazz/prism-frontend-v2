@@ -68,6 +68,7 @@ const { title, image, arrow, href } = Astro.props;
       font-size: 2rem;
       text-align: center;
       p {
+        margin: 0;
         color: var(--text-color);
       }
     }
@@ -93,17 +94,17 @@ const { title, image, arrow, href } = Astro.props;
     /* orientations */
     &.bottom-right {
       .arrow {
-        bottom: 10%;
-        right: -25%;
-        rotate: 10deg;
+        bottom: 0%;
+        right: -35%;
+        rotate: -10deg;
       }
     }
 
     &.bottom-left {
       .arrow {
-        bottom: 15%;
-        left: -25%;
-        rotate: -10deg;
+        bottom: 0%;
+        left: -35%;
+        rotate: 10deg;
         transform: scaleX(-1);
       }
     }
@@ -111,9 +112,18 @@ const { title, image, arrow, href } = Astro.props;
     &.top-left {
       flex-direction: column-reverse;
       .arrow {
-        top: 15%;
-        left: -25%;
+        top: 0%;
+        left: -35%;
         transform: scaleX(-1) scaleY(-1);
+      }
+    }
+
+    &.top-right {
+      flex-direction: column-reverse;
+      .arrow {
+        top: 0%;
+        right: -35%;
+        transform: scaleY(-1);
       }
     }
 
