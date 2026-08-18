@@ -1,25 +1,25 @@
 ---
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
-import arrow from "@assets/img/arrow7.png";
+import arrowImage from "@assets/img/arrow7.png";
 
 export interface StickerProps {
   title: string;
   image: ImageMetadata;
-  outlineTransform?: string;
+  arrow?: "bottom-left" | "bottom-right" | "top-left" | "top-right" | "none";
   href: string;
 }
 
 type Props = StickerProps;
-const { title, image, outlineTransform, href } = Astro.props;
+const { title, image, arrow, href } = Astro.props;
 ---
 
-<a class="container" href={href}>
+<a class:list={["container", arrow ?? "none"]} href={href}>
   <div class="sticker">
     <Image src={image} alt={title} class={"image"} />
   </div>
-  <div class="arrow">
-    <Image src={arrow} alt={""} class={"image"} />
+  <div class:list={["arrow"]}>
+    <Image src={arrowImage} alt={""} class={"image"} />
   </div>
   <div class="label">
     <p>{title}</p>
@@ -28,7 +28,8 @@ const { title, image, outlineTransform, href } = Astro.props;
 
 <style>
   a.container {
-    display: block;
+    display: flex;
+    flex-direction: column;
     text-decoration: none;
     --transition: all 300ms;
     transition: var(--transition);
@@ -54,11 +55,6 @@ const { title, image, outlineTransform, href } = Astro.props;
     .arrow {
       width: 50%;
       position: absolute;
-      & {
-        bottom: 15%;
-        right: -25%;
-        rotate: 10deg;
-      }
       img {
         width: 100%;
         max-width: 100%;
@@ -91,6 +87,39 @@ const { title, image, outlineTransform, href } = Astro.props;
       .sticker {
         rotate: 0deg;
         filter: drop-shadow(2px 2px 5px var(--text-color));
+      }
+    }
+
+    /* orientations */
+    &.bottom-right {
+      .arrow {
+        bottom: 10%;
+        right: -25%;
+        rotate: 10deg;
+      }
+    }
+
+    &.bottom-left {
+      .arrow {
+        bottom: 15%;
+        left: -25%;
+        rotate: -10deg;
+        transform: scaleX(-1);
+      }
+    }
+
+    &.top-left {
+      flex-direction: column-reverse;
+      .arrow {
+        top: 15%;
+        left: -25%;
+        transform: scaleX(-1) scaleY(-1);
+      }
+    }
+
+    &.none {
+      .arrow {
+        display: none;
       }
     }
   }
