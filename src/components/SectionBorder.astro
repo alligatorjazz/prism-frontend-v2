@@ -1,10 +1,7 @@
 ---
-import sprayPaintBorder from "@assets/img/png-border-blue.png";
 import { getImage } from "astro:assets";
-import CssFilterConverter from "css-filter-converter";
-import Color from "color";
-import waveLeft from "@assets/img/borders/wave-border-left.svg";
-import waveRight from "@assets/img/borders/wave-border-right.svg";
+import waveLeft from "@assets/img/borders/wave-left.svg";
+import waveRight from "@assets/img/borders/wave-right.svg";
 
 interface Props {
   type: "spray-paint" | "wave-left" | "wave-right" | "marker";
@@ -32,13 +29,23 @@ const imageBorders = import.meta.glob<{ default: ImageMetadata }>(
 const selectedBorderPath = Object.keys(imageBorders).find((key) =>
   key.includes(`${type}-${backgroundColor}`),
 );
-if (!selectedBorderPath) {
+if (!selectedBorderPath && type !== "wave-left" && type !== "wave-right") {
   throw new Error(
     "Could not find selected border for " + `${type}-${backgroundColor}`,
   );
 }
-const selectedBorderObject = await imageBorders[selectedBorderPath]();
-const selectedBorder = await getImage({ src: selectedBorderObject.default });
+const selectedBorderObject =
+  type === "wave-right" || type === "wave-left"
+    ? null
+    : await imageBorders[selectedBorderPath ?? ""]();
+const selectedBorder = selectedBorderObject
+  ? await getImage({ src: selectedBorderObject.default })
+  : null;
+const mask = `url("${type === "wave-left" ? waveLeft.src : waveRight.src}")`;
+const bg =
+  type === "wave-right" || type === "wave-left"
+    ? `var(--${backgroundColor})`
+    : undefined;
 ---
 
 <div class:list={["container", flip ? "flipped" : ""]}>
@@ -47,14 +54,14 @@ const selectedBorder = await getImage({ src: selectedBorderObject.default });
     style={{
       backgroundImage:
         type === "spray-paint" || type === "marker"
-          ? `url(${selectedBorder.src})`
+          ? `url(${selectedBorder?.src})`
           : undefined,
     }}
   >
   </div>
 </div>
 
-<style define:vars={{ "wave-border": `url(${selectedBorder.src})` }}>
+<style define:vars={{ mask, bg }}>
   .container {
     position: relative;
     height: 0;
@@ -104,7 +111,8 @@ const selectedBorder = await getImage({ src: selectedBorderObject.default });
   .border.wave-left,
   .border.wave-right {
     position: relative;
-    mask: var(--wave-border);
+    background-color: var(--bg);
+    mask: var(--mask);
     mask-size: 100% auto;
     mask-repeat: no-repeat;
     height: 7rem;
