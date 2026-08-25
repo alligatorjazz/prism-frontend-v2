@@ -5,7 +5,10 @@ import LeadershipProgramCard from "@components/LeadershipProgramCard.astro";
 import { faker } from "@faker-js/faker";
 
 // TODO: Replace with actual images from @assets/img/
-const fellowshipImage = faker.image.urlPicsumPhotos({ width: 400, height: 250 });
+const fellowshipImage = faker.image.urlPicsumPhotos({
+  width: 400,
+  height: 250,
+});
 const psapImage = faker.image.urlPicsumPhotos({ width: 400, height: 250 });
 const yacImage = faker.image.urlPicsumPhotos({ width: 400, height: 250 });
 ---
@@ -14,7 +17,8 @@ const yacImage = faker.image.urlPicsumPhotos({ width: 400, height: 250 });
   <div class="section-content">
     <h2>Specialized Leadership Programs</h2>
     <p class="intro">
-      Capstone programs for committed youth leaders ready to take ownership and drive PRISM's mission forward.
+      Capstone programs for committed youth leaders ready to take ownership and
+      drive PRISM's mission forward.
     </p>
     <div class="programs-grid">
       <LeadershipProgramCard
@@ -85,7 +89,6 @@ const yacImage = faker.image.urlPicsumPhotos({ width: 400, height: 250 });
   .leadership-programs-section {
     padding: 4rem 2rem;
     background: var(--bg-color);
-
     .section-content {
       max-width: 1200px;
       margin: 0 auto;
@@ -94,6 +97,7 @@ const yacImage = faker.image.urlPicsumPhotos({ width: 400, height: 250 });
         text-align: center;
         font-size: 2.5rem;
         margin-bottom: 1rem;
+        color: var(--fg-color);
       }
 
       .intro {
@@ -102,6 +106,7 @@ const yacImage = faker.image.urlPicsumPhotos({ width: 400, height: 250 });
         margin: 0 auto 3rem auto;
         font-size: 1.1rem;
         line-height: 1.6;
+        color: var(--fg-color);
       }
 
       .programs-grid {

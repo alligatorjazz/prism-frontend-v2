@@ -4,6 +4,7 @@ import PageIntro from "@sections/PageIntro.astro";
 import SectionBorder from "@components/SectionBorder.astro";
 import { getItems } from "@api/wix";
 import ruledPaper from "@assets/img/ruled-bg.png";
+import ScribbleSeparator from "@components/ScribbleSeparator.astro";
 
 interface Partner {
   _id: string;
@@ -158,10 +159,8 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
           )
         }
       </div>
+      <ScribbleSeparator />
     </section>
-
-    <SectionBorder type="marker" backgroundColor="rainbow-purple" flip />
-    <SectionBorder type="marker" backgroundColor="rainbow-purple" />
 
     <section
       id="donors"
@@ -371,7 +370,7 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
       article {
         background: linear-gradient(
           var(--youth-yellow-2),
-          var(--youth-yellow-1) 10%
+          var(--youth-yellow-1) 45%
         );
         padding: 1.5rem;
         display: flex;
@@ -381,6 +380,7 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
         height: 100%;
         transition: transform 0.2s ease;
 
+        filter: drop-shadow(1px 45%1px 1px var(--text-color));
         &:hover {
           transform: translateY(-4px);
           filter: drop-shadow(5px 5px 5px var(--text-color));
@@ -393,6 +393,7 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
           display: flex;
           align-items: center;
           justify-content: center;
+          font-family: var(--handwriting);
 
           img {
             width: 100%;
@@ -405,7 +406,7 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
             border-radius: 50%;
             color: white;
             font-size: 2rem;
-            font-family: var(--header-font);
+            font-family: var(--handwriting);
             font-weight: bold;
           }
         }
@@ -419,9 +420,10 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
             color: var(--text-color);
             text-decoration: none;
 
-            &:hover {
-              text-decoration: underline;
-            }
+            font-family: var(--handwriting);
+            /* &:hover { */
+            /*   text-decoration: underline; */
+            /* } */
           }
         }
       }

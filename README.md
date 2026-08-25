@@ -19,14 +19,14 @@
 - [ ] Add paint stroke texture to the borders ???
 
 ## Our Team Page
-- [ ] Something that evokes a yearbook
-- [ ] Staff full info is on separate pages with headshot, personality pic, and field pic
+- [x] Something that evokes a yearbook
+- [x] Staff full info is on separate pages with headshot, personality pic, and field pic
 
 ## Our Partners Page
-- [ ] Drop shadow should already be visible
-- [ ] Gradient should be a bit more gradual
+- [x] Drop shadow should already be visible
+- [x] Gradient should be a bit more gradual
 - [ ] Top should stay in place on hover
-- [ ] Handwritten font
+- [x] Handwritten font
 - [ ] Not having font underlined on hover
 - [ ] Dividing line between organizations and donors should be a handdrawn line
 - [ ] Replace previous and next with handrawn arrows
