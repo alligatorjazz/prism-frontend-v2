@@ -90,6 +90,7 @@
 │   │       ├──  blue-book.png
 │   │       ├──  blurry-concrete.jpg
 │   │       ├──  boca-raton-hs.avif
+│   │       ├──  BocaRatonHS1.avif
 │   │       ├──  book-sticker.png
 │   │       ├──  Book_edited.png
 │   │       ├──  Book_edited_edited.png
@@ -124,31 +125,7 @@
 │   │       │   ├──  spray-paint-youth-yellow-2.png
 │   │       │   ├──  spray-paint-youth-yellow-3.png
 │   │       │   ├──  spray-paint.png
-│   │       │   ├── 󰕙 wave-left-activist-aqua.svg
-│   │       │   ├── 󰕙 wave-left-bold-black.svg
-│   │       │   ├── 󰕙 wave-left-rainbow-blue.svg
-│   │       │   ├── 󰕙 wave-left-rainbow-green.svg
-│   │       │   ├── 󰕙 wave-left-rainbow-orange.svg
-│   │       │   ├── 󰕙 wave-left-rainbow-purple.svg
-│   │       │   ├── 󰕙 wave-left-rainbow-red.svg
-│   │       │   ├── 󰕙 wave-left-rainbow-yellow.svg
-│   │       │   ├── 󰕙 wave-left-witty-white.svg
-│   │       │   ├── 󰕙 wave-left-youth-yellow-1.svg
-│   │       │   ├── 󰕙 wave-left-youth-yellow-2.svg
-│   │       │   ├── 󰕙 wave-left-youth-yellow-3.svg
 │   │       │   ├── 󰕙 wave-left.svg
-│   │       │   ├── 󰕙 wave-right-activist-aqua.svg
-│   │       │   ├── 󰕙 wave-right-bold-black.svg
-│   │       │   ├── 󰕙 wave-right-rainbow-blue.svg
-│   │       │   ├── 󰕙 wave-right-rainbow-green.svg
-│   │       │   ├── 󰕙 wave-right-rainbow-orange.svg
-│   │       │   ├── 󰕙 wave-right-rainbow-purple.svg
-│   │       │   ├── 󰕙 wave-right-rainbow-red.svg
-│   │       │   ├── 󰕙 wave-right-rainbow-yellow.svg
-│   │       │   ├── 󰕙 wave-right-witty-white.svg
-│   │       │   ├── 󰕙 wave-right-youth-yellow-1.svg
-│   │       │   ├── 󰕙 wave-right-youth-yellow-2.svg
-│   │       │   ├── 󰕙 wave-right-youth-yellow-3.svg
 │   │       │   └── 󰕙 wave-right.svg
 │   │       ├──  centerlink-badge.png
 │   │       ├──  computer-yellow.avif
@@ -161,6 +138,7 @@
 │   │       ├──  florida-minus-sfl.avif
 │   │       ├──  giving-icon.avif
 │   │       ├──  giving-sticker.png
+│   │       ├──  growing-team.avif
 │   │       ├──  gsa-network.avif
 │   │       ├──  hands-with-heart.avif
 │   │       ├──  icons
@@ -251,56 +229,6 @@
 │   │       │   └──  WLW.png
 │   │       ├──  laptop-sticker.png
 │   │       ├──  logos
-│   │       │   ├──  alphabet
-│   │       │   │   ├──  Characters.cclibs
-│   │       │   │   └──  Font
-│   │       │   │       ├── 󰕙 (.svg
-│   │       │   │       ├── 󰕙 ).svg
-│   │       │   │       ├── 󰕙 0.svg
-│   │       │   │       ├── 󰕙 1.svg
-│   │       │   │       ├── 󰕙 2.svg
-│   │       │   │       ├── 󰕙 3.svg
-│   │       │   │       ├── 󰕙 4.svg
-│   │       │   │       ├── 󰕙 5.svg
-│   │       │   │       ├── 󰕙 6.svg
-│   │       │   │       ├── 󰕙 7.svg
-│   │       │   │       ├── 󰕙 8.svg
-│   │       │   │       ├── 󰕙 9.svg
-│   │       │   │       ├── 󰕙 _.svg
-│   │       │   │       ├── 󰕙 A.svg
-│   │       │   │       ├── 󰕙 'Asset 1.svg'
-│   │       │   │       ├── 󰕙 B.svg
-│   │       │   │       ├── 󰕙 C.svg
-│   │       │   │       ├── 󰕙 D.svg
-│   │       │   │       ├── 󰕙 E.svg
-│   │       │   │       ├── 󰕙 F.svg
-│   │       │   │       ├── 󰕙 G.svg
-│   │       │   │       ├── 󰕙 H.svg
-│   │       │   │       ├── 󰕙 I.svg
-│   │       │   │       ├── 󰕙 J.svg
-│   │       │   │       ├── 󰕙 K.svg
-│   │       │   │       ├── 󰕙 L.svg
-│   │       │   │       ├── 󰕙 M.svg
-│   │       │   │       ├── 󰕙 N.svg
-│   │       │   │       ├── 󰕙 O.svg
-│   │       │   │       ├── 󰕙 P.svg
-│   │       │   │       ├── 󰕙 Q.svg
-│   │       │   │       ├── 󰕙 R.svg
-│   │       │   │       ├── 󰕙 S.svg
-│   │       │   │       ├── 󰕙 T.svg
-│   │       │   │       ├── 󰕙 U.svg
-│   │       │   │       ├── 󰕙 V.svg
-│   │       │   │       ├── 󰕙 W.svg
-│   │       │   │       ├── 󰕙 X.svg
-│   │       │   │       ├── 󰕙 Y.svg
-│   │       │   │       └── 󰕙 Z.svg
-│   │       │   ├──  animated
-│   │       │   │   ├──  'Icon Animated.gif'
-│   │       │   │   ├──  'Icon Animated Border.mp4'
-│   │       │   │   ├──  'Icon Looping Shifted.gif'
-│   │       │   │   ├──  'Logo Animated Border.mp4'
-│   │       │   │   ├──  'Logo Animated No Border.mov'
-│   │       │   │   └──  'Logo Animated No Border.mp4'
 │   │       │   ├──  backgrounds
 │   │       │   │   ├──  'Logo (Background).png'
 │   │       │   │   ├──  'Logo (Background) hirez.png'
@@ -380,6 +308,8 @@
 │   │       ├──  ruled-bg.png
 │   │       ├──  scale.avif
 │   │       ├──  sfl.avif
+│   │       ├──  smile-march.avif
+│   │       ├──  speaking.avif
 │   │       ├──  stickers
 │   │       │   ├──  ace_circle-sticker.png
 │   │       │   ├──  ace_flag-sticker.png
@@ -396,7 +326,7 @@
 │   │       │   ├──  blood_drop-sticker.png
 │   │       │   ├──  book-sticker.png
 │   │       │   ├──  calendar-sticker.png
-│   │       │   ├──  charity_1__non_vector-sticker.png
+│   │       │   ├──  charity_1-sticker.png
 │   │       │   ├──  charity_1__non_vector___0-sticker.png
 │   │       │   ├──  charity_2__non_vector-sticker.png
 │   │       │   ├──  charity_2__non_vector___0-sticker.png
@@ -466,6 +396,7 @@
 │   │       │   ├──  vote-sticker.png
 │   │       │   ├──  white_pc-sticker.png
 │   │       │   └──  wlw-sticker.png
+│   │       ├──  taking-2-schools.avif
 │   │       ├──  tape-img.png
 │   │       ├──  team-group-photo-faw-26.jpg
 │   │       ├──  torn-notebook-paper.png
@@ -482,9 +413,9 @@
 │   │   ├──  LongFlag.astro
 │   │   ├──  MembershipTier.astro
 │   │   ├──  MetadataLoader.astro
+│   │   ├──  Modal.astro
 │   │   ├──  Navbar.astro
 │   │   ├──  NavLinks.astro
-│   │   ├──  PageHeader.astro
 │   │   ├──  Polaroid.astro
 │   │   ├──  SectionBorder.astro
 │   │   ├──  StickerWithTitle.astro
@@ -510,6 +441,7 @@
 │   │   ├──  creative-fellowship.astro
 │   │   ├──  donate.astro
 │   │   ├──  events.astro
+│   │   ├──  get-involved.astro
 │   │   ├──  index.astro
 │   │   ├──  movement-builders-business.astro
 │   │   ├──  movement-builders-monthly.astro
