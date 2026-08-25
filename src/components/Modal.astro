@@ -1,0 +1,108 @@
+---
+interface Props {
+  direction?: "top" | "bottom" | "left" | "right";
+  id?: string;
+}
+
+const { direction = "top", id } = Astro.props;
+---
+
+<div class="modal-backdrop" data-direction={direction} data-modal-id={id}>
+  <div class="modal-panel">
+    <slot />
+  </div>
+</div>
+
+<script>
+  const initModals = () => {
+    const backdrops = document.querySelectorAll<HTMLElement>(".modal-backdrop");
+
+    backdrops.forEach((backdrop) => {
+      backdrop.addEventListener("click", (e) => {
+        if (e.target === backdrop) {
+          backdrop.removeAttribute("open");
+        }
+      });
+    });
+
+    document.addEventListener("open-modal", ((e: CustomEvent) => {
+      const { id } = e.detail ?? {};
+      if (!id) return;
+      const backdrop = document.querySelector<HTMLElement>(
+        `.modal-backdrop[data-modal-id="${id}"]`,
+      );
+      if (backdrop) {
+        backdrop.setAttribute("open", "");
+      }
+    }) as EventListener);
+
+    document.addEventListener("close-modal", ((e: CustomEvent) => {
+      const { id } = e.detail ?? {};
+      if (!id) return;
+      const backdrop = document.querySelector<HTMLElement>(
+        `.modal-backdrop[data-modal-id="${id}"]`,
+      );
+      if (backdrop) {
+        backdrop.removeAttribute("open");
+      }
+    }) as EventListener);
+  };
+
+  document.addEventListener("DOMContentLoaded", initModals);
+</script>
+
+<style lang="scss">
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+
+    &[open] {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .modal-panel {
+    transition: transform 0.3s ease;
+  }
+
+  /* --- Slide-in directions (closed state) --- */
+  .modal-backdrop[data-direction="top"] .modal-panel {
+    transform: translateY(-120%);
+  }
+  .modal-backdrop[open][data-direction="top"] .modal-panel {
+    transform: translateY(0);
+  }
+
+  .modal-backdrop[data-direction="bottom"] .modal-panel {
+    transform: translateY(120%);
+  }
+  .modal-backdrop[open][data-direction="bottom"] .modal-panel {
+    transform: translateY(0);
+  }
+
+  .modal-backdrop[data-direction="left"] .modal-panel {
+    transform: translateX(-120%);
+  }
+  .modal-backdrop[open][data-direction="left"] .modal-panel {
+    transform: translateX(0);
+  }
+
+  .modal-backdrop[data-direction="right"] .modal-panel {
+    transform: translateX(120%);
+  }
+  .modal-backdrop[open][data-direction="right"] .modal-panel {
+    transform: translateX(0);
+  }
+</style>
