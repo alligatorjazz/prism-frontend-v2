@@ -1,0 +1,175 @@
+---
+// src/pages/privacy-policy.astro
+// Content sourced from: https://www.prismfl.org/privacy-policy
+import Base from "@templates/Base.astro";
+import { faker } from "@faker-js/faker";
+
+// TODO: Replace with actual image from @assets/img/
+const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
+---
+
+<Base
+  pageMetadata={{
+    title: "Privacy Policy",
+    description:
+      "PRISM FL's privacy policy explaining how we collect, use, and protect your personal information.",
+    type: "website",
+    image: heroImage,
+    "image:alt": "PRISM FL Privacy Policy",
+  }}
+>
+  <main>
+    <section class="policy-content">
+      <div class="content-wrapper">
+        <p>
+          We receive, collect and store any information you enter on our website
+          or provide us in any other way. In addition, we collect the Internet
+          protocol (IP) address used to connect your computer to the Internet;
+          login; e-mail address; password; computer and connection information,
+          and purchase history. We may use software tools to measure and collect
+          session information, including page response times, length of visits
+          to certain pages, page interaction information, and methods used to
+          browse away from the page. We also collect personally identifiable
+          information (including name, email, password, communications); payment
+          details (including credit card information), comments, feedback,
+          product reviews, recommendations, and personal profile.
+        </p>
+
+        <p>
+          When you conduct a transaction, RSVP for a meeting, fill out a
+          volunteer application, or create an account on our website, as part of
+          the process, we collect the personal information you give us such as
+          your name, address, and email address. Your personal information will
+          be used for the specific reasons stated above only.
+        </p>
+
+        <p>
+          We collect such Non-personal and Personal Information for the
+          following purposes:
+        </p>
+
+        <ol>
+          <li>To provide and operate our services;</li>
+          <li>
+            To provide our Users with ongoing customer assistance and technical
+            support;
+          </li>
+          <li>
+            To be able to contact our Visitors and Users with general or
+            personalized service-related notices and promotional messages;
+          </li>
+          <li>
+            To create aggregated statistical data and other aggregated and/or
+            inferred Non-personal Information, which we or our business partners
+            may use to provide and improve our respective services;
+          </li>
+          <li>To comply with any applicable laws and regulations.</li>
+        </ol>
+
+        <p>
+          Our company is hosted on the Wix.com platform. Wix.com provides us
+          with an online platform that allows us to carry out our charitable
+          purposes, as well as sell our products to you. Your data may be stored
+          through Wix.com's data storage, databases, and the general Wix.com
+          applications. They store your data on secure servers behind a
+          firewall.
+        </p>
+
+        <p>
+          All direct payment gateways offered by Wix.com and used by our company
+          adhere to the standards set by PCI-DSS as managed by the PCI Security
+          Standards Council, which is a joint effort of brands like Visa,
+          MasterCard, American Express, and Discover. PCI-DSS requirements help
+          ensure the secure handling of credit card information by our store and
+          its service providers.
+        </p>
+
+        <p>
+          We may contact you to notify you regarding your account, to
+          troubleshoot problems with your account, to resolve a dispute, to
+          collect fees or monies owed, to poll your opinions through surveys or
+          questionnaires, to send updates about our company, or as otherwise
+          necessary to contact you to enforce our User Agreement, applicable
+          national laws, and any agreement we may have with you. For these
+          purposes, we may contact you via email, telephone, text messages, and
+          postal mail.
+        </p>
+
+        <p>
+          If you would like to: access, correct, amend or delete any personal
+          information we have about you, you are invited to contact us at <a
+            href="mailto:info@prismfl.org">info@prismfl.org</a
+          >.
+        </p>
+
+        <p>
+          If you don't want us to process your data anymore, please contact us
+          at <a href="mailto:info@prismfl.org">info@prismfl.org</a>.
+        </p>
+
+        <p>
+          We reserve the right to modify this privacy policy at any time, so
+          please review it frequently. Changes and clarifications will take
+          effect immediately upon their posting on the website. If we make
+          material changes to this policy, we will notify you here that it has
+          been updated, so that you are aware of what information we collect,
+          how we use it, and under what circumstances, if any, we use and/or
+          disclose it.
+        </p>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "../styles/utils" as *;
+
+  main {
+    padding: 0;
+  }
+
+  .policy-content {
+    padding: 4rem 2rem;
+    background: var(--bg-color);
+
+    .content-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--fg-color);
+      padding: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      p {
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+        color: var(--text-color);
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      ol {
+        margin: 1.5rem 0;
+        padding-left: 2rem;
+
+        li {
+          margin-bottom: 0.75rem;
+          line-height: 1.6;
+          color: var(--text-color);
+        }
+      }
+
+      a {
+        color: var(--rainbow-purple);
+        text-decoration: underline;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+</style>

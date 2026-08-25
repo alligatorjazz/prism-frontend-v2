@@ -1,8 +1,9 @@
 ---
+// src/components/Footer.astro
 import { Image } from "astro:assets";
-import logo from "../assets/img/prism-logo-primary.png";
-import centerLink from "../assets/img/centerlink-badge.png";
 import { Icon } from "astro-icon/components";
+import logo from "@assets/img/prism-logo-primary.png";
+import centerLink from "@assets/img/centerlink-badge.png";
 ---
 
 <footer>
@@ -14,6 +15,7 @@ import { Icon } from "astro-icon/components";
     <div class="contact">
       <p>Phone: (561) 291-9207</p>
       <p>Email: info@prismfl.org</p>
+      <a href="/privacy-policy">Privacy Policy</a>
       <ul class="socials">
         <li>
           <a name="placeholder" href="https://discord.gg/nHuWYXkpr6"
@@ -112,6 +114,32 @@ import { Icon } from "astro-icon/components";
       .socials {
         display: flex;
         justify-content: space-evenly;
+      }
+    }
+
+    .disclaimer {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--fg-color);
+      font-size: 0.875rem;
+      line-height: 1.5;
+
+      p {
+        margin-bottom: 1rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      a {
+        color: var(--fg-color);
+        text-decoration: underline;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+          opacity: 0.8;
+        }
       }
     }
   }
