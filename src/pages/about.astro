@@ -13,6 +13,10 @@ import SectionBorder from "@components/SectionBorder.astro";
 import OurPartners from "../sections/OurPartners.astro";
 import florida from "@assets/img/florida-minus-sfl.avif";
 import sfl from "@assets/img/sfl.avif";
+import book from "@assets/img/blue-book.png";
+import scale from "@assets/img/scale.avif";
+import flag from "@assets/img/rainbow-flag.avif";
+import blood from "@assets/img/blood-drop.png";
 
 const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).src})`;
 
@@ -67,7 +71,51 @@ const newsArticles = Array.from({ length: 8 }, () => {
       </div>
     </div>
     <SectionBorder type="marker" backgroundColor="rainbow-blue" />
-
+    <div class="what-we-do">
+      <div class="content">
+        <h1>What We Do</h1>
+        <div class="work">
+          <div class="programs">
+            <a href="/404">
+              <div>
+                <Image src={book} alt="dummy" />
+              </div>
+              <p>
+                We have loads of articles on sexual health, LGBTQ+ history, POC
+                issues, and more! Find these under Learn and on our social
+                feeds.
+              </p>
+            </a>
+            <a href="/404">
+              <div>
+                <Image src={scale} alt="dummy" />
+              </div>
+              <p>
+                Critical policy advocacy {faker.lorem.words(23)}.
+              </p>
+            </a>
+            <a href="/404">
+              <div>
+                <Image src={blood} alt="dummy" />
+              </div>
+              <p>
+                We provide information on free and low-cost STI testing
+                resources through our STI Clinic Search.
+              </p>
+            </a>
+            <a href="/404">
+              <div>
+                <Image src={flag} alt="dummy" />
+              </div>
+              <p>
+                We support youth and campus activism {faker.lorem.words(15)}.
+              </p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <SectionBorder type="marker" backgroundColor="rainbow-red" />
     <div class="our-history" style={{ backgroundImage: ruledPaper }}>
       <div class="content">
         <ThreeIconCluster class={"icons"}>
@@ -241,6 +289,60 @@ const newsArticles = Array.from({ length: 8 }, () => {
         h1 {
           font-weight: bold;
           font-size: 3rem;
+        }
+      }
+    }
+  }
+  .what-we-do {
+    background-color: var(--rainbow-red);
+    .content {
+      color: var(--fg-color);
+      h1 {
+        font-size: 3rem;
+      }
+      p {
+        font-size: 1.5rem;
+      }
+      h1,
+      p {
+        text-align: center;
+      }
+      .programs {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        a {
+          transition: all 300ms;
+          background-color: var(--rainbow-red);
+          flex: 1;
+          display: flex;
+          align-items: center;
+          padding: 1rem;
+          /* border-radius: var(--round-edge); */
+          border: 1px solid var(--fg-color);
+          div {
+            width: 250px;
+            height: 250px;
+            padding: 1rem;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+            }
+          }
+          p {
+            min-width: 250px;
+            flex: 1;
+            font-size: 1.25rem;
+            text-align: right;
+          }
+
+          &:hover {
+            filter: drop-shadow(5px 5px 1px var(--text-color));
+          }
         }
       }
     }

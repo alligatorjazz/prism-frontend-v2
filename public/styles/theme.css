@@ -39,3 +39,17 @@ h2,
 h3 {
   font-family: var(--header-font);
 }
+
+a {
+  text-decoration: none;
+}
+
+p > a {
+  text-decoration: underline;
+  color: var(--accent-color);
+}
+
+a:visited {
+  color: inherit;
+  text-decoration: inherit;
+}
