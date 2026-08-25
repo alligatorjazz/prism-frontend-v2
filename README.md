@@ -27,9 +27,9 @@
 - [x] Gradient should be a bit more gradual
 - [ ] Top should stay in place on hover
 - [x] Handwritten font
-- [ ] Not having font underlined on hover
-- [ ] Dividing line between organizations and donors should be a handdrawn line
-- [ ] Replace previous and next with handrawn arrows
+- [x] Not having font underlined on hover
+- [x] Dividing line between Organizations and donors should be a handdrawn line
+- [x] Replace previous and next with handrawn arrows
 
 ## Get Involved Page
 - [ ] Explain volunteer vs member vs leader
