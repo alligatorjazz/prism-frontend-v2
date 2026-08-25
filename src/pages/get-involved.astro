@@ -4,13 +4,16 @@
 import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
 import SectionBorder from "@components/SectionBorder.astro";
+import TornPaperBox from "@components/TornPaperBox.astro";
 import LadderOfEngagement from "@components/LadderOfEngagement.astro";
 import CoreTracks from "@sections/CoreTracks.astro";
 import LeadershipPrograms from "@sections/LeadershipPrograms.astro";
 import { faker } from "@faker-js/faker";
 
+import ruledBg from "@assets/img/ruled-bg.png";
 // TODO: Replace with actual images from @assets/img/
 const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
+const backgroundImage = `url(${ruledBg.src})`;
 ---
 
 <Base
@@ -28,11 +31,11 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
     <!-- Based on: Membership Model - Section 1: Leadership Pipeline -->
     <LadderOfEngagement />
 
-    <SectionBorder backgroundColor="rainbow-red" type="spray-paint" />
+    <SectionBorder backgroundColor="youth-yellow-2" type="marker" />
 
     <!-- How to Get Started -->
     <!-- Based on: Membership Model - Section 6: Onboarding Process -->
-    <section class="get-started-section">
+    <section class="get-started-section" style={{ backgroundImage }}>
       <div class="section-content">
         <h2>How to Get Started</h2>
         <div class="steps">
@@ -72,52 +75,50 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
       </div>
     </section>
 
-    <SectionBorder backgroundColor="rainbow-red" type="spray-paint" />
+    <SectionBorder backgroundColor="youth-yellow-2" flip type="marker" />
 
     <!-- Core Tracks -->
     <!-- Based on: Membership Model - Section 3: Core Track Pathways -->
     <CoreTracks />
 
-    <SectionBorder backgroundColor="rainbow-red" type="spray-paint" />
+    <SectionBorder backgroundColor="youth-yellow-2" type="marker" />
 
     <!-- Leadership Programs -->
     <!-- Based on: Membership Model - Section 4: Specialized Leadership Programs -->
     <LeadershipPrograms />
 
-    <SectionBorder backgroundColor="rainbow-red" type="spray-paint" />
-
     <!-- 2026 Recruitment Goals -->
     <!-- Based on: Membership Model - Section 7: 2026 Recruitment Strategy -->
-    <section class="recruitment-section">
-      <div class="section-content">
-        <h2>2026 Recruitment Goals</h2>
-        <p class="goal">
-          We're looking for <strong>50 new volunteers</strong> to join our movement
-          this year!
-        </p>
-        <div class="recruitment-channels">
-          <div class="channel">
-            <span class="percentage">50%</span>
-            <h3>Community Events</h3>
-            <p>25 recruits through festivals, social mixers, and QR signups</p>
-          </div>
-          <div class="channel">
-            <span class="percentage">30%</span>
-            <h3>In-School (P-SAP)</h3>
-            <p>15 recruits through peer-to-peer organizing via GSA leaders</p>
-          </div>
-          <div class="channel">
-            <span class="percentage">20%</span>
-            <h3>Social Media (CCTF)</h3>
-            <p>10 recruits through interactive campaigns with direct CTAs</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- <section class="recruitment-section"> -->
+    <!--   <div class="section-content"> -->
+    <!--     <h2>2026 Recruitment Goals</h2> -->
+    <!--     <p class="goal"> -->
+    <!--       We're looking for <strong>50 new volunteers</strong> to join our movement -->
+    <!--       this year! -->
+    <!--     </p> -->
+    <!--     <div class="recruitment-channels"> -->
+    <!--       <div class="channel"> -->
+    <!--         <span class="percentage">50%</span> -->
+    <!--         <h3>Community Events</h3> -->
+    <!--         <p>25 recruits through festivals, social mixers, and QR signups</p> -->
+    <!--       </div> -->
+    <!--       <div class="channel"> -->
+    <!--         <span class="percentage">30%</span> -->
+    <!--         <h3>In-School (P-SAP)</h3> -->
+    <!--         <p>15 recruits through peer-to-peer organizing via GSA leaders</p> -->
+    <!--       </div> -->
+    <!--       <div class="channel"> -->
+    <!--         <span class="percentage">20%</span> -->
+    <!--         <h3>Social Media (CCTF)</h3> -->
+    <!--         <p>10 recruits through interactive campaigns with direct CTAs</p> -->
+    <!--       </div> -->
+    <!--     </div> -->
+    <!--   </div> -->
+    <!-- </section> -->
 
     <!-- Final CTA -->
     <section class="final-cta">
-      <div class="section-content">
+      <TornPaperBox class="section-content">
         <h2>Ready to Make a Difference?</h2>
         <p>
           Join PRISM and help us create a more inclusive South Florida for
@@ -126,7 +127,7 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
         <a href="/volunteer-interest" class="cta-button primary"
           >Get Started Today</a
         >
-      </div>
+      </TornPaperBox>
     </section>
   </main>
 </Base>
@@ -157,7 +158,7 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
         margin-bottom: 3rem;
 
         .step {
-          background: var(--fg-color);
+          background: var(--youth-yellow-2);
           padding: 2rem;
           /* border-radius: 12px; */
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -171,7 +172,8 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
             height: 60px;
             background: var(--rainbow-purple);
             color: white;
-            /* border-radius: 50%; */
+            border-radius: 50%;
+            filter: drop-shadow(1px 1px 1px var(--text-color));
             font-size: 1.5rem;
             font-weight: bold;
             margin-bottom: 1rem;
@@ -229,7 +231,7 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
         .channel {
           background: var(--fg-color);
           padding: 2rem;
-          border-radius: 12px;
+          /* border-radius: 12px; */
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
           .percentage {
@@ -266,7 +268,6 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
       var(--rainbow-purple)
     );
     text-align: center;
-    color: white;
 
     .section-content {
       max-width: 800px;
@@ -283,11 +284,9 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
       }
 
       .cta-button {
-        background: white;
-        color: var(--rainbow-purple);
-
         &:hover {
           background: var(--fg-color);
+          color: var(--youth-yellow-2);
         }
       }
     }
@@ -296,7 +295,7 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
   .cta-button {
     display: inline-block;
     padding: 1rem 2rem;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     text-decoration: none;
     font-weight: 600;
     transition: all 0.2s ease;

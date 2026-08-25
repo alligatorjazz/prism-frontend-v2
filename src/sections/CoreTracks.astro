@@ -7,14 +7,47 @@ import { faker } from "@faker-js/faker";
 // TODO: Replace with actual images from @assets/img/
 const outreachImage = faker.image.urlPicsumPhotos({ width: 400, height: 300 });
 const policyImage = faker.image.urlPicsumPhotos({ width: 400, height: 300 });
-const operationsImage = faker.image.urlPicsumPhotos({ width: 400, height: 300 });
+const operationsImage = faker.image.urlPicsumPhotos({
+  width: 400,
+  height: 300,
+});
+
+type Tier = {
+  level: number;
+  name: string;
+  description: string;
+  gateway?: string;
+};
+
+const tiers: Tier[] = [
+  {
+    level: 1,
+    name: "Volunteer",
+    description: "Mobilized for action. Attends events, tabling, phone banks.",
+    gateway: "Gateway: Quarterly Orientation OR 1:1 intake",
+  },
+  {
+    level: 2,
+    name: "Member",
+    description:
+      "Actively engaged organizer. Attends All-Member Trainings and participates in a Core Track.",
+    gateway: "Gateway: 1:1 intake + track selection",
+  },
+  {
+    level: 3,
+    name: "Leader",
+    description:
+      "Takes ownership of initiatives. Mobilizes others, conducts peer 1:1s, hosts events, manages projects.",
+  },
+];
 ---
 
 <section class="core-tracks-section">
   <div class="section-content">
-    <h2>Core Track Pathways</h2>
+    <h2>Ways to Plug In</h2>
     <p class="intro">
-      Once Volunteers become Members, they specialize in one of three Core Tracks. Each track offers distinct activities, skills development, and leadership opportunities.
+      PRISM membership is divided into different core tracks. Each track offers
+      distinct activities, skills development, and leadership opportunities.
     </p>
     <div class="tracks-grid">
       <CoreTrackCard
@@ -48,7 +81,7 @@ const operationsImage = faker.image.urlPicsumPhotos({ width: 400, height: 300 })
         link="/policy"
       />
       <CoreTrackCard
-        title="People's Operations"
+        title="People Ops"
         icon="🤝"
         color="var(--rainbow-aqua, #00bcd4)"
         description="Internal Base-Building. The backbone of community; member retention, engagement, and safety."
@@ -64,17 +97,32 @@ const operationsImage = faker.image.urlPicsumPhotos({ width: 400, height: 300 })
       />
     </div>
   </div>
+  <h1>Levels of Engagement</h1>
+  <div class="tiers">
+    {
+      tiers.map((tier) => (
+        <div class={`tier tier-${tier.level}`}>
+          <div class="tier-header">
+            <span class="tier-number">Tier {tier.level}</span>
+            <h3>{tier.name}</h3>
+          </div>
+          <p class="tier-description">{tier.description}</p>
+        </div>
+      ))
+    }
+  </div>
 </section>
 
 <style lang="scss">
   .core-tracks-section {
     padding: 4rem 2rem;
-    background: var(--bg-color);
+    background: var(--youth-yellow-2);
 
     .section-content {
       max-width: 1200px;
       margin: 0 auto;
 
+      margin-bottom: 4rem;
       h2 {
         text-align: center;
         font-size: 2.5rem;
@@ -93,6 +141,79 @@ const operationsImage = faker.image.urlPicsumPhotos({ width: 400, height: 300 })
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         gap: 2rem;
+      }
+    }
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .tier {
+      background: var(--fg-color);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: linear-gradient(
+          90deg,
+          var(--rainbow-red),
+          var(--rainbow-orange),
+          var(--rainbow-yellow),
+          var(--rainbow-green),
+          var(--rainbow-blue),
+          var(--rainbow-purple)
+        );
+      }
+
+      .tier-header {
+        margin-bottom: 1rem;
+
+        .tier-number {
+          display: block;
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: var(--rainbow-purple);
+          margin-bottom: 0.25rem;
+        }
+
+        h3 {
+          margin: 0;
+          font-size: 1.75rem;
+          color: var(--text-color);
+        }
+      }
+
+      .tier-description {
+        margin: 0 0 1rem 0;
+        line-height: 1.6;
+        color: var(--text-color);
+      }
+
+      .tier-gateway {
+        margin: 0;
+        padding: 0.75rem;
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--rainbow-blue);
       }
     }
   }
