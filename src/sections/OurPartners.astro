@@ -1,69 +1,194 @@
 ---
-import { getItems } from "../api/wix";
-import Carousel from "../components/Carousel.astro";
-import ContentWithHeader from "./ContentWithHeader.astro";
+// src/components/OurPartners.astro
+// Mini version of the full our-partners page
+// Shows first 5 organization partners with a link to see all
+import { Image } from "astro:assets";
+import ruledPaper from "@assets/img/ruled-paper.png";
+import { getItems } from "@api/wix";
+import ruledBg from "@assets/img/ruled-bg.png";
 
-interface Props {
-  imageWidth?: number;
-  imageHeight?: number;
-  autoScrollInterval?: number;
+// Fetch organization partners via Wix API
+// Based on: our-partners.astro data fetching pattern
+const allPartners = await getItems("Partners");
+const partners = allPartners.slice(0, 5);
+
+function wixImageUrl(wixImage: string | undefined): string | undefined {
+  if (!wixImage) return undefined;
+  const match = wixImage.match(/wix:image:\/\/v1\/([^/]+)\/[^#]+/);
+  return match ? `https://static.wixstatic.com/media/${match[1]}` : undefined;
 }
-
-const {
-  imageWidth = 225,
-  imageHeight = 225,
-  autoScrollInterval = 3000,
-} = Astro.props;
-
-/**
- * Converts a Wix internal image URI into a public HTTPS URL.
- *
- * Wix Media Manager images use the format:
- *   wix:image://v1/{mediaId}/{displayName}#originWidth=W&originHeight=H
- *
- * The static URL is: https://static.wixstatic.com/media/{mediaId}
- * (see: https://forum.wixstudio.com/t/create-a-url-for-a-media-file-the-truth-about-getfileurl/36548)
- */
-function wixImageToUrl(wixImageUri: string): string {
-  const match = wixImageUri.match(/^wix:image:\/\/v1\/([^/]+)\//);
-  if (!match) return wixImageUri; // already a URL or unrecognized format
-  return `https://static.wixstatic.com/media/${match[1]}`;
-}
-
-const partners = await getItems("Partners");
-
-const carouselItems = partners
-  .filter((partner) => partner.logo)
-  .map((partner) => ({
-    image: wixImageToUrl(partner.logo),
-    alt: partner.title || "Partner logo",
-    href: partner.website || undefined,
-  }));
+const backgroundImage = `url(${ruledBg.src})`;
 ---
 
-<ContentWithHeader title="Our Partners" color="white" background="black">
-  <p>
-    PRISM prides itself in being a collaborative member of the LGBT community in
-    South Florida. See some of our partners below! These organizations,
-    businesses, and individuals have shown their steadfast commitment to our
-    motto: "For Every Color, For Everyone" through partnered events, fundraising
-    initiatives, grants, sponsorships, and other collaborations.
-  </p>
-  <Carousel
-    items={carouselItems}
-    imageWidth={imageWidth}
-    imageHeight={imageHeight}
-    autoScrollInterval={autoScrollInterval}
-  />
-</ContentWithHeader>
-<style>
-  .our-partners {
-    width: 100%;
-    padding: 2rem 0;
+<section class="our-partners-mini" style={{ backgroundImage }}>
+  <div class="container">
+    <h2>Our Partners</h2>
+    <p class="intro">
+      PRISM prides itself in being a collaborative member of the LGBT community
+      in South Florida. These organizations, businesses, and individuals have
+      shown their steadfast commitment to our motto: "For Every Color, For
+      Everyone" through partnered events, fundraising initiatives, grants,
+      sponsorships, and other collaborations.
+    </p>
+
+    <ul class="grid">
+      {
+        partners.map((partner) => {
+          const logoUrl = wixImageUrl(partner.logo);
+
+          return (
+            <li>
+              <article>
+                {logoUrl ? (
+                  <div class="logo">
+                    <img src={logoUrl} alt={`${partner.title} logo`} />
+                  </div>
+                ) : (
+                  <div class="logo placeholder">
+                    <span>{partner.title[0]}</span>
+                  </div>
+                )}
+                <h3>
+                  {partner.website ? (
+                    <a
+                      href={partner.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {partner.title}
+                    </a>
+                  ) : (
+                    partner.title
+                  )}
+                </h3>
+              </article>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <div class="cta">
+      <a href="/our-partners" class="see-all"> See All Partners → </a>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .our-partners-mini {
+    background-size: 2000px;
+    background-repeat: repeat-y;
+    background-position: top center;
+    padding: 4rem 0;
   }
 
-  .our-partners h2 {
+  .container {
+    max-width: var(--xl);
+    margin: auto;
+    padding: 0 1rem;
+  }
+
+  h2 {
+    font-size: 2rem;
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+
+    li {
+      article {
+        background: linear-gradient(
+          var(--youth-yellow-2),
+          var(--youth-yellow-1) 45%
+        );
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        height: 100%;
+        transition: transform 0.2s ease;
+        filter: drop-shadow(1px 1px 1px var(--text-color));
+
+        &:hover {
+          transform: translateY(-4px);
+          filter: drop-shadow(5px 5px 5px var(--text-color));
+          cursor: pointer;
+        }
+
+        .logo {
+          width: 120px;
+          height: 120px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--handwriting);
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+
+          &.placeholder {
+            background-color: var(--rainbow-purple);
+            border-radius: 50%;
+            color: white;
+            font-size: 2rem;
+            font-family: var(--handwriting);
+            font-weight: bold;
+          }
+        }
+
+        h3 {
+          font-size: 1.25rem;
+          text-align: center;
+          margin: 0;
+
+          a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-family: var(--handwriting);
+          }
+        }
+      }
+    }
+  }
+
+  .cta {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .see-all {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--rainbow-purple);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
   }
 </style>

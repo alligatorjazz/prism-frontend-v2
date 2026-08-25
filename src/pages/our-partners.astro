@@ -1,10 +1,12 @@
 ---
+import arrow from "@assets/img/pagination-arrow.png";
 import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
 import SectionBorder from "@components/SectionBorder.astro";
 import { getItems } from "@api/wix";
 import ruledPaper from "@assets/img/ruled-bg.png";
 import ScribbleSeparator from "@components/ScribbleSeparator.astro";
+import { Image } from "astro:assets";
 
 interface Partner {
   _id: string;
@@ -143,7 +145,7 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
               aria-label="Organizations pagination"
             >
               <button class="prev" data-page="-1" disabled>
-                Previous
+                <Image src={arrow} alt="Previous Page" />
               </button>
               <span class="status">
                 Page <span class="current">1</span> of {orgsTotalPages}
@@ -153,7 +155,7 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
                 data-page="+1"
                 disabled={orgsTotalPages <= 1}
               >
-                Next
+                <Image src={arrow} class="flip" alt="Previous Page" />
               </button>
             </nav>
           )
@@ -231,7 +233,7 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
               aria-label="Donors pagination"
             >
               <button class="prev" data-page="-1" disabled>
-                Previous
+                <Image src={arrow} alt="Previous Page" />
               </button>
               <span class="status">
                 Page <span class="current">1</span> of {donorsTotalPages}
@@ -241,7 +243,7 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
                 data-page="+1"
                 disabled={donorsTotalPages <= 1}
               >
-                Next
+                <Image src={arrow} class="flip" alt="Next Page" />
               </button>
             </nav>
           )
@@ -459,5 +461,9 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
         cursor: default;
       }
     }
+  }
+
+  img.flip {
+    transform: rotate(180deg);
   }
 </style>
