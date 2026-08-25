@@ -1,18 +1,18 @@
 ---
-import PageIntro from "../sections/PageIntro.astro";
-import ThreeIconCluster from "../components/ThreeIconCluster.astro";
+import ThreeIconCluster from "@components/ThreeIconCluster.astro";
 import Base from "../templates/Base.astro";
-import prismLogo from "../assets/img/prism-logo-primary.png";
 import { Icon } from "astro-icon/components";
-import boca from "../assets/img/boca-raton-hs.avif";
-import concrete from "../assets/img/blurry-concrete.jpg";
-import march from "../assets/img/early-march.avif";
+import boca from "@assets/img/boca-raton-hs.avif";
+import concrete from "@assets/img/blurry-concrete.jpg";
+import march from "@assets/img/early-march.avif";
 import { Image, getImage } from "astro:assets";
-import ruledBg from "../assets/img/ruled-bg.png";
+import ruledBg from "@assets/img/ruled-bg.png";
 import { faker } from "@faker-js/faker";
-import teamPhoto from "../assets/img/team-group-photo-faw-26.jpg";
-import SectionBorder from "../components/SectionBorder.astro";
+import teamPhoto from "@assets/img/team-group-photo-faw-26.jpg";
+import SectionBorder from "@components/SectionBorder.astro";
 import OurPartners from "../sections/OurPartners.astro";
+import florida from "@assets/img/florida-minus-sfl.avif";
+import sfl from "@assets/img/sfl.avif";
 
 const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).src})`;
 
@@ -41,13 +41,33 @@ const newsArticles = Array.from({ length: 8 }, () => {
     "image:alt": "test",
   }}
 >
-  <PageIntro
-    title={"About Us"}
-    description={"We envision a community where race, ethnicity, sexual orientation, gender identity, and gender expression are not deciding factors in young people’s ability to maintain their physical, sexual, and mental health."}
-    image={{ ...prismLogo }}
-  />
   <main>
-    <SectionBorder type="spray-paint" backgroundColor="activist-aqua" />
+    <div class="who-we-are">
+      <div class="content">
+        <div class="florida">
+          <Image src={florida} alt="" />
+          <Image src={sfl} alt="" />
+        </div>
+        <div class="text">
+          <h1>Who We Are</h1>
+          <p>
+            PRISM works to expand access to LGBTQ-inclusive education and sexual
+            health resources for youth in South Florida. It's our goal to make
+            sure everyone feels included in their community, regardless of race,
+            ethnicity, religion, sexual orientation, gender identity, or gender
+            expression.
+          </p>
+          <p>
+            We envision a community where race, ethnicity, sexual orientation,
+            gender identity, and gender expression are not deciding factors in
+            young people’s ability to maintain their physical, sexual, and
+            mental health.
+          </p>
+        </div>
+      </div>
+    </div>
+    <SectionBorder type="marker" backgroundColor="rainbow-blue" />
+
     <div class="our-history" style={{ backgroundImage: ruledPaper }}>
       <div class="content">
         <ThreeIconCluster class={"icons"}>
@@ -187,6 +207,42 @@ const newsArticles = Array.from({ length: 8 }, () => {
       padding: 2rem;
       max-width: var(--xl);
       margin: auto;
+    }
+  }
+
+  .who-we-are {
+    background: var(--rainbow-blue);
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4rem;
+      .florida {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        flex: 1;
+        min-width: 400px;
+
+        img {
+          grid-column: 1;
+          grid-row: 1;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+      .text {
+        flex: 1;
+        font-family: var(--header-font);
+        font-size: 1.25rem;
+        color: var(--fg-color);
+        font-weight: 600;
+        h1 {
+          font-weight: bold;
+          font-size: 3rem;
+        }
+      }
     }
   }
 
