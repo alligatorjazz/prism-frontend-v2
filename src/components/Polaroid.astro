@@ -5,7 +5,8 @@ import { Image } from "astro:assets";
 import tapeImage from "@assets/img/tape-img.png";
 
 interface Props extends HTMLAttributes<"div"> {
-  image: ImageMetadata & { alt: string };
+  image:
+    (ImageMetadata & { alt: string }) | { src: ImageMetadata; alt: string };
   label?: string;
   tape?: "top" | "vertical";
 }

@@ -8,33 +8,30 @@
 
 ## About Page
 
-- [ ] Explain what PRISM is, our mission, etc
+- [x] Explain what PRISM is, our mission, etc
 
 ## Our History Page
 
-- [ ] Do something with the header
-  - [ ] Remove subheader
-- [ ] Updating images
-- [ ] Updating tape to be more realistic
-- [ ] Add paint stroke texture to the borders
+- [x] Do something with the header
+  - [x] Remove subheader
+- [x] Updating images
+- [x] Updating tape to be more realistic
+- [ ] Add paint stroke texture to the borders ???
 
 ## Our Team Page
-
 - [ ] Something that evokes a yearbook
 - [ ] Staff full info is on separate pages with headshot, personality pic, and field pic
 
 ## Our Partners Page
-
 - [ ] Drop shadow should already be visible
 - [ ] Gradient should be a bit more gradual
 - [ ] Top should stay in place on hover
 - [ ] Handwritten font
 - [ ] Not having font underlined on hover
-- [ ] Dividing line between organizations and donors should be a handrawn line
+- [ ] Dividing line between organizations and donors should be a handdrawn line
 - [ ] Replace previous and next with handrawn arrows
 
 ## Get Involved Page
-
 - [ ] Explain volunteer vs member vs leader
 - [ ] Core tracks should be cards side-by-side
   - [ ] Outreach
@@ -46,7 +43,6 @@
   - [ ] Youth Advisory Committee
 
 ## Creative Fellowship Page
-
 - [ ] Remove first description in the header and the "Who makes up the creative fellowship?" card
 - [ ] Add Alex's pic next to about the fellowship with a caption that says "Alexander Puga, Content Creation Director, leads the Creative Fellowship" with a learn more button
 - [ ] Alex needs to get images
@@ -55,7 +51,6 @@
 - [ ] Update fellow roles
 
 ## Policy Page
-
 - [ ] Remove "trainings" verbiage from tracks
 - [ ] Make track section background notebook paper with arrows connecting each card
 - [ ] Add expectations to member and leader cards

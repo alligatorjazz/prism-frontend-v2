@@ -3,6 +3,12 @@ import SectionBorder from "../components/SectionBorder.astro";
 import PageIntro from "../sections/PageIntro.astro";
 import Base from "../templates/Base.astro";
 import Polaroid from "@components/Polaroid.astro";
+import boca from "@assets/img/boca-raton-hs.avif";
+import concrete from "@assets/img/blurry-concrete.jpg";
+import march from "@assets/img/early-march.avif";
+import takingToSchools from "@assets/img/taking-2-schools.avif";
+import smileMarch from "@assets/img/smile-march.avif";
+import team from "@assets/img/growing-team.avif";
 ---
 
 <Base
@@ -19,13 +25,7 @@ import Polaroid from "@components/Polaroid.astro";
       <Polaroid
         tape="top"
         class={"image"}
-        image={{
-          src: "https://picsum.photos/500",
-          width: 500,
-          height: 500,
-          format: "webp",
-          alt: "dummy",
-        }}
+        image={{ src: boca, alt: "Boca Raton High School." }}
       />
       <div class="info">
         <h2>The Beginning</h2>
@@ -47,13 +47,7 @@ import Polaroid from "@components/Polaroid.astro";
       <Polaroid
         tape="top"
         class={"image"}
-        image={{
-          src: "https://picsum.photos/500",
-          width: 500,
-          height: 500,
-          format: "webp",
-          alt: "dummy",
-        }}
+        image={{ src: concrete, alt: "dummy" }}
       />
 
       <div class="info">
@@ -74,13 +68,7 @@ import Polaroid from "@components/Polaroid.astro";
       <Polaroid
         tape="top"
         class={"image"}
-        image={{
-          src: "https://picsum.photos/500",
-          width: 500,
-          height: 500,
-          format: "webp",
-          alt: "dummy",
-        }}
+        image={{ src: march, alt: "A picture from an early PRISM march." }}
       />
 
       <div class="info">
@@ -103,11 +91,8 @@ import Polaroid from "@components/Polaroid.astro";
         tape="top"
         class={"image"}
         image={{
-          src: "https://picsum.photos/500",
-          width: 500,
-          height: 500,
-          format: "webp",
-          alt: "dummy",
+          src: takingToSchools,
+          alt: "An image of PRISM volunteers at a restaurant.",
         }}
       />
 
@@ -128,17 +113,7 @@ import Polaroid from "@components/Polaroid.astro";
   <SectionBorder type={"wave-right"} backgroundColor="rainbow-purple" />
   <section id="team" class={"history lg"}>
     <div class="container">
-      <Polaroid
-        tape="top"
-        class={"image"}
-        image={{
-          src: "https://picsum.photos/500",
-          width: 500,
-          height: 500,
-          format: "webp",
-          alt: "dummy",
-        }}
-      />
+      <Polaroid tape="top" class={"image"} image={{ src: team, alt: "" }} />
 
       <div class="info">
         <h2>Growing The Team</h2>
@@ -161,13 +136,7 @@ import Polaroid from "@components/Polaroid.astro";
       <Polaroid
         tape="top"
         class={"image"}
-        image={{
-          src: "https://picsum.photos/500",
-          width: 500,
-          height: 500,
-          format: "webp",
-          alt: "dummy",
-        }}
+        image={{ src: smileMarch, alt: "dummy" }}
       />
 
       <div class="info">
@@ -195,11 +164,11 @@ import Polaroid from "@components/Polaroid.astro";
     align-items: center;
     gap: 2rem;
     justify-content: center;
-    padding: 2rem;
+    padding: 4rem 2rem;
     flex-wrap: wrap;
 
     .image {
-      width: 250px;
+      width: 350px;
       img {
         width: 100%;
         height: 100%;
