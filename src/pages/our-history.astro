@@ -14,7 +14,6 @@ import Polaroid from "@components/Polaroid.astro";
     "image:alt": "test",
   }}
 >
-  <PageIntro title={"Our History"} description="Learn about PRISM's history!" />
   <section id="beginning" class={"history lg"}>
     <div class="container">
       <Polaroid
@@ -196,7 +195,8 @@ import Polaroid from "@components/Polaroid.astro";
     align-items: center;
     gap: 2rem;
     justify-content: center;
-    padding: 4rem 0;
+    padding: 2rem;
+    flex-wrap: wrap;
 
     .image {
       width: 250px;
@@ -209,6 +209,7 @@ import Polaroid from "@components/Polaroid.astro";
     .info {
       flex: 1;
       color: var(--fg-color);
+      min-width: 350px;
       h2 {
         font-size: 2rem;
         font-weight: 600;
