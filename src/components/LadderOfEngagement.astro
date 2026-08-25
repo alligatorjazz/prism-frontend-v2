@@ -1,0 +1,151 @@
+---
+// src/components/LadderOfEngagement.astro
+// Based on: Membership Model - Section 1: Leadership Pipeline (Ladder of Engagement)
+
+type Tier = {
+  level: number;
+  name: string;
+  description: string;
+  gateway?: string;
+};
+
+const tiers: Tier[] = [
+  {
+    level: 1,
+    name: "Supporter",
+    description:
+      "Informed but unengaged. Follows social media, subscribes to newsletter.",
+  },
+  {
+    level: 2,
+    name: "Volunteer",
+    description: "Mobilized for action. Attends events, tabling, phone banks.",
+    gateway: "Gateway: Quarterly Orientation OR 1:1 intake",
+  },
+  {
+    level: 3,
+    name: "Member",
+    description:
+      "Actively engaged organizer. Attends All-Member Trainings and participates in a Core Track.",
+    gateway: "Gateway: 1:1 intake + track selection",
+  },
+  {
+    level: 4,
+    name: "Leader",
+    description:
+      "Takes ownership of initiatives. Mobilizes others, conducts peer 1:1s, hosts events, manages projects.",
+  },
+];
+---
+
+<div class="ladder-of-engagement">
+  <h2>The Ladder of Engagement</h2>
+  <p class="intro">
+    PRISM uses a four-tier progression model to develop engaged, empowered youth
+    leaders.
+  </p>
+  <div class="tiers">
+    {
+      tiers.map((tier) => (
+        <div class={`tier tier-${tier.level}`}>
+          <div class="tier-header">
+            <span class="tier-number">Tier {tier.level}</span>
+            <h3>{tier.name}</h3>
+          </div>
+          <p class="tier-description">{tier.description}</p>
+          {tier.gateway && <p class="tier-gateway">{tier.gateway}</p>}
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style lang="scss">
+  .ladder-of-engagement {
+    padding: 3rem 2rem;
+    background: var(--bg-color);
+
+    h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3rem auto;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+
+      .tier {
+        background: var(--fg-color);
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 6px;
+          background: linear-gradient(
+            90deg,
+            var(--rainbow-red),
+            var(--rainbow-orange),
+            var(--rainbow-yellow),
+            var(--rainbow-green),
+            var(--rainbow-blue),
+            var(--rainbow-purple)
+          );
+        }
+
+        .tier-header {
+          margin-bottom: 1rem;
+
+          .tier-number {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--rainbow-purple);
+            margin-bottom: 0.25rem;
+          }
+
+          h3 {
+            margin: 0;
+            font-size: 1.75rem;
+            color: var(--text-color);
+          }
+        }
+
+        .tier-description {
+          margin: 0 0 1rem 0;
+          line-height: 1.6;
+          color: var(--text-color);
+        }
+
+        .tier-gateway {
+          margin: 0;
+          padding: 0.75rem;
+          background: rgba(0, 0, 0, 0.05);
+          border-radius: 6px;
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: var(--rainbow-blue);
+        }
+      }
+    }
+  }
+</style>

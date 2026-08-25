@@ -1,0 +1,99 @@
+---
+// src/sections/CoreTracks.astro
+// Based on: Membership Model - Section 3: Core Track Pathways
+import CoreTrackCard from "@components/CoreTrackCard.astro";
+import { faker } from "@faker-js/faker";
+
+// TODO: Replace with actual images from @assets/img/
+const outreachImage = faker.image.urlPicsumPhotos({ width: 400, height: 300 });
+const policyImage = faker.image.urlPicsumPhotos({ width: 400, height: 300 });
+const operationsImage = faker.image.urlPicsumPhotos({ width: 400, height: 300 });
+---
+
+<section class="core-tracks-section">
+  <div class="section-content">
+    <h2>Core Track Pathways</h2>
+    <p class="intro">
+      Once Volunteers become Members, they specialize in one of three Core Tracks. Each track offers distinct activities, skills development, and leadership opportunities.
+    </p>
+    <div class="tracks-grid">
+      <CoreTrackCard
+        title="Outreach"
+        icon="📢"
+        color="var(--rainbow-orange)"
+        description="Mass Outreach & Harm Reduction. Frontline public engagement, community visibility, and high-volume initial contact."
+        activities={[
+          "Tabling at festivals and community events",
+          "Sexual health education and resource distribution",
+          "Harm-reduction resources (Naloxone, condoms, lubricants)",
+          "Social events with intentional organizing conversations",
+        ]}
+        pipeline="Volunteer (tabling, resource distribution) → Member (deeper conversations, event design) → Leader (tabling lead, social events, training)"
+        image={outreachImage}
+        link="/outreach"
+      />
+      <CoreTrackCard
+        title="Policy"
+        icon="⚖️"
+        color="var(--rainbow-red)"
+        description="Advocacy & Legislation. Legislative and advocacy engine fighting for LGBTQ+ rights, reproductive justice, and academic freedom."
+        activities={[
+          "Legislative and school board tracking",
+          "Lobbying initiatives and public testimony",
+          "Accountability programming (roundtables, town halls)",
+          "Policy research and advocacy campaigns",
+        ]}
+        pipeline="Volunteer (petitions, school board presence) → Member (public testimony, policy research) → Leader (advocacy workshops, campaign oversight, lobbying)"
+        image={policyImage}
+        link="/policy"
+      />
+      <CoreTrackCard
+        title="People's Operations"
+        icon="🤝"
+        color="var(--rainbow-aqua, #00bcd4)"
+        description="Internal Base-Building. The backbone of community; member retention, engagement, and safety."
+        activities={[
+          "Membership growth and retention",
+          "Discord community management",
+          "Relational outreach (phonebanking, wellness checks)",
+          "Event coordination and member support",
+        ]}
+        pipeline="Starts at Member tier (Discord engagement, wellness checks, recruitment) → Leader (intake 1:1s, orientations, Discord moderation)"
+        image={operationsImage}
+        link="/operations"
+      />
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .core-tracks-section {
+    padding: 4rem 2rem;
+    background: var(--bg-color);
+
+    .section-content {
+      max-width: 1200px;
+      margin: 0 auto;
+
+      h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .intro {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 3rem auto;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
+      .tracks-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+      }
+    }
+  }
+</style>
