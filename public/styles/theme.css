@@ -23,7 +23,8 @@ html {
   --handwriting: var(--crudex);
 
   --round-edge: 10px;
-  --shadow: drop-shadow(0 35px 35px rgba(0, 0, 0, 0.25));
+  --shadow: drop-shadow(0 35px 35px rgba(0, 0, 0, 0.35));
+
   --shadow-light: drop-shadow(0 35px 35px rgba(0, 0, 0, 0.125));
 }
 
