@@ -1,12 +1,14 @@
  .
 ├──  AGENTS.md
+├──  apply-changes.mjs
 ├──  astro.config.mjs
 ├──  design
 │   ├──  arrow-7.afdesign
 │   ├──  marker-border.afdesign
+│   ├──  pagination-arrow.afdesign
+│   ├──  scribble-separator.afdesign
 │   └──  wave-border.afdesign
 ├──  Dockerfile
-├──  download.js
 ├──  eslint.config.js
 ├──  file-tree.txt
 ├──  package-lock.json
@@ -299,6 +301,7 @@
 │   │       ├──  megaphone-sticker.png
 │   │       ├──  megaphone.avif
 │   │       ├──  output-onlinepngtools.png
+│   │       ├──  pagination-arrow.png
 │   │       ├──  paper-noise.png
 │   │       ├──  prism-logo-primary.png
 │   │       ├──  psap-group.avif
@@ -307,6 +310,7 @@
 │   │       ├──  'Red Book@2x.png'
 │   │       ├──  ruled-bg.png
 │   │       ├──  scale.avif
+│   │       ├──  scribble-separator.png
 │   │       ├──  sfl.avif
 │   │       ├──  smile-march.avif
 │   │       ├──  speaking.avif
@@ -405,10 +409,13 @@
 │   │   ├──  Calendar.astro
 │   │   ├──  Carousel.astro
 │   │   ├──  ColoredHeader.astro
+│   │   ├──  CoreTrackCard.astro
 │   │   ├──  EventList.scss
 │   │   ├──  EventList.tsx
 │   │   ├──  EventPage.scss
 │   │   ├──  EventPage.tsx
+│   │   ├──  LadderOfEngagement.astro
+│   │   ├──  LeadershipProgramCard.astro
 │   │   ├──  LinkCard.astro
 │   │   ├──  LongFlag.astro
 │   │   ├──  MembershipTier.astro
@@ -417,6 +424,7 @@
 │   │   ├──  Navbar.astro
 │   │   ├──  NavLinks.astro
 │   │   ├──  Polaroid.astro
+│   │   ├──  ScribbleSeparator.astro
 │   │   ├──  SectionBorder.astro
 │   │   ├──  StickerWithTitle.astro
 │   │   ├──  ThreeIconCluster.astro
@@ -452,6 +460,7 @@
 │   │   ├──  our-team.astro
 │   │   ├──  outreach.astro
 │   │   ├──  policy.astro
+│   │   ├──  privacy-policy.astro
 │   │   ├──  psap.astro
 │   │   ├──  quick-links.astro
 │   │   └──  task-forces
@@ -463,10 +472,12 @@
 │   │   ├──  CenteredPaperWithHeader.astro
 │   │   ├──  ConstrainedSection.astro
 │   │   ├──  ContentWithHeader.astro
+│   │   ├──  CoreTracks.astro
 │   │   ├──  EventsWithHeader.astro
 │   │   ├──  FlagWithTagline.astro
 │   │   ├──  Footer.astro
 │   │   ├──  HeroVideo.astro
+│   │   ├──  LeadershipPrograms.astro
 │   │   ├──  NewsletterForm.scss
 │   │   ├──  NewsletterForm.tsx
 │   │   ├──  NewsletterSignup.astro
