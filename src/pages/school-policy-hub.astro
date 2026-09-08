@@ -1,0 +1,49 @@
+---
+import Base from "../templates/Base.astro";
+import PageIntro from "@sections/PageIntro.astro";
+---
+
+<Base
+  pageMetadata={{
+    title: "Website",
+    description: "Test",
+    type: "website",
+    image: "https://picsum.photos/200",
+    "image:alt": "test",
+  }}
+  class={"page-content"}
+>
+  <PageIntro
+    title="School Policy Hub"
+    description="The School Policy Hub is your go-to guide for navigating LGBTQ+ rights and policies in Florida schools. It brings together current state laws, local district rules, and practical strategies for advocacy in Miami-Dade, Broward, and Palm Beach Counties. Whether you’re a student, parent, or educator, the Hub offers clear, accessible information to help you understand your rights, respond to challenges, and create safer school environments."
+    image={{
+      src: "https://picsum.photos/500/300",
+      width: 300,
+      height: 300,
+      alt: "placeholder",
+    }}
+    pointBackTo={{ href: "/about", label: "About" }}
+  />
+
+  <main>
+    <iframe src="https://school-policy-hub-embed.pages.dev/" class="embed"
+    ></iframe>
+  </main>
+</Base>
+
+<style>
+  .page-content {
+    background-color: var(--rainbow-blue);
+  }
+  main {
+    background: var(--rainbow-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .embed {
+      border: 0;
+      width: var(--2xl);
+      height: 1100px;
+    }
+  }
+</style>
