@@ -52,7 +52,9 @@ const background = `url("${paperNoise.src}")`;
   .container {
     width: 100%;
     height: 3.5rem;
-    background-size: 2000px;
+    * {
+      background-size: 2000px;
+    }
     mask: url("#edge");
     svg {
       width: 100%;

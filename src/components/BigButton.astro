@@ -1,0 +1,73 @@
+---
+import arrow from "@assets/img/arrow1.png";
+import type { HTMLAttributes } from "astro/types";
+import { Image } from "astro:assets";
+
+interface Props extends HTMLAttributes<"a"> {}
+
+const props = Astro.props;
+---
+
+<div class="container">
+  <div class="arrow left">
+    <Image src={arrow} alt="arrow" />
+  </div>
+  <a {...props} type="button"><slot /></a>
+  <div class="arrow right">
+    <Image src={arrow} alt="arrow" />
+  </div>
+</div>
+
+<style>
+  .container {
+    width: 100%;
+    position: relative;
+    margin: 4rem 0;
+    margin-top: 6rem;
+
+    .arrow {
+      --size: 200%;
+      width: var(--size);
+      height: var(--size);
+      position: absolute;
+
+      img {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+      }
+      &.left {
+        transform: scaleX(-1);
+        top: -100%;
+        right: -10%;
+        rotate: -60deg;
+      }
+      &.right {
+        top: -10%;
+        left: -10%;
+        transform: scaleY(-1);
+        rotate: -60deg;
+      }
+    }
+
+    a[type="button"] {
+      width: 50%;
+      margin: auto;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border-radius: var(--round-edge);
+      color: var(--fg-color);
+      transition: all 300ms;
+      text-align: center;
+      padding: 2rem;
+      cursor: pointer;
+
+      &:visited {
+        color: inherit;
+      }
+      &:hover {
+        filter: brightness(125%);
+      }
+    }
+  }
+</style>

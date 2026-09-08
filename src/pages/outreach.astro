@@ -1,15 +1,21 @@
 ---
 import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
+import ruledBg from "../assets/img/ruled-bg.png";
 import CenteredPaperWithHeader from "@sections/CenteredPaperWithHeader.astro";
 import SectionBorder from "@components/SectionBorder.astro";
 import Polaroid from "@components/Polaroid.astro";
 import { faker } from "@faker-js/faker";
 import ThreeIconCluster from "@components/ThreeIconCluster.astro";
-
+import avion from "@assets/img/team/avion.avif";
 import megaphone from "@assets/img/megaphone.avif";
 import Calendar from "@components/Calendar.astro";
 import { dummyEvents } from "./api/events";
+import { getImage } from "astro:assets";
+import TornPaperBox from "@components/TornPaperBox.astro";
+import BigButton from "@components/BigButton.astro";
+
+const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).src})`;
 ---
 
 <Base
@@ -25,36 +31,41 @@ import { dummyEvents } from "./api/events";
 >
   <PageIntro
     title="Outreach"
-    description={"The Outreach Track is the face of PRISM on the ground, responsible for community-facing events such as pride festivals, social mixers, career fairs, and more. We get the word out about PRISM’s work, educate on sexual health, gender identity, and LGBTQ+ history, and distribute essential harm-reduction resources."}
+    description={"The Outreach Track is the face of PRISM on the ground, responsible for community-facing events such as pride festivals, social mixers, career fairs, and more. We get the word out about PRISM's work, educate on sexual health, gender identity, and LGBTQ+ history, and distribute essential harm-reduction resources."}
     image={megaphone}
-    pointBackTo={{ href: "/task-forces", label: "Task Forces" }}
+    pointBackTo={{ href: "/get-involved/", label: "Get Involved" }}
     class={"intro"}
   />
 
   <main>
     <SectionBorder type="marker" backgroundColor="rainbow-orange" />
 
-    <section id="staff">
+    <section id="staff" style={{ backgroundImage: ruledPaper }}>
       <div class="container">
-        <h3>Staff</h3>
+        <h3>Meet the director of PRISM's outreach program!</h3>
         <div class="content">
           <article>
             <div class="person">
               <Polaroid
                 class="portrait"
                 image={{
-                  src: faker.image.avatarGitHub(),
+                  src: avion,
                   alt: "Portrait of Avion Goordeen",
                   format: "webp",
-                  width: 250,
-                  height: 250,
+                  width: 300,
+                  height: 300,
                 }}
                 label="Avion Goordeen"
               />
             </div>
             <div class="description">
               <h4>Outreach Director</h4>
-              <p>{faker.lorem.paragraphs(4)}</p>
+              <p>
+                {
+                  "Avion is a bisexual man and a first-generation immigrant from the Caribbean islands of Trinidad and Tobago. He has a Master's in Ocean Engineering from Florida Atlantic University and has been involved in LGBTQ+ activism and leadership since 2018. This includes working with CompassGLCC and being a member of the board of directors of Night Runners WPB. In his free time, Avion enjoys paddleboarding, photography and is currently a fan of the manga, One Piece."
+                }
+              </p>
+              <button type="button">Read More About Avion →</button>
             </div>
           </article>
         </div>
@@ -65,7 +76,7 @@ import { dummyEvents } from "./api/events";
 
     <section id="pathway">
       <div class="container">
-        <h3>Outreach Core Track Pathway</h3>
+        <h3>How to Get Involved</h3>
         <div class="tiers">
           <article>
             <span class="tier-label">Volunteer</span>
@@ -147,34 +158,50 @@ import { dummyEvents } from "./api/events";
                 </ThreeIconCluster>
               </div>
               <div class="wins">
-                <h3>Our Outreach Has Impact</h3>
-                <ul>
-                  <li>
-                    <strong>93</strong> unique volunteers mobilized across South Florida
-                  </li>
-                  <li>
-                    <strong>943.66</strong> service hours accrued by PRISM Outreach
-                  </li>
-                  <li>
-                    <strong>66</strong> outreach events hosted across the tri-county
-                    area
-                  </li>
-                </ul>
+                <TornPaperBox
+                  ><h3>Our Outreach Has Impact</h3>
+                  <ul>
+                    <li>
+                      <strong>93</strong> unique volunteers mobilized across South
+                      Florida
+                    </li>
+                    <li>
+                      <strong>943.66</strong> service hours accrued by PRISM Outreach
+                    </li>
+                    <li>
+                      <strong>66</strong> outreach events hosted across the tri-county
+                      area
+                    </li>
+                  </ul></TornPaperBox
+                >
               </div>
             </div>
           </div>
         </section>
       </div>
-
       <SectionBorder type="marker" backgroundColor="rainbow-orange" />
 
-      <section id="calendar">
-        <Calendar
-          events={dummyEvents}
-          title="Test Calendar"
-          backgroundColor={"var(--rainbow-orange)"}
-        />
+      <section id="volunteer-cta" style={{ backgroundImage: ruledPaper }}>
+        <div class="container">
+          <h3>Ready to Make a Difference?</h3>
+          <p>
+            Whether you're handing out resources at a tabling event, connecting
+            with community members at a pride festival, or helping set up for a
+            social mixer, every volunteer hour strengthens our movement.
+          </p>
+          <BigButton href="/volunteer" class="cta-button">
+            Sign Up to Volunteer
+          </BigButton>
+        </div>
       </section>
+
+      <!-- <section id="calendar"> -->
+      <!--   <Calendar -->
+      <!--     events={dummyEvents} -->
+      <!--     title="Test Calendar" -->
+      <!--     backgroundColor={"var(--rainbow-orange)"} -->
+      <!--   /> -->
+      <!-- </section> -->
     </section>
   </main>
 
@@ -193,6 +220,7 @@ import { dummyEvents } from "./api/events";
       }
 
       h3 {
+        text-align: center;
         font-size: 1.75rem;
       }
 
@@ -208,10 +236,11 @@ import { dummyEvents } from "./api/events";
     }
 
     #staff {
-      background-color: white;
       padding: 4rem 0;
+      background-size: 2100px;
 
       .content {
+        max-width: var(--lg);
         display: flex;
         align-items: center;
         gap: 1rem;
@@ -229,6 +258,7 @@ import { dummyEvents } from "./api/events";
             .portrait {
               width: 220px;
               height: 250px;
+              filter: var(--shadow);
             }
 
             .name {
@@ -242,6 +272,13 @@ import { dummyEvents } from "./api/events";
             display: flex;
             flex-direction: column;
             gap: 1rem;
+
+            button {
+              background: var(--rainbow-orange);
+              padding: 1rem;
+              font-weight: bold;
+              font-size: 1.25rem;
+            }
 
             * {
               margin: 0;
@@ -270,10 +307,10 @@ import { dummyEvents } from "./api/events";
 
       .wins {
         flex: 1 1 400px;
-        background-color: var(--fg-color);
+        /* background-color: var(--fg-color); */
         filter: var(--shadow);
+        background-size: 2000px;
         padding: 2rem;
-        border-radius: var(--round-edge);
 
         h3 {
           color: var(--text-color);
@@ -325,9 +362,28 @@ import { dummyEvents } from "./api/events";
       }
     }
 
+    #volunteer-cta {
+      padding: 4rem 0;
+      background-size: 2100px;
+
+      .container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        max-width: var(--lg);
+        p {
+          font-size: 1.5rem;
+          text-align: center;
+        }
+      }
+
+      .cta-button {
+        background-color: var(--rainbow-orange);
+      }
+    }
+
     #pathway {
       background-color: var(--rainbow-orange);
-      padding: 4rem 0;
 
       .tiers {
         display: grid;
@@ -338,6 +394,8 @@ import { dummyEvents } from "./api/events";
         article {
           border: 2px solid var(--fg-color);
           border-radius: var(--round-edge);
+          filter: var(--shadow);
+          background: var(--rainbow-orange);
           padding: 1.5rem;
           display: flex;
           flex-direction: column;
