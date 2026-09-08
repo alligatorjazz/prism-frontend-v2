@@ -1,456 +1,370 @@
 ---
 import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
-import CenteredPaperWithHeader from "@sections/CenteredPaperWithHeader.astro";
+import ruledBg from "@assets/img/ruled-bg.png";
 import SectionBorder from "@components/SectionBorder.astro";
-import Calendar from "@components/Calendar.astro";
-import ThreeIconCluster from "@components/ThreeIconCluster.astro";
 import Polaroid from "@components/Polaroid.astro";
 import { faker } from "@faker-js/faker";
+import { getImage } from "astro:assets";
+import TornPaperBox from "@components/TornPaperBox.astro";
+import speech from "@assets/img/icons/Speech.png";
 
-import ruledBg from "@assets/img/ruled-bg.png";
-import creative from "@assets/img/Book_purple.png";
+const ruledPaper = `url(${(await getImage({ src: ruledBg, format: "webp" })).src})`;
+const alexPhoto = faker.image.avatar();
 
-const dummyEvents = Array.from({ length: 12 }).map(() => ({
-  title: faker.company.catchPhrase(),
-  date: faker.date.soon({ days: 90 }).toISOString(),
-  location: faker.location.city(),
-  image: null,
-  link: faker.internet.url(),
-  source: "faker",
-  tags: faker.helpers.arrayElements(
-    ["Volunteer", "P-SAP", "Creative Fellowship", "Policy"],
-    { min: 1, max: 2 },
-  ),
-}));
+const fellowshipRoles = [
+  {
+    title: "Policy Fellow",
+    count: "3 (1 per county)",
+    description:
+      "Break down Florida legislation, school board meetings, elections, and current events into engaging, accessible stories that empower young people to understand policy and take action.",
+    quota: "2 original pieces per month",
+  },
+  {
+    title: "Community Fellow",
+    count: "3 (1 per county)",
+    description:
+      "Capture PRISM in action through event coverage, interviews, photography, and storytelling that highlights our volunteers, community partners, and organizing efforts.",
+    quota: "2 original pieces per month",
+  },
+  {
+    title: "Health Fellow",
+    count: "1",
+    description:
+      "Develop educational content focused on sexual health, HIV awareness, mental health, and community resources to make health information approachable, affirming, and accessible for young people.",
+    quota: "2-3 original pieces per month",
+  },
+  {
+    title: "Culture & Identity Fellow",
+    count: "1",
+    description:
+      "Lead monthly cultural campaigns that celebrate LGBTQ+ identities, heritage months, Pride Days, history, and community stories that foster belonging and representation.",
+    quota: "2-3 original pieces per month",
+  },
+  {
+    title: "Copy Editor & Research Fellow",
+    count: "1-2",
+    description:
+      "Ensure every piece of content is accurate, polished, and impactful by supporting research, fact-checking, copy editing, accessibility, and editorial consistency across PRISM's creative campaigns.",
+    quota: "Edit ~16 pieces per month",
+  },
+  {
+    title: "Design Fellow",
+    count: "2",
+    description:
+      "Bring PRISM's campaigns to life through engaging visual content, graphic design, and visual storytelling across print and digital to strengthen our brand and support advocacy efforts.",
+    quota: "3-4 visual assets per month",
+  },
+];
 ---
 
 <Base
   pageMetadata={{
     title: "Creative Fellowship",
     description:
-      "The Creative Fellowship is a specialized leadership program for storytellers, designers, and artists helping PRISM advance LGBTQ-inclusive education.",
+      "The PRISM Creative Fellowship is a 6-month volunteer leadership program for LGBTQ+ and allied students under 24 who are passionate about advocacy, organizing, and creative storytelling.",
     type: "website",
     image: "https://picsum.photos/200",
-    "image:alt": "test",
+    "image:alt": "Creative Fellowship",
   }}
-  class={"page-content"}
+  class="page-content"
 >
   <PageIntro
     title="Creative Fellowship"
-    description="The PRISM Creative Fellowship is a six-month leadership program for LGBTQ+ high school and college students under the age of 24 who are passionate about advocacy, organizing, and creative storytelling."
-    image={creative}
-    pointBackTo={{ href: "/task-forces", label: "Task Forces" }}
-    class={"intro"}
+    description="The PRISM Creative Fellowship is a 6-month volunteer leadership program designed for LGBTQ+ and allied students under the age of 24 who are passionate about advocacy, organizing, and creative storytelling. Fellows work alongside PRISM's team to create impactful content that educates, inspires, and mobilizes communities across South Florida."
+    image={speech}
+    pointBackTo={{ href: "/get-involved/", label: "Get Involved" }}
+    class="intro"
   />
 
   <main>
-    <!-- <CenteredPaperWithHeader title="who?"> -->
-    <!--   <h2 slot="content">Who makes up the Creative Fellowship?</h2> -->
-    <!-- </CenteredPaperWithHeader> -->
-
     <SectionBorder type="marker" backgroundColor="rainbow-green" />
 
-    <section id="about" style={{ backgroundImage: `url(${ruledBg.src})` }}>
+    <section id="staff" style={{ backgroundImage: ruledPaper }}>
       <div class="container">
-        <h3>About the Fellowship</h3>
-        <p>
-          The PRISM Creative Fellowship is a six-month leadership program for
-          LGBTQ+ high school and college students under the age of 24 who are
-          passionate about advocacy, organizing, and creative storytelling.
-        </p>
-        <p>
-          Fellows work alongside PRISM's team to create impactful content that
-          educates, inspires, and mobilizes communities across South Florida.
-        </p>
-        <p>
-          Through hands-on projects, mentorship, and workshops, Fellows develop
-          skills in writing, design, video production, research, and digital
-          advocacy while building a professional portfolio and gaining
-          real-world organizing experience.
-        </p>
-      </div>
-    </section>
-
-    <SectionBorder type="marker" backgroundColor="rainbow-green" flip />
-
-    <section id="impact">
-      <div class="container">
-        <ThreeIconCluster class={"icons"}>
-          <Polaroid
-            slot="top"
-            image={{
-              src: faker.image.urlPicsumPhotos({ width: 250, height: 250 }),
-              alt: "Creative Fellow",
-              format: "webp",
-              width: 250,
-              height: 250,
-            }}
-          />
-          <Polaroid
-            slot="middle"
-            image={{
-              src: faker.image.urlPicsumPhotos({ width: 250, height: 250 }),
-              alt: "Creative Fellow",
-              format: "webp",
-              width: 250,
-              height: 250,
-            }}
-          />
-          <Polaroid
-            slot="bottom"
-            image={{
-              src: faker.image.urlPicsumPhotos({ width: 250, height: 250 }),
-              alt: "Creative Fellow",
-              format: "webp",
-              width: 250,
-              height: 250,
-            }}
-          />
-        </ThreeIconCluster>
-
-        <div class="impact-content">
-          <h3>Impact at a Glance</h3>
-          <p class="impact-intro">
-            From July 2025 through June 2026, the Content Creation Task Force
-            transformed PRISM's digital platforms into trusted spaces for LGBTQ+
-            education, advocacy, and community engagement.
-          </p>
-
-          <div class="stats">
-            <article>
-              <span class="number">3.9M+</span>
-              <span class="label">Total Views</span>
-            </article>
-            <article>
-              <span class="number">421K+</span>
-              <span class="label">People Reached</span>
-            </article>
-            <article>
-              <span class="number">95.9K+</span>
-              <span class="label">Content Interactions</span>
-            </article>
-            <article>
-              <span class="number">3.8M+</span>
-              <span class="label">Organic Views</span>
-            </article>
-          </div>
-
-          <p>
-            Through timely educational campaigns, advocacy-focused storytelling,
-            and accessible resources, CCTF helped hundreds of thousands of
-            people better understand LGBTQ+ issues, public education, civic
-            engagement, and community organizing. These results demonstrate the
-            power of strategic storytelling to educate, mobilize, and inspire
-            action.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <SectionBorder type="marker" backgroundColor="rainbow-green" />
-
-    <section id="roles">
-      <div class="container">
-        <h3>Fellow Roles</h3>
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Role</th>
-                <th>Responsibilities</th>
-                <th>Time Commitment</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Visual Design Fellow</td>
-                <td>
-                  Creates graphics, social media assets, and print materials
-                  using Adobe Creative Cloud.
-                </td>
-                <td>5-10 hrs/week</td>
-              </tr>
-              <tr>
-                <td>Video Production Fellow</td>
-                <td>
-                  Films, edits, and produces video content for campaigns,
-                  tutorials, and event coverage.
-                </td>
-                <td>5-10 hrs/week</td>
-              </tr>
-              <tr>
-                <td>Writing Fellow</td>
-                <td>
-                  Writes blog posts, social copy, educational resources, and
-                  campaign narratives.
-                </td>
-                <td>5-10 hrs/week</td>
-              </tr>
-              <tr>
-                <td>Photography Fellow</td>
-                <td>
-                  Captures photos at events and for portraits to support PRISM's
-                  visual storytelling.
-                </td>
-                <td>Event-based</td>
-              </tr>
-              <tr>
-                <td>Brand Strategy Fellow</td>
-                <td>
-                  Helps shape messaging, campaign themes, and audience
-                  engagement strategies.
-                </td>
-                <td>3-5 hrs/week</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <section id="calendar">
-      <Calendar events={dummyEvents} title="Fellowship Calendar" />
-    </section>
-
-    <SectionBorder type="marker" backgroundColor="rainbow-green" flip />
-
-    <section id="join">
-      <div class="container">
+        <h3>Meet the Content Creation Director!</h3>
         <div class="content">
           <article>
-            <h4>Interested in becoming a Creative Fellow?</h4>
-            <p>
-              We'd love to have you! You can start by filling out a
-              <a href="/volunteer-form">Volunteer Application Form</a>
-              or contacting us directly.
-            </p>
-            <a href="/volunteer-form">Click here to apply!</a>
+            <div class="person">
+              <Polaroid
+                class="portrait"
+                image={{
+                  src: alexPhoto,
+                  alt: "Portrait of Alexander Puga",
+                  format: "webp",
+                  width: 300,
+                  height: 300,
+                }}
+                label="Alexander Puga"
+              />
+            </div>
+            <div class="description">
+              <h4>Content Creation Director</h4>
+              <p>
+                A Miami-born creative with a passion for storytelling that
+                uplifts and represents marginalized communities. With a background
+                in film, content creation, and brand strategy, Alex brings bold
+                visuals and culturally rooted narratives to life. He has led
+                campaigns for local businesses, fashion brands, and queer
+                initiatives. As Content Creation Director at PRISM, Alex is here
+                to celebrate queer voices and create space for joy and identity
+                across every platform. Outside of work, you'll find him biking
+                around the city, sweating through a workout, singing, or hanging
+                with his fiancé and their two pups, Nino and Winston.
+              </p>
+              <button type="button">Read More About Alex</button>
+            </div>
           </article>
         </div>
       </div>
     </section>
+
+    <SectionBorder type="marker" backgroundColor="rainbow-green" flip />
+
+    <section id="roles">
+      <div class="container">
+        <h3>Fellowship Roles</h3>
+        <div class="roles-grid">
+          {
+            fellowshipRoles.map((role) => (
+              <article>
+                <span class="role-label">{role.title}</span>
+                <p class="count">{role.count} fellow{role.count !== "1" ? "s" : ""}</p>
+                <p>{role.description}</p>
+                <p class="quota">
+                  <strong>Deliverables:</strong> {role.quota}
+                </p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <SectionBorder type="marker" backgroundColor="rainbow-green" />
+
+    <section id="expectations" style={{ backgroundImage: ruledPaper }}>
+      <div class="container">
+        <TornPaperBox>
+          <h3>What Fellows Gain</h3>
+          <ul>
+            <li>Serve in a 6-month volunteer leadership role</li>
+            <li>Attend weekly Creative Fellowship meetings</li>
+            <li>Participate in trainings, workshops, and educational seminars</li>
+            <li>Build a professional portfolio through real-world advocacy campaigns</li>
+            <li>Receive mentorship from nonprofit professionals and community leaders</li>
+            <li>Join PRISM's growing network of organizers, advocates, and changemakers</li>
+          </ul>
+          <h3>Eligibility</h3>
+          <ul>
+            <li>Be a current high school or college student (or equivalent)</li>
+            <li>Be 24 years old or younger at the start of the Fellowship</li>
+            <li>Live in Miami, Broward, or Palm Beach County</li>
+            <li>Have a demonstrated connection to LGBTQ+ youth organizing in Florida</li>
+            <li>Be able to commit to the full 6-month Fellowship</li>
+          </ul>
+        </TornPaperBox>
+      </div>
+    </section>
+
+    <SectionBorder type="marker" backgroundColor="rainbow-green" flip />
+
+    <section id="cta" style={{ backgroundImage: ruledPaper }}>
+      <div class="container">
+        <TornPaperBox>
+          <h3>Apply for the Creative Fellowship</h3>
+          <p>
+            Whether you're passionate about writing, photography, graphic design,
+            video production, or social media, there's a place for you in the
+            Creative Fellowship. Build your portfolio, develop your voice, and
+            help shape PRISM's message while growing as a leader and storyteller.
+          </p>
+          <a href="/apply/creative-fellowship/" class="cta-button">
+            Apply Now
+          </a>
+        </TornPaperBox>
+      </div>
+    </section>
+
+    <SectionBorder type="marker" backgroundColor="rainbow-green" />
   </main>
-</Base>
 
-<style>
-  .page-content {
-    background-color: var(--rainbow-green);
-  }
-  section {
-    padding: 4;
-  }
-
-  main {
-    margin: auto;
-    font-size: 1.25rem;
-
-    h2 {
-      font-size: 2rem;
-      text-align: center;
+  <style>
+    .page-content {
+      background-color: var(--rainbow-green);
     }
 
-    h3 {
-      font-size: 1.75rem;
-    }
-
-    h4 {
-      font-size: 1.5rem;
-    }
-  }
-
-  .container {
-    max-width: var(--xl);
-    margin: auto;
-    padding: 0 1rem;
-  }
-
-  #about {
-    background-color: var(--fg-color);
-    padding: 4rem 0;
-
-    p {
+    main {
+      margin: auto;
       font-size: 1.25rem;
-      line-height: 1.6;
-    }
-  }
 
-  #impact {
-    background-color: var(--rainbow-green);
-    padding: 4rem 0;
-    color: var(--text-color);
-
-    & > .container {
-      display: flex;
-      align-items: center;
-      gap: 3rem;
-      width: 100%;
-      justify-content: center;
-    }
-
-    .icons {
-      flex: 1;
-    }
-
-    .impact-content {
-    }
-
-    .impact-intro {
-      font-size: 1.25rem;
-      line-height: 1.6;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      margin: 2rem 0;
-
-      article {
-        background-color: var(--fg-color);
-        border-radius: var(--round-edge);
-        padding: 1.5rem;
+      h2 {
+        font-size: 2rem;
         text-align: center;
+      }
+
+      h3 {
+        text-align: center;
+        font-size: 1.75rem;
+      }
+
+      h4 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .container {
+      max-width: var(--xl);
+      margin: auto;
+      padding: 0 1rem;
+    }
+
+    #staff {
+      padding: 4rem 0;
+      background-size: 2100px;
+
+      .content {
+        max-width: var(--lg);
         display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
+        align-items: center;
+        gap: 1rem;
+        margin: auto;
+        padding: 2rem 0;
 
-        .number {
-          font-size: 2.5rem;
-          font-weight: bold;
-          font-family: var(--header-font);
-          color: var(--rainbow-green);
-        }
+        article {
+          display: flex;
+          gap: 1rem;
 
-        .label {
-          font-size: 1rem;
-          font-weight: bold;
-        }
-      }
-    }
+          .person {
+            display: flex;
+            flex-direction: column;
 
-    p {
-      font-size: 1.25rem;
-      line-height: 1.6;
-    }
-  }
+            .portrait {
+              width: 220px;
+              height: 250px;
+              filter: var(--shadow);
+            }
 
-  #education {
-    background-color: var(--fg-color);
-    padding: 4rem 0;
+            .name {
+              white-space: nowrap;
+              font-family: var(--header-font);
+              text-align: center;
+            }
+          }
 
-    p {
-      font-size: 1.25rem;
-      line-height: 1.6;
-    }
-  }
+          .description {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
 
-  #action {
-    background-color: var(--rainbow-green);
-    padding: 4rem 0;
-    color: var(--text-color);
+            button {
+              background: var(--rainbow-green);
+              padding: 1rem;
+              font-weight: bold;
+              font-size: 1.25rem;
+            }
 
-    p {
-      font-size: 1.25rem;
-      line-height: 1.6;
-    }
-  }
-
-  #roles {
-    background-color: var(--fg-color);
-    padding: 4rem 0;
-
-    h3 {
-      color: var(--text-color);
-    }
-
-    .table-wrapper {
-      overflow-x: auto;
-      margin-top: 2rem;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: var(--fg-color);
-      border-radius: var(--round-edge);
-      overflow: hidden;
-
-      th,
-      td {
-        padding: 1rem;
-        text-align: left;
-        border-bottom: 1px solid var(--rainbow-green);
-      }
-
-      th {
-        background-color: var(--text-color);
-        color: var(--fg-color);
-        font-family: var(--header-font);
-      }
-
-      td {
-        color: var(--text-color);
-      }
-
-      tr:last-child td {
-        border-bottom: none;
-      }
-    }
-  }
-
-  #calendar {
-    background-color: var(--fg-color);
-    padding: 4rem 0;
-  }
-
-  #join {
-    background-size: 2000px;
-    padding: 4rem 0;
-
-    .content {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-
-      article {
-        flex: 1;
-        min-width: 45%;
-        background-color: var(--fg-color);
-        filter: var(--shadow);
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-
-        h4 {
-          height: 2rem;
-        }
-
-        p {
-          flex: 1;
-        }
-
-        & > a:last-of-type {
-          background-color: var(--accent-color);
-          padding: 0.5rem 1rem;
-          border-radius: var(--round-edge);
-          color: var(--fg-color);
-          font-weight: bold;
-          text-align: center;
-          text-decoration: none;
-          transition: all 300ms;
-
-          &:hover {
-            filter: brightness(110%);
+            * {
+              margin: 0;
+            }
           }
         }
       }
     }
-  }
 
-  @media (min-width: 768px) {
-    #impact .stats {
-      grid-template-columns: repeat(4, 1fr);
+    #roles {
+      background-color: var(--rainbow-green);
+      padding: 4rem 0;
+
+      .roles-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+
+        article {
+          border: 2px solid var(--fg-color);
+          border-radius: var(--round-edge);
+          filter: var(--shadow);
+          background: var(--rainbow-green);
+          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+          color: var(--fg-color);
+
+          .role-label {
+            align-self: flex-start;
+            background-color: var(--text-color);
+            color: var(--fg-color);
+            font-family: var(--header-font);
+            font-weight: bold;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--round-edge);
+            text-transform: uppercase;
+            font-size: 0.875rem;
+          }
+
+          .count {
+            font-weight: 600;
+            margin: 0;
+          }
+
+          .quota {
+            font-size: 1rem;
+            margin-top: auto;
+          }
+        }
+      }
     }
-  }
-</style>
+
+    #expectations {
+      padding: 4rem 0;
+      background-size: 2100px;
+
+      .container {
+        display: flex;
+        justify-content: center;
+      }
+
+      h3 {
+        color: var(--text-color);
+      }
+
+      ul {
+        list-style: disc;
+        padding-left: 1.5rem;
+        color: var(--text-color);
+        line-height: 1.8;
+      }
+    }
+
+    #cta {
+      padding: 4rem 0;
+      background-size: 2100px;
+
+      .container {
+        display: flex;
+        justify-content: center;
+      }
+
+      .cta-button {
+        display: block;
+        background-color: var(--rainbow-green);
+        color: var(--fg-color);
+        padding: 1rem 2rem;
+        border-radius: var(--round-edge);
+        font-weight: bold;
+        font-size: 1.25rem;
+        text-align: center;
+        text-decoration: none;
+        transition: all 300ms;
+        margin-top: 1.5rem;
+
+        &:hover {
+          filter: brightness(110%);
+        }
+      }
+    }
+  </style>
+</Base>

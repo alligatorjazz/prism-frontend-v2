@@ -1,0 +1,257 @@
+---
+import Base from "@templates/Base.astro";
+import PageIntro from "@sections/PageIntro.astro";
+import ruledBg from "@assets/img/ruled-bg.png";
+import SectionBorder from "@components/SectionBorder.astro";
+import Polaroid from "@components/Polaroid.astro";
+import { faker } from "@faker-js/faker";
+import { getImage } from "astro:assets";
+import TornPaperBox from "@components/TornPaperBox.astro";
+import fist1 from "@assets/img/stickers/fist_1-sticker.png";
+
+const ruledPaper = `url(${(await getImage({ src: ruledBg, format: "webp" })).src})`;
+const maxxPhoto = faker.image.avatar();
+---
+
+<Base
+  pageMetadata={{
+    title: "Youth Advisory Committee",
+    description:
+      "The Youth Advisory Committee (YAC) is a 9-month program for nonprofit governance and board recommendations, empowering the next generation of LGBTQ+ leaders in South Florida.",
+    type: "website",
+    image: "https://picsum.photos/200",
+    "image:alt": "Youth Advisory Committee",
+  }}
+  class="page-content"
+>
+  <PageIntro
+    title="Youth Advisory Committee"
+    description="The Youth Advisory Committee (YAC) is a 9-month program designed to develop the next generation of LGBTQ+ nonprofit leaders. YAC members gain hands-on experience in nonprofit governance, strategic planning, and board leadership while making real recommendations that shape PRISM's direction and impact across South Florida."
+    image={fist1}
+    pointBackTo={{ href: "/get-involved/", label: "Get Involved" }}
+    class="intro"
+  />
+
+  <main>
+    <SectionBorder type="marker" backgroundColor="youth-yellow-2" />
+
+    <section id="staff" style={{ backgroundImage: ruledPaper }}>
+      <div class="container">
+        <h3>Meet the Executive Director!</h3>
+        <div class="content">
+          <article>
+            <div class="person">
+              <Polaroid
+                class="portrait"
+                image={{
+                  src: maxxPhoto,
+                  alt: "Portrait of Maxx Fenning",
+                  format: "webp",
+                  width: 300,
+                  height: 300,
+                }}
+                label="Maxx Fenning"
+              />
+            </div>
+            <div class="description">
+              <h4>Executive Director</h4>
+              <p>
+                A staunch advocate for LGBTQ+ rights and sexual health education,
+                Maxx is the Executive Director of PRISM. He recently earned his
+                degree in Business Administration from the University of Florida,
+                and is now pursuing a Master of Public Policy at the University
+                of Miami. He is also an active creator on TikTok, where he
+                educates on many of the same topics that PRISM addresses. In his
+                free time, Maxx enjoys singing and graphic design.
+              </p>
+              <button type="button">Read More About Maxx</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <SectionBorder type="marker" backgroundColor="youth-yellow-2" flip />
+
+    <section id="program">
+      <div class="container">
+        <h3>What is the YAC?</h3>
+        <div class="program-content">
+          <TornPaperBox>
+            <p>
+              The Youth Advisory Committee serves as a bridge between PRISM's
+              youth members and its Board of Directors. Over the course of 9
+              months, YAC members develop a deep understanding of nonprofit
+              governance, organizational strategy, and community-led
+              decision-making.
+            </p>
+            <h4>Key Components</h4>
+            <ul>
+              <li>Attend monthly YAC meetings with the YAC Chair and Executive Director</li>
+              <li>Review board governance and strategy</li>
+              <li>Make real recommendations that shape PRISM's organizational direction</li>
+              <li>Develop leadership skills in nonprofit management and governance</li>
+              <li>Connect with PRISM's Board of Directors and community partners</li>
+            </ul>
+          </TornPaperBox>
+        </div>
+      </div>
+    </section>
+
+    <SectionBorder type="marker" backgroundColor="youth-yellow-2" />
+
+    <section id="cta" style={{ backgroundImage: ruledPaper }}>
+      <div class="container">
+        <TornPaperBox>
+          <h3>Shape the Future of PRISM</h3>
+          <p>
+            The Youth Advisory Committee is where young leaders gain real
+            governance experience and make decisions that matter. If you're
+            passionate about nonprofit leadership, organizational strategy, and
+            ensuring that youth voices guide our movement, the YAC is your
+            opportunity to step up and lead from within.
+          </p>
+          <a href="/apply/yac/" class="cta-button">
+            Apply to the YAC
+          </a>
+        </TornPaperBox>
+      </div>
+    </section>
+
+    <SectionBorder type="marker" backgroundColor="youth-yellow-2" flip />
+  </main>
+
+  <style>
+    .page-content {
+      background-color: var(--youth-yellow-2);
+    }
+
+    main {
+      margin: auto;
+      font-size: 1.25rem;
+
+      h2 {
+        font-size: 2rem;
+        text-align: center;
+      }
+
+      h3 {
+        text-align: center;
+        font-size: 1.75rem;
+      }
+
+      h4 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .container {
+      max-width: var(--xl);
+      margin: auto;
+      padding: 0 1rem;
+    }
+
+    #staff {
+      padding: 4rem 0;
+      background-size: 2100px;
+
+      .content {
+        max-width: var(--lg);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: auto;
+        padding: 2rem 0;
+
+        article {
+          display: flex;
+          gap: 1rem;
+
+          .person {
+            display: flex;
+            flex-direction: column;
+
+            .portrait {
+              width: 220px;
+              height: 250px;
+              filter: var(--shadow);
+            }
+
+            .name {
+              white-space: nowrap;
+              font-family: var(--header-font);
+              text-align: center;
+            }
+          }
+
+          .description {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            button {
+              background: var(--youth-yellow-2);
+              padding: 1rem;
+              font-weight: bold;
+              font-size: 1.25rem;
+            }
+
+            * {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+
+    #program {
+      background-color: var(--youth-yellow-2);
+      padding: 4rem 0;
+
+      .program-content {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+
+      h4 {
+        color: var(--text-color);
+      }
+
+      ul {
+        list-style: disc;
+        padding-left: 1.5rem;
+        color: var(--text-color);
+        line-height: 1.8;
+      }
+    }
+
+    #cta {
+      padding: 4rem 0;
+      background-size: 2100px;
+
+      .container {
+        display: flex;
+        justify-content: center;
+      }
+
+      .cta-button {
+        display: block;
+        background-color: var(--youth-yellow-2);
+        color: var(--text-color);
+        padding: 1rem 2rem;
+        border-radius: var(--round-edge);
+        font-weight: bold;
+        font-size: 1.25rem;
+        text-align: center;
+        text-decoration: none;
+        transition: all 300ms;
+        margin-top: 1.5rem;
+
+        &:hover {
+          filter: brightness(110%);
+        }
+      }
+    }
+  </style>
+</Base>
