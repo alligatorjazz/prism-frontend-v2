@@ -1,0 +1,408 @@
+---
+import Base from "@templates/Base.astro";
+import PageIntro from "@sections/PageIntro.astro";
+import SectionBorder from "@components/SectionBorder.astro";
+import RelatedPosts from "@components/RelatedPosts.astro";
+import { faker } from "@faker-js/faker";
+import dayjs from "dayjs";
+import ruledBg from "@assets/img/ruled-bg.png";
+import book from "@assets/img/stickers/book-sticker.png";
+import { getBlogPostDetail } from "@api/wix";
+
+const slug = Astro.params.slug ?? "";
+
+const result = await getBlogPostDetail(slug);
+
+if (!result) {
+  return new Response("Post not found", { status: 404 });
+}
+
+const { post, related } = result;
+
+const published = post.date ? dayjs(post.date) : null;
+const publishedLabel = published?.isValid()
+  ? published.format("MMMM D, YYYY")
+  : "";
+const publishedIso = published?.isValid() ? published.toISOString() : undefined;
+
+const updated = post.updatedDate ? dayjs(post.updatedDate) : null;
+const updatedLabel =
+  updated?.isValid() && !sameDay(updated, published)
+    ? updated.format("MMMM D, YYYY")
+    : "";
+
+// Only show "Updated" when it actually differs from the publish date.
+function sameDay(a: dayjs.Dayjs, b: dayjs.Dayjs | null): boolean {
+  if (!b?.isValid()) return false;
+  return a.format("YYYY-MM-DD") === b.format("YYYY-MM-DD");
+}
+
+const heroImage = post.image;
+
+const description = post.excerpt || `A PRISM Learn article: ${post.title}.`;
+
+const sectionStyle = `background-image: url(${ruledBg.src});`;
+
+const readTime = `${post.readingTimeMinutes} min read`;
+
+const fallbackBreadcrumb = { href: "/learn", label: "Learn" };
+const breadcrumb = post.categories[0]
+  ? { href: post.categories[0].href, label: post.categories[0].label }
+  : fallbackBreadcrumb;
+---
+
+<Base
+  pageMetadata={{
+    title: `${post.title} | Learn`,
+    description,
+    type: "website",
+    image:
+      heroImage?.src ??
+      faker.image.urlPicsumPhotos({ width: 1200, height: 600 }),
+    "image:alt": heroImage?.alt || post.title,
+  }}
+  class={"page-content"}
+>
+  <PageIntro
+    title={post.title}
+    description={post.excerpt || description}
+    image={book}
+    pointBackTo={breadcrumb}
+  />
+
+  <SectionBorder type="marker" backgroundColor="rainbow-orange" />
+
+  <main>
+    <div class="layout">
+      <article class="post">
+        {
+          heroImage && (
+            <figure class="hero">
+              <img
+                src={heroImage.src}
+                alt={heroImage.alt || post.title}
+                decoding="async"
+              />
+            </figure>
+          )
+        }
+
+        <div class="meta">
+          {
+            publishedLabel && (
+              <time datetime={publishedIso}>{publishedLabel}</time>
+            )
+          }
+          {updatedLabel && <span class="updated">Updated {updatedLabel}</span>}
+          {post.author && <span class="author">{post.author.name}</span>}
+          <span class="reading-time">{readTime}</span>
+        </div>
+
+        {
+          post.categories.length > 0 && (
+            <ul class="categories" aria-label="Categories">
+              {post.categories.map((category) => (
+                <li>
+                  <a href={category.href}>{category.label}</a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+
+        {post.excerpt && <p class="lede">{post.excerpt}</p>}
+
+        {
+          post.contentHtml ? (
+            <div class="content" set:html={post.contentHtml} />
+          ) : post.paragraphs.length > 0 ? (
+            <div class="content">
+              {post.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </div>
+          ) : (
+            <div class="content">
+              <p class="no-content">
+                This post has no body content yet. Check back soon.
+              </p>
+            </div>
+          )
+        }
+
+        {
+          post.tags.length > 0 && (
+            <footer class="tags">
+              <h2 class="tags-heading">Tags</h2>
+              <ul>
+                {post.tags.map((tag) => (
+                  <li>
+                    <a href={tag.href}>#{tag.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </footer>
+          )
+        }
+      </article>
+
+      <RelatedPosts posts={related} currentSlug={post.slug} />
+    </div>
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "../../../styles/utils" as *;
+
+  .page-content {
+    background-color: var(--rainbow-orange);
+  }
+
+  main {
+    margin: auto;
+    font-size: 1.25rem;
+  }
+
+  .layout {
+    max-width: var(--xl);
+    margin: auto;
+    padding: 4rem 1rem;
+    display: grid;
+    /* minmax(0, ...) stops long words and URLs from blowing the grid out
+       on narrow screens. */
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .post {
+    min-width: 0;
+  }
+
+  .hero {
+    margin: 0 0 1.5rem;
+    background-color: var(--youth-yellow-1);
+
+    img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    font-family: var(--header-font);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .author {
+    font-family: var(--handwriting);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .categories {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 1.5rem;
+    padding: 0;
+
+    a {
+      display: inline-block;
+      padding: 0.15rem 0.75rem;
+      font-size: 0.9rem;
+      color: var(--witty-white);
+      background-color: var(--rainbow-purple);
+      border-radius: var(--round-edge);
+
+      &:hover {
+        background-color: var(--activist-aqua);
+      }
+    }
+  }
+
+  .lede {
+    margin: 0 0 2rem;
+    padding-bottom: 1.5rem;
+    font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+    line-height: 1.5;
+    font-weight: 500;
+    border-bottom: 2px solid var(--text-color);
+  }
+
+  /*
+   * The body is injected with set:html, so Astro never sees those elements
+   * and cannot scope them. Every selector for rendered rich content has to
+   * go through :global(), or the styles silently do nothing.
+   */
+  .content {
+    overflow-wrap: anywhere;
+
+    :global(p) {
+      margin: 0 0 1.5rem;
+      line-height: 1.7;
+    }
+
+    :global(p:last-child) {
+      margin-bottom: 0;
+    }
+
+    :global(h2),
+    :global(h3),
+    :global(h4),
+    :global(h5),
+    :global(h6) {
+      margin: 2.5rem 0 1rem;
+      font-family: var(--header-font);
+      line-height: 1.25;
+    }
+
+    :global(h2) {
+      font-size: 1.75rem;
+    }
+
+    :global(h3) {
+      font-size: 1.4rem;
+    }
+
+    :global(ul),
+    :global(ol) {
+      margin: 0 0 1.5rem;
+      padding-left: 1.5rem;
+      line-height: 1.7;
+    }
+
+    :global(li) {
+      margin-bottom: 0.5rem;
+    }
+
+    :global(blockquote) {
+      margin: 0 0 1.5rem;
+      padding: 0.5rem 0 0.5rem 1.25rem;
+      border-left: 4px solid var(--rainbow-purple);
+      font-family: var(--handwriting);
+      font-size: 1.3rem;
+
+      :global(p:last-child) {
+        margin-bottom: 0;
+      }
+    }
+
+    :global(figure) {
+      margin: 0 0 1.5rem;
+    }
+
+    :global(img),
+    :global(video) {
+      display: block;
+      width: 100%;
+      height: auto;
+      background-color: var(--youth-yellow-1);
+    }
+
+    :global(figcaption) {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    :global(.gallery) {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    :global(hr) {
+      margin: 2.5rem 0;
+      border: 0;
+      border-top: 2px solid var(--text-color);
+    }
+
+    :global(a) {
+      color: var(--rainbow-purple);
+      text-decoration: underline;
+    }
+
+    :global(pre) {
+      margin: 0 0 1.5rem;
+      padding: 1rem;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      background-color: var(--witty-white);
+    }
+  }
+
+  .no-content {
+    font-style: italic;
+    opacity: 0.75;
+  }
+
+  .tags {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--text-color);
+
+    .tags-heading {
+      margin: 0 0 0.75rem;
+      font-size: 1.25rem;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      display: inline-block;
+      padding: 0.15rem 0.75rem;
+      font-size: 0.95rem;
+      color: var(--witty-white);
+      background-color: var(--activist-aqua);
+      border-radius: var(--round-edge);
+
+      &:hover {
+        background-color: var(--rainbow-purple);
+      }
+    }
+  }
+
+  /* Two columns only once there is room for them; below this the sidebar
+     simply follows the article. */
+  @include breakpoint-up(md) {
+    .layout {
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+      gap: 3rem;
+    }
+
+    .related {
+      position: sticky;
+      /* Clears the fixed navbar when scrolled. */
+      top: 2rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    main {
+      font-size: 1.1rem;
+    }
+
+    .layout {
+      padding: 2rem 1rem 3rem;
+    }
+  }
+</style>
