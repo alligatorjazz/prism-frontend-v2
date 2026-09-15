@@ -7,6 +7,7 @@ import { faker } from "@faker-js/faker";
 import dayjs from "dayjs";
 import ruledBg from "@assets/img/ruled-bg.png";
 import book from "@assets/img/stickers/book-sticker.png";
+import { faker } from "@faker-js/faker";
 import { getBlogPostDetail } from "@api/wix";
 
 const slug = Astro.params.slug ?? "";
@@ -116,13 +117,10 @@ const breadcrumb = post.categories[0]
 
         <div class="content">
           {
-            post.paragraphs.length > 0 ? (
-              post.paragraphs.map((paragraph) => <p>{paragraph}</p>)
-            ) : (
-              <p class="no-content">
-                This post has no body content yet. Check back soon.
-              </p>
-            )
+            faker.lorem
+              .paragraphs(10)
+              .split("\n")
+              .map((paragraph) => <p>{paragraph}</p>)
           }
         </div>
 
