@@ -1,0 +1,139 @@
+---
+import { faker } from "@faker-js/faker";
+import { repeatRandom } from "@lib/index";
+
+const books = repeatRandom(
+  () => ({ title: faker.lorem.words(2), color: faker.color.hwb() }),
+  4,
+  4,
+);
+---
+
+<div class="container">
+  <ul class="books">
+    {
+      books.map(({ title, color }) => (
+        <li class="book" title={title}>
+          <div style={{ background: color }} class="side front">
+            <a href="/">{title}</a>
+          </div>
+          <div style={{ background: color }} class="side back">
+            <p>{title.split(" ")[0]}-back</p>
+          </div>
+          <div style={{ background: color }} class="side right">
+            <p>{title.split(" ")[0]}-right</p>
+          </div>
+          <div style={{ background: color }} class="side left">
+            <p>{title.split(" ")[0]}-left</p>
+          </div>
+          <div style={{ background: color }} class="side top">
+            <p>{title.split(" ")[0]}-top</p>
+          </div>
+          <div style={{ background: color }} class="side bottom">
+            <p>{title.split(" ")[0]}-bottom</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style lang="scss">
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    display: flex;
+    background-color: orange;
+    width: 100%;
+    height: 100%;
+    max-width: var(--xl);
+    margin: auto;
+  }
+
+  .books {
+    width: 60%;
+    height: 60vh;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    perspective: 500px;
+
+    padding: 8rem 0;
+
+    .book {
+      perspective-origin: center left;
+      transform-style: preserve-3d;
+      position: relative;
+      cursor: pointer;
+      transition: all 300ms;
+      &:hover {
+        transform: translateZ(25px);
+        .side {
+          filter: brightness(125%);
+        }
+      }
+      .side {
+        transition: inherit;
+        user-select: none;
+        --width: 100px;
+        --height: 250px;
+        --zh-push: translateZ(calc(var(--width) / 2));
+        --zy-push: translateZ(calc(var(--height) / 2));
+
+        position: absolute;
+        width: var(--width);
+        height: var(--height);
+        border: none;
+        right: calc(var(--width) / -2);
+        font-family: sans-serif;
+        color: white;
+        text-align: center;
+        backface-visibility: visible;
+        background-color: green;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1rem;
+
+        &.front {
+          background: rgb(0 0 0 / 100%);
+          transform: var(--zh-push);
+        }
+
+        &.back {
+          background: lime;
+          color: black;
+          transform: rotateY(180deg) var(--zh-push);
+        }
+
+        &.right {
+          background: rgb(196 0 0 / 70%);
+          transform: rotateY(90deg) var(--zh-push);
+        }
+
+        &.left {
+          background: rgb(0 0 196 / 70%);
+          transform: rotateY(-90deg) var(--zh-push);
+        }
+
+        &.top {
+          background: rgb(196 196 0 / 70%);
+          transform: rotateX(90deg) var(--zh-push);
+          height: var(--width);
+        }
+
+        &.bottom {
+          display: none;
+          background: rgb(196 0 196 / 70%);
+          transform: rotateX(-90deg) translateZ(var(--width));
+          height: var(--width);
+        }
+      }
+    }
+  }
+</style>
