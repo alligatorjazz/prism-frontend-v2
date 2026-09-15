@@ -58,12 +58,13 @@
 │       ├──  '10 Second Countdown Timer - Film Beginning [RZEf9xNogqI].webm'
 │       └──  Websitevideov3.webm
 ├── 󰂺 README.md
+├──  scripts
+│   └──  create-pages.js
 ├── 󰣞 src
 │   ├──  api
 │   │   ├──  index.ts
 │   │   └──  wix.ts
 │   ├──  assets
-│   │   ├──  arrow7.png
 │   │   ├──  fonts
 │   │   │   ├──  Crudex.otf
 │   │   │   └──  Crudex.ttf
@@ -402,10 +403,18 @@
 │   │       │   └──  wlw-sticker.png
 │   │       ├──  taking-2-schools.avif
 │   │       ├──  tape-img.png
+│   │       ├──  team
+│   │       │   ├──  alex.avif
+│   │       │   ├──  aux.avif
+│   │       │   ├──  avion.avif
+│   │       │   ├──  miles.avif
+│   │       │   └──  mv.avif
 │   │       ├──  team-group-photo-faw-26.jpg
 │   │       ├──  torn-notebook-paper.png
 │   │       └──  yellow-tile-bg.png
 │   ├──  components
+│   │   ├──  BigButton.astro
+│   │   ├──  Bookshelf.astro
 │   │   ├──  Calendar.astro
 │   │   ├──  Carousel.astro
 │   │   ├──  ColoredHeader.astro
@@ -451,6 +460,7 @@
 │   │   ├──  events.astro
 │   │   ├──  get-involved.astro
 │   │   ├──  index.astro
+│   │   ├──  learn.astro
 │   │   ├──  movement-builders-business.astro
 │   │   ├──  movement-builders-monthly.astro
 │   │   ├──  movement-builders-yearly.astro
@@ -459,13 +469,16 @@
 │   │   ├──  our-partners.astro
 │   │   ├──  our-team.astro
 │   │   ├──  outreach.astro
+│   │   ├──  people-ops.astro
+│   │   ├──  policy-hub.astro
 │   │   ├──  policy.astro
 │   │   ├──  privacy-policy.astro
 │   │   ├──  psap.astro
 │   │   ├──  quick-links.astro
-│   │   └──  task-forces
-│   │       ├──  content-creation-task-force.astro
-│   │       └──  fundraising-task-force.astro
+│   │   ├──  task-forces
+│   │   │   ├──  content-creation-task-force.astro
+│   │   │   └──  fundraising-task-force.astro
+│   │   └──  yac.astro
 │   ├──  sections
 │   │   ├──  AlternatingRibbons.astro
 │   │   ├──  CardsWithHeader.astro
