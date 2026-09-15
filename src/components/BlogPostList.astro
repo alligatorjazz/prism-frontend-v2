@@ -1,0 +1,338 @@
+---
+import { Image } from "astro:assets";
+import dayjs from "dayjs";
+import arrow from "@assets/img/pagination-arrow.png";
+import type { BlogPostSummary } from "@api/wix";
+
+interface Props {
+  posts: BlogPostSummary[];
+  title?: string;
+  itemsPerPage?: number;
+  emptyMessage?: string;
+  ariaLabel?: string;
+}
+
+const {
+  posts,
+  title,
+  itemsPerPage = 6,
+  emptyMessage = "No posts to display yet. Check back soon!",
+  ariaLabel = "Blog posts pagination",
+} = Astro.props;
+
+function chunkItems<T>(items: T[], size: number): T[][] {
+  const chunks: T[][] = [];
+
+  for (let i = 0; i < items.length; i += size) {
+    chunks.push(items.slice(i, i + size));
+  }
+
+  return chunks.length ? chunks : [[]];
+}
+
+function formatDate(value: string | Date | null | undefined): string {
+  if (!value) return "";
+
+  const date = dayjs(value);
+  return date.isValid() ? date.format("MMMM D, YYYY") : "";
+}
+
+function toIsoDate(
+  value: string | Date | null | undefined,
+): string | undefined {
+  if (!value) return undefined;
+
+  const date = dayjs(value);
+  return date.isValid() ? date.toISOString() : undefined;
+}
+
+const pages = chunkItems(posts, itemsPerPage);
+const totalPages = pages.length;
+---
+
+<div class="blog-list" data-total-pages={totalPages}>
+  {title && <h2>{title}</h2>}
+
+  <div class="slider">
+    <div class="track">
+      {
+        pages.map((pagePosts, pageIndex) => (
+          <div class="page" data-page={pageIndex + 1}>
+            {pagePosts.length > 0 ? (
+              <ul class="grid">
+                {pagePosts.map((post) => (
+                  <li>
+                    <article>
+                      <a
+                        class="cover"
+                        href={post.href}
+                        tabindex="-1"
+                        aria-hidden="true"
+                      >
+                        {post.image ? (
+                          <img
+                            src={post.image.src}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ) : (
+                          <span class="cover-placeholder" />
+                        )}
+                      </a>
+
+                      <div class="body">
+                        {formatDate(post.date) && (
+                          <time class="date" datetime={toIsoDate(post.date)}>
+                            {formatDate(post.date)}
+                          </time>
+                        )}
+
+                        <h3>
+                          <a href={post.href}>{post.title}</a>
+                        </h3>
+
+                        {post.excerpt && <p class="excerpt">{post.excerpt}</p>}
+
+                        {post.tags.length > 0 && (
+                          <ul class="tags">
+                            {post.tags.map((tag) => (
+                              <li>
+                                <a href={tag.href}>{tag.label}</a>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </article>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p class="empty">{emptyMessage}</p>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  {
+    totalPages > 1 && (
+      <nav class="pagination" aria-label={ariaLabel}>
+        <button class="prev" type="button" disabled>
+          <Image src={arrow} alt="Previous Page" />
+        </button>
+        <span class="status">
+          Page <span class="current">1</span> of {totalPages}
+        </span>
+        <button class="next" type="button">
+          <Image src={arrow} class="flip" alt="Next Page" />
+        </button>
+      </nav>
+    )
+  }
+</div>
+
+<script>
+  function initBlogList(list: HTMLElement) {
+    const track = list.querySelector(".track") as HTMLElement | null;
+    const pagination = list.querySelector(".pagination") as HTMLElement | null;
+
+    // A list with a single page renders no pagination controls at all.
+    if (!track || !pagination) return;
+
+    const totalPages = parseInt(list.dataset.totalPages || "1", 10);
+    let currentPage = 1;
+
+    const prevButton = pagination.querySelector(".prev") as HTMLButtonElement;
+    const nextButton = pagination.querySelector(".next") as HTMLButtonElement;
+    const currentLabel = pagination.querySelector(".current") as HTMLElement;
+
+    function updateButtons() {
+      prevButton.disabled = currentPage <= 1;
+      nextButton.disabled = currentPage >= totalPages;
+      currentLabel.textContent = currentPage.toString();
+    }
+
+    function goToPage(newPage: number) {
+      if (newPage < 1 || newPage > totalPages || newPage === currentPage)
+        return;
+
+      track.style.setProperty("--current-page", newPage.toString());
+
+      currentPage = newPage;
+      updateButtons();
+    }
+
+    prevButton.addEventListener("click", () => goToPage(currentPage - 1));
+    nextButton.addEventListener("click", () => goToPage(currentPage + 1));
+
+    updateButtons();
+  }
+
+  document.querySelectorAll<HTMLElement>(".blog-list").forEach(initBlogList);
+</script>
+
+<style lang="scss">
+  .blog-list {
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 0 0 2rem;
+  }
+
+  .slider {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .track {
+    display: flex;
+    width: 100%;
+    transition: transform 0.4s ease-in-out;
+    transform: translateX(calc((var(--current-page, 1) - 1) * -100%));
+  }
+
+  .page {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    /* Collapses to one column on narrow screens, no media query needed. */
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    gap: 1.5rem;
+  }
+
+  article {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1rem;
+    background-color: var(--witty-white);
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.35));
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  .cover {
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: var(--youth-yellow-1);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cover-placeholder {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(var(--youth-yellow-2), var(--rainbow-orange));
+    }
+  }
+
+  .body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1rem;
+  }
+
+  .date {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--youth-yellow-3);
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    line-height: 1.25;
+
+    a {
+      color: var(--text-color);
+    }
+  }
+
+  .excerpt {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: auto 0 0;
+    padding: 1rem 0 0;
+
+    a {
+      display: inline-block;
+      padding: 0.15rem 0.65rem;
+      font-size: 0.85rem;
+      color: var(--witty-white);
+      background-color: var(--activist-aqua);
+      border-radius: var(--round-edge);
+
+      &:hover {
+        background-color: var(--rainbow-purple);
+      }
+    }
+  }
+
+  .empty {
+    margin: 0;
+    text-align: center;
+    font-size: 1.25rem;
+  }
+
+  .pagination {
+    margin: 2rem auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.25rem;
+
+    button {
+      background: transparent;
+      border: none;
+      color: var(--text-color);
+      text-decoration: underline;
+      font-size: inherit;
+      cursor: pointer;
+
+      &:disabled {
+        pointer-events: none;
+        opacity: 0.5;
+        text-decoration: none;
+        cursor: default;
+      }
+    }
+  }
+
+  img.flip {
+    transform: rotate(180deg);
+  }
+</style>

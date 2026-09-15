@@ -1,0 +1,72 @@
+---
+import BlogPostCard from "@components/BlogPostCard.astro";
+import type { BlogPostSummary } from "@api/wix";
+
+interface Props {
+  posts: BlogPostSummary[];
+  /** Shown as the sidebar heading. */
+  heading?: string;
+  /** Slug the page is currently on, so it is excluded defensively. */
+  currentSlug?: string;
+}
+
+const { posts, heading = "Related Posts", currentSlug } = Astro.props;
+
+const visible = posts.filter((post) => post.slug !== currentSlug);
+---
+
+<aside class="related" aria-labelledby="related-heading">
+  <h2 id="related-heading">{heading}</h2>
+
+  {
+    visible.length > 0 ? (
+      <ul class="list">
+        {visible.map((post) => (
+          <BlogPostCard post={post} />
+        ))}
+      </ul>
+    ) : (
+      <p class="empty">No related posts yet.</p>
+    )
+  }
+
+  <a class="back-to-learn" href="/learn"> Browse all topics </a>
+</aside>
+
+<style lang="scss">
+  .related {
+    background-color: var(--witty-white);
+    padding: 1.25rem;
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.35));
+  }
+
+  h2 {
+    margin: 0 0 1rem;
+    padding-bottom: 0.5rem;
+    font-size: 1.25rem;
+    border-bottom: 2px solid var(--text-color);
+  }
+
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .empty {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .back-to-learn {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-family: var(--header-font);
+    font-weight: 600;
+    color: var(--text-color);
+    text-decoration: underline;
+  }
+</style>
