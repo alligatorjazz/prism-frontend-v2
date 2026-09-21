@@ -1,0 +1,49 @@
+---
+import { faker } from "@faker-js/faker";
+import Base from "@templates/Base.astro";
+import BlogArchive from "@sections/BlogArchive.astro";
+import { getBlogPostsByCategorySlug } from "@api/wix";
+
+const slug = Astro.params["category"] ?? "";
+
+const result = await getBlogPostsByCategorySlug(slug);
+
+if (!result) {
+  return new Response("Category not found", { status: 404 });
+}
+
+const { category, posts } = result;
+
+const description =
+  category.description ||
+  "Every " + category.label + " article in the PRISM Learn library.";
+
+const intro = description + " Browse the full collection below.";
+
+const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
+---
+
+<Base
+  pageMetadata={{
+    title: category.label + " | Learn",
+    description,
+    type: "website",
+    image: heroImage,
+    "image:alt": category.label + " articles on PRISM Learn",
+  }}
+  class={"page-content"}
+>
+  <BlogArchive
+    title={category.label}
+    description={intro}
+    breadcrumb={{ href: "/learn", label: "Learn" }}
+    posts={posts}
+    borderColor="rainbow-orange"
+  />
+</Base>
+
+<style lang="scss">
+  .page-content {
+    background-color: var(--rainbow-orange);
+  }
+</style>

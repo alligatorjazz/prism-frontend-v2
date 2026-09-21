@@ -1,0 +1,65 @@
+---
+import type { ComponentProps } from "astro/types";
+import PageIntro from "@sections/PageIntro.astro";
+import SectionBorder from "@components/SectionBorder.astro";
+import BlogPostList from "@components/BlogPostList.astro";
+import book from "@assets/img/stickers/book-sticker.png";
+import ruledBg from "@assets/img/ruled-bg.png";
+import type { BlogPostSummary } from "@api/wix";
+
+type BorderColor = ComponentProps<typeof SectionBorder>["backgroundColor"];
+
+interface Props {
+  title: string;
+  description: string;
+  breadcrumb: { href: string; label: string };
+  posts: BlogPostSummary[];
+  borderColor: BorderColor;
+}
+
+const { title, description, breadcrumb, posts, borderColor } = Astro.props;
+
+const ariaLabel = title + " pagination";
+const emptyMessage = title + " has no posts yet. Check back soon!";
+const sectionStyle = "background-image: url(" + ruledBg.src + ");";
+---
+
+<PageIntro
+  title={title}
+  description={description}
+  image={book}
+  pointBackTo={breadcrumb}
+/>
+
+<SectionBorder type="marker" backgroundColor={borderColor} />
+
+<main>
+  <section class="archive" aria-label={ariaLabel} style={sectionStyle}>
+    <div class="container">
+      <BlogPostList
+        posts={posts}
+        ariaLabel={ariaLabel}
+        emptyMessage={emptyMessage}
+      />
+    </div>
+  </section>
+</main>
+
+<style lang="scss">
+  main {
+    margin: auto;
+    font-size: 1.25rem;
+  }
+
+  .archive {
+    background-size: 2000px;
+    background-repeat: repeat-y;
+    background-position: top center;
+  }
+
+  .container {
+    max-width: var(--xl);
+    margin: auto;
+    padding: 4rem 1rem;
+  }
+</style>

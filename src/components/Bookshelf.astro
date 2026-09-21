@@ -1,0 +1,221 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+import sexualHealthSticker from "@assets/img/stickers/condom_package-sticker.png";
+import genderSticker from "@assets/img/stickers/genderqueer-sticker.png";
+import bookSticker from "@assets/img/stickers/book-sticker.png";
+import fistSticker from "@assets/img/stickers/fist_1-sticker.png";
+
+/**
+ * Every `link` must be `/learn/<Wix blog category slug>`.
+ *
+ * getBlogPostsByCategorySlug() resolves a slug by matching it against
+ * getBlogCategories(), so a link that does not match a published slug renders
+ * a 404 instead of a listing. The slugs in use, verified against the live
+ * Wix blog's category URLs:
+ *
+ *   /learn/sexual-health         -> "sexual-health"
+ *   /learn/gender-and-sexuality  -> "gender-and-sexuality"
+ *   /learn/lgbt-history          -> "lgbt-history"
+ *   /learn/qpoc                  -> "qpoc"
+ *
+ * Two near-misses to avoid:
+ *   - the blog category is "gender-and-sexuality", NOT the top-level
+ *     /gender-sexuality resource page;
+ *   - the blog category is "lgbt-history", NOT "lgbtq-history".
+ */
+const books: {
+  title: string;
+  link: string;
+  description: string;
+  color: string;
+  image: ImageMetadata;
+}[] = [
+  {
+    title: "Sexual Health",
+    link: "/learn/sexual-health",
+    description:
+      "Safe sex is sexy. Learn how you can make it safer and even sexier",
+    color: "pink",
+    image: sexualHealthSticker,
+  },
+  {
+    title: "Gender & Sexuality",
+    link: "/learn/gender-and-sexuality",
+    description:
+      "Perfect just the way you are. Learn all the ins and outs of gender identity and sexuality",
+    color: "var(--rainbow-blue)",
+    image: genderSticker,
+  },
+  {
+    title: "LGBTQ+ History",
+    // Was "/learn/lgbtq-history", which is not a real category.
+    link: "/learn/lgbt-history",
+    description:
+      "What led us here. From the history of the pride flag to marriage equality, learn all about the journey of our fight for equal rights",
+    color: "var(--rainbow-green)",
+    image: bookSticker,
+  },
+  {
+    title: "Queer People of Color",
+    link: "/learn/qpoc",
+    description:
+      "The history and struggles of Brown and Black Americans. Although QPOC (Queer People of Color) have been a mainstay of the LGBTQ+ movement, they face little representation in its history. Read more about their struggles and achievements here.",
+    color: "brown",
+    image: fistSticker,
+  },
+];
+---
+
+<div class="container">
+  <ul class="books">
+    {
+      books.map(({ title, color, image, link }) => (
+        <li class="book" title={title}>
+          <div style={{ background: color }} class="side front">
+            <a href={link}>{title}</a>
+          </div>
+          <div style={{ background: color }} class="side back">
+            <a href={link} />
+          </div>
+          <div style={{ background: color }} class="side right">
+            <a href={link} class="cover">
+              <Image src={image} alt={title} />
+            </a>
+          </div>
+          <div style={{ background: color }} class="side left">
+            <a href={link} class="cover">
+              <Image src={image} alt={title} />
+            </a>
+          </div>
+          <div style={{ background: color }} class="side top">
+            <a href={link} />
+          </div>
+          <div style={{ background: color }} class="side bottom">
+            <a href={link} />
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style lang="scss">
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    max-width: var(--xl);
+    margin: auto;
+  }
+
+  .books {
+    width: 60%;
+    height: 60vh;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    perspective: 250px;
+
+    padding: 8rem 0;
+
+    .book {
+      perspective-origin: center left;
+      transform-style: preserve-3d;
+      position: relative;
+      cursor: pointer;
+      transition: all 300ms;
+      &:hover {
+        transform: translateZ(25px);
+        .side {
+          filter: brightness(125%);
+        }
+      }
+      .side {
+        transition: inherit;
+        user-select: none;
+        --width: 100px;
+        --height: 250px;
+        --zh-push: translateZ(calc(var(--width) / 2));
+        --zy-push: translateZ(calc(var(--height) / 2));
+
+        position: absolute;
+        width: var(--width);
+        height: var(--height);
+        border: none;
+        right: calc(var(--width) / -2);
+        font-family: var(--header-font);
+        color: var(--text-color);
+        font-weight: bold;
+        text-align: center;
+        backface-visibility: visible;
+
+        background-color: green;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1rem;
+        border: 2px solid var(--text-color);
+
+        a {
+          color: inherit;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        &.front {
+          background: rgb(0 0 0 / 100%);
+          transform: var(--zh-push);
+        }
+
+        &.back {
+          background: lime;
+          color: black;
+          transform: rotateY(180deg) var(--zh-push);
+        }
+
+        &.right {
+          background: rgb(196 0 0 / 70%);
+          transform: rotateY(90deg) var(--zh-push);
+        }
+
+        &.left {
+          background: rgb(0 0 196 / 70%);
+          transform: rotateY(-90deg) var(--zh-push);
+        }
+
+        &.top {
+          background: rgb(196 196 0 / 70%);
+          transform: rotateX(90deg) var(--zh-push);
+          height: var(--width);
+        }
+
+        &.bottom {
+          display: none;
+          background: rgb(196 0 196 / 70%);
+          transform: rotateX(-90deg) translateZ(var(--width));
+          height: var(--width);
+        }
+
+        .cover img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+</style>

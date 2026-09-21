@@ -839,32 +839,18 @@ export interface BlogPostDetail {
 }
 
 /**
- * One post, by slug, with its body.
+ * One post, by slug.
  *
- * The body lives in `post.richContent` and is ONLY returned when the
- * RICH_CONTENT fieldset is requested — without it the field is undefined.
- * `getPostBySlug` is used because that is the form Wix documents for this
- * exact purpose:
- * https://dev.wix.com/docs/sdk/backend-modules/blog/posts/get-post-by-slug
- * https://dev.wix.com/docs/kb-only/MCP_REST_RECIPES_KB_ID/TRAIN_how-to-code-a-blog-application
+ * `fieldsets: ["RICH_CONTENT"]` is what makes `post.richContent` exist at
+ * all; without it the field is undefined and any rich-content renderer fails
+ * silently. The slug filter is used rather than getPostBySlug() so this goes
+ * through the same queryPosts call as every other function here.
  *
- * Note that getPostBySlug matches slugs case-sensitively, so a mis-cased URL
- * 404s. The queryPosts fallback below covers that, along with any API change
- * to the fieldset option.
+ * See Wix: https://dev.wix.com/docs/sdk/backend-modules/blog/posts/get-post-by-slug
+ * A queryPosts fieldset is how the Ricos document is requested:
+ * https://dev.wix.com/docs/sdk/backend-modules/blog/introduction
  */
 export async function getBlogPostBySlug(slug: string): Promise<any | null> {
-  try {
-    const response: any = await wix.posts.getPostBySlug(slug, {
-      fieldsets: ["RICH_CONTENT"],
-    });
-
-    const post = response?.post ?? response;
-
-    if (post?.id || post?.slug) return post;
-  } catch (error) {
-    console.warn("getPostBySlug failed, trying queryPosts:", slug, error);
-  }
-
   const response: any = await wix.posts.queryPosts({
     filter: { slug: { $eq: slug } },
     fieldsets: ["RICH_CONTENT"],

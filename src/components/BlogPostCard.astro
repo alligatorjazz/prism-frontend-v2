@@ -1,0 +1,107 @@
+---
+import dayjs from "dayjs";
+import type { BlogPostSummary } from "@api/wix";
+
+interface Props {
+  post: BlogPostSummary;
+  /** "row" = small thumbnail beside the text, for sidebars. */
+  variant?: "row" | "stack";
+}
+
+const { post, variant = "row" } = Astro.props;
+
+const date = post.date ? dayjs(post.date) : null;
+const published = date?.isValid() ? date.format("MMMM D, YYYY") : "";
+---
+
+<li class:list={["card", variant]}>
+  <a class="cover" href={post.href} tabindex="-1" aria-hidden="true">
+    {
+      post.image ? (
+        <img
+          src={post.image.src}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          width="160"
+          height="90"
+        />
+      ) : (
+        <span class="cover-placeholder" />
+      )
+    }
+  </a>
+
+  <div class="body">
+    {published && <time datetime={date?.toISOString()}>{published}</time>}
+    <h3><a href={post.href}>{post.title}</a></h3>
+  </div>
+</li>
+
+<style lang="scss">
+  .card {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+
+    &.stack {
+      flex-direction: column;
+    }
+  }
+
+  .cover {
+    flex: 0 0 auto;
+    display: block;
+    width: 96px;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: var(--youth-yellow-1);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cover-placeholder {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(var(--youth-yellow-2), var(--rainbow-orange));
+    }
+  }
+
+  .stack .cover {
+    width: 100%;
+  }
+
+  .body {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  time {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--youth-yellow-3);
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.3;
+
+    a {
+      color: var(--text-color);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+</style>

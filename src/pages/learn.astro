@@ -1,0 +1,42 @@
+---
+import Base from "@templates/Base.astro";
+import PageIntro from "@sections/PageIntro.astro";
+import Bookshelf from "@components/Bookshelf.astro";
+import SectionBorder from "@components/SectionBorder.astro";
+import { faker } from "@faker-js/faker";
+import ruledBg from "@assets/img/ruled-bg.png";
+
+import book from "@assets/img/stickers/book-sticker.png";
+const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
+const ruledPaper = `url(${ruledBg.src})`;
+---
+
+<Base
+  pageMetadata={{
+    title: "Learn",
+    description: "https://www.prismfl.org/learn",
+    type: "website",
+    image: heroImage,
+    "image:alt": "PRISM Get Involved",
+  }}
+  class={"page-content"}
+>
+  <PageIntro
+    title="Learn"
+    description="Here, you can find all sorts of information about relationships, gender identity, sexual orientation, STIs, LGBT history, and more. If there's a topic not covered on our site, or if you have a more specific question, you can use the chat box on the bottom corner of your screen. We'll never disclose these conversations to anyone without your consent."
+    image={book}
+    pointBackTo={{ href: "/resources", label: "Resources" }}
+    class="intro"
+  />
+
+  <main>
+    <div class="bookshelf">
+      <Bookshelf />
+    </div>
+  </main>
+</Base>
+<style>
+  .page-content {
+    background-color: var(--rainbow-orange);
+  }
+</style>
