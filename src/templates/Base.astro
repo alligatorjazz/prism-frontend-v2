@@ -8,6 +8,8 @@ import NewsletterSignup from "../sections/NewsletterSignup.astro";
 import Footer from "../sections/Footer.astro";
 import type { HTMLAttributes } from "astro/types";
 import { Font } from "astro:assets";
+import { getImage } from "astro:assets";
+import ruledBg from "@assets/img/ruled-bg.png";
 
 interface Props extends HTMLAttributes<"div"> {
   pageMetadata: SurfaceMetadata;
@@ -98,6 +100,10 @@ const routes: Route[] = [
 ];
 
 const { pageMetadata, ...props } = Astro.props;
+
+const backgrounds = {
+  "ruled-bg": `url(${(await getImage({ src: ruledBg, format: "webp" })).src})`,
+};
 ---
 
 <html lang="en">
@@ -118,15 +124,20 @@ const { pageMetadata, ...props } = Astro.props;
   </head>
   <body data-drawer="inactive" data-prev-scroll="up">
     <Navbar routes={routes} siteMetadata={siteMetadata} />
-    <div class="spacer"></div>
+    <div class="navbar-spacer"></div>
     <div {...props}><slot /></div>
     <NewsletterSignup />
     <Footer />
   </body>
 </html>
 
-<style>
-  .spacer {
+<style is:global define:vars={{ ...backgrounds }}>
+  .navbar-spacer {
     margin-bottom: 10rem;
+  }
+
+  .ruled-bg {
+    background-image: var(--ruled-bg);
+    background-size: 2000px;
   }
 </style>
