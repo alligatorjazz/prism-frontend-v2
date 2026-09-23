@@ -1,6 +1,24 @@
 ---
+import BlogPostList from "@components/BlogPostList.astro";
 import Base from "../templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
+import { getCollection } from "astro:content";
+import type { PostSummary } from "@datatypes/blog";
+import { postToSummary } from "@lib/blog";
+
+const allPosts = await getCollection("blog");
+const policyHubArticles: PostSummary[] = allPosts
+  .filter((post) =>
+    post.data.tags.some((tag) =>
+      [
+        "School Policy Hub",
+        "SPH - Parents",
+        "SPH - Students",
+        "SPH - Teachers",
+      ].includes(tag),
+    ),
+  )
+  .map((post) => postToSummary(post));
 ---
 
 <Base
@@ -28,6 +46,12 @@ import PageIntro from "@sections/PageIntro.astro";
   <main>
     <iframe src="https://school-policy-hub-embed.pages.dev/" class="embed"
     ></iframe>
+    <div class="all-articles ruled-bg">
+      <div class="content">
+        <h1>All Articles</h1>
+        <BlogPostList posts={policyHubArticles} />
+      </div>
+    </div>
   </main>
 </Base>
 
@@ -44,6 +68,17 @@ import PageIntro from "@sections/PageIntro.astro";
       border: 0;
       width: var(--2xl);
       height: 1100px;
+    }
+    .all-articles {
+      width: 100%;
+      .content {
+        margin: auto;
+        width: var(--lg);
+        padding: 2rem;
+        h1 {
+          text-align: center;
+        }
+      }
     }
   }
 </style>
