@@ -1,0 +1,386 @@
+---
+// Full-post template for Learn articles. All data comes from the "blog"
+// content collection (src/content.config.ts) instead of the Wix API.
+// Structure and styling match the former src/pages/learn/posts/[slug].astro.
+
+import { faker } from "@faker-js/faker";
+import dayjs from "dayjs";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import book from "@assets/img/stickers/book-sticker.png";
+import Base from "./Base.astro";
+import PageIntro from "@sections/PageIntro.astro";
+import SectionBorder from "@components/SectionBorder.astro";
+import RelatedPosts from "@components/RelatedPosts.astro";
+import { postToSummary, tagSlug } from "../lib/blog";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { title, publishDate, author, excerpt, tags, coverImage } = post.data;
+const postSlug = post.id;
+
+const published = dayjs(publishDate);
+const publishedLabel = published.isValid()
+  ? published.format("MMMM D, YYYY")
+  : "";
+const publishedIso = published.isValid() ? published.toISOString() : undefined;
+
+// The collection frontmatter has no reading time (Wix used to supply one),
+// so estimate from the body at ~225 wpm.
+const wordCount = post.body?.trim().match(/\S+/g)?.length ?? 0;
+const readTime = `${Math.max(1, Math.round(wordCount / 225))} min read`;
+
+const heroImage = coverImage
+  ? { src: coverImage.url, alt: coverImage.alt || title }
+  : null;
+
+const description = excerpt || `A PRISM Learn article: ${title}.`;
+
+// The compiled frontmatter has no categories (Wix categories and tags were
+// merged during the pull), so point back to the Learn index.
+const breadcrumb = { href: "/learn", label: "Learn" };
+
+// Tag chips point at the combined /learn/tagged-with/[tag] pages.
+const tagHref = (tag: string) => `/learn/tagged-with/${tagSlug(tag)}`;
+
+// Related posts: most shared tags first, recency as the tiebreaker.
+// (ISO date strings sort chronologically.)
+const currentTags = new Set(tags);
+const related = (await getCollection("blog"))
+  .filter((candidate) => candidate.id !== postSlug)
+  .map((candidate) => ({
+    summary: postToSummary(candidate),
+    sharedTags: candidate.data.tags.filter((tag) => currentTags.has(tag))
+      .length,
+  }))
+  .sort(
+    (a, b) =>
+      b.sharedTags - a.sharedTags ||
+      b.summary.date.localeCompare(a.summary.date),
+  )
+  .slice(0, 5)
+  .map(({ summary }) => summary);
+
+const { Content } = await render(post);
+---
+
+<Base
+  pageMetadata={{
+    title: `${title} | Learn`,
+    description,
+    type: "website",
+    image:
+      heroImage?.src ??
+      faker.image.urlPicsumPhotos({ width: 1200, height: 600 }),
+    "image:alt": heroImage?.alt || title,
+  }}
+  class={"page-content"}
+>
+  <PageIntro
+    title={title}
+    description={excerpt || description}
+    image={book}
+    pointBackTo={breadcrumb}
+  />
+
+  <SectionBorder type="marker" backgroundColor="rainbow-orange" />
+
+  <main>
+    <div class="layout">
+      <article class="post">
+        {
+          heroImage && (
+            <figure class="hero">
+              <img
+                src={heroImage.src}
+                alt={heroImage.alt || title}
+                decoding="async"
+              />
+            </figure>
+          )
+        }
+
+        <div class="meta">
+          {
+            publishedLabel && (
+              <time datetime={publishedIso}>{publishedLabel}</time>
+            )
+          }
+          <span>|</span>
+          {author && <span class="author">{author}</span>}
+          <span class="reading-time">{readTime}</span>
+        </div>
+
+        {excerpt && <p class="lede">{excerpt}</p>}
+
+        {
+          post.body?.trim() ? (
+            <div class="content">
+              <Content />
+            </div>
+          ) : (
+            <div class="content">
+              <p class="no-content">
+                This post has no body content yet. Check back soon.
+              </p>
+            </div>
+          )
+        }
+
+        {
+          tags.length > 0 && (
+            <footer class="tags">
+              <h2 class="tags-heading">Tags</h2>
+              <ul>
+                {tags.map((tag) => (
+                  <li>
+                    <a href={tagHref(tag)}>#{tag}</a>
+                  </li>
+                ))}
+              </ul>
+            </footer>
+          )
+        }
+      </article>
+
+      <RelatedPosts posts={related} currentSlug={postSlug} />
+    </div>
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "../styles/utils" as *;
+
+  .page-content {
+    background-color: var(--rainbow-orange);
+  }
+
+  main {
+    margin: auto;
+    font-size: 1.25rem;
+  }
+
+  .layout {
+    max-width: var(--xl);
+    margin: auto;
+    padding: 4rem 1rem;
+    display: grid;
+    /* minmax(0, ...) stops long words and URLs from blowing the grid out
+       on narrow screens. */
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .post {
+    min-width: 0;
+  }
+
+  .hero {
+    margin: 0 0 1.5rem;
+    background-color: var(--youth-yellow-1);
+
+    img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    font-family: var(--header-font);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .author {
+    /* font-family: var(--handwriting); */
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .lede {
+    margin: 0 0 2rem;
+    padding-bottom: 1.5rem;
+    font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+    line-height: 1.5;
+    font-weight: 500;
+    border-bottom: 2px solid var(--text-color);
+  }
+
+  /*
+   * The body <Content /> renders from MDX, so Astro never sees those
+   * elements and cannot scope them. Every selector for rendered rich
+   * content has to go through :global(), or the styles silently do
+   * nothing.
+   */
+  .content {
+    overflow-wrap: anywhere;
+
+    :global(p) {
+      margin: 0 0 1.5rem;
+      line-height: 1.7;
+    }
+
+    :global(p:last-child) {
+      margin-bottom: 0;
+    }
+
+    :global(h2),
+    :global(h3),
+    :global(h4),
+    :global(h5),
+    :global(h6) {
+      margin: 2.5rem 0 1rem;
+      font-family: var(--header-font);
+      line-height: 1.25;
+    }
+
+    :global(h2) {
+      font-size: 1.75rem;
+    }
+
+    :global(h3) {
+      font-size: 1.4rem;
+    }
+
+    :global(ul),
+    :global(ol) {
+      margin: 0 0 1.5rem;
+      padding-left: 1.5rem;
+      line-height: 1.7;
+    }
+
+    :global(li) {
+      margin-bottom: 0.5rem;
+    }
+
+    :global(blockquote) {
+      margin: 0 0 1.5rem;
+      padding: 0.5rem 0 0.5rem 1.25rem;
+      border-left: 4px solid var(--rainbow-purple);
+      font-family: var(--handwriting);
+      font-size: 1.3rem;
+
+      :global(p:last-child) {
+        margin-bottom: 0;
+      }
+    }
+
+    :global(figure) {
+      margin: 0 0 1.5rem;
+    }
+
+    :global(img),
+    :global(video) {
+      display: block;
+      width: 100%;
+      height: auto;
+      background-color: var(--youth-yellow-1);
+    }
+
+    :global(figcaption) {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    :global(.gallery) {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    :global(hr) {
+      margin: 2.5rem 0;
+      border: 0;
+      border-top: 2px solid var(--text-color);
+    }
+
+    :global(a) {
+      color: var(--rainbow-purple);
+      text-decoration: underline;
+    }
+
+    :global(pre) {
+      margin: 0 0 1.5rem;
+      padding: 1rem;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      background-color: var(--witty-white);
+    }
+  }
+
+  .no-content {
+    font-style: italic;
+    opacity: 0.75;
+  }
+
+  .tags {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--text-color);
+
+    .tags-heading {
+      margin: 0 0 0.75rem;
+      font-size: 1.25rem;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      display: inline-block;
+      padding: 0.15rem 0.75rem;
+      font-size: 0.95rem;
+      color: var(--witty-white);
+      background-color: var(--activist-aqua);
+      border-radius: var(--round-edge);
+
+      &:hover {
+        background-color: var(--rainbow-purple);
+      }
+    }
+  }
+
+  /* Two columns only once there is room for them; below this the sidebar
+     simply follows the article. */
+  @include breakpoint-up(md) {
+    .layout {
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+      gap: 3rem;
+    }
+
+    .related {
+      position: sticky;
+      /* Clears the fixed navbar when scrolled. */
+      top: 2rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    main {
+      font-size: 1.1rem;
+    }
+
+    .layout {
+      padding: 2rem 1rem 3rem;
+    }
+  }
+</style>

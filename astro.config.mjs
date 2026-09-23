@@ -4,6 +4,7 @@ import { defineConfig, fontProviders } from "astro/config";
 import icon from "astro-icon";
 import node from "@astrojs/node";
 import react from "@astrojs/react";
+import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,7 +13,7 @@ export default defineConfig({
     port: 3000,
     host: "0.0.0.0",
   },
-  integrations: [icon(), react()],
+  integrations: [icon(), mdx(), react()],
   output: "server",
   image: {
     remotePatterns: [{ protocol: "https" }],

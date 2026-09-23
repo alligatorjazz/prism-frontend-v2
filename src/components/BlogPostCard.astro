@@ -1,9 +1,9 @@
 ---
 import dayjs from "dayjs";
-import type { BlogPostSummary } from "@api/wix";
+import type { PostSummary } from "@datatypes/blog";
 
 interface Props {
-  post: BlogPostSummary;
+  post: PostSummary;
   /** "row" = small thumbnail beside the text, for sidebars. */
   variant?: "row" | "stack";
 }

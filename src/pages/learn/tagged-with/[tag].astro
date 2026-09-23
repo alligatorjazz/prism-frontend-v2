@@ -1,0 +1,67 @@
+---
+// All Learn posts sharing a given tag: /learn/tagged-with/[tag]
+// Combines the old /learn/[category] and /learn/tag/[tag] pages — the
+// category/tag distinction dropped out when posts were compiled into
+// the "blog" content collection.
+
+import { faker } from "@faker-js/faker";
+import { getCollection } from "astro:content";
+import Base from "@templates/Base.astro";
+import BlogArchive from "@sections/BlogArchive.astro";
+import { postToSummary, tagSlug } from "@lib/blog";
+
+const slug = Astro.params.tag ?? "";
+
+const allPosts = await getCollection("blog");
+
+const postsForTag = allPosts.filter((post) =>
+  post.data.tags.some((tag) => tagSlug(tag) === slug),
+);
+
+// 404 on unknown tags rather than rendering an empty archive.
+if (postsForTag.length === 0) {
+  return new Response("Tag not found", { status: 404 });
+}
+
+// Display label = first original-case tag that maps to this slug
+// (e.g. URL "sexual-health" -> label "#Sexual Health").
+const tagLabel =
+  postsForTag
+    .flatMap((post) => post.data.tags)
+    .find((tag) => tagSlug(tag) === slug) ?? slug;
+
+const posts = postsForTag
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .map(postToSummary);
+
+const title = tagLabel;
+const description = 'Every PRISM Learn article tagged "' + tagLabel + '".';
+const intro = description + " Browse the full collection below.";
+
+const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
+---
+
+<Base
+  pageMetadata={{
+    title: title + " | Learn",
+    description,
+    type: "website",
+    image: heroImage,
+    "image:alt": title + " posts on PRISM Learn",
+  }}
+  class={"page-content"}
+>
+  <BlogArchive
+    title={title}
+    description={intro}
+    breadcrumb={{ href: "/learn", label: "Learn" }}
+    posts={posts}
+    borderColor="rainbow-blue"
+  />
+</Base>
+
+<style lang="scss">
+  .page-content {
+    background-color: var(--rainbow-blue);
+  }
+</style>

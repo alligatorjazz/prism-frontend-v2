@@ -1,6 +1,4 @@
  .
-├──  AGENTS.md
-├──  apply-changes.mjs
 ├──  astro.config.mjs
 ├──  design
 │   ├──  arrow-7.afdesign
@@ -10,7 +8,10 @@
 │   └──  wave-border.afdesign
 ├──  Dockerfile
 ├──  eslint.config.js
+├──  example.mdx
 ├──  file-tree.txt
+├──  notes
+│   └──  mtg-notes-2026-09-15.md
 ├──  package-lock.json
 ├──  package.json
 ├──  public
@@ -58,8 +59,11 @@
 │       ├──  '10 Second Countdown Timer - Film Beginning [RZEf9xNogqI].webm'
 │       └──  Websitevideov3.webm
 ├── 󰂺 README.md
+├──  result.json
 ├──  scripts
-│   └──  create-pages.js
+│   ├──  compile-posts.ts
+│   ├──  onefetch.ts
+│   └──  pull-posts.ts
 ├── 󰣞 src
 │   ├──  api
 │   │   ├──  index.ts
@@ -414,6 +418,8 @@
 │   │       └──  yellow-tile-bg.png
 │   ├──  components
 │   │   ├──  BigButton.astro
+│   │   ├──  BlogPostCard.astro
+│   │   ├──  BlogPostList.astro
 │   │   ├──  Bookshelf.astro
 │   │   ├──  Calendar.astro
 │   │   ├──  Carousel.astro
@@ -433,6 +439,7 @@
 │   │   ├──  Navbar.astro
 │   │   ├──  NavLinks.astro
 │   │   ├──  Polaroid.astro
+│   │   ├──  RelatedPosts.astro
 │   │   ├──  ScribbleSeparator.astro
 │   │   ├──  SectionBorder.astro
 │   │   ├──  StickerWithTitle.astro
@@ -442,6 +449,110 @@
 │   │   ├──  TornPaperBox.astro
 │   │   └──  ToString.astro
 │   ├──  config.ts
+│   ├──  content
+│   │   └──  posts
+│   │       ├──  70s-and-80s-club-culture.mdx
+│   │       ├──  aapi-youth-and-mental-health.mdx
+│   │       ├──  affirmed-names-and-pronouns.mdx
+│   │       ├──  aids-crisis.mdx
+│   │       ├──  alan-turing.mdx
+│   │       ├──  anita-bryant.mdx
+│   │       ├──  anti-bullying-and-non-discrimination-policies.mdx
+│   │       ├──  asexuality-and-aromanticism.mdx
+│   │       ├──  bathroom-access-what-students-need-to-know.mdx
+│   │       ├──  bayard-rustin.mdx
+│   │       ├──  birth-control-patch.mdx
+│   │       ├──  birth-control.mdx
+│   │       ├──  bisexuality.mdx
+│   │       ├──  black-cat-protests.mdx
+│   │       ├──  black-lives-matter.mdx
+│   │       ├──  case-studies-and-faqs.mdx
+│   │       ├──  cervical-caps.mdx
+│   │       ├──  chlamydia.mdx
+│   │       ├──  colorism.mdx
+│   │       ├──  coming-out-tips.mdx
+│   │       ├──  communication.mdx
+│   │       ├──  condoms.mdx
+│   │       ├──  consent.mdx
+│   │       ├──  contraception.mdx
+│   │       ├──  cultural-appropriation.mdx
+│   │       ├──  dei-rollbacks-what-they-mean-for-schools.mdx
+│   │       ├──  dental-dams.mdx
+│   │       ├──  diaphragms.mdx
+│   │       ├──  doxypep.mdx
+│   │       ├──  earring-magic-ken.mdx
+│   │       ├──  emergency-contraception.mdx
+│   │       ├──  employment-discrimination.mdx
+│   │       ├──  florida-lgbtq-organizations-launch-staygay-campaign.mdx
+│   │       ├──  gay.mdx
+│   │       ├──  gender-affirming-care.mdx
+│   │       ├──  gender-expression-in-asian-cultures.mdx
+│   │       ├──  gender-norms.mdx
+│   │       ├──  gonorrhea.mdx
+│   │       ├──  harvey-milk.mdx
+│   │       ├──  hepatitis-b.mdx
+│   │       ├──  hepatitis-c.mdx
+│   │       ├──  herpes.mdx
+│   │       ├──  hiv-and-aids.mdx
+│   │       ├──  homosexuality-as-a-mental-illness.mdx
+│   │       ├──  homosexuality-in-ancient-china.mdx
+│   │       ├──  homosexuality-in-ancient-europe.mdx
+│   │       ├──  homosexuality-in-latin-america.mdx
+│   │       ├──  homosexuality-in-medieval-europe.mdx
+│   │       ├──  homosexuality-in-the-pre-colonial-americas.mdx
+│   │       ├──  how-to-report-violations.mdx
+│   │       ├──  how-to-respond-to-someone-coming-out.mdx
+│   │       ├──  hpv.mdx
+│   │       ├──  implants.mdx
+│   │       ├──  iuds.mdx
+│   │       ├──  josephine-baker.mdx
+│   │       ├──  juneteenth.mdx
+│   │       ├──  lesbian.mdx
+│   │       ├──  lgbtq-history-month.mdx
+│   │       ├──  lgbtq-organizations-urge-miami-dade-school-board-to-recognize-lgbtq-history-month.mdx
+│   │       ├──  malcolm-x.mdx
+│   │       ├──  marsha-p-johnson.mdx
+│   │       ├──  matthew-shepard.mdx
+│   │       ├──  mdcps-reaffirms-the-importance-of-diversity.mdx
+│   │       ├──  mental-health-counseling-and-parent-notification.mdx
+│   │       ├──  model-minority-myth.mdx
+│   │       ├──  myths-about-gender-affirming-care.mdx
+│   │       ├──  non-binary.mdx
+│   │       ├──  outdated-trans-terms.mdx
+│   │       ├──  pansexuality.mdx
+│   │       ├──  prep-and-pep.mdx
+│   │       ├──  prism-condemns-mdcps-decision-on-lgbtq-history-month.mdx
+│   │       ├──  prism-takes-on-queer-censorship-with-new-saveprism-campaign.mdx
+│   │       ├──  pronouns-101.mdx
+│   │       ├──  pubic-lice.mdx
+│   │       ├──  pulse-shooting.mdx
+│   │       ├──  respecting-lgbtq-boundaries.mdx
+│   │       ├──  sappho-of-lesbos.mdx
+│   │       ├──  school-board-advocacy.mdx
+│   │       ├──  sex-education-in-florida.mdx
+│   │       ├──  sex-toys-101.mdx
+│   │       ├──  sex-vs-gender.mdx
+│   │       ├──  sexual-orientation-basics.mdx
+│   │       ├──  slavery-in-the-americas.mdx
+│   │       ├──  sterilization.mdx
+│   │       ├──  sti-basics.mdx
+│   │       ├──  stonewall-riots.mdx
+│   │       ├──  sylvia-rivera.mdx
+│   │       ├──  syphilis.mdx
+│   │       ├──  talking-about-getting-tested.mdx
+│   │       ├──  talking-about-using-protection.mdx
+│   │       ├──  the-american-civil-rights-movement.mdx
+│   │       ├──  the-fight-for-marriage-equality.mdx
+│   │       ├──  the-importance-of-being-out-and-proud.mdx
+│   │       ├──  the-school-to-prison-pipeline.mdx
+│   │       ├──  title-ix-and-lgbtq-protections.mdx
+│   │       ├──  transgender.mdx
+│   │       ├──  trichomoniasis.mdx
+│   │       ├──  victory-for-sexual-health-education-in-miami-dade.mdx
+│   │       ├──  what-is-racism.mdx
+│   │       ├──  where-to-find-support.mdx
+│   │       ├──  why-lgbtq-history-matters.mdx
+│   │       └──  willi-ninja.mdx
 │   ├──  env.d.ts
 │   ├──  inbox
 │   │   └──  payload-types.ts
@@ -460,6 +571,12 @@
 │   │   ├──  events.astro
 │   │   ├──  get-involved.astro
 │   │   ├──  index.astro
+│   │   ├──  learn
+│   │   │   ├──  [category].astro
+│   │   │   ├──  posts
+│   │   │   │   └──  [slug].astro
+│   │   │   └──  tag
+│   │   │       └──  [tag].astro
 │   │   ├──  learn.astro
 │   │   ├──  movement-builders-business.astro
 │   │   ├──  movement-builders-monthly.astro
@@ -481,6 +598,7 @@
 │   │   └──  yac.astro
 │   ├──  sections
 │   │   ├──  AlternatingRibbons.astro
+│   │   ├──  BlogArchive.astro
 │   │   ├──  CardsWithHeader.astro
 │   │   ├──  CenteredPaperWithHeader.astro
 │   │   ├──  ConstrainedSection.astro
