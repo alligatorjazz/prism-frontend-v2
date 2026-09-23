@@ -2,10 +2,10 @@
 import { Image } from "astro:assets";
 import dayjs from "dayjs";
 import arrow from "@assets/img/pagination-arrow.png";
-import type { BlogPostSummary } from "@api/wix";
+import type { PostSummary } from "../types/blog";
 
 interface Props {
-  posts: BlogPostSummary[];
+  posts: PostSummary[];
   title?: string;
   itemsPerPage?: number;
   emptyMessage?: string;

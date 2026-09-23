@@ -1,9 +1,9 @@
 ---
 import BlogPostCard from "@components/BlogPostCard.astro";
-import type { BlogPostSummary } from "@api/wix";
+import type { PostSummary } from "@datatypes/blog";
 
 interface Props {
-  posts: BlogPostSummary[];
+  posts: PostSummary[];
   /** Shown as the sidebar heading. */
   heading?: string;
   /** Slug the page is currently on, so it is excluded defensively. */

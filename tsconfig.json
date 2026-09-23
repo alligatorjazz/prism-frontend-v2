@@ -3,32 +3,16 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "paths": {
-      "@sections/*": [
-        "./src/sections/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@templates/*": [
-        "./src/templates/*"
-      ],
-      "@assets/*": [
-        "./src/assets/*"
-      ],
-      "@api/*": [
-        "./src/api/*"
-      ],
-      "@lib/*": [
-        "./src/lib/*"
-      ]
+      "@sections/*": ["./src/sections/*"],
+      "@components/*": ["./src/components/*"],
+      "@templates/*": ["./src/templates/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@api/*": ["./src/api/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@datatypes/*": ["./src/types/*"]
     }
   },
   "extends": "astro/tsconfigs/strict",
-  "include": [
-    ".astro/types.d.ts",
-    "**/*"
-  ],
-  "exclude": [
-    "dist"
-  ]
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
 }
