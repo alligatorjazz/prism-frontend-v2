@@ -78,12 +78,7 @@ const { Content } = await render(post);
   }}
   class={"page-content"}
 >
-  <PageIntro
-    title={title}
-    description={excerpt || description}
-    image={book}
-    pointBackTo={breadcrumb}
-  />
+  <PageIntro pointBackTo={breadcrumb} />
 
   <SectionBorder type="marker" backgroundColor="rainbow-orange" />
 

@@ -3,11 +3,13 @@ import type { HTMLAttributes } from "astro/types";
 import { strictSlug } from "../lib";
 import { type SectionProps } from "../types/sections";
 import ConstrainedSection from "./ConstrainedSection.astro";
+import { uuid } from "astro:schema";
+import { randomUUID } from "crypto";
 
 // TODO: implement rich text here
 interface Props extends HTMLAttributes<"section"> {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   image?: HTMLAttributes<"img">;
   pointBackTo?: {
     href: string;
@@ -17,7 +19,7 @@ interface Props extends HTMLAttributes<"section"> {
 const { title, description, image, pointBackTo, ...props } = Astro.props;
 ---
 
-<ConstrainedSection id={strictSlug(title)} {...props}>
+<ConstrainedSection id={strictSlug(title ?? randomUUID())} {...props}>
   <div class="container">
     <div class="text">
       {
@@ -28,9 +30,9 @@ const { title, description, image, pointBackTo, ...props } = Astro.props;
         )
       }
 
-      <h1>{title}</h1>
-
-      {description.split("\n").map((line) => <p>{line}</p>)}
+      {title && <h1>{title}</h1>}
+      {title && <hr />}
+      {description?.split("\n").map((line) => <p>{line}</p>)}
     </div>
     {
       image && (
@@ -50,7 +52,7 @@ const { title, description, image, pointBackTo, ...props } = Astro.props;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    padding: 3rem 1rem;
+    padding: 2rem 1rem;
     color: var(--fg-color);
 
     .text {
@@ -70,10 +72,12 @@ const { title, description, image, pointBackTo, ...props } = Astro.props;
       }
 
       h1 {
-        padding-top: 0;
-        padding-bottom: 1rem;
         font-size: 2.5rem;
-        border-bottom: 2px solid var(--fg-color);
+      }
+
+      hr {
+        color: var(--fg-color);
+        margin: 1rem 0;
       }
       p {
         margin: 0;
