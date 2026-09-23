@@ -5,7 +5,7 @@ import PageIntro from "@sections/PageIntro.astro";
 import { getCollection } from "astro:content";
 import type { PostSummary } from "@datatypes/blog";
 import { postToSummary } from "@lib/blog";
-
+import scale from "@assets/img/book-scale.png";
 const allPosts = await getCollection("blog");
 const policyHubArticles: PostSummary[] = allPosts
   .filter((post) =>
@@ -34,12 +34,7 @@ const policyHubArticles: PostSummary[] = allPosts
   <PageIntro
     title="School Policy Hub"
     description="The School Policy Hub is your go-to guide for navigating LGBTQ+ rights and policies in Florida schools. It brings together current state laws, local district rules, and practical strategies for advocacy in Miami-Dade, Broward, and Palm Beach Counties. Whether you’re a student, parent, or educator, the Hub offers clear, accessible information to help you understand your rights, respond to challenges, and create safer school environments."
-    image={{
-      src: "https://picsum.photos/500/300",
-      width: 300,
-      height: 300,
-      alt: "placeholder",
-    }}
+    image={scale}
     pointBackTo={{ href: "/about", label: "About" }}
   />
 
