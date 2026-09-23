@@ -23,6 +23,8 @@ const { siteMetadata, routes } = Astro.props;
           alt={`The ${siteMetadata.title} logo.`}
           width={247}
           height={71}
+          format={"webp"}
+          loading={"eager"}
         />
       ) : (
         <p>siteMetadata.title</p>

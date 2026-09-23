@@ -2,7 +2,7 @@
 // src/components/OurPartners.astro
 // Mini version of the full our-partners page
 // Shows first 5 organization partners with a link to see all
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 import ruledPaper from "@assets/img/ruled-paper.png";
 import { getItems } from "@api/wix";
 import ruledBg from "@assets/img/ruled-bg.png";
@@ -33,15 +33,18 @@ const backgroundImage = `url(${ruledBg.src})`;
 
     <ul class="grid">
       {
-        partners.map((partner) => {
-          const logoUrl = wixImageUrl(partner.logo);
+        partners.map(async (partner) => {
+          const logoUrl = await getImage({
+            src: wixImageUrl(partner.logo) ?? "",
+            format: "webp",
+          });
 
           return (
             <li>
               <article>
                 {logoUrl ? (
                   <div class="logo">
-                    <img src={logoUrl} alt={`${partner.title} logo`} />
+                    <img src={logoUrl.src} alt={`${partner.title} logo`} />
                   </div>
                 ) : (
                   <div class="logo placeholder">
