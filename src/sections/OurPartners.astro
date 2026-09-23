@@ -3,9 +3,7 @@
 // Mini version of the full our-partners page
 // Shows first 5 organization partners with a link to see all
 import { getImage, Image } from "astro:assets";
-import ruledPaper from "@assets/img/ruled-paper.png";
 import { getItems } from "@api/wix";
-import ruledBg from "@assets/img/ruled-bg.png";
 
 // Fetch organization partners via Wix API
 // Based on: our-partners.astro data fetching pattern
@@ -17,10 +15,9 @@ function wixImageUrl(wixImage: string | undefined): string | undefined {
   const match = wixImage.match(/wix:image:\/\/v1\/([^/]+)\/[^#]+/);
   return match ? `https://static.wixstatic.com/media/${match[1]}` : undefined;
 }
-const backgroundImage = `url(${ruledBg.src})`;
 ---
 
-<section class="our-partners-mini" style={{ backgroundImage }}>
+<section class="our-partners-mini ruled-bg">
   <div class="container">
     <h2>Our Partners</h2>
     <p class="intro">
@@ -37,6 +34,7 @@ const backgroundImage = `url(${ruledBg.src})`;
           const logoUrl = await getImage({
             src: wixImageUrl(partner.logo) ?? "",
             format: "webp",
+            inferSize: true,
           });
 
           return (
