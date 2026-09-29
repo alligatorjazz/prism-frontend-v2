@@ -22,7 +22,7 @@
 - [x] Add category / tag separation in tag list
 - [x] Remove dates from blog cards
 - [ ] Sticky box for TOCs
-- [ ] Change primary color for Learn landing page
+- [x] Change primary color for Learn landing page
 
 ## Policy, Get Involved & Membership
 - [ ] P-SAP page port
