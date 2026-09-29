@@ -1,9 +1,8 @@
 # Front-End TODO List
 
 ## Global / Site-Wide
-- [ ] Reduce noise opacity on notebook paper to 50%
-- [ ] Match notebook paper lines to text
-- [ ] Fix line spacing on notebook paper
+- [x] Reduce noise opacity on notebook paper to 50%
+- [x] Fix line spacing on notebook paper
 - [ ] Add hand-written page numbers
 - [ ] Get new hand-written font for smaller display
 - [ ] Add drop shadow on `tornpaperbox`

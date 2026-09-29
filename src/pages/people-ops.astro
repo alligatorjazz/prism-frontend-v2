@@ -6,6 +6,7 @@ import Polaroid from "@components/Polaroid.astro";
 import { faker } from "@faker-js/faker";
 import TornPaperBox from "@components/TornPaperBox.astro";
 import handsWithHeart from "@assets/img/hands-with-heart.avif";
+import PaperNoise from "@components/PaperNoise.astro";
 
 const mvPhoto = faker.image.avatar();
 ---
@@ -31,6 +32,9 @@ const mvPhoto = faker.image.avatar();
 
   <main>
     <SectionBorder type="marker" backgroundColor="activist-aqua" />
+    <section class="test">
+      <PaperNoise />
+    </section>
 
     <section id="staff" class="ruled-bg">
       <div class="container">

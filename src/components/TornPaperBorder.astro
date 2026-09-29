@@ -1,5 +1,5 @@
 ---
-import paperNoise from "../assets/img/ruled-bg.png";
+import paperNoise from "../assets/img/pure-noise.png";
 interface Props {
   offset?: boolean;
 }
@@ -9,7 +9,10 @@ const background = `url("${paperNoise.src}")`;
 ---
 
 <div class="container" style={{ background }}>
-  <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+  <svg
+    version="1.0"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
     ><mask id="edge">
       <defs id="defs5">
         <clipPath clipPathUnits="userSpaceOnUse" id="clipPath10">
@@ -52,10 +55,8 @@ const background = `url("${paperNoise.src}")`;
   .container {
     width: 100%;
     height: 3.5rem;
-    * {
-      background-size: 2000px;
-    }
     mask: url("#edge");
+    background-size: 2000px;
     svg {
       width: 100%;
       height: 100%;

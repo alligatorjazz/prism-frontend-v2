@@ -1,13 +1,13 @@
 ---
 import TornPaperBorder from "../components/TornPaperBorder.astro";
-import paperNoise from "../assets/img/ruled-bg.png";
+import ruledPaper from "../assets/img/ruled-bg.png";
 import { getImage } from "astro:assets";
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"div"> {}
 
 const { class: className, ...props } = Astro.props;
-const { src: noise } = await getImage({ src: paperNoise, format: "webp" });
+const { src: noise } = await getImage({ src: ruledPaper, format: "webp" });
 const backgroundImage = `url("${noise}")`;
 ---
 
