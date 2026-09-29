@@ -1,0 +1,22 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {}
+const { class: className, ...props } = Astro.props;
+---
+
+<div class:list={["post-it", className]} {...props}>
+  <slot />
+</div>
+
+<style>
+  .post-it {
+    background: linear-gradient(
+      var(--youth-yellow-2),
+      var(--youth-yellow-1) 45%
+    );
+    transition: transform 0.2s ease;
+    filter: drop-shadow(1px 1px 1px var(--text-color));
+    padding: 1rem;
+  }
+</style>

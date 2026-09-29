@@ -26,7 +26,7 @@
 
 ## Policy, Get Involved & Membership
 - [ ] P-SAP page port
-- [ ] Update school policy hub
+- [x] Update school policy hub
 - [ ] Get Involved / Membership Model pages
   - [ ] People Ops page
 - [ ] Explain volunteer vs. member vs. leader
