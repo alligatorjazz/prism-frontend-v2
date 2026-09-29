@@ -10,10 +10,8 @@ import CoreTracks from "@sections/CoreTracks.astro";
 import LeadershipPrograms from "@sections/LeadershipPrograms.astro";
 import { faker } from "@faker-js/faker";
 
-import ruledBg from "@assets/img/ruled-bg.png";
 // TODO: Replace with actual images from @assets/img/
 const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
-const backgroundImage = `url(${ruledBg.src})`;
 ---
 
 <Base
@@ -35,7 +33,7 @@ const backgroundImage = `url(${ruledBg.src})`;
 
     <!-- How to Get Started -->
     <!-- Based on: Membership Model - Section 6: Onboarding Process -->
-    <section class="get-started-section" style={{ backgroundImage }}>
+    <section class="get-started-section" class="ruled-bg">
       <div class="section-content">
         <h2>How to Get Started</h2>
         <div class="steps">

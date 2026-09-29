@@ -4,11 +4,9 @@ import PageIntro from "@sections/PageIntro.astro";
 import Bookshelf from "@components/Bookshelf.astro";
 import SectionBorder from "@components/SectionBorder.astro";
 import { faker } from "@faker-js/faker";
-import ruledBg from "@assets/img/ruled-bg.png";
 
 import book from "@assets/img/stickers/book-sticker.png";
 const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
-const ruledPaper = `url(${ruledBg.src})`;
 ---
 
 <Base

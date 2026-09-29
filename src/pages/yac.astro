@@ -1,15 +1,12 @@
 ---
 import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
-import ruledBg from "@assets/img/ruled-bg.png";
 import SectionBorder from "@components/SectionBorder.astro";
 import Polaroid from "@components/Polaroid.astro";
 import { faker } from "@faker-js/faker";
-import { getImage } from "astro:assets";
 import TornPaperBox from "@components/TornPaperBox.astro";
 import fist1 from "@assets/img/stickers/fist_1-sticker.png";
 
-const ruledPaper = `url(${(await getImage({ src: ruledBg, format: "webp" })).src})`;
 const maxxPhoto = faker.image.avatar();
 ---
 
@@ -35,7 +32,7 @@ const maxxPhoto = faker.image.avatar();
   <main>
     <SectionBorder type="marker" backgroundColor="youth-yellow-2" />
 
-    <section id="staff" style={{ backgroundImage: ruledPaper }}>
+    <section id="staff" class="ruled-bg">
       <div class="container">
         <h3>Meet the Executive Director!</h3>
         <div class="content">
@@ -56,13 +53,14 @@ const maxxPhoto = faker.image.avatar();
             <div class="description">
               <h4>Executive Director</h4>
               <p>
-                A staunch advocate for LGBTQ+ rights and sexual health education,
-                Maxx is the Executive Director of PRISM. He recently earned his
-                degree in Business Administration from the University of Florida,
-                and is now pursuing a Master of Public Policy at the University
-                of Miami. He is also an active creator on TikTok, where he
-                educates on many of the same topics that PRISM addresses. In his
-                free time, Maxx enjoys singing and graphic design.
+                A staunch advocate for LGBTQ+ rights and sexual health
+                education, Maxx is the Executive Director of PRISM. He recently
+                earned his degree in Business Administration from the University
+                of Florida, and is now pursuing a Master of Public Policy at the
+                University of Miami. He is also an active creator on TikTok,
+                where he educates on many of the same topics that PRISM
+                addresses. In his free time, Maxx enjoys singing and graphic
+                design.
               </p>
               <button type="button">Read More About Maxx</button>
             </div>
@@ -87,11 +85,21 @@ const maxxPhoto = faker.image.avatar();
             </p>
             <h4>Key Components</h4>
             <ul>
-              <li>Attend monthly YAC meetings with the YAC Chair and Executive Director</li>
+              <li>
+                Attend monthly YAC meetings with the YAC Chair and Executive
+                Director
+              </li>
               <li>Review board governance and strategy</li>
-              <li>Make real recommendations that shape PRISM's organizational direction</li>
-              <li>Develop leadership skills in nonprofit management and governance</li>
-              <li>Connect with PRISM's Board of Directors and community partners</li>
+              <li>
+                Make real recommendations that shape PRISM's organizational
+                direction
+              </li>
+              <li>
+                Develop leadership skills in nonprofit management and governance
+              </li>
+              <li>
+                Connect with PRISM's Board of Directors and community partners
+              </li>
             </ul>
           </TornPaperBox>
         </div>
@@ -100,7 +108,7 @@ const maxxPhoto = faker.image.avatar();
 
     <SectionBorder type="marker" backgroundColor="youth-yellow-2" />
 
-    <section id="cta" style={{ backgroundImage: ruledPaper }}>
+    <section id="cta" class="ruled-bg">
       <div class="container">
         <TornPaperBox>
           <h3>Shape the Future of PRISM</h3>
@@ -111,9 +119,7 @@ const maxxPhoto = faker.image.avatar();
             ensuring that youth voices guide our movement, the YAC is your
             opportunity to step up and lead from within.
           </p>
-          <a href="/apply/yac/" class="cta-button">
-            Apply to the YAC
-          </a>
+          <a href="/apply/yac/" class="cta-button"> Apply to the YAC </a>
         </TornPaperBox>
       </div>
     </section>

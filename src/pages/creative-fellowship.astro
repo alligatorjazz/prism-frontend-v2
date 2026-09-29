@@ -1,15 +1,12 @@
 ---
 import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
-import ruledBg from "@assets/img/ruled-bg.png";
 import SectionBorder from "@components/SectionBorder.astro";
 import Polaroid from "@components/Polaroid.astro";
 import { faker } from "@faker-js/faker";
-import { getImage } from "astro:assets";
 import TornPaperBox from "@components/TornPaperBox.astro";
 import speech from "@assets/img/icons/Speech.png";
 
-const ruledPaper = `url(${(await getImage({ src: ruledBg, format: "webp" })).src})`;
 const alexPhoto = faker.image.avatar();
 
 const fellowshipRoles = [
@@ -80,7 +77,7 @@ const fellowshipRoles = [
   <main>
     <SectionBorder type="marker" backgroundColor="rainbow-green" />
 
-    <section id="staff" style={{ backgroundImage: ruledPaper }}>
+    <section id="staff" class="ruled-bg">
       <div class="container">
         <h3>Meet the Content Creation Director!</h3>
         <div class="content">
@@ -102,15 +99,15 @@ const fellowshipRoles = [
               <h4>Content Creation Director</h4>
               <p>
                 A Miami-born creative with a passion for storytelling that
-                uplifts and represents marginalized communities. With a background
-                in film, content creation, and brand strategy, Alex brings bold
-                visuals and culturally rooted narratives to life. He has led
-                campaigns for local businesses, fashion brands, and queer
-                initiatives. As Content Creation Director at PRISM, Alex is here
-                to celebrate queer voices and create space for joy and identity
-                across every platform. Outside of work, you'll find him biking
-                around the city, sweating through a workout, singing, or hanging
-                with his fiancé and their two pups, Nino and Winston.
+                uplifts and represents marginalized communities. With a
+                background in film, content creation, and brand strategy, Alex
+                brings bold visuals and culturally rooted narratives to life. He
+                has led campaigns for local businesses, fashion brands, and
+                queer initiatives. As Content Creation Director at PRISM, Alex
+                is here to celebrate queer voices and create space for joy and
+                identity across every platform. Outside of work, you'll find him
+                biking around the city, sweating through a workout, singing, or
+                hanging with his fiancé and their two pups, Nino and Winston.
               </p>
               <button type="button">Read More About Alex</button>
             </div>
@@ -129,7 +126,9 @@ const fellowshipRoles = [
             fellowshipRoles.map((role) => (
               <article>
                 <span class="role-label">{role.title}</span>
-                <p class="count">{role.count} fellow{role.count !== "1" ? "s" : ""}</p>
+                <p class="count">
+                  {role.count} fellow{role.count !== "1" ? "s" : ""}
+                </p>
                 <p>{role.description}</p>
                 <p class="quota">
                   <strong>Deliverables:</strong> {role.quota}
@@ -143,24 +142,38 @@ const fellowshipRoles = [
 
     <SectionBorder type="marker" backgroundColor="rainbow-green" />
 
-    <section id="expectations" style={{ backgroundImage: ruledPaper }}>
+    <section id="expectations" class="ruled-bg">
       <div class="container">
         <TornPaperBox>
           <h3>What Fellows Gain</h3>
           <ul>
             <li>Serve in a 6-month volunteer leadership role</li>
             <li>Attend weekly Creative Fellowship meetings</li>
-            <li>Participate in trainings, workshops, and educational seminars</li>
-            <li>Build a professional portfolio through real-world advocacy campaigns</li>
-            <li>Receive mentorship from nonprofit professionals and community leaders</li>
-            <li>Join PRISM's growing network of organizers, advocates, and changemakers</li>
+            <li>
+              Participate in trainings, workshops, and educational seminars
+            </li>
+            <li>
+              Build a professional portfolio through real-world advocacy
+              campaigns
+            </li>
+            <li>
+              Receive mentorship from nonprofit professionals and community
+              leaders
+            </li>
+            <li>
+              Join PRISM's growing network of organizers, advocates, and
+              changemakers
+            </li>
           </ul>
           <h3>Eligibility</h3>
           <ul>
             <li>Be a current high school or college student (or equivalent)</li>
             <li>Be 24 years old or younger at the start of the Fellowship</li>
             <li>Live in Miami, Broward, or Palm Beach County</li>
-            <li>Have a demonstrated connection to LGBTQ+ youth organizing in Florida</li>
+            <li>
+              Have a demonstrated connection to LGBTQ+ youth organizing in
+              Florida
+            </li>
             <li>Be able to commit to the full 6-month Fellowship</li>
           </ul>
         </TornPaperBox>
@@ -169,15 +182,16 @@ const fellowshipRoles = [
 
     <SectionBorder type="marker" backgroundColor="rainbow-green" flip />
 
-    <section id="cta" style={{ backgroundImage: ruledPaper }}>
+    <section id="cta" class="ruled-bg">
       <div class="container">
         <TornPaperBox>
           <h3>Apply for the Creative Fellowship</h3>
           <p>
-            Whether you're passionate about writing, photography, graphic design,
-            video production, or social media, there's a place for you in the
-            Creative Fellowship. Build your portfolio, develop your voice, and
-            help shape PRISM's message while growing as a leader and storyteller.
+            Whether you're passionate about writing, photography, graphic
+            design, video production, or social media, there's a place for you
+            in the Creative Fellowship. Build your portfolio, develop your
+            voice, and help shape PRISM's message while growing as a leader and
+            storyteller.
           </p>
           <a href="/apply/creative-fellowship/" class="cta-button">
             Apply Now

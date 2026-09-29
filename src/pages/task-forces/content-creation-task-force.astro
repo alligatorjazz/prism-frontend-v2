@@ -6,10 +6,6 @@ import { faker } from "@faker-js/faker";
 import Polaroid from "../../components/Polaroid.astro";
 import computer from "../../assets/img/computer-yellow.avif";
 import CenteredPaperWithHeader from "../../sections/CenteredPaperWithHeader.astro";
-import ruledBg from "../../assets/img/ruled-bg.png";
-import { getImage } from "astro:assets";
-
-const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).src})`;
 ---
 
 <Base
@@ -109,7 +105,7 @@ const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).sr
       </div>
     </section>
     <SectionBorder type="marker" backgroundColor="rainbow-blue" />
-    <section id="contractors" style={{ backgroundImage: ruledPaper }}>
+    <section id="contractors" class="ruled-bg">
       <div class="container">
         <h3>Contractors</h3>
         <div class="content">

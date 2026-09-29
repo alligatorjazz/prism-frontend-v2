@@ -5,8 +5,7 @@ import { Icon } from "astro-icon/components";
 import boca from "@assets/img/boca-raton-hs.avif";
 import concrete from "@assets/img/blurry-concrete.jpg";
 import march from "@assets/img/early-march.avif";
-import { Image, getImage } from "astro:assets";
-import ruledBg from "@assets/img/ruled-bg.png";
+import { Image } from "astro:assets";
 import { faker } from "@faker-js/faker";
 import teamPhoto from "@assets/img/team-group-photo-faw-26.jpg";
 import SectionBorder from "@components/SectionBorder.astro";
@@ -17,8 +16,6 @@ import book from "@assets/img/blue-book.png";
 import scale from "@assets/img/scale.avif";
 import flag from "@assets/img/rainbow-flag.avif";
 import blood from "@assets/img/blood-drop.png";
-
-const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).src})`;
 
 const newsArticles = Array.from({ length: 8 }, () => {
   const title = faker.lorem.sentence({ min: 4, max: 8 });
@@ -116,7 +113,7 @@ const newsArticles = Array.from({ length: 8 }, () => {
       </div>
     </div>
     <SectionBorder type="marker" backgroundColor="rainbow-red" />
-    <div class="our-history" style={{ backgroundImage: ruledPaper }}>
+    <div class="our-history" class="ruled-bg">
       <div class="content">
         <ThreeIconCluster class={"icons"}>
           <Image

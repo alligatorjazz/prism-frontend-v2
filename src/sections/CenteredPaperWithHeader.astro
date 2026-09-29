@@ -1,7 +1,6 @@
 ---
 import { strictSlug } from "../lib";
 import TornPaperBorder from "../components/TornPaperBorder.astro";
-import paperNoise from "../assets/img/ruled-bg.png";
 import { getImage } from "astro:assets";
 
 interface Props {
@@ -10,8 +9,6 @@ interface Props {
 
 // TODO: implement tornPaper
 const { title } = Astro.props;
-const { src: noise } = await getImage({ src: paperNoise, format: "webp" });
-const backgroundImage = `url("${noise}")`;
 ---
 
 <section id={strictSlug(title)} title={title}>
@@ -20,7 +17,7 @@ const backgroundImage = `url("${noise}")`;
     <div class="border top">
       <TornPaperBorder />
     </div>
-    <div class="content" style={{ backgroundImage }}>
+    <div class="content ruled-bg">
       <slot name="content" />
     </div>
     <div class="border bottom">

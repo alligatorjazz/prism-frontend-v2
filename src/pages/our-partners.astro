@@ -4,7 +4,6 @@ import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
 import SectionBorder from "@components/SectionBorder.astro";
 import { getItems } from "@api/wix";
-import ruledPaper from "@assets/img/ruled-bg.png";
 import ScribbleSeparator from "@components/ScribbleSeparator.astro";
 import { Image } from "astro:assets";
 
@@ -78,9 +77,8 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
   <main>
     <section
       id="organizations"
-      class="partner-section"
+      class="partner-section ruled-bg"
       data-total-pages={orgsTotalPages}
-      style={`background-image: url(${ruledPaper.src});`}
     >
       <div class="container">
         <h2>Organizations</h2>
@@ -166,9 +164,8 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
 
     <section
       id="donors"
-      class="partner-section"
+      class="partner-section ruled-bg"
       data-total-pages={donorsTotalPages}
-      style={`background-image: url(${ruledPaper.src});`}
     >
       <div class="container">
         <h2>Donors</h2>

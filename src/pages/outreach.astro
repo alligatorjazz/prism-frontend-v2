@@ -1,21 +1,14 @@
 ---
 import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
-import ruledBg from "../assets/img/ruled-bg.png";
-import CenteredPaperWithHeader from "@sections/CenteredPaperWithHeader.astro";
 import SectionBorder from "@components/SectionBorder.astro";
 import Polaroid from "@components/Polaroid.astro";
 import { faker } from "@faker-js/faker";
 import ThreeIconCluster from "@components/ThreeIconCluster.astro";
 import avion from "@assets/img/team/avion.avif";
 import megaphone from "@assets/img/megaphone.avif";
-import Calendar from "@components/Calendar.astro";
-import { dummyEvents } from "./api/events";
-import { getImage } from "astro:assets";
 import TornPaperBox from "@components/TornPaperBox.astro";
 import BigButton from "@components/BigButton.astro";
-
-const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).src})`;
 ---
 
 <Base
@@ -40,7 +33,7 @@ const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).sr
   <main>
     <SectionBorder type="marker" backgroundColor="rainbow-orange" />
 
-    <section id="staff" style={{ backgroundImage: ruledPaper }}>
+    <section id="staff" class="ruled-bg">
       <div class="container">
         <h3>Meet the director of PRISM's outreach program!</h3>
         <div class="content">
@@ -181,7 +174,7 @@ const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).sr
       </div>
       <SectionBorder type="marker" backgroundColor="rainbow-orange" />
 
-      <section id="volunteer-cta" style={{ backgroundImage: ruledPaper }}>
+      <section id="volunteer-cta" class="ruled-bg">
         <div class="container">
           <h3>Ready to Make a Difference?</h3>
           <p>

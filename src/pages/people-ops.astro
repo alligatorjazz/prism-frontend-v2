@@ -1,15 +1,12 @@
 ---
 import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
-import ruledBg from "@assets/img/ruled-bg.png";
 import SectionBorder from "@components/SectionBorder.astro";
 import Polaroid from "@components/Polaroid.astro";
 import { faker } from "@faker-js/faker";
-import { getImage } from "astro:assets";
 import TornPaperBox from "@components/TornPaperBox.astro";
 import handsWithHeart from "@assets/img/hands-with-heart.avif";
 
-const ruledPaper = `url(${(await getImage({ src: ruledBg, format: "webp" })).src})`;
 const mvPhoto = faker.image.avatar();
 ---
 
@@ -35,7 +32,7 @@ const mvPhoto = faker.image.avatar();
   <main>
     <SectionBorder type="marker" backgroundColor="activist-aqua" />
 
-    <section id="staff" style={{ backgroundImage: ruledPaper }}>
+    <section id="staff" class="ruled-bg">
       <div class="container">
         <h3>Meet the Organizing Director!</h3>
         <div class="content">
@@ -115,7 +112,7 @@ const mvPhoto = faker.image.avatar();
 
     <SectionBorder type="marker" backgroundColor="activist-aqua" />
 
-    <section id="cta" style={{ backgroundImage: ruledPaper }}>
+    <section id="cta" class="ruled-bg">
       <div class="container">
         <TornPaperBox>
           <h3>Help Build Our Community</h3>

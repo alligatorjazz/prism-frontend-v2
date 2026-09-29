@@ -1,16 +1,11 @@
 ---
 import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
-import ruledBg from "@assets/img/ruled-bg.png";
 import SectionBorder from "@components/SectionBorder.astro";
 import Polaroid from "@components/Polaroid.astro";
-import { faker } from "@faker-js/faker";
-import { getImage } from "astro:assets";
-import TornPaperBox from "@components/TornPaperBox.astro";
 import scale from "@assets/img/scale.avif";
 import miles from "@assets/img/team/miles.avif";
 import BigButton from "@components/BigButton.astro";
-const ruledPaper = `url(${(await getImage({ src: ruledBg, format: "webp" })).src})`;
 ---
 
 <Base
@@ -35,7 +30,7 @@ const ruledPaper = `url(${(await getImage({ src: ruledBg, format: "webp" })).src
   <main>
     <SectionBorder type="marker" backgroundColor="rainbow-red" />
 
-    <section id="staff" style={{ backgroundImage: ruledPaper }}>
+    <section id="staff" class="ruled-bg">
       <div class="container">
         <h3>Meet the Policy Director!</h3>
         <div class="content">

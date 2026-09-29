@@ -5,11 +5,7 @@ import Base from "../templates/Base.astro";
 import dayjs from "dayjs";
 import { toTitleCase } from "../lib/dom";
 import PageIntro from "../sections/PageIntro.astro";
-import ruledBg from "../assets/img/ruled-bg.png";
-import { getImage } from "astro:assets";
 import SectionBorder from "../components/SectionBorder.astro";
-
-const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).src})`;
 
 const placeholderNewsStories = repeatRandom(
   () => {
@@ -78,7 +74,7 @@ const pageLink = (page: number) => {
     pointBackTo={{ href: "/about", label: "About" }}
   />
   <SectionBorder type="marker" backgroundColor="rainbow-blue" />
-  <section id="stories" style={{ backgroundImage: ruledPaper }}>
+  <section id="stories" class="ruled-bg">
     <ul>
       {
         pageStories.map((story, index) => {

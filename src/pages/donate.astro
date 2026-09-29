@@ -3,9 +3,6 @@ import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
 import SectionBorder from "@components/SectionBorder.astro";
 import donateImage from "@assets/img/giving-icon.avif";
-import ruledBg from "@assets/img/ruled-bg.png";
-import { getImage } from "astro:assets";
-const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).src})`;
 ---
 
 <Base
@@ -30,7 +27,7 @@ const ruledPaper = `url( ${(await getImage({ src: ruledBg, format: "webp" })).sr
 
   <SectionBorder type="wave-left" backgroundColor="rainbow-green" />
   <main>
-    <section id="one-time" style={{ backgroundImage: ruledPaper }}>
+    <section id="one-time" class="ruled-bg">
       <div class="container">
         <h2>One-Time or Recurring Donation</h2>
         <p>
