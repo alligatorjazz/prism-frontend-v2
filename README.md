@@ -3,8 +3,8 @@
 ## Global / Site-Wide
 - [x] Reduce noise opacity on notebook paper to 50%
 - [x] Fix line spacing on notebook paper
-- [ ] Add hand-written page numbers
-- [ ] Get new hand-written font for smaller display
+- [x] Add hand-written page numbers
+- [x] Get new hand-written font for smaller display
 - [ ] Add drop shadow on `tornpaperbox`
 - [ ] Add Discord link
 - [ ] Create jobs page

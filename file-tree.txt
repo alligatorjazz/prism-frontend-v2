@@ -52,6 +52,7 @@
 │   │       ├──  Poppins-Thin.ttf
 │   │       └──  Poppins-ThinItalic.ttf
 │   ├──  img
+│   │   ├──  book-scale.png
 │   │   └──  prism-logo-primary.png
 │   ├──  styles
 │   │   └──  theme.css
@@ -59,7 +60,6 @@
 │       ├──  '10 Second Countdown Timer - Film Beginning [RZEf9xNogqI].webm'
 │       └──  Websitevideov3.webm
 ├── 󰂺 README.md
-├──  result.json
 ├──  scripts
 │   ├──  compile-posts.ts
 │   ├──  onefetch.ts
@@ -98,6 +98,7 @@
 │   │       ├──  blurry-concrete.jpg
 │   │       ├──  boca-raton-hs.avif
 │   │       ├──  BocaRatonHS1.avif
+│   │       ├──  book-scale.png
 │   │       ├──  book-sticker.png
 │   │       ├──  Book_edited.png
 │   │       ├──  Book_edited_edited.png
@@ -311,6 +312,7 @@
 │   │       ├──  prism-logo-primary.png
 │   │       ├──  psap-group.avif
 │   │       ├──  psap-leaders-council.avif
+│   │       ├──  pure-noise.png
 │   │       ├──  rainbow-flag.avif
 │   │       ├──  'Red Book@2x.png'
 │   │       ├──  ruled-bg.png
@@ -438,6 +440,7 @@
 │   │   ├──  Modal.astro
 │   │   ├──  Navbar.astro
 │   │   ├──  NavLinks.astro
+│   │   ├──  PaperNoise.astro
 │   │   ├──  Polaroid.astro
 │   │   ├──  RelatedPosts.astro
 │   │   ├──  ScribbleSeparator.astro
@@ -553,10 +556,12 @@
 │   │       ├──  where-to-find-support.mdx
 │   │       ├──  why-lgbtq-history-matters.mdx
 │   │       └──  willi-ninja.mdx
+│   ├──  content.config.ts
 │   ├──  env.d.ts
 │   ├──  inbox
 │   │   └──  payload-types.ts
 │   ├──  lib
+│   │   ├──  blog.ts
 │   │   ├──  dates.ts
 │   │   ├──  dom.ts
 │   │   ├──  index.ts
@@ -572,10 +577,9 @@
 │   │   ├──  get-involved.astro
 │   │   ├──  index.astro
 │   │   ├──  learn
-│   │   │   ├──  [category].astro
 │   │   │   ├──  posts
 │   │   │   │   └──  [slug].astro
-│   │   │   └──  tag
+│   │   │   └──  tagged-with
 │   │   │       └──  [tag].astro
 │   │   ├──  learn.astro
 │   │   ├──  movement-builders-business.astro
@@ -615,14 +619,17 @@
 │   │   ├──  OurPartners.astro
 │   │   ├──  PageIntro.astro
 │   │   ├──  PaperWithPolaroids.astro
+│   │   ├──  PolicyNotebook.astro
 │   │   ├──  StickersWithHeader.astro
 │   │   └──  ThreeColumns.astro
 │   ├──  styles
 │   │   ├──  global.scss
 │   │   └──  utils.scss
 │   ├──  templates
-│   │   └──  Base.astro
+│   │   ├──  Base.astro
+│   │   └──  BlogPost.astro
 │   └──  types
+│       ├──  blog.ts
 │       ├──  index.ts
 │       ├──  openGraph.ts
 │       ├──  payload.ts

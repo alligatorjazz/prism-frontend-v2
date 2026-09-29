@@ -7,6 +7,8 @@ import { getItems } from "@api/wix";
 import ScribbleSeparator from "@components/ScribbleSeparator.astro";
 import { Image } from "astro:assets";
 
+const { page } = Astro.params;
+console.log(page);
 interface Partner {
   _id: string;
   _owner: string;
@@ -17,11 +19,15 @@ interface Partner {
   website?: string;
   logo?: string;
   sponsorship?: string[];
+  organization: boolean;
+  donor: boolean;
 }
 
 const ITEMS_PER_PAGE = 12;
 
-const allPartners: Partner[] = await getItems("Partners");
+const allPartners: Partner[] = (await getItems(
+  "Partners",
+)) as unknown as Partner[];
 
 const organizations = allPartners.filter((p) => p.organization);
 const donors = allPartners.filter((p) => p.donor);
@@ -145,8 +151,10 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
               <button class="prev" data-page="-1" disabled>
                 <Image src={arrow} alt="Previous Page" />
               </button>
+
               <span class="status">
-                Page <span class="current">1</span> of {orgsTotalPages}
+                <span class="current">1</span> /{" "}
+                <span class="total">{donorsTotalPages}</span>
               </span>
               <button
                 class="next"
@@ -233,7 +241,8 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
                 <Image src={arrow} alt="Previous Page" />
               </button>
               <span class="status">
-                Page <span class="current">1</span> of {donorsTotalPages}
+                <span class="current">1</span> /{" "}
+                <span class="total">{donorsTotalPages}</span>
               </span>
               <button
                 class="next"
@@ -419,7 +428,7 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
             color: var(--text-color);
             text-decoration: none;
 
-            font-family: var(--handwriting);
+            font-family: var(--cursive);
             /* &:hover { */
             /*   text-decoration: underline; */
             /* } */
@@ -457,6 +466,10 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
         text-decoration: none;
         cursor: default;
       }
+    }
+    span.status {
+      font-size: 3rem;
+      font-family: var(--handwriting);
     }
   }
 
