@@ -78,3 +78,11 @@ div.image.cover>img {
 .paper-bg {
   background: var(--test-var);
 }
+
+.post-it {
+  background: linear-gradient(var(--youth-yellow-2),
+      var(--youth-yellow-1) 45%);
+  transition: transform 0.2s ease;
+  filter: drop-shadow(1px 1px 1px var(--text-color));
+  padding: 1rem;
+}
