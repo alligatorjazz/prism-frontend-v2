@@ -25,7 +25,7 @@
 - [x] Change primary color for Learn landing page
 
 ## Policy, Get Involved & Membership
-- [ ] P-SAP page port
+- [x] P-SAP page port
 - [x] Update school policy hub
 - [ ] Get Involved / Membership Model pages
   - [ ] People Ops page
@@ -68,13 +68,12 @@
 - [ ] Add paint stroke texture to borders (TBD — partners section on current site)
 
 ## About Page
-- [ ] Remove partners from About
+- [x] Remove partners from About
 
 ## Our Partners Page
 - [ ] Top should stay in place on hover
 - [ ] Add grain to post-it
-- [ ] Shrink pagination arrows
-- [ ] Decrease arrow / scribble stroke weight
+- [x] Shrink pagination arrows
 - [ ] Make pagination arrows into a reusable component
 
 ## Creative Fellowship Page
@@ -88,6 +87,4 @@
 ## Consultation & Follow-Ups
 - [ ] Consult staff re: additional yearbook changes and other items
 - [ ] Membership staff meeting (Friday): Maxx to ask whether training plans and leadership roles should be enumerated on track pages
-  - Pending assumption: replace tier outline with a key activities section
 
-**Excluded as already completed** (marked done in the files): explain PRISM mission (About), updating images / realistic tape (History), yearbook-style staff pages (Team), drop shadow / gradient / handwritten font / hand-drawn dividers & arrows (Partners), and the four action-table items from all three Data Planning notes — tweak news page, task force pages, dashboard wireframes, and event fields feature request.

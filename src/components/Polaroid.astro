@@ -32,12 +32,16 @@ const { class: className, image, label, tape, ...props } = Astro.props;
   .container {
     --font-size: 1.25rem;
     --border-size: 12px;
-    border: var(--border-size) solid var(--fg-color);
-    background-color: var(--fg-color);
+    /* border: var(--border-size) solid var(--fg-color); */
+    /* background-color: var(--fg-color); */
     position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
-  img {
+  .container > img {
+    border: var(--border-size) solid var(--fg-color);
     width: 100%;
     height: calc(100% - var(--font-size) - (var(--border-size) * 2));
     object-fit: cover;
@@ -45,7 +49,8 @@ const { class: className, image, label, tape, ...props } = Astro.props;
 
   .label {
     margin: 0;
-    padding: var(--border-size);
+    /* padding: var(--border-size); */
+    border: var(--border-size) solid var(--fg-color);
     background-color: var(--fg-color);
     text-align: center;
     font-weight: bold;
@@ -60,7 +65,7 @@ const { class: className, image, label, tape, ...props } = Astro.props;
     position: absolute;
     top: 0;
     right: 0;
-    --size: 35%;
+    --size: 64px;
     img {
       position: absolute;
       width: var(--size);
