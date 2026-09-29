@@ -1,78 +1,95 @@
-## General / Global Changes
+# Front-End TODO List
 
+## Global / Site-Wide
 - [ ] Reduce noise opacity on notebook paper to 50%
-- [ ] Try to match notebook paper lines to text
+- [ ] Match notebook paper lines to text
+- [ ] Fix line spacing on notebook paper
+- [ ] Add hand-written page numbers
+- [ ] Get new hand-written font for smaller display
+- [ ] Add drop shadow on `tornpaperbox`
+- [ ] Add Discord link
+- [ ] Create jobs page
+- [ ] Create contact page
+- [ ] Add privacy policy and "Do Not Sell My Personal Information"
 - [ ] Remove quick links page
-- [ ] Add "Learn"
-- [ ] Add privacy policy and do not sell my personal info
-- [ ] drop-shadow on tornpaperbox
+- [ ] Add "Learn" (nav / landing)
+- [ ] Add trinkets (e.g., bucket with pride flags)
+- [ ] Experiment with shadow fills (trapezoidal background? TBD)
+- [ ] Gradients to reflect shadow
 
-## About Page
+## Learn Section & Tag/Category Pages
+- [ ] Content loading for Learn section (page embeds)
+- [ ] Tag/category page: better use of vertical space (page/intro takes up too much room)
+- [ ] Tag/category page: make the entire card a link
+- [ ] Add category / tag separation in tag list
+- [ ] Remove dates from blog cards
+- [ ] Sticky box for TOCs
+- [ ] Change primary color for Learn landing page
 
-- [x] Explain what PRISM is, our mission, etc
-- [ ] remove partners from about
+## Policy, Get Involved & Membership
+- [ ] P-SAP page port
+- [ ] Update school policy hub
+- [ ] Get Involved / Membership Model pages
+  - [ ] People Ops page
+- [ ] Explain volunteer vs. member vs. leader
+  - [ ] Difference in expectations and upside
+  - [ ] People can join as members and volunteers, but not leaders
+- [ ] Youth Advisory Committee
+- [ ] Consider sticky scroll
+- [ ] Change "attend orientation" header to "meet with us"
 
+### Policy Page
+- [ ] Remove "trainings" verbiage from tracks
+- [ ] Track section: notebook paper background with arrows connecting each card
+- [ ] Add expectations to member and leader cards
+- [ ] Add "To learn more about our leadership pipeline" link → back to Get Involved
+- [ ] Replace policy calendar with next policy power hour
+
+### Membership Page Touch-Ups
+- [ ] Polaroids: thinnest border on the sides, thickest on the bottom
+- [ ] Angle Avion's pic slightly counterclockwise; maybe add tape
+- [ ] Add filtered events list for outreach (tabling and social)
+
+## Our Team (Yearbook) Page
+- [ ] Convey paper stacking / skeuomorphism
+  - [ ] Paper poking out beyond the edge (top edge / vertical spine)
+  - [ ] Imply pages behind the current spread
+- [ ] Make it look used / scribbled on to sell the paper idea
+- [ ] Shift staff under content
+- [ ] Staff pages: no full bio — use arrows, terse introduction only; title on polaroid
+- [ ] Add additional fields: email, contact for
+- [ ] Make title visible without hover, underneath card
+- [ ] Consider splitting names by row
+- [ ] Drawn underline / arrow to the name on hover
 
 ## Our History Page
-
-- [x] Updating images
-- [x] Updating tape to be more realistic
-- [ ] Add paint stroke texture to the borders ???
-    - (our partners on current site)
+- [ ] Add a header: "Our History" title + backlink to About
+- [ ] Replace team pic with the current team
+- [ ] Make tape the same size
 - [ ] Rotation
-- [ ] Replace the team pic with the current team
-- [ ] make tape the same size
-- [ ] have *a* header
-    - "title" our history, + about backlink
+- [ ] Add paint stroke texture to borders (TBD — partners section on current site)
 
-## Our Team Page
-- [x] Something that evokes a yearbook
-- [x] Staff full info is on separate pages with headshot, personality pic, and field pic
-- [ ] make it look used / scribbled on, sell paper idea
-    - [ ] vertical spine
-        - [ ] have it poke out the edge
-    - [ ] imply pages behind the current spread
-- [ ] addl. fields
-    - [ ] email
-    - [ ] contact for
-- [ ] have title be visible w/o hover underneath card
-- [ ] split out names by row?
-- [ ] drawn underline / arrow to the name on hover
+## About Page
+- [ ] Remove partners from About
 
 ## Our Partners Page
-- [x] Drop shadow should already be visible
-- [x] Gradient should be a bit more gradual
 - [ ] Top should stay in place on hover
-- [x] Handwritten font
-- [x] Not having font underlined on hover
-- [x] Dividing line between Organizations and donors should be a handdrawn line
-- [x] Replace previous and next with handrawn arrows
-- [ ] add grain to post-it
-- [ ] decrease arrow / scribble stroke weight
-- [ ] shrink arrows
-- [ ] make pagination arrows into reusable component
-
-## Get Involved Page
-- [ ] Explain volunteer vs member vs leader
-    - [ ] difference in expectations, upside
-    - [ ] people can join as members and volunteers but not leaders
-> sticky scroll?
-  - [ ] Youth Advisory Committee
-
-- [ ] change "attend orientation" header to "meet with us"
+- [ ] Add grain to post-it
+- [ ] Shrink pagination arrows
+- [ ] Decrease arrow / scribble stroke weight
+- [ ] Make pagination arrows into a reusable component
 
 ## Creative Fellowship Page
-- [ ] Remove first description in the header and the "Who makes up the creative fellowship?" card
-- [ ] Add Alex's pic next to about the fellowship with a caption that says "Alexander Puga, Content Creation Director, leads the Creative Fellowship" with a learn more button
-- [ ] Alex needs to get images
-  - [ ] Should have same width borders on sides and top
+- [ ] Remove first description in header and the "Who makes up the creative fellowship?" card
+- [ ] Add Alex's pic next to "About the Fellowship" with caption "Alexander Puga, Content Creation Director, leads the Creative Fellowship" + learn more button
+- [ ] Get images (Alex)
+  - [ ] Same-width borders on sides and top
 - [ ] Add apply button beneath fellow roles
 - [ ] Update fellow roles
 
-## Policy Page
-- [ ] Remove "trainings" verbiage from tracks
-- [ ] Make track section background notebook paper with arrows connecting each card
-- [ ] Add expectations to member and leader cards
-- [ ] "To learn more about our leadership pipeline, click here" and takes them back to Get Involved
-- [ ] Replace policy calendar with next policy power hour
+## Consultation & Follow-Ups
+- [ ] Consult staff re: additional yearbook changes and other items
+- [ ] Membership staff meeting (Friday): Maxx to ask whether training plans and leadership roles should be enumerated on track pages
+  - Pending assumption: replace tier outline with a key activities section
 
+**Excluded as already completed** (marked done in the files): explain PRISM mission (About), updating images / realistic tape (History), yearbook-style staff pages (Team), drop shadow / gradient / handwritten font / hand-drawn dividers & arrows (Partners), and the four action-table items from all three Data Planning notes — tweak news page, task force pages, dashboard wireframes, and event fields feature request.
