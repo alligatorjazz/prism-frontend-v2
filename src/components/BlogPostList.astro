@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import dayjs from "dayjs";
 import arrow from "@assets/img/pagination-arrow.png";
 import type { PostSummary } from "../types/blog";
 
@@ -30,21 +29,21 @@ function chunkItems<T>(items: T[], size: number): T[][] {
   return chunks.length ? chunks : [[]];
 }
 
-function formatDate(value: string | Date | null | undefined): string {
-  if (!value) return "";
-
-  const date = dayjs(value);
-  return date.isValid() ? date.format("MMMM D, YYYY") : "";
-}
-
-function toIsoDate(
-  value: string | Date | null | undefined,
-): string | undefined {
-  if (!value) return undefined;
-
-  const date = dayjs(value);
-  return date.isValid() ? date.toISOString() : undefined;
-}
+// function formatDate(value: string | Date | null | undefined): string {
+//   if (!value) return "";
+//
+//   const date = dayjs(value);
+//   return date.isValid() ? date.format("MMMM D, YYYY") : "";
+// }
+//
+// function toIsoDate(
+//   value: string | Date | null | undefined,
+// ): string | undefined {
+//   if (!value) return undefined;
+//
+//   const date = dayjs(value);
+//   return date.isValid() ? date.toISOString() : undefined;
+// }
 
 const pages = chunkItems(posts, itemsPerPage);
 const totalPages = pages.length;
@@ -82,11 +81,11 @@ const totalPages = pages.length;
                       </a>
 
                       <div class="body">
-                        {formatDate(post.date) && (
-                          <time class="date" datetime={toIsoDate(post.date)}>
-                            {formatDate(post.date)}
-                          </time>
-                        )}
+                        <!-- {formatDate(post.date) && ( -->
+                        <!--   <time class="date" datetime={toIsoDate(post.date)}> -->
+                        <!--     {formatDate(post.date)} -->
+                        <!--   </time> -->
+                        <!-- )} -->
 
                         <h3>
                           <a href={post.href}>{post.title}</a>
@@ -96,11 +95,14 @@ const totalPages = pages.length;
 
                         {post.tags.length > 0 && (
                           <ul class="tags">
-                            {post.tags.map((tag) => (
+														<li class="primary">                                
+															<a href={post.tags[0].href}>{post.tags[0].label}</a>
+														</li>
+														{post.tags.slice(1).map((tag) => (
                               <li>
                                 <a href={tag.href}>{tag.label}</a>
                               </li>
-                            ))}
+                            )) }
                           </ul>
                         )}
                       </div>
@@ -159,7 +161,7 @@ const totalPages = pages.length;
       if (newPage < 1 || newPage > totalPages || newPage === currentPage)
         return;
 
-      track.style.setProperty("--current-page", newPage.toString());
+      track?.style.setProperty("--current-page", newPage.toString());
 
       currentPage = newPage;
       updateButtons();
@@ -286,6 +288,10 @@ const totalPages = pages.length;
     gap: 0.5rem;
     margin: auto 0 0;
     padding: 1rem 0 0;
+		.primary {
+			font-weight: bold;
+a { 			background-color: var(--rainbow-red); }
+		}
 
     a {
       display: inline-block;

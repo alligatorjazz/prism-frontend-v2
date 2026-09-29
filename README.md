@@ -5,23 +5,22 @@
 - [x] Fix line spacing on notebook paper
 - [x] Add hand-written page numbers
 - [x] Get new hand-written font for smaller display
-- [ ] Add drop shadow on `tornpaperbox`
-- [ ] Add Discord link
+- [x] Add drop shadow on `tornpaperbox`
+- [x] Add Discord link
 - [ ] Create jobs page
 - [ ] Create contact page
-- [ ] Add privacy policy and "Do Not Sell My Personal Information"
-- [ ] Remove quick links page
-- [ ] Add "Learn" (nav / landing)
+- [x] Add privacy policy and "Do Not Sell My Personal Information"
+- [x] Remove quick links page
+- [x] Add "Learn" (nav / landing)
 - [ ] Add trinkets (e.g., bucket with pride flags)
-- [ ] Experiment with shadow fills (trapezoidal background? TBD)
-- [ ] Gradients to reflect shadow
+- [ ] Standardize pagination component
 
 ## Learn Section & Tag/Category Pages
-- [ ] Content loading for Learn section (page embeds)
-- [ ] Tag/category page: better use of vertical space (page/intro takes up too much room)
-- [ ] Tag/category page: make the entire card a link
-- [ ] Add category / tag separation in tag list
-- [ ] Remove dates from blog cards
+- [x] Content loading for Learn section (page embeds)
+- [x] Tag/category page: better use of vertical space (page/intro takes up too much room)
+- [x] Tag/category page: make the entire card a link
+- [x] Add category / tag separation in tag list
+- [x] Remove dates from blog cards
 - [ ] Sticky box for TOCs
 - [ ] Change primary color for Learn landing page
 
