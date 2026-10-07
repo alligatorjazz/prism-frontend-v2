@@ -6,7 +6,6 @@ import Base from "@templates/Base.astro";
 import Modal from "@components/Modal.astro";
 import YearbookPortrait from "@components/YearbookPortrait.astro";
 
-
 import groupPhoto from "@assets/img/team-group-photo-faw-26.jpg";
 
 // One headshot per staff member and board member. Files live in
@@ -25,7 +24,6 @@ import mvPhoto from "@assets/img/team/mv.avif";
 import samuelPhoto from "@assets/img/team/samuel.avif";
 import sofiaPhoto from "@assets/img/team/sofia.avif";
 
-
 interface Member {
   /** URL-safe id. Drives the modal, so it must not contain quotes or spaces. */
   slug: string;
@@ -42,7 +40,7 @@ const staff: Member[] = [
   {
     slug: "maxx-fenning",
     name: "Maxx Fenning",
-		photo: maxxPhoto,
+    photo: maxxPhoto,
     title: "Executive Director",
     pronouns: "He/Him",
     bio: `A staunch advocate for LGBTQ+ rights and sexual health education, Maxx is the Executive Director of PRISM. Maxx recently earned his degree in Business Administration from the University of Florida, and is now pursuing a Master of Public Policy at the University of Miami. He is also an active creator on TikTok, where he educates on many of the same topics that PRISM addresses. In his free time, Maxx enjoys singing and graphic design.`,
@@ -51,7 +49,7 @@ const staff: Member[] = [
   {
     slug: "hannah-neuman",
     name: "Hannah Neuman",
-		photo: hannahPhoto,
+    photo: hannahPhoto,
     title: "Development & Operations Director",
     pronouns: "They/She",
     bio: `Hannah is a genderqueer lesbian from Jacksonville, FL with a BSc from Florida State University. They have an extensive background in education and youth empowerment, and a deep passion for community-building. Over the last three years, they have co-directed two small non-profits focused on uplifting houseless individuals and local artists by expanding access to vital resources. Hannah currently plans to pursue a Masters of Social Work in 2026. As a Jewish member of the queer community, they are dedicated to Collective Liberation—actively uplifting Palestinian voices in their fight for freedom at every opportunity. In addition to advocacy work, Hannah enjoys practicing astrology, tarot, art, and vegan cooking. In their free time, you can often find them taking a long hike through nature, working on a magazine collage, or performing with their indie-rock band "No Parts".`,
@@ -95,7 +93,7 @@ const staff: Member[] = [
   {
     slug: "miles-davis",
     name: "Miles Davis",
-		title: "Policy Director",
+    title: "Policy Director",
     pronouns: "He/Him",
     photo: milesPhoto,
     bio: `Miles Davis has a diverse background in legislative affairs, voting rights advocacy, and political campaigns. He served as Chief of Staff in the Florida Senate, where he provided strategic guidance on policy initiatives and built strong relationships with community leaders and state agencies. As Florida Voting Rights Director at America Votes, Miles worked to protect and expand voter access, collaborating with state and local stakeholders to create coordinated strategies. He has also led teams on high-profile political campaigns, serving as a Political Director and Campaign Manager for statewide and regional efforts. Miles is passionate about empowering communities, advancing civic engagement, and fostering equitable opportunities for all.`,
@@ -105,18 +103,9 @@ const staff: Member[] = [
     name: "Damian Thomas",
     title: "Website Design Manager",
     pronouns: "He/Him",
-		photo: damianPhoto,
+    photo: damianPhoto,
     bio: `Damian Thomas is a full-stack web developer who has been working in and around progressive politics since 2017. Off the clock, he's a history nerd, fighting game enthusiast, and musician.`,
     quote: `Off the clock, he's a history nerd, fighting game enthusiast, and musician.`,
-  },
-  {
-    slug: "jordan-thompson",
-    name: "Jordan Thompson",
-    title: "Data & Research Manager",
-    pronouns: "She/Her",
-		photo: jordanPhoto,
-    bio: `Jordan Thompson is a political psychologist who specializes in political communication and behavior. She earned her PhD at Florida Atlantic University, where she published research on political polarization and prejudice. Jordan has extensive experience working with surveys and text-based data. She believes strongly in the importance of blending research and activism. Data should tell a story, and she is passionate about using data to advocate for LGBTQ+ people and other marginalized communities. In her spare time, you can find Jordan hanging out with her cats, Lily and Lucy. She also enjoys cooking vegetarian recipes and scouring thrift stores for Halloween decorations.`,
-    quote: `In her spare time, you can find Jordan hanging out with her cats, Lily and Lucy. She also enjoys cooking vegetarian recipes and scouring thrift stores for Halloween decorations.`,
   },
 ];
 
@@ -125,14 +114,14 @@ const board: Member[] = [
     slug: "gala-gonsalves",
     name: "Gala Gonsalves",
     title: "Chair",
-		photo: galaPhoto,
+    photo: galaPhoto,
     pronouns: "She/Her",
     bio: `A Licensed Mental Health Counselor in the state of Florida.`,
   },
   {
     slug: "sofia-hernandez",
     name: "Sofia Hernandez",
-		photo: sofiaPhoto,
+    photo: sofiaPhoto,
     title: "Youth Advisory Committee Chair",
     pronouns: "She/Her",
     bio: `High school senior and PRISM Student Ambassador, current Chair of PRISM's Youth Advisory Committee, and founder/director of Blooming LGBTQ, a youth self-sufficiency task force.`,
@@ -148,14 +137,14 @@ const board: Member[] = [
     slug: "fabiana-ungaro",
     name: "Fabiana Ungaro",
     title: "Member",
-		photo: fabianaPhoto,
+    photo: fabianaPhoto,
     pronouns: "She/Her",
     bio: `First-generation Peruvian immigrant and Communications major.`,
   },
   {
     slug: "samuel-doss",
     name: "Samuel Doss",
-		photo: samuelPhoto,
+    photo: samuelPhoto,
     title: "Treasurer",
     pronouns: "He/Him",
     bio: `MBA and Ph.D. in Business Administration, retired professor in marketing & entrepreneurship, former stockbroker and entrepreneur with many years of work with various nonprofits.`,
@@ -186,7 +175,6 @@ const contents = [
     <section class="cover">
       <span class="spine" aria-hidden="true"></span>
       <div class="cover-inner">
-        
         <h1>PRISM Yearbook</h1>
         <p class="year">2026</p>
         <p class="volume">Staff &amp; Board · South Florida</p>
@@ -196,22 +184,22 @@ const contents = [
     <!-- <div class="divider"><ScribbleSeparator /></div> -->
 
     <!-- ── Contents ────────────────────────────────────────────── -->
-    <section class="contents" id="contents">
-      <div class="container">
-        <h2>Contents</h2>
-        <ul class="list">
-          {
-            contents.map(({ href, label, page }) => (
-              <li>
-                <a href={href}>{label}</a>
-                <span class="dots" aria-hidden="true" />
-                <!-- <span class="page-number">{page}</span> -->
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </section>
+    <!-- <section class="contents" id="contents"> -->
+    <!--   <div class="container"> -->
+    <!--     <h2>Contents</h2> -->
+    <!--     <ul class="list"> -->
+    <!--       { -->
+    <!--         contents.map(({ href, label, page }) => ( -->
+    <!--           <li> -->
+    <!--             <a href={href}>{label}</a> -->
+    <!--             <span class="dots" aria-hidden="true" /> -->
+    <!--             <!-- <span class="page-number">{page}</span> --> -->
+    <!--           </li> -->
+    <!--         )) -->
+    <!--       } -->
+    <!--     </ul> -->
+    <!--   </div> -->
+    <!-- </section> -->
 
     <!-- ── Staff ───────────────────────────────────────────────── -->
     <section class="sheet ruled-bg" id="staff">
@@ -227,7 +215,6 @@ const contents = [
                 title={member.title}
                 pronouns={member.pronouns}
                 photo={member.photo}
-
               />
             ))
           }
@@ -514,7 +501,6 @@ const contents = [
       opacity: 0.45;
       transform: translateY(-0.3rem);
     }
-
   }
 
   /* ---------- Interior pages ---------- */
@@ -573,8 +559,6 @@ const contents = [
       line-height: 1.1;
     }
   }
-
-  
 
   .prompt {
     max-width: 34rem;
