@@ -1,0 +1,491 @@
+---
+// src/pages/contact.astro
+import Base from "@templates/Base.astro";
+import PageIntro from "@sections/PageIntro.astro";
+import SectionBorder from "@components/SectionBorder.astro";
+import TornPaperBox from "@components/TornPaperBox.astro";
+import speaking from "@assets/img/megaphone-sticker.png";
+
+// The address and number already published in Footer.astro, kept here so the
+// page and the footer can never disagree.
+const email = "info@prismfl.org";
+const phone = "(561) 291-9207";
+const phoneHref = "tel:+15612919207";
+
+// Where the form posts. Leave PUBLIC_CONTACT_ENDPOINT unset and the form
+// degrades to a pre-filled mailto: draft instead of dropping the message.
+const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
+
+const topics = [
+  "General question",
+  "Volunteering or membership",
+  "Press or media request",
+  "Partnership or sponsorship",
+  "Donations or giving",
+];
+
+// Real routes only — every href here resolves to a page in src/pages/.
+const elsewhere = [
+  { href: "/get-involved", label: "Join PRISM or volunteer" },
+  { href: "/learn", label: "Browse sexual health & LGBTQ+ resources" },
+  { href: "/our-partners", label: "See the organizations we work with" },
+  { href: "/donate", label: "Donate to PRISM" },
+];
+---
+
+<Base
+  pageMetadata={{
+    title: "Contact Us",
+    description:
+      "Get in touch with PRISM FL. Email info@prismfl.org, call us, or send a message through the contact form.",
+    type: "website",
+    image: speaking.src,
+    "image:alt": "A PRISM community member speaking at an event",
+  }}
+  class="page-content"
+>
+  <PageIntro
+    title="Contact Us"
+    description={"Have a question, an idea, or a story to share? We would love to hear from you. Contact us using the email or the form below"}
+    image={{
+      src: speaking.src,
+      alt: "A PRISM community member speaking at an event",
+      width: speaking.width,
+      height: speaking.height,
+    }}
+    class="intro"
+  />
+
+  <SectionBorder type="marker" backgroundColor="activist-aqua" />
+
+  <main>
+    <section id="reach-us" class="ruled-bg">
+      <div class="container">
+        <h2>Reach Us Directly</h2>
+
+        <div class="card-grid">
+          <article class="card">
+            <h3>Email</h3>
+            <p class="value"><a href={`mailto:${email}`}>{email}</a></p>
+            <p>
+              For questions about our programs, volunteering, press, or anything
+              else.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Phone</h3>
+            <p class="value"><a href={phoneHref}>{phone}</a></p>
+            <p>Prefer to talk it through? Give us a call.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <SectionBorder type="marker" flip backgroundColor="activist-aqua" />
+    <section id="message">
+      <div class="container">
+        <TornPaperBox class="paper">
+          <div class="form-inner">
+            <h2>Send Us a Message</h2>
+            <p class="lede">
+              Every field is required. If you would rather not use a form, email
+              us at <a href={`mailto:${email}`}>{email}</a>.
+            </p>
+
+            <form
+              class="contact-form"
+              name="contact"
+              method="post"
+              action={contactEndpoint || undefined}
+              data-endpoint={contactEndpoint}
+            >
+              <div class="field">
+                <label for="contact-name">Your name</label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+
+              <div class="field">
+                <label for="contact-email">Your email</label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+
+              <div class="field">
+                <label for="contact-topic">What is this about?</label>
+                <select id="contact-topic" name="topic" required>
+                  <option value="" selected disabled>Choose a topic…</option>
+                  {
+                    topics.map((topic) => (
+                      <option value={topic}>{topic}</option>
+                    ))
+                  }
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" name="message" rows="7" required
+                ></textarea>
+              </div>
+
+              <!-- Honeypot: hidden from people, tempting to bots. -->
+              <div class="honeypot" aria-hidden="true">
+                <label for="contact-website">Website</label>
+                <input
+                  id="contact-website"
+                  name="website"
+                  type="text"
+                  tabindex="-1"
+                  autocomplete="off"
+                />
+              </div>
+
+              <button type="submit">Send Message</button>
+
+              <p class="form-status" role="status"></p>
+            </form>
+          </div>
+        </TornPaperBox>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "../styles/utils" as *;
+
+  /* The page colour is set on both the wrapper and <main>, so the background
+     holds whether or not the class passed to Base.astro picks up this file's
+     scope. */
+  .page-content {
+    background-color: var(--activist-aqua);
+  }
+
+  main {
+    background-color: var(--activist-aqua);
+    font-size: 1.25rem;
+    margin: auto;
+  }
+
+  h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 0 0 2rem;
+  }
+
+  .container {
+    max-width: var(--xl);
+    margin: auto;
+    padding: 4rem 1rem;
+  }
+
+  #reach-us,
+  #routes {
+    background-size: 2000px;
+    background-repeat: repeat-y;
+    background-position: top center;
+  }
+
+  .lede {
+    max-width: 40rem;
+    margin: 0 auto 2rem;
+    text-align: center;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    max-width: var(--lg);
+    margin: 0 auto;
+  }
+
+  /* Same yellow paper treatment as the partner cards. */
+  .card {
+    background-color: var(--youth-yellow-2);
+    padding: 1.5rem;
+    filter: var(--shadow-light);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    h3 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .value {
+      font-family: var(--header-font);
+      font-size: 1.25rem;
+      font-weight: 700;
+
+      a {
+        color: var(--text-color);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  #message {
+    .container {
+      max-width: var(--lg);
+    }
+
+    /* Clears the torn top and bottom edges of the paper box. */
+    .form-inner {
+      padding: 2rem 0 3rem;
+    }
+
+    .lede {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    label {
+      font-family: var(--header-font);
+      font-weight: 600;
+    }
+
+    /* global.scss strips borders and backgrounds from inputs, so they are
+       restated here. */
+    input,
+    select,
+    textarea {
+      width: 100%;
+      font-family: var(--text-font);
+      font-size: 1.125rem;
+      color: var(--text-color);
+      background-color: var(--witty-white);
+      border: 2px solid var(--text-color);
+      /* border-radius: var(--round-edge); */
+      padding: 0.75rem 1rem;
+
+      &:focus-visible {
+        outline: 3px solid var(--activist-aqua);
+        outline-offset: 2px;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 10rem;
+    }
+
+    button[type="submit"] {
+      align-self: flex-start;
+      font-size: 1.25rem;
+      font-weight: bold;
+      padding: 1rem 2rem;
+      background-color: var(--activist-aqua);
+      color: var(--witty-white);
+
+      &:hover {
+        filter: brightness(110%);
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: wait;
+      }
+    }
+
+    /* Off-screen rather than display:none — some bots skip hidden fields. */
+    .honeypot {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .form-status {
+      margin: 0;
+      font-weight: 600;
+
+      &:empty {
+        display: none;
+      }
+
+      &[data-state="error"] {
+        color: var(--rainbow-red);
+      }
+    }
+  }
+
+  .links {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    max-width: var(--lg);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    a {
+      display: block;
+      background-color: var(--witty-white);
+      border: 2px solid var(--text-color);
+      border-radius: var(--round-edge);
+      padding: 1rem 1.5rem;
+      font-family: var(--header-font);
+      font-weight: 600;
+      color: var(--text-color);
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: translateX(4px);
+      }
+    }
+  }
+</style>
+
+<script>
+  /**
+   * Contact form submission.
+   *
+   * The form works in two modes, decided by `data-endpoint`:
+   *
+   *   endpoint set    -> POST the fields as JSON and report the result inline
+   *   endpoint unset  -> open a pre-filled mailto: draft, so the message the
+   *                      visitor just typed is never silently discarded
+   *
+   * Nothing here is required for the page to be readable — with JavaScript off
+   * the form still renders and the email address is still on the page.
+   */
+
+  const EMAIL = "info@prismfl.org";
+
+  function setStatus(form: HTMLFormElement, message: string, state: string) {
+    const node = form.querySelector<HTMLElement>(".form-status");
+    if (!node) return;
+    node.textContent = message;
+    node.dataset.state = state;
+  }
+
+  /** The visitor's answers, as a plain object to POST. */
+  function payloadOf(data: FormData) {
+    return {
+      name: data.get("name"),
+      email: data.get("email"),
+      topic: data.get("topic"),
+      message: data.get("message"),
+      // Honeypot: a real server should discard any submission where this is set.
+      website: data.get("website"),
+    };
+  }
+
+  /** A mailto: URL carrying the message the visitor already typed. */
+  function mailtoUrl(data: FormData) {
+    const subject = String(data.get("topic") || "Website contact form");
+    const body = [
+      String(data.get("message") ?? ""),
+      "",
+      `— ${data.get("name")} (${data.get("email")})`,
+    ].join("\n");
+
+    return (
+      `mailto:${EMAIL}` +
+      `?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`
+    );
+  }
+
+  async function post(endpoint: string, payload: unknown) {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok)
+      throw new Error(`Contact form failed: ${response.status}`);
+  }
+
+  async function handleSubmit(form: HTMLFormElement, event: SubmitEvent) {
+    event.preventDefault();
+
+    const data = new FormData(form);
+
+    // Honeypot tripped: report success and drop it. Bots do not get feedback.
+    if (data.get("website")) {
+      form.reset();
+      setStatus(form, "Thanks — your message is on its way.", "success");
+      return;
+    }
+
+    const endpoint = form.dataset.endpoint ?? "";
+
+    // No endpoint configured yet: hand the message to the visitor's mail client
+    // rather than posting it nowhere.
+    if (!endpoint) {
+      window.location.href = mailtoUrl(data);
+      setStatus(
+        form,
+        `This form isn't connected to a server yet, so we've opened a draft email to ${EMAIL} — send that and we'll get it.`,
+        "fallback",
+      );
+      return;
+    }
+
+    const button = form.querySelector<HTMLButtonElement>(
+      'button[type="submit"]',
+    );
+    if (button) button.disabled = true;
+    setStatus(form, "Sending…", "pending");
+
+    try {
+      await post(endpoint, payloadOf(data));
+      form.reset();
+      setStatus(
+        form,
+        "Thanks — your message is on its way. We'll be in touch soon.",
+        "success",
+      );
+    } catch (error) {
+      console.error(error);
+      setStatus(
+        form,
+        `Something went wrong sending that. Please email ${EMAIL} directly.`,
+        "error",
+      );
+    } finally {
+      if (button) button.disabled = false;
+    }
+  }
+
+  document
+    .querySelectorAll<HTMLFormElement>(".contact-form")
+    .forEach((form) => {
+      form.addEventListener("submit", (event) => handleSubmit(form, event));
+    });
+</script>

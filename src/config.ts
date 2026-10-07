@@ -1,3 +1,5 @@
+import type { Route } from "./types";
+
 export const siteBreakpoints = {
   xs: 576,
   sm: 768,
@@ -39,6 +41,11 @@ export const globalRoutes: Route[] = [
         type: "internal",
         path: "/psap",
         displayName: "Student Ambassador Program",
+      },
+      {
+        type: "internal",
+        path: "/contact-us",
+        displayName: "Contact Us",
       },
       {
         type: "external",

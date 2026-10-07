@@ -1,0 +1,193 @@
+---
+// src/components/YearbookPortrait.astro
+//
+// One pasted-in photo for the yearbook grid: a portrait, a handwritten name,
+// and the member's role. Members without a real headshot fall back to an
+// initials tile rather than a stock image.
+//
+// The whole card is a <button>, so it is keyboard reachable and announced as
+// actionable. The page listens for [data-member] clicks and opens the matching
+// bio modal. Everything inside is phrasing content, which is what a <button>
+// is allowed to contain — no <div> or <p> nested in here.
+
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import tape from "@assets/img/tape-img.png";
+
+interface Props {
+  /** Modal id suffix. Must be URL-safe — no quotes or spaces. */
+  slug: string;
+  name: string;
+  title: string;
+  pronouns: string;
+  photo?: ImageMetadata;
+  /** A strip of tape over the top edge, for photos that are really pasted in. */
+  taped?: boolean;
+}
+
+const { slug, name, title, pronouns, photo, taped = false } = Astro.props;
+
+// "MariaVictoria "MV" Chacón-Briceño" -> "MC"
+const initials = name
+  .replace(/["“”].*?["“”]/g, " ")
+  .split(/\s+/)
+  .filter((part) => /\p{L}/u.test(part))
+  .map((part) => part.charAt(0))
+  .slice(0, 2)
+  .join("")
+  .toUpperCase();
+---
+
+<button class="portrait" type="button" data-member={slug}>
+  <span class="frame">
+    {
+      photo ? (
+        <Image src={photo} alt="" width={320} height={400} />
+      ) : (
+        <span class="placeholder" aria-hidden="true">
+          <span class="initials">{initials}</span>
+        </span>
+      )
+    }
+  </span>
+
+  {
+    taped && (
+      <span class="tape" aria-hidden="true">
+        <Image src={tape} alt="" />
+      </span>
+    )
+  }
+
+  <span class="caption">
+    <span class="name">{name}</span>
+    <span class="role">{title}</span>
+    <span class="pronouns">{pronouns}</span>
+  </span>
+</button>
+
+<style lang="scss">
+  .portrait {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 0.85rem 1.1rem;
+    background: var(--fg-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 2px;
+    filter: drop-shadow(2px 3px 3px rgba(0, 0, 0, 0.35));
+    text-align: center;
+    cursor: pointer;
+    transition:
+      rotate 200ms ease,
+      transform 200ms ease,
+      filter 200ms ease;
+
+    /* Photos never get pasted in perfectly straight. */
+    &:nth-of-type(odd) {
+      rotate: -1.5deg;
+    }
+    &:nth-of-type(even) {
+      rotate: 1.25deg;
+    }
+
+    &:hover,
+    &:focus-visible {
+      rotate: 0deg;
+      transform: translateY(-4px);
+      filter: drop-shadow(5px 7px 5px rgba(0, 0, 0, 0.35));
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--youth-yellow-2);
+      outline-offset: 3px;
+    }
+
+    &:hover .name {
+      text-decoration: underline;
+    }
+  }
+
+  .frame {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--youth-yellow-1);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      160deg,
+      var(--youth-yellow-1),
+      var(--youth-yellow-2)
+    );
+  }
+
+  .initials {
+    font-family: var(--header-font);
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  /* Sits above the frame's top edge, like real tape holding a photo down. */
+  .tape {
+    position: absolute;
+    top: 0.3rem;
+    left: 50%;
+    translate: -50% 0;
+    rotate: -3deg;
+    width: 4.5rem;
+    z-index: 2;
+    pointer-events: none;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .caption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .name {
+    font-family: var(--handwriting);
+    font-size: 1.5rem;
+    line-height: 1.05;
+  }
+
+  .role {
+    font-family: var(--header-font);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .pronouns {
+    font-size: 0.8rem;
+    font-style: italic;
+    opacity: 0.65;
+  }
+</style>

@@ -1,324 +1,326 @@
 ---
+// src/pages/our-team.astro
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 import Base from "@templates/Base.astro";
 import Modal from "@components/Modal.astro";
-import { faker } from "@faker-js/faker";
+import ScribbleSeparator from "@components/ScribbleSeparator.astro";
+import YearbookPortrait from "@components/YearbookPortrait.astro";
 
-// TODO: Uncomment these imports when real images are available
-// import maxxHeadshot from "@assets/img/staff/maxx-fenning.jpg";
-// import hannahHeadshot from "@assets/img/staff/hannah-neuman.jpg";
-// import avionHeadshot from "@assets/img/staff/avion-goordeen.jpg";
-// import alexanderHeadshot from "@assets/img/staff/alexander-puga.jpg";
-// import mvHeadshot from "@assets/img/staff/mv-chacon-briceno.jpg";
-// import auxmaryHeadshot from "@assets/img/staff/auxmary-valdez.jpg";
-// import milesHeadshot from "@assets/img/staff/miles-davis.jpg";
-// import damianHeadshot from "@assets/img/staff/damian-thomas.jpg";
-// import jordanHeadshot from "@assets/img/staff/jordan-thompson.jpg";
 
-// import galaHeadshot from "@assets/img/staff/gala-gonsalves.jpg";
-// import sofiaHeadshot from "@assets/img/staff/sofia-hernandez.jpg";
-// import maryHeadshot from "@assets/img/staff/mary-eakins-durand.jpg";
-// import fabianaHeadshot from "@assets/img/staff/fabiana-ungaro.jpg";
-// import samuelHeadshot from "@assets/img/staff/samuel-doss.jpg";
+import prismLogo from "@assets/img/prism-logo-primary.png";
+import groupPhoto from "@assets/img/team-group-photo-faw-26.jpg";
 
-// import maxxPersonality from "@assets/img/staff/maxx-personality.jpg";
-// import hannahPersonality from "@assets/img/staff/hannah-personality.jpg";
-// import avionPersonality from "@assets/img/staff/avion-personality.jpg";
-// import alexanderPersonality from "@assets/img/staff/alexander-personality.jpg";
-// import mvPersonality from "@assets/img/staff/mv-personality.jpg";
-// import auxmaryPersonality from "@assets/img/staff/auxmary-personality.jpg";
-// import milesPersonality from "@assets/img/staff/miles-personality.jpg";
-// import damianPersonality from "@assets/img/staff/damian-personality.jpg";
-// import jordanPersonality from "@assets/img/staff/jordan-personality.jpg";
+// One headshot per staff member and board member. Files live in
+// src/assets/img/team/, named for the person's first name.
+import alexPhoto from "@assets/img/team/alex.avif";
+import auxPhoto from "@assets/img/team/aux.avif";
+import avionPhoto from "@assets/img/team/avion.avif";
+import damianPhoto from "@assets/img/team/damian.avif";
+import fabianaPhoto from "@assets/img/team/fabiana.avif";
+import galaPhoto from "@assets/img/team/gala.avif";
+import hannahPhoto from "@assets/img/team/hannah.avif";
+import jordanPhoto from "@assets/img/team/jordan.avif";
+import maryPhoto from "@assets/img/team/mary.avif";
+import maxxPhoto from "@assets/img/team/maxx.avif";
+import milesPhoto from "@assets/img/team/miles.avif";
+import mvPhoto from "@assets/img/team/mv.avif";
+import samuelPhoto from "@assets/img/team/samuel.avif";
+import sofiaPhoto from "@assets/img/team/sofia.avif";
 
-// import galaPersonality from "@assets/img/staff/gala-personality.jpg";
-// import sofiaPersonality from "@assets/img/staff/sofia-personality.jpg";
-// import maryPersonality from "@assets/img/staff/mary-personality.jpg";
-// import fabianaPersonality from "@assets/img/staff/fabiana-personality.jpg";
-// import samuelPersonality from "@assets/img/staff/samuel-personality.jpg";
 
-// import maxxField from "@assets/img/staff/maxx-field.jpg";
-// import hannahField from "@assets/img/staff/hannah-field.jpg";
-// import avionField from "@assets/img/staff/avion-field.jpg";
-// import alexanderField from "@assets/img/staff/alexander-field.jpg";
-// import mvField from "@assets/img/staff/mv-field.jpg";
-// import auxmaryField from "@assets/img/staff/auxmary-field.jpg";
-// import milesField from "@assets/img/staff/miles-field.jpg";
-// import damianField from "@assets/img/staff/damian-field.jpg";
-// import jordanField from "@assets/img/staff/jordan-field.jpg";
-
-// import galaField from "@assets/img/staff/gala-field.jpg";
-// import sofiaField from "@assets/img/staff/sofia-field.jpg";
-// import maryField from "@assets/img/staff/mary-field.jpg";
-// import fabianaField from "@assets/img/staff/fabiana-field.jpg";
-// import samuelField from "@assets/img/staff/samuel-field.jpg";
-
-type Member = {
+interface Member {
+  /** URL-safe id. Drives the modal, so it must not contain quotes or spaces. */
+  slug: string;
   name: string;
   title: string;
   pronouns: string;
-  headshot: string;
-  personality: string;
-  field: string;
+  photo?: ImageMetadata;
   bio: string;
-};
+  /** Free-time line lifted verbatim from the bio, where the bio has one. */
+  quote?: string;
+}
 
-const team: Member[] = [
+const staff: Member[] = [
   {
+    slug: "maxx-fenning",
     name: "Maxx Fenning",
+		photo: maxxPhoto,
     title: "Executive Director",
     pronouns: "He/Him",
-    headshot: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    personality: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    field: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    bio: "A staunch advocate for LGBTQ+ rights and sexual health education, Maxx is the Executive Director of PRISM. Maxx recently earned his degree in Business Administration from the University of Florida, and is now pursuing a Master of Public Policy at the University of Miami. He is also an active creator on TikTok, where he educates on many of the same topics that PRISM addresses. In his free time, Maxx enjoys singing and graphic design.",
+    bio: `A staunch advocate for LGBTQ+ rights and sexual health education, Maxx is the Executive Director of PRISM. Maxx recently earned his degree in Business Administration from the University of Florida, and is now pursuing a Master of Public Policy at the University of Miami. He is also an active creator on TikTok, where he educates on many of the same topics that PRISM addresses. In his free time, Maxx enjoys singing and graphic design.`,
+    quote: `In his free time, Maxx enjoys singing and graphic design.`,
   },
   {
+    slug: "hannah-neuman",
     name: "Hannah Neuman",
+		photo: hannahPhoto,
     title: "Development & Operations Director",
     pronouns: "They/She",
-    headshot: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    personality: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    field: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    bio: 'Hannah is a genderqueer lesbian from Jacksonville, FL with a BSc from Florida State University. They have an extensive background in education and youth empowerment, and a deep passion for community-building. Over the last three years, they have co-directed two small non-profits focused on uplifting houseless individuals and local artists by expanding access to vital resources. Hannah currently plans to pursue a Masters of Social Work in 2026. As a Jewish member of the queer community, they are dedicated to Collective Liberation—actively uplifting Palestinian voices in their fight for freedom at every opportunity. In addition to advocacy work, Hannah enjoys practicing astrology, tarot, art, and vegan cooking. In their free time, you can often find them taking a long hike through nature, working on a magazine collage, or performing with their indie-rock band "No Parts".',
+    bio: `Hannah is a genderqueer lesbian from Jacksonville, FL with a BSc from Florida State University. They have an extensive background in education and youth empowerment, and a deep passion for community-building. Over the last three years, they have co-directed two small non-profits focused on uplifting houseless individuals and local artists by expanding access to vital resources. Hannah currently plans to pursue a Masters of Social Work in 2026. As a Jewish member of the queer community, they are dedicated to Collective Liberation—actively uplifting Palestinian voices in their fight for freedom at every opportunity. In addition to advocacy work, Hannah enjoys practicing astrology, tarot, art, and vegan cooking. In their free time, you can often find them taking a long hike through nature, working on a magazine collage, or performing with their indie-rock band "No Parts".`,
+    quote: `In addition to advocacy work, Hannah enjoys practicing astrology, tarot, art, and vegan cooking.`,
   },
   {
+    slug: "avion-goordeen",
     name: "Avion Goordeen",
     title: "Outreach Director",
     pronouns: "He/Him",
-    headshot: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    personality: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    field: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    bio: "Avion is a bisexual man and a first-generation immigrant from the Caribbean islands of Trinidad and Tobago. He has a Master's in Ocean Engineering from Florida Atlantic University and has been involved in LGBTQ+ activism and leadership since 2018. This includes working with CompassGLCC and being a member of the board of directors of Night Runners WPB. In his free time, Avion enjoys paddleboarding, photography and is currently a fan of the manga, One Piece.",
+    photo: avionPhoto,
+    bio: `Avion is a bisexual man and a first-generation immigrant from the Caribbean islands of Trinidad and Tobago. He has a Master's in Ocean Engineering from Florida Atlantic University and has been involved in LGBTQ+ activism and leadership since 2018. This includes working with CompassGLCC and being a member of the board of directors of Night Runners WPB. In his free time, Avion enjoys paddleboarding, photography and is currently a fan of the manga, One Piece.`,
+    quote: `In his free time, Avion enjoys paddleboarding, photography and is currently a fan of the manga, One Piece.`,
   },
   {
+    slug: "alexander-puga",
     name: "Alexander Puga",
     title: "Content Creation Director",
     pronouns: "He/Him",
-    headshot: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    personality: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    field: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    bio: "A Miami-born creative with a passion for storytelling that uplifts and represents marginalized communities. With a background in film, content creation, and brand strategy, Alex brings bold visuals and culturally rooted narratives to life. He has led campaigns for local businesses, fashion brands, and queer initiatives. As Content Creation Director at PRISM, Alex is here to celebrate queer voices and create space for joy and identity across every platform. Outside of work, you'll find him biking around the city, sweating through a workout, singing, or hanging with his fiancé and their two pups, Nino and Winston.",
+    photo: alexPhoto,
+    bio: `A Miami-born creative with a passion for storytelling that uplifts and represents marginalized communities. With a background in film, content creation, and brand strategy, Alex brings bold visuals and culturally rooted narratives to life. He has led campaigns for local businesses, fashion brands, and queer initiatives. As Content Creation Director at PRISM, Alex is here to celebrate queer voices and create space for joy and identity across every platform. Outside of work, you'll find him biking around the city, sweating through a workout, singing, or hanging with his fiancé and their two pups, Nino and Winston.`,
+    quote: `Outside of work, you'll find him biking around the city, sweating through a workout, singing, or hanging with his fiancé and their two pups, Nino and Winston.`,
   },
   {
+    slug: "mv-chacon-briceno",
     name: 'MariaVictoria "MV" Chacón-Briceño',
     title: "Organizing Director",
     pronouns: "They/She/He",
-    headshot: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    personality: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    field: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    bio: "MariaVictoria is a queer, second-generation Venezuelan immigrant, born and raised in Miami, Florida. They earned a Bachelor of Arts in Political Science with a Double Minor in Public Administration and Anthropology from Florida International University. MV has been advocating and organizing in their community since 2018 on issues such as gun violence prevention, education equity, youth civic engagement, LGBTQ+ rights, and economic justice. They pride themselves on being a continuous student to the practice of community organizing and are passionate about building relationships and developing the skills of their peers. When MV isn't organizing you can find them salsa dancing, reading in a hammock, or having philosophical conversations with anyone who will listen.",
+    photo: mvPhoto,
+    bio: `MariaVictoria is a queer, second-generation Venezuelan immigrant, born and raised in Miami, Florida. They earned a Bachelor of Arts in Political Science with a Double Minor in Public Administration and Anthropology from Florida International University. MV has been advocating and organizing in their community since 2018 on issues such as gun violence prevention, education equity, youth civic engagement, LGBTQ+ rights, and economic justice. They pride themselves on being a continuous student to the practice of community organizing and are passionate about building relationships and developing the skills of their peers. When MV isn't organizing you can find them salsa dancing, reading in a hammock, or having philosophical conversations with anyone who will listen.`,
+    quote: `When MV isn't organizing you can find them salsa dancing, reading in a hammock, or having philosophical conversations with anyone who will listen.`,
   },
   {
+    slug: "auxmary-valdez",
     name: "Auxmary Valdez",
     title: "P-SAP Manager",
     pronouns: "She/Her",
-    headshot: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    personality: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    field: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    bio: "Auxmary Valdez is a queer woman and daughter of first-generation Venezuelan and Nicaraguan immigrants. She is a former sex educator and current University of Central Florida student, double majoring in Political Science and Biomedical Sciences.",
+    photo: auxPhoto,
+    bio: `Auxmary Valdez is a queer woman and daughter of first-generation Venezuelan and Nicaraguan immigrants. She is a former sex educator and current University of Central Florida student, double majoring in Political Science and Biomedical Sciences.`,
   },
   {
+    slug: "miles-davis",
     name: "Miles Davis",
-    title: "Policy Analyst",
+		title: "Policy Director",
     pronouns: "He/Him",
-    headshot: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    personality: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    field: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    bio: "Miles Davis has a diverse background in legislative affairs, voting rights advocacy, and political campaigns. He served as Chief of Staff in the Florida Senate, where he provided strategic guidance on policy initiatives and built strong relationships with community leaders and state agencies. As Florida Voting Rights Director at America Votes, Miles worked to protect and expand voter access, collaborating with state and local stakeholders to create coordinated strategies. He has also led teams on high-profile political campaigns, serving as a Political Director and Campaign Manager for statewide and regional efforts. Miles is passionate about empowering communities, advancing civic engagement, and fostering equitable opportunities for all.",
+    photo: milesPhoto,
+    bio: `Miles Davis has a diverse background in legislative affairs, voting rights advocacy, and political campaigns. He served as Chief of Staff in the Florida Senate, where he provided strategic guidance on policy initiatives and built strong relationships with community leaders and state agencies. As Florida Voting Rights Director at America Votes, Miles worked to protect and expand voter access, collaborating with state and local stakeholders to create coordinated strategies. He has also led teams on high-profile political campaigns, serving as a Political Director and Campaign Manager for statewide and regional efforts. Miles is passionate about empowering communities, advancing civic engagement, and fostering equitable opportunities for all.`,
   },
   {
+    slug: "damian-thomas",
     name: "Damian Thomas",
     title: "Website Design Manager",
     pronouns: "He/Him",
-    headshot: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    personality: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    field: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    bio: "Damian Thomas is a full-stack web developer who has been working in and around progressive politics since 2017. Off the clock, he's a history nerd, fighting game enthusiast, and musician.",
+		photo: damianPhoto,
+    bio: `Damian Thomas is a full-stack web developer who has been working in and around progressive politics since 2017. Off the clock, he's a history nerd, fighting game enthusiast, and musician.`,
+    quote: `Off the clock, he's a history nerd, fighting game enthusiast, and musician.`,
   },
   {
+    slug: "jordan-thompson",
     name: "Jordan Thompson",
     title: "Data & Research Manager",
     pronouns: "She/Her",
-    headshot: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    personality: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    field: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    bio: "Jordan Thompson is a political psychologist who specializes in political communication and behavior. She earned her PhD at Florida Atlantic University, where she published research on political polarization and prejudice. Jordan has extensive experience working with surveys and text-based data. She believes strongly in the importance of blending research and activism. Data should tell a story, and she is passionate about using data to advocate for LGBTQ+ people and other marginalized communities. In her spare time, you can find Jordan hanging out with her cats, Lily and Lucy. She also enjoys cooking vegetarian recipes and scouring thrift stores for Halloween decorations.",
+		photo: jordanPhoto,
+    bio: `Jordan Thompson is a political psychologist who specializes in political communication and behavior. She earned her PhD at Florida Atlantic University, where she published research on political polarization and prejudice. Jordan has extensive experience working with surveys and text-based data. She believes strongly in the importance of blending research and activism. Data should tell a story, and she is passionate about using data to advocate for LGBTQ+ people and other marginalized communities. In her spare time, you can find Jordan hanging out with her cats, Lily and Lucy. She also enjoys cooking vegetarian recipes and scouring thrift stores for Halloween decorations.`,
+    quote: `In her spare time, you can find Jordan hanging out with her cats, Lily and Lucy. She also enjoys cooking vegetarian recipes and scouring thrift stores for Halloween decorations.`,
   },
 ];
 
 const board: Member[] = [
-  // Board member bios remain unchanged (no individual pages found on the v1 site)
   {
+    slug: "gala-gonsalves",
     name: "Gala Gonsalves",
     title: "Chair",
+		photo: galaPhoto,
     pronouns: "She/Her",
-    headshot: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    personality: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    field: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    bio: "A Licensed Mental Health Counselor in the state of Florida.",
+    bio: `A Licensed Mental Health Counselor in the state of Florida.`,
   },
   {
+    slug: "sofia-hernandez",
     name: "Sofia Hernandez",
+		photo: sofiaPhoto,
     title: "Youth Advisory Committee Chair",
     pronouns: "She/Her",
-    headshot: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    personality: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    field: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    bio: "High school senior and PRISM Student Ambassador, current Chair of PRISM's Youth Advisory Committee, and founder/director of Blooming LGBTQ, a youth self-sufficiency task force.",
+    bio: `High school senior and PRISM Student Ambassador, current Chair of PRISM's Youth Advisory Committee, and founder/director of Blooming LGBTQ, a youth self-sufficiency task force.`,
   },
   {
+    slug: "mary-eakins-durand",
     name: "Mary Eakins-Durand",
     title: "Member",
     pronouns: "She/Her/Ella",
-    headshot: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    personality: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    field: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    bio: "Statewide Political & Special Campaigns Manager at Equality Florida and a first generation US-born Cuban American.",
+    bio: `Statewide Political & Special Campaigns Manager at Equality Florida and a first generation US-born Cuban American.`,
   },
   {
+    slug: "fabiana-ungaro",
     name: "Fabiana Ungaro",
     title: "Member",
+		photo: fabianaPhoto,
     pronouns: "She/Her",
-    headshot: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    personality: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    field: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    bio: "First-generation Peruvian immigrant and Communications major.",
+    bio: `First-generation Peruvian immigrant and Communications major.`,
   },
   {
+    slug: "samuel-doss",
     name: "Samuel Doss",
+		photo: samuelPhoto,
     title: "Treasurer",
     pronouns: "He/Him",
-    headshot: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    personality: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    field: faker.image.urlPicsumPhotos({ width: 500, height: 500 }),
-    bio: "MBA and Ph.D. in Business Administration, retired professor in marketing & entrepreneurship, former stockbroker and entrepreneur with many years of work with various nonprofits.",
+    bio: `MBA and Ph.D. in Business Administration, retired professor in marketing & entrepreneurship, former stockbroker and entrepreneur with many years of work with various nonprofits.`,
   },
+];
+
+const everyone = [...staff, ...board];
+
+const contents = [
+  { href: "#staff", label: "Staff Directory", page: "2" },
+  { href: "#board", label: "Board of Directors", page: "3" },
+  { href: "#class-photo", label: "Class Photo", page: "4" },
+  // { href: "#autographs", label: "Autographs", page: "5" },
 ];
 ---
 
 <Base
   pageMetadata={{
     title: "Our Team",
-    description: "Meet PRISM's team and board.",
+    description: "Meet PRISM's staff and board!",
     type: "website",
-    image: "https://picsum.photos/200",
-    "image:alt": "test",
+    image: groupPhoto.src,
+    "image:alt": "PRISM staff and board gathered for a group photo",
   }}
 >
   <main>
-    <div class="yearbook">
-      <div class="content">
-        <h1>PRISM Staff of 2026</h1>
-        <div class="staff members">
-          <ul class="names">
-            {
-              team.map((member) => (
-                <li data-member={member.name} role="button">
-                  {member.name}
-                </li>
-              ))
-            }
-          </ul>
-          <ul class="photos">
-            {
-              team.map((member) => (
-                <li role="button" data-member={member.name}>
-                  <div class="image cover">
-                    <img
-                      src={member.headshot}
-                      alt={member.name}
-                      width={500}
-                      height={500}
-                    />
-                  </div>
-                  <div class="title">
-                    <p>{member.title}</p>
-                    <p>{member.pronouns}</p>
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-        <h2>Our Board</h2>
-        <div class="board members">
-          <ul class="names">
-            {
-              board.map((member) => (
-                <li data-member={member.name} role="button">
-                  {member.name}
-                </li>
-              ))
-            }
-          </ul>
-          <ul class="photos">
-            {
-              board.map((member) => (
-                <li role="button" data-member={member.name}>
-                  <div class="image cover">
-                    <img
-                      src={member.headshot}
-                      alt={member.name}
-                      width={500}
-                      height={500}
-                    />
-                  </div>
-                  <div class="title">
-                    <p>{member.title}</p>
-                    <p>{member.pronouns}</p>
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
+    <!-- ── Cover ───────────────────────────────────────────────── -->
+    <section class="cover">
+      <span class="spine" aria-hidden="true"></span>
+      <div class="cover-inner">
+        <Image
+          src={prismLogo}
+          alt="PRISM"
+          class="logo"
+          width={220}
+          height={220}
+        />
+        <h1>PRISM Yearbook</h1>
+        <p class="year">2026</p>
+        <p class="volume">Staff &amp; Board · Volume One · South Florida</p>
+      </div>
+    </section>
+
+    <!-- <div class="divider"><ScribbleSeparator /></div> -->
+
+    <!-- ── Contents ────────────────────────────────────────────── -->
+    <section class="contents" id="contents">
+      <div class="container">
+        <h2>Contents</h2>
+        <ul class="list">
+          {
+            contents.map(({ href, label, page }) => (
+              <li>
+                <a href={href}>{label}</a>
+                <span class="dots" aria-hidden="true" />
+                <!-- <span class="page-number">{page}</span> -->
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── Staff ───────────────────────────────────────────────── -->
+    <section class="sheet ruled-bg" id="staff">
+      <div class="container">
+        <h2>Staff Directory</h2>
+        <p class="lede">The nine people who run PRISM's day-to-day work.</p>
+        <div class="portraits">
+          {
+            staff.map((member) => (
+              <YearbookPortrait
+                slug={member.slug}
+                name={member.name}
+                title={member.title}
+                pronouns={member.pronouns}
+                photo={member.photo}
+
+              />
+            ))
+          }
         </div>
       </div>
-    </div>
+      <span class="folio" aria-hidden="true">2</span>
+    </section>
+
+    <!-- ── Board ───────────────────────────────────────────────── -->
+    <section class="sheet ruled-bg" id="board">
+      <div class="container">
+        <h2>Board of Directors</h2>
+        <p class="lede">
+          The volunteers who set direction and hold the organization
+          accountable.
+        </p>
+        <div class="portraits">
+          {
+            board.map((member) => (
+              <YearbookPortrait
+                slug={member.slug}
+                name={member.name}
+                title={member.title}
+                pronouns={member.pronouns}
+                photo={member.photo}
+              />
+            ))
+          }
+        </div>
+      </div>
+      <span class="folio" aria-hidden="true">3</span>
+    </section>
+
+    <!-- ── Class photo ─────────────────────────────────────────── -->
+    <section class="class-photo" id="class-photo">
+      <div class="container">
+        <h2>Class Photo</h2>
+        <figure>
+          <Image
+            src={groupPhoto}
+            alt="PRISM staff and board gathered together for a group photo"
+            class="group"
+          />
+          <figcaption>PRISM staff &amp; board, 2026.</figcaption>
+        </figure>
+      </div>
+      <span class="folio" aria-hidden="true">4</span>
+    </section>
   </main>
 
+  <!-- ── Bios ──────────────────────────────────────────────────── -->
   {
-    [...team, ...board].map((member) => (
-      <Modal id={member.name}>
-        <article class="member-bio">
-          <header class="bio-header">
-            <div class="bio-images">
-              <div class="headshot-wrapper">
-                <img
-                  src={member.headshot}
-                  alt={`${member.name} headshot`}
-                  width={300}
-                  height={300}
+    everyone.map((member) => (
+      <Modal id={`member-${member.slug}`}>
+        <article class="bio">
+          <header>
+            {member.photo && (
+              <div class="bio-photo">
+                <Image
+                  src={member.photo}
+                  alt={`Portrait of ${member.name}`}
+                  width={320}
+                  height={400}
                 />
               </div>
-              <div class="secondary-images">
-                <div class="image-wrapper">
-                  <img
-                    src={member.personality}
-                    alt={`${member.name} personality`}
-                    width={200}
-                    height={200}
-                  />
-                </div>
-                <div class="image-wrapper">
-                  <img
-                    src={member.field}
-                    alt={`${member.name} in the field`}
-                    width={200}
-                    height={200}
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="bio-info">
-              <h1>{member.name}</h1>
-              <p class="title">{member.title}</p>
+            )}
+            <div class="bio-id">
+              <h2>{member.name}</h2>
+              <p class="role">{member.title}</p>
               <p class="pronouns">{member.pronouns}</p>
             </div>
           </header>
-          <section class="bio-content">
-            <h2>About {member.name.split(" ")[0]}</h2>
-            <p>{member.bio}</p>
-          </section>
+
+          <p class="bio-text">{member.bio}</p>
+
+          {member.quote && <blockquote>{member.quote}</blockquote>}
+
+          <button
+            class="close"
+            type="button"
+            data-close-modal={`member-${member.slug}`}
+          >
+            Close
+          </button>
         </article>
       </Modal>
     ))
@@ -326,269 +328,386 @@ const board: Member[] = [
 </Base>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const items = document.querySelectorAll<HTMLLIElement>("li[data-member]");
+  /**
+   * Opens the bio modal that matches the portrait that was clicked, and closes
+   * it again. Modal.astro already listens for `open-modal` / `close-modal` on
+   * the document and for backdrop clicks; the two gaps it leaves are that it
+   * has no close control of its own and no Escape handling, both filled here.
+   */
 
-    const activate = (memberId: string) => {
-      items.forEach((item) => {
-        if (item.dataset.member === memberId) {
-          item.classList.add("active");
-        }
-      });
-    };
+  const openModal = (id: string) =>
+    document.dispatchEvent(new CustomEvent("open-modal", { detail: { id } }));
 
-    const deactivate = (memberId: string) => {
-      items.forEach((item) => {
-        if (item.dataset.member === memberId) {
-          item.classList.remove("active");
-        }
-      });
-    };
+  const closeModal = (id: string) =>
+    document.dispatchEvent(new CustomEvent("close-modal", { detail: { id } }));
 
-    items.forEach((item) => {
-      item.addEventListener("mouseenter", () => {
-        const memberId = item.dataset.member;
-        if (memberId) activate(memberId);
-      });
+  document.querySelectorAll<HTMLElement>("[data-member]").forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      const id = trigger.dataset.member;
+      if (id) openModal(`member-${id}`);
+    });
+  });
 
-      item.addEventListener("mouseleave", () => {
-        const memberId = item.dataset.member;
-        if (memberId) deactivate(memberId);
-      });
-
-      item.addEventListener("click", () => {
-        document.dispatchEvent(
-          new CustomEvent("open-modal", {
-            detail: { id: item.dataset.member },
-          }),
-        );
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-close-modal]")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        const id = button.dataset.closeModal;
+        if (id) closeModal(id);
       });
     });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    document
+      .querySelectorAll<HTMLElement>(".modal-backdrop[open]")
+      .forEach((backdrop) => backdrop.removeAttribute("open"));
   });
 </script>
 
 <style lang="scss">
-  @use "../styles/utils.scss" as *;
+  @use "../styles/utils" as *;
+
   main {
-    padding: 4rem;
+    background-color: var(--youth-yellow-1);
+    font-size: 1.25rem;
   }
 
-  main * {
-    transition: all 300ms;
-    cursor: pointer;
+  h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 0 0 1rem;
   }
 
-  .yearbook {
-    background: var(--rainbow-blue);
-    padding: 2rem;
+  .container {
+    max-width: var(--xl);
+    margin: auto;
+    padding: 4rem 1rem;
+  }
+
+  .lede {
+    max-width: 42rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  /* ---------- Cover ---------- */
+
+  .cover {
+    position: relative;
+    padding: 3rem 1.5rem 3rem 3.5rem;
+    background:
+      radial-gradient(
+        circle at 22% 12%,
+        rgba(255, 255, 255, 0.14),
+        transparent 55%
+      ),
+      var(--rainbow-purple);
     filter: var(--shadow);
+    overflow: hidden;
+  }
+
+  /* Faux binding down the left edge. */
+  .spine {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 1.75rem;
+    background: rgba(0, 0, 0, 0.18);
+    border-right: 2px dashed rgba(255, 255, 255, 0.35);
+  }
+
+  .cover-inner {
+    max-width: var(--lg);
+    margin: auto;
+    padding: 3rem 1.5rem;
+    border: 4px double var(--youth-yellow-2);
+    border-radius: var(--round-edge);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+    color: var(--fg-color);
+
+    .logo {
+      width: 96px;
+      height: auto;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.45));
+
+      @include breakpoint-up(md) {
+        width: 120px;
+      }
+    }
+
     h1 {
+      margin: 0;
+      font-size: 2.25rem;
+      letter-spacing: 0.02em;
+      color: var(--youth-yellow-2);
+
+      @include breakpoint-up(md) {
+        font-size: 3.5rem;
+      }
+    }
+
+    .year {
+      margin: 0;
+      font-family: var(--header-font);
+      font-weight: 700;
       font-size: 4rem;
-    }
-    h2 {
-      font-size: 3rem;
-      text-align: right;
-    }
-    .content {
-      padding: 2rem;
-      background: var(--fg-color);
-      filter: var(--shadow-light);
+      line-height: 1;
 
-      .members {
-        display: flex;
-        justify-content: space-between;
-        gap: 1;
-        align-items: center;
-        margin-bottom: 2rem;
-        ul.names {
-          list-style: none;
-          margin: 0;
-          display: flex;
-          gap: 0.25rem;
-          justify-content: space-evenly;
-          flex-direction: column;
-          font-size: 1.25rem;
-          li.active {
-            font-weight: bold;
-          }
-        }
-
-        ul.photos {
-          list-style: none;
-          margin: 0;
-          display: flex;
-          justify-content: space-evenly;
-          flex-wrap: wrap;
-          gap: 1rem;
-          width: 100%;
-          li {
-            text-align: center;
-            font-size: 1rem;
-            width: 150px;
-            min-width: 150px;
-            position: relative;
-            div.image {
-              height: 200px;
-            }
-
-            h2 {
-              font-size: 1rem;
-            }
-            h2,
-            h3 {
-              margin: 0;
-            }
-
-            div.title {
-              width: 100%;
-              height: 100%;
-              position: absolute;
-              top: 0;
-              left: 0;
-              display: flex;
-              align-items: center;
-              flex-direction: column;
-              justify-content: center;
-              backdrop-filter: brightness(50%) blur(5px);
-              opacity: 0;
-              p {
-                color: var(--fg-color);
-                margin: 0;
-              }
-            }
-
-            &.active {
-              div.title {
-                opacity: 1;
-              }
-            }
-          }
-        }
+      @include breakpoint-up(md) {
+        font-size: 6rem;
       }
     }
+
+    .volume {
+      margin: 0;
+      font-family: var(--header-font);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      opacity: 0.85;
+    }
   }
 
-  .board {
-    flex-direction: row-reverse;
+  /* ScribbleSeparator ships an unconstrained <Image>, so it is capped here. */
+  .divider {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+
+    :global(img) {
+      max-width: min(100%, 34rem);
+      height: auto;
+    }
   }
 
-  /* Modal bio styles */
-  .member-bio {
-    background: var(--fg-color);
-    padding: 2rem;
-    max-width: 900px;
-    width: 90vw;
-    max-height: 90vh;
-    overflow-y: auto;
-    border-radius: 8px;
+  /* ---------- Contents ---------- */
 
-    .bio-header {
+  .contents {
+    background: var(--witty-white);
+  }
+
+  .list {
+    list-style: none;
+    max-width: var(--lg);
+    margin: 2rem auto 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+
+    li {
       display: flex;
-      gap: 2rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
 
-      .bio-images {
-        display: flex;
-        gap: 1rem;
-        flex-shrink: 0;
+    a {
+      font-family: var(--header-font);
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: var(--text-color);
 
-        .headshot-wrapper {
-          width: 300px;
-          height: 300px;
-          overflow: hidden;
-          border-radius: 8px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
-        }
-
-        .secondary-images {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-
-          .image-wrapper {
-            width: 200px;
-            height: 200px;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-            }
-          }
-        }
-      }
-
-      .bio-info {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        min-width: 200px;
-
-        h1 {
-          font-size: 2.5rem;
-          margin: 0 0 0.5rem 0;
-          color: var(--text-color);
-        }
-
-        .title {
-          font-size: 1.25rem;
-          margin: 0 0 0.5rem 0;
-          color: var(--text-color);
-          opacity: 0.8;
-        }
-
-        .pronouns {
-          font-size: 1rem;
-          margin: 0;
-          color: var(--text-color);
-          opacity: 0.6;
-          font-style: italic;
-        }
+      &:hover {
+        text-decoration: underline;
       }
     }
 
-    .bio-content {
-      h2 {
-        font-size: 1.75rem;
-        margin: 0 0 1rem 0;
-        color: var(--text-color);
-      }
+    /* Dot leader, the way a printed contents page runs out to the folio. */
+    .dots {
+      flex: 1;
+      border-bottom: 2px dotted var(--text-color);
+      opacity: 0.45;
+      transform: translateY(-0.3rem);
+    }
 
-      p {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        margin: 0;
-        color: var(--text-color);
-      }
+  }
+
+  /* ---------- Interior pages ---------- */
+
+  .sheet {
+    position: relative;
+    background-size: 2000px;
+    background-repeat: repeat-y;
+    background-position: top center;
+  }
+
+  .folio {
+    position: absolute;
+    right: 2rem;
+    bottom: 1.25rem;
+    font-family: var(--header-font);
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: 0.55;
+  }
+
+  .portraits {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 2.5rem 1.75rem;
+    max-width: var(--xl);
+    margin: 2.5rem auto 0;
+  }
+
+  /* ---------- Class photo ---------- */
+
+  .class-photo {
+    position: relative;
+    background: var(--witty-white);
+
+    figure {
+      margin: 2rem auto 0;
+      max-width: var(--lg);
+      padding: 1rem;
+      background: var(--fg-color);
+      filter: drop-shadow(2px 3px 3px rgba(0, 0, 0, 0.35));
+      rotate: -0.5deg;
+    }
+
+    .group {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    figcaption {
+      margin-top: 0.75rem;
+      text-align: center;
+      font-family: var(--handwriting);
+      font-size: 1.5rem;
+      line-height: 1.1;
     }
   }
 
-  @media (max-width: 768px) {
-    .member-bio {
-      .bio-header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+  
 
-        .bio-images {
-          flex-direction: column;
-          align-items: center;
+  .prompt {
+    max-width: 34rem;
+    margin: 0 auto;
+    text-align: center;
+    font-family: var(--handwriting);
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
 
-          .secondary-images {
-            flex-direction: row;
-          }
-        }
+  .signature-lines {
+    width: min(100%, var(--lg));
+    height: 15rem;
+    margin: 2.5rem 0;
+    opacity: 0.35;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(2.5rem - 2px),
+      var(--text-color) calc(2.5rem - 2px),
+      var(--text-color) 2.5rem
+    );
+  }
+
+  .sign-cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--rainbow-purple);
+    color: var(--fg-color);
+    font-family: var(--header-font);
+    font-size: 1.25rem;
+    font-weight: 700;
+    border-radius: var(--round-edge);
+    transition: filter 200ms ease;
+
+    &:hover {
+      filter: brightness(110%);
+    }
+  }
+
+  /* ---------- Bio modal ---------- */
+
+  .bio {
+    width: min(90vw, 44rem);
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 2rem;
+    background: var(--fg-color);
+    border-radius: var(--round-edge);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    header {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .bio-photo {
+      flex: 0 0 auto;
+      width: 150px;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border: 6px solid var(--witty-white);
+      filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.35));
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .bio-id {
+      flex: 1;
+      min-width: 12rem;
+    }
+
+    h2 {
+      margin: 0 0 0.25rem;
+      font-size: 2rem;
+      text-align: left;
+    }
+
+    .role {
+      margin: 0;
+      font-family: var(--header-font);
+      font-weight: 600;
+    }
+
+    .pronouns {
+      margin: 0;
+      font-style: italic;
+      opacity: 0.65;
+    }
+
+    .bio-text {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    blockquote {
+      margin: 0;
+      padding: 1rem 1.25rem;
+      background: var(--youth-yellow-1);
+      border-left: 4px solid var(--youth-yellow-2);
+      font-style: italic;
+    }
+
+    .close {
+      align-self: flex-end;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--rainbow-purple);
+      color: var(--fg-color);
+      font-family: var(--header-font);
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: var(--round-edge);
+
+      &:hover {
+        filter: brightness(110%);
       }
     }
   }
