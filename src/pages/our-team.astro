@@ -4,11 +4,9 @@ import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import Base from "@templates/Base.astro";
 import Modal from "@components/Modal.astro";
-import ScribbleSeparator from "@components/ScribbleSeparator.astro";
 import YearbookPortrait from "@components/YearbookPortrait.astro";
 
 
-import prismLogo from "@assets/img/prism-logo-primary.png";
 import groupPhoto from "@assets/img/team-group-photo-faw-26.jpg";
 
 // One headshot per staff member and board member. Files live in
@@ -21,7 +19,6 @@ import fabianaPhoto from "@assets/img/team/fabiana.avif";
 import galaPhoto from "@assets/img/team/gala.avif";
 import hannahPhoto from "@assets/img/team/hannah.avif";
 import jordanPhoto from "@assets/img/team/jordan.avif";
-import maryPhoto from "@assets/img/team/mary.avif";
 import maxxPhoto from "@assets/img/team/maxx.avif";
 import milesPhoto from "@assets/img/team/miles.avif";
 import mvPhoto from "@assets/img/team/mv.avif";
@@ -189,16 +186,10 @@ const contents = [
     <section class="cover">
       <span class="spine" aria-hidden="true"></span>
       <div class="cover-inner">
-        <Image
-          src={prismLogo}
-          alt="PRISM"
-          class="logo"
-          width={220}
-          height={220}
-        />
+        
         <h1>PRISM Yearbook</h1>
         <p class="year">2026</p>
-        <p class="volume">Staff &amp; Board · Volume One · South Florida</p>
+        <p class="volume">Staff &amp; Board · South Florida</p>
       </div>
     </section>
 
