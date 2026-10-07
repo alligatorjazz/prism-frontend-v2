@@ -2,11 +2,9 @@
 // src/pages/get-involved.astro
 // Based on: Membership Model document (Updated August 2026)
 import Base from "@templates/Base.astro";
-import PageIntro from "@sections/PageIntro.astro";
 import SectionBorder from "@components/SectionBorder.astro";
 import TornPaperBox from "@components/TornPaperBox.astro";
 import LadderOfEngagement from "@components/LadderOfEngagement.astro";
-import CoreTracks from "@sections/CoreTracks.astro";
 import LeadershipPrograms from "@sections/LeadershipPrograms.astro";
 import { faker } from "@faker-js/faker";
 
@@ -73,13 +71,155 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
       </div>
     </section>
 
-    <SectionBorder backgroundColor="youth-yellow-2" flip type="marker" />
+    <SectionBorder backgroundColor="rainbow-purple" flip type="marker" />
 
     <!-- Core Tracks -->
     <!-- Based on: Membership Model - Section 3: Core Track Pathways -->
-    <CoreTracks />
+    <section id="core-tracks">
+      <div class="content">
+        <div class="intro">
+          <h2>Ways to Plug In!</h2>
+          <p>
+            PRISM membership is divided into different core tracks. Each track
+            offers distinct activities, skills development, and leadership
+            opportunities.
+          </p>
+        </div>
+        <div class="binder">
+          <div class="page ruled-bg">
+            <!-- insert new content in these divs -->
+            <!-- insert new content in these divs -->
+            <div class="page-content policy">
+              <header class="track-header">
+                <h3 class="track-title">Core Track: Policy</h3>
+                <p class="track-description">Advocacy &amp; Legislation</p>
+              </header>
+              <ul class="track-levels">
+                <li class="level tier-1">
+                  <h4 class="tier-name">Tier 1: Volunteer</h4>
+                  <p class="tier-description">
+                    Mobilized for action. Attends events, tabling, phone banks.
+                  </p>
+                  <p class="responsibilities">
+                    Signs petitions; presence at school board meetings.
+                  </p>
+                </li>
+                <li class="level tier-2">
+                  <h4 class="tier-name">Tier 2: Member</h4>
+                  <p class="tier-description">
+                    Actively engaged organizer. Attends All-Member Trainings and
+                    participates in a Core Track.
+                  </p>
+                  <p class="responsibilities">
+                    Delivers public testimony to lawmakers.
+                  </p>
+                </li>
+                <li class="level tier-3">
+                  <h4 class="tier-name">Tier 3: Leader</h4>
+                  <p class="tier-description">
+                    Takes ownership of initiatives. Mobilizes others, conducts
+                    peer 1:1s, hosts events, manages projects.
+                  </p>
+                  <p class="responsibilities">
+                    Power-mapping workshops; campaign oversight; Lobbying
+                    Captain.
+                  </p>
+                </li>
+              </ul>
+              <a href="#" class="learn-more button">Learn More</a>
+            </div>
 
-    <SectionBorder backgroundColor="youth-yellow-2" type="marker" />
+            <div class="page-content outreach">
+              <header class="track-header">
+                <h3 class="track-title">Outreach</h3>
+                <p class="track-description">
+                  Mass Outreach &amp; Harm Reduction
+                </p>
+              </header>
+              <ul class="track-levels">
+                <li class="level tier-1">
+                  <h4 class="tier-name">Tier 1: Volunteer</h4>
+                  <p class="tier-description">
+                    Mobilized for action. Attends events, tabling, phone banks.
+                  </p>
+                  <p class="responsibilities">
+                    Boots on the ground at tabling; distributes resources and
+                    flyers.
+                  </p>
+                  <p class="gateway">
+                    Gateway: Quarterly Orientation OR 1:1 intake
+                  </p>
+                </li>
+                <li class="level tier-2">
+                  <h4 class="tier-name">Tier 2: Member</h4>
+                  <p class="tier-description">
+                    Actively engaged organizer. Attends All-Member Trainings and
+                    participates in a Core Track.
+                  </p>
+                  <p class="responsibilities">
+                    Designs connection spaces; deep organizing conversations at
+                    field events.
+                  </p>
+                  <p class="gateway">Gateway: 1:1 intake + track selection</p>
+                </li>
+                <li class="level tier-3">
+                  <h4 class="tier-name">Tier 3: Leader</h4>
+                  <p class="tier-description">
+                    Takes ownership of initiatives. Mobilizes others, conducts
+                    peer 1:1s, hosts events, manages projects.
+                  </p>
+                  <p class="responsibilities">
+                    Tabling Lead; co-creates social events; trains new
+                    volunteers.
+                  </p>
+                </li>
+              </ul>
+              <a href="#" class="learn-more">Learn More</a>
+            </div>
+
+            <div class="page-content people-ops">
+              <header class="track-header">
+                <h3 class="track-title">People Ops</h3>
+                <p class="track-description">Internal Base-Building</p>
+              </header>
+              <ul class="track-levels">
+                <li class="level empty-level invisible" aria-hidden="true"></li>
+                <li class="level tier-2">
+                  <h4 class="tier-name">Tier 2: Member</h4>
+                  <p class="tier-description">
+                    Actively engaged organizer. Attends All-Member Trainings and
+                    participates in a Core Track.
+                  </p>
+                  <p class="responsibilities">
+                    Discord stewardship; phonebanks; wellness checks;
+                    recruitment.
+                  </p>
+                  <p class="gateway">Gateway: 1:1 intake + track selection</p>
+                </li>
+                <li class="level tier-3">
+                  <h4 class="tier-name">Tier 3: Leader</h4>
+                  <p class="tier-description">
+                    Takes ownership of initiatives. Mobilizes others, conducts
+                    peer 1:1s, hosts events, manages projects.
+                  </p>
+                  <p class="responsibilities">
+                    Conducts intake 1:1s; co-facilitates Orientations;
+                    rapid-response lead.
+                  </p>
+                </li>
+              </ul>
+              <a href="#" class="learn-more">Learn More</a>
+            </div>
+          </div>
+          <nav class="tabs">
+            <button class="outreach" type="button">Outreach</button>
+            <button class="policy" type="button">Policy</button>
+            <button class="people-ops" type="button">People Ops</button>
+          </nav>
+        </div>
+      </div>
+    </section>
+    <SectionBorder backgroundColor="rainbow-purple" type="marker" />
 
     <!-- Leadership Programs -->
     <!-- Based on: Membership Model - Section 4: Specialized Leadership Programs -->
@@ -114,6 +254,7 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
       margin: 0 auto;
 
       h2 {
+        color: var(--fg-color);
         text-align: center;
         font-size: 2.5rem;
         margin-bottom: 3rem;
@@ -133,18 +274,18 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
           text-align: center;
 
           .step-number {
-            display: inline-flex;
+            padding: 0.5rem;
+            background: var(--rainbow-blue);
+            width: 3rem;
+            height: 3rem;
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
-            background: var(--rainbow-purple);
-            color: white;
-            border-radius: 50%;
-            filter: drop-shadow(1px 1px 1px var(--text-color));
-            font-size: 1.5rem;
-            font-weight: bold;
+            border-radius: 100%;
+            margin: auto;
             margin-bottom: 1rem;
+            font-size: 2rem;
+            font-family: var(--handwriting);
           }
 
           h3 {
@@ -168,58 +309,131 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
     }
   }
 
-  .recruitment-section {
-    padding: 4rem 2rem;
-    background: var(--bg-color);
+  #core-tracks {
+    background-color: var(--rainbow-purple);
+    &,
+    & * {
+      transition: all 300ms;
+    }
 
-    .section-content {
-      max-width: 1000px;
-      margin: 0 auto;
+    .content {
+      filter: var(--shadow);
+      padding: 6rem 2rem;
+      max-width: var(--xl);
+      margin: auto;
+      display: flex;
+      align-items: stretch;
+      gap: 0.25rem;
+    }
+
+    .intro {
+      width: 50%;
+      padding: 1rem;
+      border-radius: 10px 0 0 10px;
+      background-color: var(--fg-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       text-align: center;
-
       h2 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
+        /* font-family: var(--handwriting); */
+        font-style: italic;
+        font-size: 3rem;
+      }
+      p {
+        font-size: 1.5rem;
+      }
+    }
+
+    .binder {
+      width: 50%;
+      background-color: var(--fg-color);
+      padding: 1rem;
+      border-radius: 0 10px 10px 0;
+      .page {
+        padding: 2rem;
+      }
+      .page-content {
+        display: none;
+      }
+      .page-content:first-child {
+        display: initial;
       }
 
-      .goal {
-        font-size: 1.3rem;
-        margin-bottom: 3rem;
+      .page-content {
+        &.outreach {
+          .learn-more {
+            background-color: var(--rainbow-orange);
+          }
+        }
+        &.policy {
+          .learn-more {
+            background-color: var(--rainbow-red);
+          }
+        }
+        &.people-ops {
+          .learn-more {
+            background-color: var(--rainbow-blue);
+          }
+        }
+      }
+      .page,
+      nav {
+        filter: var(--shadow-light);
+      }
 
-        strong {
-          color: var(--rainbow-purple);
+      nav {
+        display: flex;
+        width: 100%;
+        gap: 0.125rem;
+        button {
+          flex: 1;
+          border-radius: 0 0 10px 10px;
+          &.outreach {
+            background-color: var(--rainbow-orange);
+          }
+          &.policy {
+            background-color: var(--rainbow-red);
+          }
+          &.people-ops {
+            background-color: var(--rainbow-blue);
+          }
         }
       }
 
-      .recruitment-channels {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
+      .page-content {
+        /* font-family: var(--cursive); */
+        .track-title {
+          font-size: 2rem;
+          font-family: var(--handwriting);
+          text-align: center;
+        }
 
-        .channel {
-          background: var(--fg-color);
-          padding: 2rem;
-          /* border-radius: 12px; */
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .track-description {
+          /* font-family: var(--cursive); */
+          text-align: center;
+        }
 
-          .percentage {
-            display: block;
-            font-size: 3rem;
-            font-weight: bold;
-            color: var(--rainbow-orange);
-            margin-bottom: 0.5rem;
-          }
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
 
-          h3 {
-            margin: 0 0 1rem 0;
-            font-size: 1.3rem;
-          }
-
-          p {
-            margin: 0;
-            line-height: 1.5;
+        ul.track-levels {
+          .tier-name {
+            font-size: 1.25rem;
+            font-family: var(--handwriting);
           }
         }
+      }
+
+      .learn-more {
+        background-color: var(--rainbow-blue);
+
+        width: min-content;
+        white-space: nowrap;
+        margin: auto;
       }
     }
   }
@@ -290,3 +504,7 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
     }
   }
 </style>
+
+<script>
+  // implement binder page switching
+</script>

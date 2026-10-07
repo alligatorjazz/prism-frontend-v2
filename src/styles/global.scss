@@ -27,7 +27,6 @@ a.button {
   background: inherit;
   cursor: pointer;
   text-decoration: none;
-  border-radius: 10px;
   font-family: var(--header-font);
   padding: 0.5rem 1rem;
   color: var(--fg-color);
@@ -85,4 +84,9 @@ div.image.cover>img {
   transition: transform 0.2s ease;
   filter: drop-shadow(1px 1px 1px var(--text-color));
   padding: 1rem;
+}
+
+.invisible {
+  opacity: 0;
+  user-select: none;
 }

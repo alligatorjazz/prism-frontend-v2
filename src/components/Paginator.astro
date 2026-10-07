@@ -1,0 +1,91 @@
+---
+import { Image } from "astro:assets";
+import arrow from "@assets/img/pagination-arrow.png";
+import type { HTMLAttributes } from "astro/types";
+import { uuid } from "astro:schema";
+
+interface Props extends HTMLAttributes<"section"> {
+  totalPages: number;
+  startingPage?: number;
+}
+
+const paginatorId = uuid();
+
+const { totalPages, startingPage, ...props } = Astro.props;
+---
+
+<section {...props}>
+  <div class="content"></div>
+  <nav class="controls">
+    <button class="prev" data-page="-1" disabled>
+      <Image src={arrow} alt="Previous Page" />
+    </button>
+
+    <span class="status">
+      <span
+        data-paginator={`${paginatorId}-currentPage`}
+        data-page={1}
+        class="current">{startingPage ?? 1}</span
+      > /{" "}
+      <span class="total">{totalPages ?? 1}</span>
+    </span>
+    <button class="next" data-page="+1" disabled={totalPages <= 1}>
+      <Image src={arrow} class="flip" alt="Previous Page" />
+    </button>
+  </nav>
+</section>
+
+<style>
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav.controls {
+    display: flex;
+    font-size: 4rem;
+    gap: 1rem;
+    margin: auto;
+
+    .status {
+      display: flex;
+      font-family: var(--handwriting);
+      align-items: center;
+      gap: 1rem;
+    }
+
+    button.next {
+      transform: scaleX(-1);
+    }
+  }
+</style>
+
+<script define:vars={{ paginatorId, totalPages }} is:inline>
+  import { clamp } from "@lib/index";
+
+  const currentPage = document.querySelector(
+    `span[data-paginator=${paginatorId}-currentPage]`,
+  );
+
+  if (!currentPage) {
+    throw new Error(`Could not find currentPage element for ${paginatorId}`);
+  }
+
+  currentPage.addEventListener("change", () => {
+    currentPage.innerHTML = `${currentPage.dataset["page"]}`;
+  });
+
+  function setPage(num) {
+		currentPage.dataset:w
+		;
+  }
+
+  function nextPage() {
+    return clamp(currentPage + 1, 1, totalPages);
+  }
+
+  function previousPage() {
+    return clamp(currentPage + 1, 1, totalPages);
+  }
+</script>

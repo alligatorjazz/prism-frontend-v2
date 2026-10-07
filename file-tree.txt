@@ -144,6 +144,7 @@
 │   │       ├──  fist-sticker.png
 │   │       ├──  flag-sticker.png
 │   │       ├──  florida-minus-sfl.avif
+│   │       ├──  florida.avif
 │   │       ├──  giving-icon.avif
 │   │       ├──  giving-sticker.png
 │   │       ├──  growing-team.avif
@@ -310,8 +311,11 @@
 │   │       ├──  pagination-arrow.png
 │   │       ├──  paper-noise.png
 │   │       ├──  prism-logo-primary.png
+│   │       ├──  psap-church.avif
 │   │       ├──  psap-group.avif
+│   │       ├──  psap-indoors.avif
 │   │       ├──  psap-leaders-council.avif
+│   │       ├──  psap-table.avif
 │   │       ├──  pure-noise.png
 │   │       ├──  rainbow-flag.avif
 │   │       ├──  'Red Book@2x.png'
@@ -319,6 +323,7 @@
 │   │       ├──  scale.avif
 │   │       ├──  scribble-separator.png
 │   │       ├──  sfl.avif
+│   │       ├──  sfl.png
 │   │       ├──  smile-march.avif
 │   │       ├──  speaking.avif
 │   │       ├──  stickers
@@ -426,7 +431,6 @@
 │   │   ├──  Calendar.astro
 │   │   ├──  Carousel.astro
 │   │   ├──  ColoredHeader.astro
-│   │   ├──  CoreTrackCard.astro
 │   │   ├──  EventList.scss
 │   │   ├──  EventList.tsx
 │   │   ├──  EventPage.scss
@@ -440,8 +444,10 @@
 │   │   ├──  Modal.astro
 │   │   ├──  Navbar.astro
 │   │   ├──  NavLinks.astro
+│   │   ├──  Paginator.astro
 │   │   ├──  PaperNoise.astro
 │   │   ├──  Polaroid.astro
+│   │   ├──  PostIt.astro
 │   │   ├──  RelatedPosts.astro
 │   │   ├──  ScribbleSeparator.astro
 │   │   ├──  SectionBorder.astro
@@ -599,6 +605,7 @@
 │   │   ├──  task-forces
 │   │   │   ├──  content-creation-task-force.astro
 │   │   │   └──  fundraising-task-force.astro
+│   │   ├──  test.astro
 │   │   └──  yac.astro
 │   ├──  sections
 │   │   ├──  AlternatingRibbons.astro
@@ -607,7 +614,6 @@
 │   │   ├──  CenteredPaperWithHeader.astro
 │   │   ├──  ConstrainedSection.astro
 │   │   ├──  ContentWithHeader.astro
-│   │   ├──  CoreTracks.astro
 │   │   ├──  EventsWithHeader.astro
 │   │   ├──  FlagWithTagline.astro
 │   │   ├──  Footer.astro
