@@ -131,7 +131,7 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
 
             <div class="page-content outreach">
               <header class="track-header">
-                <h3 class="track-title">Outreach</h3>
+                <h3 class="track-title">Core Track: Outreach</h3>
                 <p class="track-description">
                   Mass Outreach &amp; Harm Reduction
                 </p>
@@ -174,12 +174,12 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
                   </p>
                 </li>
               </ul>
-              <a href="#" class="learn-more">Learn More</a>
+              <a href="#" class="learn-more button">Learn More</a>
             </div>
 
             <div class="page-content people-ops">
               <header class="track-header">
-                <h3 class="track-title">People Ops</h3>
+                <h3 class="track-title">Core Track: People Ops</h3>
                 <p class="track-description">Internal Base-Building</p>
               </header>
               <ul class="track-levels">
@@ -208,7 +208,7 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
                   </p>
                 </li>
               </ul>
-              <a href="#" class="learn-more">Learn More</a>
+              <a href="#" class="learn-more button">Learn More</a>
             </div>
           </div>
           <nav class="tabs">
@@ -353,12 +353,31 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
       .page {
         padding: 2rem;
       }
+
+      /* All pages sit on the one sheet; only the open page is rendered. */
       .page-content {
         display: none;
       }
-      .page-content:first-child {
-        display: initial;
+
+      /* Until the script marks the sheet ready (or if JS never runs), the
+         first page in the markup is the one on screen. */
+      .page:not([data-ready]) .page-content:first-child {
+        display: block;
       }
+
+      /* Set by the script at the bottom of this file. */
+      .page-content.is-active {
+        display: block;
+      }
+      /* The open page's tab reads as pulled forward; the others recede. */
+      /* filter: brightness(0.85); */
+      /* &:hover { */
+      /*   filter: brightness(1); */
+      /* } */
+      /* &.is-active { */
+      /*   filter: brightness(1.1); */
+      /*   transform: translateY(-2px); */
+      /* } */
 
       .page-content {
         &.outreach {
@@ -506,5 +525,154 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
 </style>
 
 <script>
-  // implement binder page switching
+  /**
+   * Page switching for the "Ways to Plug In!" core-track binder.
+   *
+   * The markup is the whole contract — no data attributes required:
+   *
+   *   .binder
+   *     .page                  the one sheet that is on screen
+   *       .page-content.<key>  a page per tab, named by its extra class
+   *     nav.tabs
+   *       button.<key>         opens the page that shares its class
+   *
+   * Adding a track is therefore markup-only: add a `.page-content.<key>` and a
+   * `button.<key>` and this picks them up. The first `.page-content` in the
+   * markup is the default page (or `data-default="<key>"` on `.page`, if you
+   * ever add that attribute).
+   */
+
+  let binderCount = 0;
+
+  /** The `.page-content` children of a sheet, in markup order. */
+  function pagesOf(sheet: HTMLElement) {
+    return Array.from(
+      sheet.querySelectorAll<HTMLElement>(":scope > .page-content"),
+    );
+  }
+
+  /** The tab buttons of a binder's nav, in markup order. */
+  function tabsOf(binder: HTMLElement) {
+    return Array.from(
+      binder.querySelectorAll<HTMLButtonElement>("nav.tabs button"),
+    );
+  }
+
+  /** The first class an element shares with `candidates` — e.g. "policy". */
+  function keyOf(element: HTMLElement, candidates: Set<string>) {
+    return Array.from(element.classList).find((name) => candidates.has(name));
+  }
+
+  function initBinder(binder: HTMLElement) {
+    const sheet = binder.querySelector<HTMLElement>(".page");
+    const tabList = binder.querySelector<HTMLElement>("nav.tabs");
+    if (!sheet || !tabList) return;
+
+    // `data-ready` releases the CSS fallback that keeps the first page visible
+    // without JS, and makes a second run (client-side navigation) a no-op.
+    if (sheet.hasAttribute("data-ready")) return;
+
+    const pages = pagesOf(sheet);
+    const tabs = tabsOf(binder);
+    if (!pages.length || !tabs.length) return;
+
+    // Pair each page with the tab that shares its key class. Both directions
+    // are derived from the markup, so the track names are never hard-coded.
+    const tabClasses = new Set(
+      tabs.flatMap((tab) => Array.from(tab.classList)),
+    );
+
+    const pagesByKey = new Map<string, HTMLElement>();
+    for (const page of pages) {
+      const key = keyOf(page, tabClasses);
+      if (key) pagesByKey.set(key, page);
+    }
+
+    const tabsByKey = new Map<string, HTMLButtonElement>();
+    for (const tab of tabs) {
+      const key = keyOf(tab, new Set(pagesByKey.keys()));
+      if (key) tabsByKey.set(key, tab);
+    }
+
+    if (!pagesByKey.size) return;
+
+    // Promote the plain nav of buttons into a tablist and wire each tab to its
+    // page. The ids are generated here so the markup stays attribute-free.
+    const scope = `binder-${++binderCount}`;
+    tabList.setAttribute("role", "tablist");
+
+    for (const [key, tab] of tabsByKey) {
+      const page = pagesByKey.get(key);
+      if (!page) continue;
+
+      tab.id = `${scope}-tab-${key}`;
+      tab.setAttribute("role", "tab");
+      tab.setAttribute("aria-controls", `${scope}-page-${key}`);
+
+      page.id = `${scope}-page-${key}`;
+      page.setAttribute("role", "tabpanel");
+      page.setAttribute("aria-labelledby", tab.id);
+    }
+
+    let currentKey = "";
+
+    /** Turn the sheet to the page named `key`. */
+    function showPage(key: string, moveFocus = false) {
+      if (!pagesByKey.has(key) || key === currentKey) return;
+      currentKey = key;
+
+      for (const [pageKey, page] of pagesByKey) {
+        page.classList.toggle("is-active", pageKey === key);
+      }
+
+      for (const [tabKey, tab] of tabsByKey) {
+        const open = tabKey === key;
+        tab.classList.toggle("is-active", open);
+        tab.setAttribute("aria-selected", String(open));
+        // Roving tabindex: only the open page's tab is in the tab order.
+        tab.tabIndex = open ? 0 : -1;
+      }
+
+      if (moveFocus) tabsByKey.get(key)?.focus();
+
+      // Keeps the URL in sync so a single page can be linked to directly.
+      // Delete this line if the binder shouldn't touch the address bar.
+      history.replaceState(null, "", `#${key}`);
+    }
+
+    for (const [key, tab] of tabsByKey) {
+      tab.addEventListener("click", () => showPage(key));
+    }
+
+    /** The tab an arrow / Home / End key asks for, if any. */
+    function keyFromKeydown(event: KeyboardEvent, keys: string[]) {
+      const index = keys.indexOf(currentKey);
+      if (event.key === "ArrowRight") return keys[(index + 1) % keys.length];
+      if (event.key === "ArrowLeft")
+        return keys[(index - 1 + keys.length) % keys.length];
+      if (event.key === "Home") return keys[0];
+      if (event.key === "End") return keys[keys.length - 1];
+      return undefined;
+    }
+
+    // Arrow keys move between tabs, as a tablist is expected to.
+    tabList.addEventListener("keydown", (event) => {
+      // Tab order (not page order) — the two differ in this binder.
+      const next = keyFromKeydown(event, Array.from(tabsByKey.keys()));
+      if (!next) return;
+      event.preventDefault();
+      showPage(next, true);
+    });
+
+    // Open the page the URL points at, else the first page in the markup.
+    const fromHash = window.location.hash.replace(/^#/, "");
+    const initial = pagesByKey.has(fromHash)
+      ? fromHash
+      : (sheet.dataset.default ?? Array.from(pagesByKey.keys())[0]);
+
+    sheet.setAttribute("data-ready", "");
+    showPage(initial);
+  }
+
+  document.querySelectorAll<HTMLElement>(".binder").forEach(initBinder);
 </script>
