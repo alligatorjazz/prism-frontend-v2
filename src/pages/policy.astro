@@ -1,113 +1,102 @@
 ---
+// src/pages/policy.astro
 import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
 import SectionBorder from "@components/SectionBorder.astro";
-import Polaroid from "@components/Polaroid.astro";
+import TrackIntro from "@sections/TrackIntro.astro";
 import scale from "@assets/img/scale.avif";
 import miles from "@assets/img/team/miles.avif";
-import BigButton from "@components/BigButton.astro";
+
+// Key Activities, from the Membership Model's Policy Track.
+const activities = [
+  {
+    title: "Legislative & School Board Tracking",
+    description:
+      "We monitor bills and local policy agendas to keep our community informed and ready to respond.",
+  },
+  {
+    title: "Lobbying Initiatives",
+    description:
+      "We coordinate meetings with elected officials and school board members, draft policy language, and prepare students to testify effectively.",
+  },
+  {
+    title: "Accountability Programming",
+    description:
+      "We convene roundtables and town halls, creating direct access between students and the decision-makers who impact their education and daily lives.",
+  },
+];
 ---
 
 <Base
   pageMetadata={{
     title: "Policy Core Track",
     description:
-      "The Policy Track is the legislative and advocacy engine of PRISM, fighting for LGBTQ+ rights, reproductive justice, and academic freedom at every level of government.",
+      "The Policy Track is the legislative and advocacy engine of PRISM, fighting for LGBTQ+ rights, reproductive justice, and academic freedom across South Florida.",
     type: "website",
-    image: "https://picsum.photos/200",
+    image: scale.src,
     "image:alt": "Policy Core Track",
   }}
   class="page-content"
 >
   <PageIntro
     title="Policy"
-    description="The Policy Track is the legislative and advocacy engine of PRISM, dedicated to fighting for LGBTQ+ rights, reproductive justice, and academic freedom at the local, state, and national levels. We center the needs of LGBTQ+ young people across South Florida by navigating political landscapes, engaging with elected officials, and ensuring that student voices are heard in the halls of power."
+    description="The Policy Track is the legislative and advocacy engine of PRISM, dedicated to fighting for LGBTQ+ rights, reproductive justice, and academic freedom at the local, state, and national levels. We focus on centering the needs of LGBTQ+ young people across South Florida by navigating political landscapes, engaging with elected officials, and ensuring that student voices are heard in the halls of power."
     image={scale}
     pointBackTo={{ href: "/get-involved/", label: "Get Involved" }}
     class="intro"
   />
 
   <main>
+    <!-- Who leads the track, alongside what the track does -->
     <SectionBorder type="marker" backgroundColor="rainbow-red" />
 
-    <section id="staff" class="ruled-bg">
-      <div class="container">
-        <h3>Meet the Policy Director!</h3>
-        <div class="content">
-          <article>
-            <div class="person">
-              <Polaroid
-                class="portrait"
-                image={{
-                  src: miles,
-                  alt: "Portrait of Miles Davis",
-                  format: "webp",
-                  width: 300,
-                  height: 300,
-                }}
-                label="Miles Davis"
-              />
-            </div>
-            <div class="description">
-              <h4>Policy Director</h4>
-              <p>
-                Miles Davis has a diverse background in legislative affairs,
-                voting rights advocacy, and political campaigns. He served as
-                Chief of Staff in the Florida Senate, where he provided
-                strategic guidance on policy initiatives and built strong
-                relationships with community leaders and state agencies. As
-                Florida Voting Rights Director at America Votes, Miles worked to
-                protect and expand voter access, collaborating with state and
-                local stakeholders to create coordinated strategies. He has also
-                led teams on high-profile political campaigns, serving as a
-                Political Director and Campaign Manager for statewide and
-                regional efforts. Miles is passionate about empowering
-                communities, advancing civic engagement, and fostering equitable
-                opportunities for all.
-              </p>
-              <button type="button">Read More About Miles</button>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+    <TrackIntro
+      id="about"
+      class="ruled-bg"
+      heading="What We Do"
+      eyebrow="Track Lead"
+      name="Miles Davis"
+      title="Policy Director"
+      image={miles}
+      imageAlt="Portrait of Miles Davis"
+      description="The Policy Track is led by the Policy Director, who oversees our legislative strategy, trains grassroots activists, and coordinates lobbying logistics. The Policy Director works closely with the Organizing Director to ensure our policy priorities align with our broader organizing and member engagement goals."
+      activities={activities}
+    />
 
     <SectionBorder type="marker" backgroundColor="rainbow-red" flip />
 
+    <!-- Based on: Membership Model - Policy Pipeline -->
     <section id="pathway">
       <div class="container">
         <h3>How to Get Involved</h3>
-        <div class="tiers">
-          <article>
+        <p class="pathway-note">
+          The Policy Track starts at the Volunteer tier. Attend a Quarterly
+          Orientation or schedule a 1:1 intake to get started, then choose
+          Policy when you select your core track.
+        </p>
+
+        <div class="card-grid">
+          <article class="card">
             <span class="tier-label">Volunteer</span>
             <p>
               Participates in mass mobilizations, signs petitions, and delivers
               prepared public testimony to lawmakers.
             </p>
-            <p class="trainings">
-              <strong>Trainings:</strong> Civics 101, Advocacy Basics
-            </p>
           </article>
 
-          <article>
+          <article class="card">
             <span class="tier-label member">Member</span>
             <p>
               Shapes local decisions by directly interfacing with lawmakers and
               conducting policy research.
             </p>
-            <p class="trainings">
-              <strong>Trainings:</strong> Power Mapping, Testifying 101
-            </p>
           </article>
 
-          <article>
+          <article class="card">
             <span class="tier-label leader">Leader</span>
             <p>
               Hosts advocacy workshops, oversees local campaigns, leads
               rapid-response teams, and/or serves as Lobbying Captains.
-            </p>
-            <p class="trainings">
-              <strong>Trainings:</strong> Advanced Lobbying, Policy Language Drafting
             </p>
           </article>
         </div>
@@ -115,6 +104,7 @@ import BigButton from "@components/BigButton.astro";
     </section>
 
     <SectionBorder type="marker" backgroundColor="rainbow-red" />
+
     <section id="cta" class="ruled-bg">
       <div class="container">
         <h3>Ready to Make a Difference?</h3>
@@ -125,16 +115,15 @@ import BigButton from "@components/BigButton.astro";
           help ensure that LGBTQ+ young people have a seat at the table where
           decisions about their lives are made.
         </p>
-        <BigButton href="/volunteer" class="cta-button">
-          Sign Up to Volunteer
-        </BigButton>
+        <a
+          href="https://prismfl.app.neoncrm.com/forms/volunteer-interest-form"
+          class="cta-button">Sign Up to Volunteer</a
+        >
       </div>
     </section>
-
-    <SectionBorder type="marker" backgroundColor="rainbow-red" flip />
   </main>
 
-  <style>
+  <style lang="scss">
     .page-content {
       background-color: var(--rainbow-red);
     }
@@ -164,120 +153,94 @@ import BigButton from "@components/BigButton.astro";
       padding: 0 1rem;
     }
 
-    #staff {
-      padding: 4rem 0;
+    /* The intro's <section> is rendered inside TrackIntro.astro, so the scoped
+       rules above cannot reach it. The id is unique to this page, so a global
+       selector is the honest fix rather than a leak. */
+    :global(#about) {
+      background-color: var(--rainbow-red);
       background-size: 2100px;
-
-      .content {
-        max-width: var(--lg);
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin: auto;
-        padding: 2rem 0;
-
-        article {
-          display: flex;
-          gap: 1rem;
-
-          .person {
-            display: flex;
-            flex-direction: column;
-
-            .portrait {
-              width: 220px;
-              height: 250px;
-              filter: var(--shadow);
-            }
-
-            .name {
-              white-space: nowrap;
-              font-family: var(--header-font);
-              text-align: center;
-            }
-          }
-
-          .description {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-
-            button {
-              background: var(--rainbow-red);
-              padding: 1rem;
-              font-weight: bold;
-              font-size: 1.25rem;
-            }
-
-            * {
-              margin: 0;
-            }
-          }
-        }
-      }
     }
 
     #pathway {
       background-color: var(--rainbow-red);
-      padding: 4rem 0;
+      padding: 8rem 0;
 
-      .tiers {
+      color: var(--fg-color);
+      h3 {
+        font-size: 3rem;
+      }
+      .pathway-note {
+        font-size: 1.5rem;
+        text-align: center;
+        font-style: italic;
+        max-width: 640px;
+        margin: 1rem auto 0;
+        color: var(--fg-color);
+      }
+
+      .card-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         gap: 1.5rem;
-        margin-top: 2rem;
+        max-width: var(--lg);
+        margin: 2rem auto 0;
+      }
 
-        article {
-          border: 2px solid var(--fg-color);
-          border-radius: var(--round-edge);
-          filter: var(--shadow);
-          background: var(--rainbow-red);
-          padding: 1.5rem;
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
+      .card {
+        border: 2px solid var(--fg-color);
+        filter: var(--shadow);
+        background: var(--rainbow-red);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        color: var(--fg-color);
+
+        p {
+          margin: 0;
+        }
+
+        .tier-label {
+          align-self: flex-start;
+          background-color: var(--text-color);
           color: var(--fg-color);
+          font-family: var(--header-font);
+          font-weight: bold;
+          padding: 0.25rem 0.75rem;
+          border-radius: var(--round-edge);
+          text-transform: uppercase;
+          font-size: 0.875rem;
 
-          .tier-label {
-            align-self: flex-start;
+          &.member {
+            background-color: var(--rainbow-red);
+            color: var(--fg-color);
+            border: 1px solid var(--fg-color);
+          }
+
+          &.leader {
             background-color: var(--text-color);
             color: var(--fg-color);
-            font-family: var(--header-font);
-            font-weight: bold;
-            padding: 0.25rem 0.75rem;
-            border-radius: var(--round-edge);
-            text-transform: uppercase;
-            font-size: 0.875rem;
-
-            &.member {
-              background-color: var(--rainbow-red);
-              color: var(--fg-color);
-              border: 1px solid var(--fg-color);
-            }
-
-            &.leader {
-              background-color: var(--text-color);
-              color: var(--fg-color);
-            }
           }
+        }
 
-          .trainings {
-            font-size: 1rem;
-            color: var(--fg-color);
-            margin-top: auto;
-          }
+        .trainings {
+          margin-top: auto;
+          font-size: 1rem;
+          color: var(--fg-color);
         }
       }
     }
+
     #cta {
       padding: 4rem 0;
       background-size: 2100px;
 
       .container {
         display: flex;
-        justify-content: center;
         flex-direction: column;
+        align-items: center;
         max-width: var(--lg);
+
         p {
           font-size: 1.5rem;
           text-align: center;
@@ -285,7 +248,21 @@ import BigButton from "@components/BigButton.astro";
       }
 
       .cta-button {
+        display: block;
+        margin-top: 1.5rem;
         background-color: var(--rainbow-red);
+        color: var(--fg-color);
+        padding: 1rem 2rem;
+        border-radius: var(--round-edge);
+        font-weight: bold;
+        font-size: 1.25rem;
+        text-align: center;
+        text-decoration: none;
+        transition: all 300ms;
+
+        &:hover {
+          filter: brightness(110%);
+        }
       }
     }
   </style>
