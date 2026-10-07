@@ -1,204 +1,194 @@
 ---
+// src/pages/outreach.astro
 import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
 import SectionBorder from "@components/SectionBorder.astro";
+import TrackIntro from "@sections/TrackIntro.astro";
 import Polaroid from "@components/Polaroid.astro";
-import { faker } from "@faker-js/faker";
 import ThreeIconCluster from "@components/ThreeIconCluster.astro";
-import avion from "@assets/img/team/avion.avif";
-import megaphone from "@assets/img/megaphone.avif";
 import TornPaperBox from "@components/TornPaperBox.astro";
-import BigButton from "@components/BigButton.astro";
+import { faker } from "@faker-js/faker";
+import megaphone from "@assets/img/megaphone.avif";
+import avion from "@assets/img/team/avion.avif";
+
+// Key Activities, from the Membership Model's Outreach Track.
+const activities = [
+  {
+    title: "Tabling",
+    description:
+      "Outreach captures signups and makes high-volume initial pitches at festivals and community events. This is our primary engine for volunteer recruitment and resource distribution.",
+  },
+  {
+    title: "Social Events",
+    description:
+      "Low-stakes social spaces where People's Ops and Outreach members facilitate intentional 1:1 organizing conversations to deepen relationships and move supporters up the ladder of engagement.",
+  },
+];
 ---
 
 <Base
   pageMetadata={{
     title: "Outreach Core Track",
     description:
-      "The Outreach Core Track coordinates events and other activities to spread awareness of the amazing work PRISM does and builds connections with the community.",
+      "The Outreach Track is the face of PRISM on the ground, responsible for community-facing events, sexual health education, and harm-reduction resource distribution.",
     type: "website",
-    image: "https://picsum.photos/200",
-    "image:alt": "test",
+    image: megaphone.src,
+    "image:alt": "Outreach Core Track",
   }}
-  class={"page-content"}
+  class="page-content"
 >
   <PageIntro
     title="Outreach"
-    description={"The Outreach Track is the face of PRISM on the ground, responsible for community-facing events such as pride festivals, social mixers, career fairs, and more. We get the word out about PRISM's work, educate on sexual health, gender identity, and LGBTQ+ history, and distribute essential harm-reduction resources."}
+    description="The Outreach Track is the face of PRISM on the ground, responsible for community-facing events such as pride festivals, social mixers, and career fairs. We get the word out about PRISM's work, educate on sexual health, gender identity, and LGBTQ+ history, and distribute essential harm-reduction resources — including Naloxone, condoms, and lubricants."
     image={megaphone}
     pointBackTo={{ href: "/get-involved/", label: "Get Involved" }}
-    class={"intro"}
+    class="intro"
   />
 
   <main>
+    <!-- Who leads the track, alongside what the track does -->
     <SectionBorder type="marker" backgroundColor="rainbow-orange" />
 
-    <section id="staff" class="ruled-bg">
-      <div class="container">
-        <h3>Meet the director of PRISM's outreach program!</h3>
-        <div class="content">
-          <article>
-            <div class="person">
-              <Polaroid
-                class="portrait"
-                image={{
-                  src: avion,
-                  alt: "Portrait of Avion Goordeen",
-                  format: "webp",
-                  width: 300,
-                  height: 300,
-                }}
-                label="Avion Goordeen"
-              />
-            </div>
-            <div class="description">
-              <h4>Outreach Director</h4>
-              <p>
-                {
-                  "Avion is a bisexual man and a first-generation immigrant from the Caribbean islands of Trinidad and Tobago. He has a Master's in Ocean Engineering from Florida Atlantic University and has been involved in LGBTQ+ activism and leadership since 2018. This includes working with CompassGLCC and being a member of the board of directors of Night Runners WPB. In his free time, Avion enjoys paddleboarding, photography and is currently a fan of the manga, One Piece."
-                }
-              </p>
-              <button type="button">Read More About Avion →</button>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+    <TrackIntro
+      id="about"
+      class="ruled-bg"
+      heading="What We Do"
+      eyebrow="Track Lead"
+      name="Avion Goordeen"
+      title="Outreach Director"
+      image={avion}
+      imageAlt="Portrait of Avion Goordeen"
+      description="The Outreach Track is led by the Outreach Director, who manages logistics, orders supplies, plans social events, and develops members in the Outreach Track. Outreach is supported by our Organizing Director, who oversees membership and focuses on recruitment, volunteer onboarding, and orienting new members."
+      activities={activities}
+    />
 
     <SectionBorder type="marker" backgroundColor="rainbow-orange" flip />
 
+    <!-- Based on: Membership Model - Outreach Pipeline -->
     <section id="pathway">
       <div class="container">
         <h3>How to Get Involved</h3>
-        <div class="tiers">
-          <article>
+        <p class="pathway-note">
+          Outreach is the front door of PRISM, so this track welcomes
+          Volunteers. Attend a Quarterly Orientation or schedule a 1:1 intake,
+          then join our Discord to get connected with the Outreach team.
+        </p>
+
+        <div class="card-grid">
+          <article class="card">
             <span class="tier-label">Volunteer</span>
             <p>
-              Helps set up events, tables at community gatherings, and spreads
-              the word about PRISM's work.
-            </p>
-            <p class="trainings">
-              <strong>Trainings:</strong> Outreach 101, Event Setup
+              Boots on the ground at tabling; distributes resources and flyers.
+              Focuses on high-volume initial engagement and registration.
             </p>
           </article>
 
-          <article>
+          <article class="card">
             <span class="tier-label member">Member</span>
             <p>
-              Represents PRISM at events, coordinates tabling logistics, and
-              recruits new volunteers.
-            </p>
-            <p class="trainings">
-              <strong>Trainings:</strong> Public Speaking, Volunteer Recruitment
+              Engages in deeper conversations at community events about PRISM's
+              work, and supports in designing social events.
             </p>
           </article>
 
-          <article>
+          <article class="card">
             <span class="tier-label leader">Leader</span>
             <p>
-              Plans outreach strategy, manages event calendars, leads volunteer
-              teams, and/or serves as Event Captains.
-            </p>
-            <p class="trainings">
-              <strong>Trainings:</strong> Event Planning, Team Management
+              Oversees tabling efforts, co-creates social events, and/or trains
+              new volunteers.
             </p>
           </article>
         </div>
-        <section id="impact">
-          <div class="container">
-            <div class="impact-wrapper">
-              <div class="cluster">
-                <ThreeIconCluster class={"icons"}>
-                  <Polaroid
-                    slot="top"
-                    image={{
-                      src: faker.image.urlPicsumPhotos({
-                        width: 250,
-                        height: 250,
-                      }),
-                      alt: "Creative Fellow",
-                      format: "webp",
-                      width: 250,
-                      height: 250,
-                    }}
-                  />
-                  <Polaroid
-                    slot="middle"
-                    image={{
-                      src: faker.image.urlPicsumPhotos({
-                        width: 250,
-                        height: 250,
-                      }),
-                      alt: "Creative Fellow",
-                      format: "webp",
-                      width: 250,
-                      height: 250,
-                    }}
-                  />
-                  <Polaroid
-                    slot="bottom"
-                    image={{
-                      src: faker.image.urlPicsumPhotos({
-                        width: 250,
-                        height: 250,
-                      }),
-                      alt: "Creative Fellow",
-                      format: "webp",
-                      width: 250,
-                      height: 250,
-                    }}
-                  />
-                </ThreeIconCluster>
-              </div>
-              <div class="wins">
-                <TornPaperBox
-                  ><h3>Our Outreach Has Impact</h3>
-                  <ul>
-                    <li>
-                      <strong>93</strong> unique volunteers mobilized across South
-                      Florida
-                    </li>
-                    <li>
-                      <strong>943.66</strong> service hours accrued by PRISM Outreach
-                    </li>
-                    <li>
-                      <strong>66</strong> outreach events hosted across the tri-county
-                      area
-                    </li>
-                  </ul></TornPaperBox
-                >
-              </div>
-            </div>
-          </div>
-        </section>
       </div>
-      <SectionBorder type="marker" backgroundColor="rainbow-orange" />
+    </section>
 
-      <section id="volunteer-cta" class="ruled-bg">
-        <div class="container">
-          <h3>Ready to Make a Difference?</h3>
-          <p>
-            Whether you're handing out resources at a tabling event, connecting
-            with community members at a pride festival, or helping set up for a
-            social mixer, every volunteer hour strengthens our movement.
-          </p>
-          <BigButton href="/volunteer" class="cta-button">
-            Sign Up to Volunteer
-          </BigButton>
+    <!-- Achievements. Left intact, as requested. -->
+    <section id="impact">
+      <div class="container">
+        <div class="impact-wrapper">
+          <div class="cluster">
+            <ThreeIconCluster class={"icons"}>
+              <Polaroid
+                slot="top"
+                image={{
+                  src: faker.image.urlPicsumPhotos({
+                    width: 250,
+                    height: 250,
+                  }),
+                  alt: "Creative Fellow",
+                  format: "webp",
+                  width: 250,
+                  height: 250,
+                }}
+              />
+              <Polaroid
+                slot="middle"
+                image={{
+                  src: faker.image.urlPicsumPhotos({
+                    width: 250,
+                    height: 250,
+                  }),
+                  alt: "Creative Fellow",
+                  format: "webp",
+                  width: 250,
+                  height: 250,
+                }}
+              />
+              <Polaroid
+                slot="bottom"
+                image={{
+                  src: faker.image.urlPicsumPhotos({
+                    width: 250,
+                    height: 250,
+                  }),
+                  alt: "Creative Fellow",
+                  format: "webp",
+                  width: 250,
+                  height: 250,
+                }}
+              />
+            </ThreeIconCluster>
+          </div>
+          <div class="wins">
+            <TornPaperBox
+              ><h3>Our Outreach Has Impact</h3>
+              <ul>
+                <li>
+                  <strong>93</strong> unique volunteers mobilized across South Florida
+                </li>
+                <li>
+                  <strong>943.66</strong> service hours accrued by PRISM Outreach
+                </li>
+                <li>
+                  <strong>66</strong> outreach events hosted across the tri-county
+                  area
+                </li>
+              </ul></TornPaperBox
+            >
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- <section id="calendar"> -->
-      <!--   <Calendar -->
-      <!--     events={dummyEvents} -->
-      <!--     title="Test Calendar" -->
-      <!--     backgroundColor={"var(--rainbow-orange)"} -->
-      <!--   /> -->
-      <!-- </section> -->
+    <SectionBorder type="marker" backgroundColor="rainbow-orange" />
+
+    <section id="cta" class="ruled-bg">
+      <div class="container">
+        <h3>Ready to Make a Difference?</h3>
+        <p>
+          Whether you're handing out resources at a tabling event, connecting
+          with community members at a pride festival, or helping set up for a
+          social mixer, every volunteer hour strengthens our movement.
+        </p>
+        <a
+          href="https://prismfl.app.neoncrm.com/forms/volunteer-interest-form"
+          class="cta-button">Sign Up to Volunteer</a
+        >
+      </div>
     </section>
   </main>
 
-  <style>
+  <style lang="scss">
     .page-content {
       background-color: var(--rainbow-orange);
     }
@@ -228,142 +218,114 @@ import BigButton from "@components/BigButton.astro";
       padding: 0 1rem;
     }
 
-    #staff {
-      padding: 4rem 0;
+    /* The intro's <section> is rendered inside TrackIntro.astro, so the scoped
+       rules above cannot reach it. The id is unique to this page, so a global
+       selector is the honest fix rather than a leak. */
+    :global(#about) {
+      background-color: var(--rainbow-orange);
       background-size: 2100px;
+    }
 
-      .content {
+    #pathway {
+      background-color: var(--rainbow-orange);
+      padding: 8rem 0;
+
+      color: var(--fg-color);
+      h3 {
+        font-size: 3rem;
+      }
+      .pathway-note {
+        font-size: 1.5rem;
+        text-align: center;
+        font-style: italic;
+        max-width: 640px;
+        margin: 1rem auto 0;
+        color: var(--fg-color);
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
         max-width: var(--lg);
+        margin: 2rem auto 0;
+      }
+
+      .card {
+        border: 2px solid var(--fg-color);
+        filter: var(--shadow);
+        background: var(--rainbow-orange);
+        padding: 1.5rem;
         display: flex;
-        align-items: center;
+        flex-direction: column;
         gap: 1rem;
-        margin: auto;
-        padding: 2rem 0;
+        color: var(--fg-color);
 
-        article {
-          display: flex;
-          gap: 1rem;
+        p {
+          margin: 0;
+        }
 
-          .person {
-            display: flex;
-            flex-direction: column;
+        .tier-label {
+          align-self: flex-start;
+          background-color: var(--text-color);
+          color: var(--fg-color);
+          font-family: var(--header-font);
+          font-weight: bold;
+          padding: 0.25rem 0.75rem;
+          border-radius: var(--round-edge);
+          text-transform: uppercase;
+          font-size: 0.875rem;
 
-            .portrait {
-              width: 220px;
-              height: 250px;
-              filter: var(--shadow);
-            }
-
-            .name {
-              white-space: nowrap;
-              font-family: var(--header-font);
-              text-align: center;
-            }
+          &.member {
+            background-color: var(--rainbow-orange);
+            color: var(--fg-color);
+            border: 1px solid var(--fg-color);
           }
 
-          .description {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-
-            button {
-              background: var(--rainbow-orange);
-              padding: 1rem;
-              font-weight: bold;
-              font-size: 1.25rem;
-            }
-
-            * {
-              margin: 0;
-            }
+          &.leader {
+            background-color: var(--text-color);
+            color: var(--fg-color);
           }
+        }
+
+        .trainings {
+          margin-top: auto;
+          font-size: 1rem;
+          color: var(--fg-color);
         }
       }
     }
+
+    /* Achievements block: cluster beside the paper "wins" list. */
     #impact {
       background-color: var(--rainbow-orange);
-      padding: 6rem 0;
+      padding: 4rem 0;
 
       .impact-wrapper {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
-        gap: 2rem;
+        gap: 3rem;
       }
 
-      .cluster {
-        flex: 1 1 300px;
-        display: flex;
-        justify-content: center;
-      }
-
+      .cluster,
       .wins {
-        flex: 1 1 400px;
-        /* background-color: var(--fg-color); */
-        filter: var(--shadow);
-        background-size: 2000px;
-        padding: 2rem;
-
-        h3 {
-          color: var(--text-color);
-          font-size: 2rem;
-          margin-top: 0;
-        }
-
-        ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-          width: 100%;
-          gap: 1rem;
-        }
-
-        li {
-          font-size: 1.25rem;
-          flex: 1;
-          color: var(--text-color);
-          line-height: 1.5;
-        }
-
-        strong {
-          color: var(--rainbow-orange);
-          font-size: 2rem;
-        }
-
-        .counties {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1rem;
-
-          span {
-            background-color: var(--rainbow-orange);
-            color: var(--fg-color);
-            padding: 0.5rem 1rem;
-            border-radius: var(--round-edge);
-            font-weight: 600;
-          }
-
-          strong {
-            color: var(--fg-color);
-            font-size: 1.25rem;
-          }
-        }
+        flex: 1 1 22rem;
+        max-width: 34rem;
       }
     }
 
-    #volunteer-cta {
+    #cta {
       padding: 4rem 0;
       background-size: 2100px;
 
       .container {
         display: flex;
-        justify-content: center;
         flex-direction: column;
+        align-items: center;
         max-width: var(--lg);
+
         p {
           font-size: 1.5rem;
           text-align: center;
@@ -371,130 +333,20 @@ import BigButton from "@components/BigButton.astro";
       }
 
       .cta-button {
+        display: block;
+        margin-top: 1.5rem;
         background-color: var(--rainbow-orange);
-      }
-    }
+        color: var(--fg-color);
+        padding: 1rem 2rem;
+        border-radius: var(--round-edge);
+        font-weight: bold;
+        font-size: 1.25rem;
+        text-align: center;
+        text-decoration: none;
+        transition: all 300ms;
 
-    #pathway {
-      background-color: var(--rainbow-orange);
-
-      .tiers {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-        margin-top: 2rem;
-
-        article {
-          border: 2px solid var(--fg-color);
-          border-radius: var(--round-edge);
-          filter: var(--shadow);
-          background: var(--rainbow-orange);
-          padding: 1.5rem;
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-
-          color: var(--fg-color);
-
-          .tier-label {
-            align-self: flex-start;
-            background-color: var(--text-color);
-            color: var(--fg-color);
-
-            font-family: var(--header-font);
-            font-weight: bold;
-            padding: 0.25rem 0.75rem;
-            border-radius: var(--round-edge);
-            text-transform: uppercase;
-            font-size: 0.875rem;
-
-            &.member {
-              background-color: var(--rainbow-orange);
-              color: var(--fg-color);
-              border: 1px solid var(--fg-color);
-            }
-
-            &.leader {
-              background-color: var(--text-color);
-              color: var(--fg-color);
-            }
-          }
-
-          .trainings {
-            font-size: 1rem;
-            color: var(--fg-color);
-            margin-top: auto;
-          }
-        }
-      }
-    }
-
-    #calendar {
-      background-color: white;
-      padding: 4rem 0;
-
-      .events {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-        margin-top: 2rem;
-
-        article {
-          border: 2px solid var(--rainbow-orange);
-          border-radius: var(--round-edge);
-          padding: 1.5rem;
-
-          h4 {
-            margin: 0 0 0.5rem;
-          }
-
-          p {
-            margin: 0.25rem 0;
-          }
-        }
-      }
-    }
-
-    #join {
-      background-size: 2000px;
-      padding: 4rem 0;
-
-      .content {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-
-        article {
-          flex: 1;
-          min-width: 45%;
-          background-color: var(--fg-color);
-          filter: var(--shadow);
-          padding: 2rem;
-          display: flex;
-          flex-direction: column;
-
-          h4 {
-            height: 2rem;
-          }
-
-          p {
-            flex: 1;
-          }
-
-          & > a:last-of-type {
-            background-color: var(--accent-color);
-            padding: 0.5rem 1rem;
-            border-radius: var(--round-edge);
-            color: var(--fg-color);
-            font-weight: bold;
-            text-align: center;
-            text-decoration: none;
-            transition: all 300ms;
-
-            &:hover {
-              filter: brightness(110%);
-            }
-          }
+        &:hover {
+          filter: brightness(110%);
         }
       }
     }
