@@ -10,97 +10,13 @@ import type { HTMLAttributes } from "astro/types";
 import { Font } from "astro:assets";
 import { getImage } from "astro:assets";
 import ruledBg from "@assets/img/ruled-bg.png";
+import { globalRoutes } from "../config";
 
 interface Props extends HTMLAttributes<"div"> {
   pageMetadata: SurfaceMetadata;
 }
 
 const siteMetadata = await getSiteMetadata();
-const routes: Route[] = [
-  {
-    type: "internal",
-    path: "/about",
-    displayName: "About",
-    children: [
-      { type: "internal", path: "/our-history", displayName: "Our History" },
-      { type: "internal", path: "/our-team", displayName: "Our Team" },
-      { type: "internal", path: "/our-partners", displayName: "Our Partners" },
-      {
-        type: "internal",
-        path: "/news-and-press",
-        displayName: "News & Press",
-      },
-    ],
-  },
-  {
-    type: "internal",
-    path: "/get-involved",
-    displayName: "Get Involved",
-    children: [
-      { type: "internal", path: "/outreach", displayName: "Outreach" },
-      {
-        type: "internal",
-        path: "/creative-fellowship",
-        displayName: "Creative Fellowship",
-      },
-      { type: "internal", path: "/policy", displayName: "Policy" },
-      { type: "internal", path: "/people-ops", displayName: "People Ops" },
-      {
-        type: "internal",
-        path: "/psap",
-        displayName: "Student Ambassador Program",
-      },
-      {
-        type: "external",
-        url: "https://discord.gg/nHuWYXkpr6",
-        displayName: "Discord",
-      },
-    ],
-  },
-  {
-    type: "internal",
-    path: "/resources",
-    displayName: "Resources",
-    children: [
-      {
-        type: "internal",
-        path: "/sti-clinic-search",
-        displayName: "STI Clinic Search",
-      },
-
-      {
-        type: "internal",
-        path: "/policy-hub",
-        displayName: "School Policy Hub",
-      },
-      { type: "internal", path: "/learn", displayName: "Learn" },
-    ],
-  },
-  {
-    type: "internal",
-    path: "/donate",
-    displayName: "Donate",
-    highlight: true,
-    children: [
-      {
-        type: "internal",
-        path: "/movement-builders-monthly",
-        displayName: "Monthly Giving",
-      },
-      {
-        type: "internal",
-        path: "/movement-builders-yearly",
-        displayName: "Yearly Giving",
-      },
-      {
-        type: "internal",
-        path: "/movement-builders-business",
-        displayName: "Business Sponsorship",
-      },
-    ],
-  },
-];
-
 const { pageMetadata, ...props } = Astro.props;
 
 const backgrounds = {
@@ -125,7 +41,7 @@ const backgrounds = {
     <Font cssVariable="--crudex" />
   </head>
   <body data-drawer="inactive" data-prev-scroll="up">
-    <Navbar routes={routes} siteMetadata={siteMetadata} />
+    <Navbar routes={globalRoutes} siteMetadata={siteMetadata} />
     <div class="navbar-spacer"></div>
     <div {...props}><slot /></div>
     <NewsletterSignup />
