@@ -1,14 +1,13 @@
 ---
+// src/pages/creative-fellowship.astro
 import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
 import SectionBorder from "@components/SectionBorder.astro";
-import Polaroid from "@components/Polaroid.astro";
-import { faker } from "@faker-js/faker";
-import TornPaperBox from "@components/TornPaperBox.astro";
+import TrackIntro from "@sections/TrackIntro.astro";
 import speech from "@assets/img/icons/Speech.png";
+import alex from "@assets/img/team/alex.avif";
 
-const alexPhoto = faker.image.avatar();
-
+// Fellowship Roles Overview, from the Membership Model.
 const fellowshipRoles = [
   {
     title: "Policy Fellow",
@@ -53,6 +52,23 @@ const fellowshipRoles = [
     quota: "3-4 visual assets per month",
   },
 ];
+
+const whatFellowsGain = [
+  "Serve in a 6-month volunteer leadership role",
+  "Attend weekly Creative Fellowship meetings",
+  "Participate in trainings, workshops, and educational seminars",
+  "Build a professional portfolio through real-world advocacy campaigns",
+  "Receive mentorship from nonprofit professionals and community leaders",
+  "Join PRISM's growing network of organizers, advocates, and changemakers",
+];
+
+const eligibility = [
+  "Be a current high school or college student (or equivalent)",
+  "Be 24 years old or younger at the start of the Fellowship",
+  "Live in Miami, Broward, or Palm Beach County",
+  "Have a demonstrated connection to LGBTQ+ youth organizing in Florida",
+  "Be able to commit to the full 6-month Fellowship",
+];
 ---
 
 <Base
@@ -61,70 +77,45 @@ const fellowshipRoles = [
     description:
       "The PRISM Creative Fellowship is a 6-month volunteer leadership program for LGBTQ+ and allied students under 24 who are passionate about advocacy, organizing, and creative storytelling.",
     type: "website",
-    image: "https://picsum.photos/200",
-    "image:alt": "Creative Fellowship",
+    image: speech.src,
+    "image:alt": "PRISM Creative Fellowship",
   }}
   class="page-content"
 >
   <PageIntro
     title="Creative Fellowship"
-    description="The PRISM Creative Fellowship is a 6-month volunteer leadership program designed for LGBTQ+ and allied students under the age of 24 who are passionate about advocacy, organizing, and creative storytelling. Fellows work alongside PRISM's team to create impactful content that educates, inspires, and mobilizes communities across South Florida."
+    description="The PRISM Creative Fellowship is a 6-month volunteer leadership program designed for LGBTQ+ and allied students under the age of 24 who are passionate about advocacy, organizing, and creative storytelling. Fellows gain real-world experience in nonprofit communications while helping shape PRISM's voice and impact across South Florida."
     image={speech}
     pointBackTo={{ href: "/get-involved/", label: "Get Involved" }}
     class="intro"
   />
 
   <main>
+    <!-- Who leads the program, alongside what it does -->
     <SectionBorder type="marker" backgroundColor="rainbow-green" />
 
-    <section id="staff" class="ruled-bg">
-      <div class="container">
-        <h3>Meet the Content Creation Director!</h3>
-        <div class="content">
-          <article>
-            <div class="person">
-              <Polaroid
-                class="portrait"
-                image={{
-                  src: alexPhoto,
-                  alt: "Portrait of Alexander Puga",
-                  format: "webp",
-                  width: 300,
-                  height: 300,
-                }}
-                label="Alexander Puga"
-              />
-            </div>
-            <div class="description">
-              <h4>Content Creation Director</h4>
-              <p>
-                A Miami-born creative with a passion for storytelling that
-                uplifts and represents marginalized communities. With a
-                background in film, content creation, and brand strategy, Alex
-                brings bold visuals and culturally rooted narratives to life. He
-                has led campaigns for local businesses, fashion brands, and
-                queer initiatives. As Content Creation Director at PRISM, Alex
-                is here to celebrate queer voices and create space for joy and
-                identity across every platform. Outside of work, you'll find him
-                biking around the city, sweating through a workout, singing, or
-                hanging with his fiancé and their two pups, Nino and Winston.
-              </p>
-              <button type="button">Read More About Alex</button>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+    <TrackIntro
+      id="about"
+      class="ruled-bg"
+      heading="What Is the Fellowship?"
+      eyebrow="Program Lead"
+      name="Alexander Puga"
+      title="Content Creation Director"
+      image={alex}
+      imageAlt="Portrait of Alexander Puga"
+      description="The Creative Fellowship is led by PRISM's Content Creation Director and is designed for students who are passionate about advocacy, organizing, and creative storytelling. Fellows work alongside PRISM's team to create impactful content that educates, inspires, and mobilizes communities across South Florida. Through hands-on projects, mentorship, and professional development, Fellows build a portfolio while helping shape PRISM's voice and impact."
+    />
 
     <SectionBorder type="marker" backgroundColor="rainbow-green" flip />
 
+    <!-- Based on: Membership Model - Fellowship Roles Overview -->
     <section id="roles">
       <div class="container">
         <h3>Fellowship Roles</h3>
-        <div class="roles-grid">
+        <div class="card-grid">
           {
             fellowshipRoles.map((role) => (
-              <article>
+              <article class="card">
                 <span class="role-label">{role.title}</span>
                 <p class="count">
                   {role.count} fellow{role.count !== "1" ? "s" : ""}
@@ -140,70 +131,46 @@ const fellowshipRoles = [
       </div>
     </section>
 
-    <SectionBorder type="marker" backgroundColor="rainbow-green" />
-
-    <section id="expectations" class="ruled-bg">
+    <!-- Based on: Membership Model - Fellowship Expectations & Eligibility -->
+    <section id="expectations">
       <div class="container">
-        <TornPaperBox>
-          <h3>What Fellows Gain</h3>
-          <ul>
-            <li>Serve in a 6-month volunteer leadership role</li>
-            <li>Attend weekly Creative Fellowship meetings</li>
-            <li>
-              Participate in trainings, workshops, and educational seminars
-            </li>
-            <li>
-              Build a professional portfolio through real-world advocacy
-              campaigns
-            </li>
-            <li>
-              Receive mentorship from nonprofit professionals and community
-              leaders
-            </li>
-            <li>
-              Join PRISM's growing network of organizers, advocates, and
-              changemakers
-            </li>
-          </ul>
-          <h3>Eligibility</h3>
-          <ul>
-            <li>Be a current high school or college student (or equivalent)</li>
-            <li>Be 24 years old or younger at the start of the Fellowship</li>
-            <li>Live in Miami, Broward, or Palm Beach County</li>
-            <li>
-              Have a demonstrated connection to LGBTQ+ youth organizing in
-              Florida
-            </li>
-            <li>Be able to commit to the full 6-month Fellowship</li>
-          </ul>
-        </TornPaperBox>
+        <h3>What Fellows Gain | Who Should Apply</h3>
+
+        <div class="card-grid two-up">
+          <article class="card">
+            <h4>What Fellows Gain</h4>
+            <ul>
+              {whatFellowsGain.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+
+          <article class="card">
+            <h4>Eligibility</h4>
+            <ul>
+              {eligibility.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+        </div>
       </div>
     </section>
 
-    <SectionBorder type="marker" backgroundColor="rainbow-green" flip />
+    <SectionBorder type="marker" backgroundColor="rainbow-green" />
 
     <section id="cta" class="ruled-bg">
       <div class="container">
-        <TornPaperBox>
-          <h3>Apply for the Creative Fellowship</h3>
-          <p>
-            Whether you're passionate about writing, photography, graphic
-            design, video production, or social media, there's a place for you
-            in the Creative Fellowship. Build your portfolio, develop your
-            voice, and help shape PRISM's message while growing as a leader and
-            storyteller.
-          </p>
-          <a href="/apply/creative-fellowship/" class="cta-button">
-            Apply Now
-          </a>
-        </TornPaperBox>
+        <h3>Apply for the Creative Fellowship</h3>
+        <p>
+          Whether you're passionate about writing, photography, graphic design,
+          video production, or social media, there's a place for you in the
+          Creative Fellowship. Build your portfolio, develop your voice, and
+          help shape PRISM's message while growing as a leader and storyteller.
+        </p>
+        <a href="/apply/creative-fellowship/" class="cta-button">Apply Now</a>
       </div>
     </section>
-
-    <SectionBorder type="marker" backgroundColor="rainbow-green" />
   </main>
 
-  <style>
+  <style lang="scss">
     .page-content {
       background-color: var(--rainbow-green);
     }
@@ -233,124 +200,102 @@ const fellowshipRoles = [
       padding: 0 1rem;
     }
 
-    #staff {
-      padding: 4rem 0;
-      background-size: 2100px;
-
-      .content {
-        max-width: var(--lg);
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin: auto;
-        padding: 2rem 0;
-
-        article {
-          display: flex;
-          gap: 1rem;
-
-          .person {
-            display: flex;
-            flex-direction: column;
-
-            .portrait {
-              width: 220px;
-              height: 250px;
-              filter: var(--shadow);
-            }
-
-            .name {
-              white-space: nowrap;
-              font-family: var(--header-font);
-              text-align: center;
-            }
-          }
-
-          .description {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-
-            button {
-              background: var(--rainbow-green);
-              padding: 1rem;
-              font-weight: bold;
-              font-size: 1.25rem;
-            }
-
-            * {
-              margin: 0;
-            }
-          }
-        }
-      }
+    .lede {
+      font-size: 1.25rem;
+      text-align: center;
+      font-style: italic;
+      max-width: 640px;
+      margin: 1rem auto 0;
     }
 
-    #roles {
+    /* The intro's <section> is rendered inside TrackIntro.astro, so the scoped
+       rules above cannot reach it. The id is unique to this page, so a global
+       selector is the honest fix rather than a leak. */
+    :global(#about) {
       background-color: var(--rainbow-green);
-      padding: 4rem 0;
+      background-size: 2100px;
+    }
 
-      .roles-grid {
+    #roles,
+    #expectations {
+      background-color: var(--rainbow-green);
+      padding: 2rem 0;
+      /* color: var(--fg-color); */
+
+      h3 {
+        font-size: 3rem;
+      }
+
+      .card-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 1.5rem;
-        margin-top: 2rem;
+        max-width: var(--lg);
+        margin: 2rem auto 0;
+      }
 
-        article {
-          border: 2px solid var(--fg-color);
-          border-radius: var(--round-edge);
-          filter: var(--shadow);
-          background: var(--rainbow-green);
-          padding: 1.5rem;
+      .card-grid.two-up {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+
+      .card {
+        border: 2px solid var(--fg-color);
+        filter: var(--shadow);
+        background: var(--rainbow-green);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        color: var(--fg-color);
+
+        h4 {
+          margin: 0;
+          font-size: 1.5rem;
+        }
+
+        p {
+          margin: 0;
+        }
+
+        ul {
+          margin: 0;
+          padding-left: 1.25rem;
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
+          gap: 0.5rem;
+        }
+
+        .role-label {
+          align-self: flex-start;
+          background-color: var(--text-color);
           color: var(--fg-color);
+          font-family: var(--header-font);
+          font-weight: bold;
+          padding: 0.25rem 0.75rem;
+          border-radius: var(--round-edge);
+          text-transform: uppercase;
+          font-size: 0.875rem;
+        }
 
-          .role-label {
-            align-self: flex-start;
-            background-color: var(--text-color);
-            color: var(--fg-color);
-            font-family: var(--header-font);
-            font-weight: bold;
-            padding: 0.25rem 0.75rem;
-            border-radius: var(--round-edge);
-            text-transform: uppercase;
-            font-size: 0.875rem;
-          }
+        .count {
+          font-family: var(--header-font);
+          font-weight: bold;
+        }
 
-          .count {
-            font-weight: 600;
-            margin: 0;
-          }
-
-          .quota {
-            font-size: 1rem;
-            margin-top: auto;
-          }
+        .quota {
+          margin-top: auto;
+          font-size: 1rem;
+        }
+        /* TODO: figure out how to deal with quotas */
+        .count,
+        .quota {
+          display: none;
         }
       }
     }
 
     #expectations {
-      padding: 4rem 0;
-      background-size: 2100px;
-
-      .container {
-        display: flex;
-        justify-content: center;
-      }
-
-      h3 {
-        color: var(--text-color);
-      }
-
-      ul {
-        list-style: disc;
-        padding-left: 1.5rem;
-        color: var(--text-color);
-        line-height: 1.8;
-      }
+      padding-bottom: 6rem;
     }
 
     #cta {
@@ -359,11 +304,19 @@ const fellowshipRoles = [
 
       .container {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        max-width: var(--lg);
+
+        p {
+          font-size: 1.5rem;
+          text-align: center;
+        }
       }
 
       .cta-button {
         display: block;
+        margin-top: 1.5rem;
         background-color: var(--rainbow-green);
         color: var(--fg-color);
         padding: 1rem 2rem;
@@ -373,7 +326,6 @@ const fellowshipRoles = [
         text-align: center;
         text-decoration: none;
         transition: all 300ms;
-        margin-top: 1.5rem;
 
         &:hover {
           filter: brightness(110%);
