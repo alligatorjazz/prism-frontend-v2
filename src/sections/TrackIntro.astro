@@ -74,7 +74,7 @@ const {
 
     <div class="overview">
       <h3>{heading}</h3>
-      {description.split("\n").map((line) => <p>{line}</p>)}
+      <!-- {description.split("\n").map((line) => <p>{line}</p>)} -->
 
       {
         activities && activities.length > 0 && (
@@ -119,6 +119,7 @@ const {
     justify-content: center;
     gap: 0.75rem;
     text-align: center;
+    color: var(--bold-black);
     .portrait {
       transition: all 300ms;
     }

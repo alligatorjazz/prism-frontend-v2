@@ -43,11 +43,6 @@ export const globalRoutes: Route[] = [
         displayName: "Student Ambassador Program",
       },
       {
-        type: "internal",
-        path: "/contact-us",
-        displayName: "Contact Us",
-      },
-      {
         type: "external",
         url: "https://discord.gg/nHuWYXkpr6",
         displayName: "Discord",
@@ -73,6 +68,12 @@ export const globalRoutes: Route[] = [
       { type: "internal", path: "/learn", displayName: "Learn" },
     ],
   },
+  {
+    type: "internal",
+    path: "/contact-us",
+    displayName: "Contact Us",
+  },
+
   {
     type: "internal",
     path: "/donate",
