@@ -1,0 +1,135 @@
+---
+// src/sections/FitComparison.astro
+//
+// "What's the best fit for me?" - Volunteer vs Member, plus the connector
+// that carries the eye from Member down into the leadership programs.
+//
+// This section is the containment context the FlowArrows query, which is why
+// container-type: inline-size sits on the root. Removing it silently stops
+// the arrows from reorienting.
+
+import FlowArrow from "@components/FlowArrow.astro";
+
+const tiers = [
+  {
+    key: "volunteer",
+    heading: "Volunteer",
+    lead: "For people who can't commit, or aren't sure yet.",
+    body: "Volunteers participate in initiatives when they're available and don't make a specific commitment.",
+    note: "Training opportunities for volunteers are limited.",
+  },
+  {
+    key: "member",
+    heading: "Member",
+    lead: "For individuals that want to go deeper.",
+    body: "Members agree to volunteer at least once each month with a particular track and attend monthly All-Member meetings.",
+    note: "Members have access to more training and the opportunity to become track leaders, spearheading their own projects within PRISM.",
+  },
+];
+---
+
+<section class="fit-comparison">
+  <h2>What's the Best Fit for Me?</h2>
+
+  <div class="tiers">
+    {
+      tiers.map((tier, index) => (
+        <>
+          {index > 0 && (
+            <FlowArrow class="tier-arrow" angleWide="0deg" angleStacked="90deg" />
+          )}
+          <article class:list={["tier", tier.key]}>
+            <h3>{tier.heading}</h3>
+            <p class="lead">{tier.lead}</p>
+            <p>{tier.body}</p>
+            <p class="note">{tier.note}</p>
+          </article>
+        </>
+      ))
+    }
+  </div>
+
+  <!-- Points down-left at the leadership-programs heading below. -->
+  <div class="descent">
+    <FlowArrow class="descent-arrow" angleWide="135deg" angleStacked="90deg" />
+  </div>
+</section>
+
+<style lang="scss">
+  .fit-comparison {
+    /* The containment context the FlowArrows query. Do not remove. */
+    container-type: inline-size;
+
+    padding: 0 2rem 4rem;
+    max-width: var(--xl);
+    margin: 0 auto;
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin: 0 0 2.5rem;
+    }
+
+    .tiers {
+      display: grid;
+      /* volunteer | arrow | member */
+      grid-template-columns: 1fr auto 1fr;
+      align-items: start;
+      gap: 1.5rem 2rem;
+
+      .tier-arrow {
+        align-self: center;
+      }
+
+      .tier {
+        h3 {
+          margin: 0 0 0.75rem;
+          font-size: 1.5rem;
+          font-family: var(--handwriting);
+          text-align: center;
+        }
+
+        p {
+          margin: 0 0 0.75rem;
+          line-height: 1.6;
+        }
+
+        .lead {
+          font-weight: 600;
+        }
+
+        .note {
+          opacity: 0.8;
+        }
+      }
+    }
+
+    .descent {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 1rem;
+
+      .descent-arrow {
+        grid-column: 2;
+        justify-self: start;
+      }
+    }
+
+    /* Stacks: the tier arrow points down and the descent arrow straightens
+       out. Both are driven by the FlowArrow's own container query. */
+    @container (width < 48rem) {
+      .tiers {
+        grid-template-columns: 1fr;
+      }
+
+      .descent {
+        grid-template-columns: 1fr;
+
+        .descent-arrow {
+          grid-column: 1;
+          justify-self: center;
+        }
+      }
+    }
+  }
+</style>

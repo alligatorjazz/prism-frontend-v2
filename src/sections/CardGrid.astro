@@ -1,0 +1,78 @@
+---
+// src/sections/CardGrid.astro
+//
+// Generalised from LeadershipPrograms.astro: a heading, an optional intro,
+// and a responsive grid of Cards. Drives both rows on /get-involved.
+
+import Card from "@components/Card.astro";
+import type { CardData } from "@datatypes/card";
+
+type Props = {
+  /** Anchor id, e.g. "core-tracks". */
+  id?: string;
+  heading?: string;
+  intro?: string;
+  cards: CardData[];
+  /** Minimum card width before the grid reflows to fewer columns. */
+  minColumn?: string;
+  /** Any CSS colour. Defaults to the page background. */
+  background?: string;
+};
+
+const {
+  id,
+  heading,
+  intro,
+  cards,
+  minColumn = "320px",
+  background = "var(--bg-color)",
+} = Astro.props as Props;
+---
+
+<section
+  id={id}
+  class="card-grid"
+  style={`--grid-bg: ${background}; --min-column: ${minColumn};`}
+>
+  <div class="section-content">
+    {heading && <h2>{heading}</h2>}
+    {intro && <p class="intro">{intro}</p>}
+    <div class="cards">
+      {cards.map((card) => <Card {...card} />)}
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .card-grid {
+    padding: 4rem 2rem;
+    background: var(--grid-bg);
+    /* Text colour is inherited on purpose: the caller decides whether the
+       band this sits on is light or dark. */
+
+    .section-content {
+      max-width: var(--xl);
+      margin: 0 auto;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin: 0 0 1rem;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(var(--min-column), 1fr));
+      gap: 2rem;
+    }
+  }
+</style>

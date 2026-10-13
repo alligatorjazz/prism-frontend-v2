@@ -5,11 +5,40 @@ import Base from "@templates/Base.astro";
 import SectionBorder from "@components/SectionBorder.astro";
 import TornPaperBox from "@components/TornPaperBox.astro";
 import LadderOfEngagement from "@components/LadderOfEngagement.astro";
+import CardGrid from "@sections/CardGrid.astro";
+import FitComparison from "@sections/FitComparison.astro";
 import LeadershipPrograms from "@sections/LeadershipPrograms.astro";
+import type { CardData } from "@datatypes/card";
 import { faker } from "@faker-js/faker";
 
 // TODO: Replace with actual images from @assets/img/
 const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
+
+// Core tracks. Order follows the mockup: Outreach, Policy, People's Operations.
+// TODO: copy pending review against the Membership Plan (Updated August 2026).
+const coreTracks: CardData[] = [
+  {
+    title: "Outreach",
+    color: "var(--rainbow-orange)",
+    description:
+      "Mass outreach and harm reduction. Table at events, distribute resources, and hold the real conversations that connect people to PRISM.",
+    link: "/outreach",
+  },
+  {
+    title: "Policy",
+    color: "var(--rainbow-red)",
+    description:
+      "Advocacy and legislation. Turn community power into pressure on school boards and lawmakers.",
+    link: "/policy",
+  },
+  {
+    title: "People's Operations",
+    color: "var(--activist-aqua)",
+    description:
+      "Internal base-building. Steward our Discord, run phonebanks, do wellness checks, and recruit the next wave.",
+    link: "/people-ops",
+  },
+];
 ---
 
 <Base
@@ -75,149 +104,17 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
 
     <!-- Core Tracks -->
     <!-- Based on: Membership Model - Section 3: Core Track Pathways -->
-    <section id="core-tracks">
-      <div class="content">
-        <div class="intro">
-          <h2>Ways to Plug In!</h2>
-          <p>
-            PRISM membership is divided into different core tracks. Each track
-            offers distinct activities, skills development, and leadership
-            opportunities.
-          </p>
-        </div>
-        <div class="binder">
-          <div class="page ruled-bg">
-            <!-- insert new content in these divs -->
-            <!-- insert new content in these divs -->
-            <div class="page-content policy">
-              <header class="track-header">
-                <h3 class="track-title">Core Track: Policy</h3>
-                <p class="track-description">Advocacy &amp; Legislation</p>
-              </header>
-              <ul class="track-levels">
-                <li class="level tier-1">
-                  <h4 class="tier-name">Tier 1: Volunteer</h4>
-                  <p class="tier-description">
-                    Mobilized for action. Attends events, tabling, phone banks.
-                  </p>
-                  <p class="responsibilities">
-                    Signs petitions; presence at school board meetings.
-                  </p>
-                </li>
-                <li class="level tier-2">
-                  <h4 class="tier-name">Tier 2: Member</h4>
-                  <p class="tier-description">
-                    Actively engaged organizer. Attends All-Member Trainings and
-                    participates in a Core Track.
-                  </p>
-                  <p class="responsibilities">
-                    Delivers public testimony to lawmakers.
-                  </p>
-                </li>
-                <li class="level tier-3">
-                  <h4 class="tier-name">Tier 3: Leader</h4>
-                  <p class="tier-description">
-                    Takes ownership of initiatives. Mobilizes others, conducts
-                    peer 1:1s, hosts events, manages projects.
-                  </p>
-                  <p class="responsibilities">
-                    Power-mapping workshops; campaign oversight; Lobbying
-                    Captain.
-                  </p>
-                </li>
-              </ul>
-              <a href="/policy" class="learn-more button">Learn More</a>
-            </div>
+        <section class="core-tracks-band">
+      <CardGrid
+        id="core-tracks"
+        heading="Ways to Plug In!"
+        intro="PRISM membership is divided into different core tracks. Each track offers distinct activities, skills development, and leadership opportunities."
+        cards={coreTracks}
+        background="transparent"
+      />
 
-            <div class="page-content outreach">
-              <header class="track-header">
-                <h3 class="track-title">Core Track: Outreach</h3>
-                <p class="track-description">
-                  Mass Outreach &amp; Harm Reduction
-                </p>
-              </header>
-              <ul class="track-levels">
-                <li class="level tier-1">
-                  <h4 class="tier-name">Tier 1: Volunteer</h4>
-                  <p class="tier-description">
-                    Mobilized for action. Attends events, tabling, phone banks.
-                  </p>
-                  <p class="responsibilities">
-                    Boots on the ground at tabling; distributes resources and
-                    flyers.
-                  </p>
-                  <p class="gateway">
-                    Gateway: Quarterly Orientation OR 1:1 intake
-                  </p>
-                </li>
-                <li class="level tier-2">
-                  <h4 class="tier-name">Tier 2: Member</h4>
-                  <p class="tier-description">
-                    Actively engaged organizer. Attends All-Member Trainings and
-                    participates in a Core Track.
-                  </p>
-                  <p class="responsibilities">
-                    Designs connection spaces; deep organizing conversations at
-                    field events.
-                  </p>
-                  <p class="gateway">Gateway: 1:1 intake + track selection</p>
-                </li>
-                <li class="level tier-3">
-                  <h4 class="tier-name">Tier 3: Leader</h4>
-                  <p class="tier-description">
-                    Takes ownership of initiatives. Mobilizes others, conducts
-                    peer 1:1s, hosts events, manages projects.
-                  </p>
-                  <p class="responsibilities">
-                    Tabling Lead; co-creates social events; trains new
-                    volunteers.
-                  </p>
-                </li>
-              </ul>
-              <a href="/outreach" class="learn-more button">Learn More</a>
-            </div>
-
-            <div class="page-content people-ops">
-              <header class="track-header">
-                <h3 class="track-title">Core Track: People Ops</h3>
-                <p class="track-description">Internal Base-Building</p>
-              </header>
-              <ul class="track-levels">
-                <li class="level empty-level invisible" aria-hidden="true"></li>
-                <li class="level tier-2">
-                  <h4 class="tier-name">Tier 2: Member</h4>
-                  <p class="tier-description">
-                    Actively engaged organizer. Attends All-Member Trainings and
-                    participates in a Core Track.
-                  </p>
-                  <p class="responsibilities">
-                    Discord stewardship; phonebanks; wellness checks;
-                    recruitment.
-                  </p>
-                  <p class="gateway">Gateway: 1:1 intake + track selection</p>
-                </li>
-                <li class="level tier-3">
-                  <h4 class="tier-name">Tier 3: Leader</h4>
-                  <p class="tier-description">
-                    Takes ownership of initiatives. Mobilizes others, conducts
-                    peer 1:1s, hosts events, manages projects.
-                  </p>
-                  <p class="responsibilities">
-                    Conducts intake 1:1s; co-facilitates Orientations;
-                    rapid-response lead.
-                  </p>
-                </li>
-              </ul>
-              <a href="/people-ops" class="learn-more button">Learn More</a>
-            </div>
-          </div>
-          <nav class="tabs">
-            <button class="outreach" type="button">Outreach</button>
-            <button class="policy" type="button">Policy</button>
-            <button class="people-ops" type="button">People Ops</button>
-          </nav>
-        </div>
-      </div>
+      <!-- Volunteer vs Member, and the arrow into the leadership programs -->
+      <FitComparison />
     </section>
     <SectionBorder backgroundColor="rainbow-purple" type="marker" />
 
@@ -309,152 +206,11 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
     }
   }
 
-  #core-tracks {
+
+  /* The band that both the track grid and the fit comparison sit on. */
+  .core-tracks-band {
     background-color: var(--rainbow-purple);
-    &,
-    & * {
-      transition: all 300ms;
-    }
-
-    .content {
-      filter: var(--shadow);
-      padding: 6rem 2rem;
-      max-width: var(--xl);
-      margin: auto;
-      display: flex;
-      align-items: stretch;
-      gap: 0.25rem;
-    }
-
-    .intro {
-      width: 50%;
-      padding: 1rem;
-      border-radius: 10px 0 0 10px;
-      background-color: var(--fg-color);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      h2 {
-        /* font-family: var(--handwriting); */
-        font-style: italic;
-        font-size: 3rem;
-      }
-      p {
-        font-size: 1.5rem;
-      }
-    }
-
-    .binder {
-      width: 50%;
-      background-color: var(--fg-color);
-      padding: 1rem;
-      border-radius: 0 10px 10px 0;
-      .page {
-        padding: 2rem;
-      }
-
-      /* All pages sit on the one sheet; only the open page is rendered. */
-      .page-content {
-        display: none;
-      }
-
-      /* Until the script marks the sheet ready (or if JS never runs), the
-         first page in the markup is the one on screen. */
-      .page:not([data-ready]) .page-content:first-child {
-        display: block;
-      }
-
-      /* Set by the script at the bottom of this file. */
-      .page-content.is-active {
-        display: block;
-      }
-      /* The open page's tab reads as pulled forward; the others recede. */
-      /* filter: brightness(0.85); */
-      /* &:hover { */
-      /*   filter: brightness(1); */
-      /* } */
-      /* &.is-active { */
-      /*   filter: brightness(1.1); */
-      /*   transform: translateY(-2px); */
-      /* } */
-
-      .page-content {
-        &.outreach {
-          .learn-more {
-            background-color: var(--rainbow-orange);
-          }
-        }
-        &.policy {
-          .learn-more {
-            background-color: var(--rainbow-red);
-          }
-        }
-        &.people-ops {
-          .learn-more {
-            background-color: var(--rainbow-blue);
-          }
-        }
-      }
-      .page,
-      nav {
-        filter: var(--shadow-light);
-      }
-
-      nav {
-        display: flex;
-        width: 100%;
-        gap: 0.125rem;
-        button {
-          flex: 1;
-          border-radius: 0 0 10px 10px;
-          &.outreach {
-            background-color: var(--rainbow-orange);
-          }
-          &.policy {
-            background-color: var(--rainbow-red);
-          }
-          &.people-ops {
-            background-color: var(--rainbow-blue);
-          }
-        }
-      }
-
-      .page-content {
-        /* font-family: var(--cursive); */
-        .track-title {
-          font-size: 2rem;
-          font-family: var(--handwriting);
-          text-align: center;
-        }
-
-        .track-description {
-          /* font-family: var(--cursive); */
-          text-align: center;
-        }
-
-        ul {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-
-        ul.track-levels {
-          .tier-name {
-            font-size: 1.25rem;
-            font-family: var(--handwriting);
-          }
-        }
-      }
-
-      .learn-more {
-        background-color: var(--rainbow-blue);
-
-        width: min-content;
-        white-space: nowrap;
-        margin: auto;
-      }
-    }
+    color: var(--witty-white);
   }
 
   .final-cta {
@@ -523,156 +279,3 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
     }
   }
 </style>
-
-<script>
-  /**
-   * Page switching for the "Ways to Plug In!" core-track binder.
-   *
-   * The markup is the whole contract — no data attributes required:
-   *
-   *   .binder
-   *     .page                  the one sheet that is on screen
-   *       .page-content.<key>  a page per tab, named by its extra class
-   *     nav.tabs
-   *       button.<key>         opens the page that shares its class
-   *
-   * Adding a track is therefore markup-only: add a `.page-content.<key>` and a
-   * `button.<key>` and this picks them up. The first `.page-content` in the
-   * markup is the default page (or `data-default="<key>"` on `.page`, if you
-   * ever add that attribute).
-   */
-
-  let binderCount = 0;
-
-  /** The `.page-content` children of a sheet, in markup order. */
-  function pagesOf(sheet: HTMLElement) {
-    return Array.from(
-      sheet.querySelectorAll<HTMLElement>(":scope > .page-content"),
-    );
-  }
-
-  /** The tab buttons of a binder's nav, in markup order. */
-  function tabsOf(binder: HTMLElement) {
-    return Array.from(
-      binder.querySelectorAll<HTMLButtonElement>("nav.tabs button"),
-    );
-  }
-
-  /** The first class an element shares with `candidates` — e.g. "policy". */
-  function keyOf(element: HTMLElement, candidates: Set<string>) {
-    return Array.from(element.classList).find((name) => candidates.has(name));
-  }
-
-  function initBinder(binder: HTMLElement) {
-    const sheet = binder.querySelector<HTMLElement>(".page");
-    const tabList = binder.querySelector<HTMLElement>("nav.tabs");
-    if (!sheet || !tabList) return;
-
-    // `data-ready` releases the CSS fallback that keeps the first page visible
-    // without JS, and makes a second run (client-side navigation) a no-op.
-    if (sheet.hasAttribute("data-ready")) return;
-
-    const pages = pagesOf(sheet);
-    const tabs = tabsOf(binder);
-    if (!pages.length || !tabs.length) return;
-
-    // Pair each page with the tab that shares its key class. Both directions
-    // are derived from the markup, so the track names are never hard-coded.
-    const tabClasses = new Set(
-      tabs.flatMap((tab) => Array.from(tab.classList)),
-    );
-
-    const pagesByKey = new Map<string, HTMLElement>();
-    for (const page of pages) {
-      const key = keyOf(page, tabClasses);
-      if (key) pagesByKey.set(key, page);
-    }
-
-    const tabsByKey = new Map<string, HTMLButtonElement>();
-    for (const tab of tabs) {
-      const key = keyOf(tab, new Set(pagesByKey.keys()));
-      if (key) tabsByKey.set(key, tab);
-    }
-
-    if (!pagesByKey.size) return;
-
-    // Promote the plain nav of buttons into a tablist and wire each tab to its
-    // page. The ids are generated here so the markup stays attribute-free.
-    const scope = `binder-${++binderCount}`;
-    tabList.setAttribute("role", "tablist");
-
-    for (const [key, tab] of tabsByKey) {
-      const page = pagesByKey.get(key);
-      if (!page) continue;
-
-      tab.id = `${scope}-tab-${key}`;
-      tab.setAttribute("role", "tab");
-      tab.setAttribute("aria-controls", `${scope}-page-${key}`);
-
-      page.id = `${scope}-page-${key}`;
-      page.setAttribute("role", "tabpanel");
-      page.setAttribute("aria-labelledby", tab.id);
-    }
-
-    let currentKey = "";
-
-    /** Turn the sheet to the page named `key`. */
-    function showPage(key: string, moveFocus = false) {
-      if (!pagesByKey.has(key) || key === currentKey) return;
-      currentKey = key;
-
-      for (const [pageKey, page] of pagesByKey) {
-        page.classList.toggle("is-active", pageKey === key);
-      }
-
-      for (const [tabKey, tab] of tabsByKey) {
-        const open = tabKey === key;
-        tab.classList.toggle("is-active", open);
-        tab.setAttribute("aria-selected", String(open));
-        // Roving tabindex: only the open page's tab is in the tab order.
-        tab.tabIndex = open ? 0 : -1;
-      }
-
-      if (moveFocus) tabsByKey.get(key)?.focus();
-
-      // Keeps the URL in sync so a single page can be linked to directly.
-      // Delete this line if the binder shouldn't touch the address bar.
-      history.replaceState(null, "", `#${key}`);
-    }
-
-    for (const [key, tab] of tabsByKey) {
-      tab.addEventListener("click", () => showPage(key));
-    }
-
-    /** The tab an arrow / Home / End key asks for, if any. */
-    function keyFromKeydown(event: KeyboardEvent, keys: string[]) {
-      const index = keys.indexOf(currentKey);
-      if (event.key === "ArrowRight") return keys[(index + 1) % keys.length];
-      if (event.key === "ArrowLeft")
-        return keys[(index - 1 + keys.length) % keys.length];
-      if (event.key === "Home") return keys[0];
-      if (event.key === "End") return keys[keys.length - 1];
-      return undefined;
-    }
-
-    // Arrow keys move between tabs, as a tablist is expected to.
-    tabList.addEventListener("keydown", (event) => {
-      // Tab order (not page order) — the two differ in this binder.
-      const next = keyFromKeydown(event, Array.from(tabsByKey.keys()));
-      if (!next) return;
-      event.preventDefault();
-      showPage(next, true);
-    });
-
-    // Open the page the URL points at, else the first page in the markup.
-    const fromHash = window.location.hash.replace(/^#/, "");
-    const initial = pagesByKey.has(fromHash)
-      ? fromHash
-      : (sheet.dataset.default ?? Array.from(pagesByKey.keys())[0]);
-
-    sheet.setAttribute("data-ready", "");
-    showPage(initial);
-  }
-
-  document.querySelectorAll<HTMLElement>(".binder").forEach(initBinder);
-</script>
