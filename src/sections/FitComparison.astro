@@ -9,21 +9,19 @@
 // the arrows from reorienting.
 
 import FlowArrow from "@components/FlowArrow.astro";
-
+import TornPaperBox from "@components/TornPaperBox.astro";
 const tiers = [
   {
     key: "volunteer",
     heading: "Volunteer",
-    lead: "For people who can't commit, or aren't sure yet.",
-    body: "Volunteers participate in initiatives when they're available and don't make a specific commitment.",
-    note: "Training opportunities for volunteers are limited.",
+    lead: "For folks getting started with activism.",
+    body: "Volunteers participate in actions and initiatives when you're able to.",
   },
   {
     key: "member",
     heading: "Member",
     lead: "For individuals that want to go deeper.",
-    body: "Members agree to volunteer at least once each month with a particular track and attend monthly All-Member meetings.",
-    note: "Members have access to more training and the opportunity to become track leaders, spearheading their own projects within PRISM.",
+    body: "Members show up at least once each month and attend monthly All-Member meetings.",
   },
 ];
 ---
@@ -36,31 +34,42 @@ const tiers = [
       tiers.map((tier, index) => (
         <>
           {index > 0 && (
-            <FlowArrow class="tier-arrow" angleWide="0deg" angleStacked="90deg" />
+            <FlowArrow
+              class="tier-arrow side-arrow"
+              angleWide="0deg"
+              angleStacked="70deg"
+              size={"8rem"}
+            />
           )}
-          <article class:list={["tier", tier.key]}>
-            <h3>{tier.heading}</h3>
-            <p class="lead">{tier.lead}</p>
-            <p>{tier.body}</p>
-            <p class="note">{tier.note}</p>
-          </article>
+          <TornPaperBox>
+            <article class:list={["tier ruled-bg", tier.key]}>
+              <h3>{tier.heading}</h3>
+              <p class="lead">{tier.lead}</p>
+              <p>{tier.body}</p>
+            </article>
+          </TornPaperBox>
         </>
       ))
     }
   </div>
 
-  <!-- Points down-left at the leadership-programs heading below. -->
   <div class="descent">
-    <FlowArrow class="descent-arrow" angleWide="135deg" angleStacked="90deg" />
+    <FlowArrow
+      class="descent-arrow"
+      arrowType={2}
+      angleWide="0deg"
+      flip
+      angleStacked="0deg"
+      size={"12rem"}
+    />
   </div>
 </section>
 
 <style lang="scss">
-  .fit-comparison {
-    /* The containment context the FlowArrows query. Do not remove. */
-    container-type: inline-size;
+  @use "../styles/utils" as *;
 
-    padding: 0 2rem 4rem;
+  .fit-comparison {
+    padding: 0 2rem 8rem;
     max-width: var(--xl);
     margin: 0 auto;
 
@@ -71,20 +80,26 @@ const tiers = [
     }
 
     .tiers {
-      display: grid;
-      /* volunteer | arrow | member */
-      grid-template-columns: 1fr auto 1fr;
-      align-items: start;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       gap: 1.5rem 2rem;
-
+      @include breakpoint-up(md) {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        grid-auto-rows: 1fr;
+      }
       .tier-arrow {
         align-self: center;
       }
 
       .tier {
+        height: 100%;
+        color: var(--bold-black);
+        padding: 1rem;
         h3 {
           margin: 0 0 0.75rem;
-          font-size: 1.5rem;
+          font-size: 1.75rem;
           font-family: var(--handwriting);
           text-align: center;
         }
@@ -92,9 +107,13 @@ const tiers = [
         p {
           margin: 0 0 0.75rem;
           line-height: 1.6;
+          text-align: center;
         }
 
         .lead {
+          font-family: var(--cursive);
+          font-size: 1.25rem;
+          text-align: center;
           font-weight: 600;
         }
 
@@ -103,33 +122,26 @@ const tiers = [
         }
       }
     }
+  }
 
-    .descent {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      margin-top: 1rem;
-
-      .descent-arrow {
-        grid-column: 2;
-        justify-self: start;
-      }
+  .descent {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    & :global(.descent-arrow) {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      z-index: 3;
     }
-
-    /* Stacks: the tier arrow points down and the descent arrow straightens
-       out. Both are driven by the FlowArrow's own container query. */
-    @container (width < 48rem) {
-      .tiers {
-        grid-template-columns: 1fr;
-      }
-
-      .descent {
-        grid-template-columns: 1fr;
-
-        .descent-arrow {
-          grid-column: 1;
-          justify-self: center;
-        }
-      }
+    @include breakpoint-up(md) {
+      justify-content: center;
+      margin-left: 6rem;
+    }
+  }
+  @include breakpoint-up(md) {
+    .flow-arrow {
+      display: none;
     }
   }
 </style>

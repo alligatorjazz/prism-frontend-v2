@@ -1,32 +1,21 @@
 ---
+import arrow1 from "@assets/img/arrow1.png";
+import arrow2 from "@assets/img/arrow2.png";
+import arrow3 from "@assets/img/arrow3.png";
+import arrow4 from "@assets/img/arrow4.png";
+import arrow5 from "@assets/img/arrow5.png";
+
+import { Image } from "astro:assets";
 // src/components/FlowArrow.astro
-//
-// A CSS-only connector arrow. The glyph is drawn once, natively pointing
-// right, and re-aimed with a single rotate value:
-//
-//   0deg = right    90deg = down    135deg = down-left
-//
-// The value flips inside a CONTAINER query, so the arrow reorients when the
-// layout it lives in stacks, rather than when the viewport happens to cross
-// a breakpoint. The classic failure that avoids: a component dropped into a
-// narrow column while the viewport is still wide.
-//
-// PARENT REQUIREMENT: the arrow queries its nearest ancestor container, so
-// that ancestor must declare container-type: inline-size. Without it the
-// @container rule below can never match and the arrow silently stays at
-// angleWide. FitComparison.astro sets it. If the arrow ever stops
-// reorienting, look for a missing container first.
-//
-// To key off the viewport instead, replace the @container block with:
-//   @media (max-width: 48rem) { .flow-arrow { --arrow-angle: var(--arrow-angle-stacked, 90deg); } }
 
 type Props = {
   /** Rotation while the layout is side by side. 0deg points right. */
+  arrowType?: 1 | 2 | 3 | 4 | 5;
   angleWide?: string;
+  flip?: boolean;
   /** Rotation once the container is narrower than the breakpoint. */
   angleStacked?: string;
-  /** Optional caption under the arrow. */
-  label?: string;
+  size?: string;
   /** Forwarded from the call site so callers can position the arrow. */
   class?: string;
 };
@@ -34,75 +23,44 @@ type Props = {
 const {
   angleWide = "0deg",
   angleStacked = "90deg",
-  label,
+  size = "8rem",
+  arrowType = 4,
+  flip = false,
   class: className,
 } = Astro.props as Props;
 ---
 
 <div
-  class:list={["flow-arrow", className]}
-  style={`--arrow-angle-wide: ${angleWide}; --arrow-angle-stacked: ${angleStacked};`}
+  class:list={["flow-arrow", flip ? "flip" : "", className]}
+  style={`--arrow-angle-wide: ${angleWide}; --arrow-angle-stacked: ${angleStacked}; --arrow-size: ${size};`}
 >
-  <svg
-    class="flow-arrow-glyph"
-    viewBox="0 0 64 32"
-    fill="none"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <!-- Shaft. The slight arc keeps the hand-drawn feel of the mockup. -->
-    <path
-      d="M5 18c14 4 28 4 43-2"
-      stroke="currentColor"
-      stroke-width="3"
-      stroke-linecap="round"></path>
-    <!-- Head -->
-    <path
-      d="M38 5l13 10-13 9"
-      stroke="currentColor"
-      stroke-width="3"
-      stroke-linecap="round"
-      stroke-linejoin="round"></path>
-  </svg>
-  {label && <p class="flow-arrow-label">{label}</p>}
+  <Image
+    src={[arrow1, arrow2, arrow3, arrow4, arrow5][arrowType - 1]}
+    alt=""
+    format="webp"
+    inferSize
+  />
 </div>
 
 <style lang="scss">
+  @use "../styles/utils" as *;
   .flow-arrow {
-    --arrow-angle: var(--arrow-angle-wide, 0deg);
+    --arrow-angle: var(--arrow-angle-stacked, 90deg);
+    @include breakpoint-up(md) {
+      --arrow-angle: var(--arrow-angle-wide, 0deg);
+    }
+    width: var(--arrow-size);
+    height: var(--arrow-size);
 
-    display: grid;
-    justify-items: center;
-    gap: 0.5rem;
-
-    .flow-arrow-glyph {
-      display: block;
-      width: min(100%, 8rem);
-      /* height:auto scales the glyph uniformly, so the stroke stays
-         proportional. Only reach for vector-effect="non-scaling-stroke" if
-         you switch to a stretched (preserveAspectRatio="none") layout. */
-      height: auto;
+    img {
+      width: 100%;
+      height: 100%;
       rotate: var(--arrow-angle);
-      transition: rotate 300ms ease;
+      object-fit: contain;
     }
 
-    .flow-arrow-label {
-      margin: 0;
-      text-align: center;
-      font-size: 1.1rem;
-    }
-  }
-
-  /* The arrow's own container, not the viewport. */
-  @container (width < 48rem) {
-    .flow-arrow {
-      --arrow-angle: var(--arrow-angle-stacked, 90deg);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .flow-arrow .flow-arrow-glyph {
-      transition: none;
+    &.flip {
+      transform: scaleX(-1);
     }
   }
 </style>
