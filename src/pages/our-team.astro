@@ -43,7 +43,6 @@ const staff: Member[] = [
     title: "Executive Director",
     pronouns: "He/Him",
     bio: `A staunch advocate for LGBTQ+ rights and sexual health education, Maxx is the Executive Director of PRISM. Maxx recently earned his degree in Business Administration from the University of Florida, and is now pursuing a Master of Public Policy at the University of Miami. He is also an active creator on TikTok, where he educates on many of the same topics that PRISM addresses.`,
-    quote: `In his free time, Maxx enjoys singing and graphic design.`,
   },
   {
     slug: "hannah-neuman",
@@ -52,7 +51,6 @@ const staff: Member[] = [
     title: "Development & Operations Director",
     pronouns: "They/She",
     bio: `Hannah is a genderqueer lesbian from Jacksonville, FL with a BSc from Florida State University. They have an extensive background in education and youth empowerment, and a deep passion for community-building. Over the last three years, they have co-directed two small non-profits focused on uplifting houseless individuals and local artists by expanding access to vital resources. Hannah currently plans to pursue a Masters of Social Work in 2026. As a Jewish member of the queer community, they are dedicated to Collective Liberation—actively uplifting Palestinian voices in their fight for freedom at every opportunity. In addition to advocacy work,  In their free time, you can often find them taking a long hike through nature, working on a magazine collage, or performing with their indie-rock band "No Parts".`,
-    quote: `In addition to advocacy work, Hannah enjoys practicing astrology, tarot, art, and vegan cooking.`,
   },
   {
     slug: "avion-goordeen",
@@ -61,7 +59,6 @@ const staff: Member[] = [
     pronouns: "He/Him",
     photo: avionPhoto,
     bio: `Avion is a bisexual man and a first-generation immigrant from the Caribbean islands of Trinidad and Tobago. He has a Master's in Ocean Engineering from Florida Atlantic University and has been involved in LGBTQ+ activism and leadership since 2018. This includes working with CompassGLCC and being a member of the board of directors of Night Runners WPB. In his free time, Avion enjoys paddleboarding, photography and is currently a fan of the manga, One Piece.`,
-    quote: `In his free time, Avion enjoys paddleboarding, photography and is currently a fan of the manga, One Piece.`,
   },
   {
     slug: "alexander-puga",
@@ -70,7 +67,6 @@ const staff: Member[] = [
     pronouns: "He/Him",
     photo: alexPhoto,
     bio: `A Miami-born creative with a passion for storytelling that uplifts and represents marginalized communities. With a background in film, content creation, and brand strategy, Alex brings bold visuals and culturally rooted narratives to life. He has led campaigns for local businesses, fashion brands, and queer initiatives. As Content Creation Director at PRISM, Alex is here to celebrate queer voices and create space for joy and identity across every platform.`,
-    quote: `Outside of work, you'll find him biking around the city, sweating through a workout, singing, or hanging with his fiancé and their two pups, Nino and Winston.`,
   },
   {
     slug: "mv-chacon-briceno",
@@ -79,7 +75,6 @@ const staff: Member[] = [
     pronouns: "They/She/He",
     photo: mvPhoto,
     bio: `MariaVictoria is a queer, second-generation Venezuelan immigrant, born and raised in Miami, Florida. They earned a Bachelor of Arts in Political Science with a Double Minor in Public Administration and Anthropology from Florida International University. MV has been advocating and organizing in their community since 2018 on issues such as gun violence prevention, education equity, youth civic engagement, LGBTQ+ rights, and economic justice. They pride themselves on being a continuous student to the practice of community organizing and are passionate about building relationships and developing the skills of their peers.`,
-    quote: `When MV isn't organizing you can find them salsa dancing, reading in a hammock, or having philosophical conversations with anyone who will listen.`,
   },
   {
     slug: "auxmary-valdez",
@@ -104,7 +99,6 @@ const staff: Member[] = [
     pronouns: "He/Him",
     photo: damianPhoto,
     bio: `Damian Thomas is a full-stack web developer who has been working in and around progressive politics since 2017. Off the clock, he's a history nerd, fighting game enthusiast, and musician.`,
-    quote: `Off the clock, he's a history nerd, fighting game enthusiast, and musician.`,
   },
 ];
 
@@ -263,8 +257,6 @@ const contents = [
           </header>
 
           <p class="bio-text">{member.bio}</p>
-
-          {member.quote && <blockquote>{member.quote}</blockquote>}
 
           <button
             class="close"
