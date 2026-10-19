@@ -67,9 +67,12 @@ const {
           width: 300,
           height: 300,
         }}
-        label={name}
-      />
-      <p class="lead-title">{title}</p>
+      >
+        <div class="label">
+          <span>{name}</span>
+          <span>{title}</span>
+        </div>
+      </Polaroid>
     </a>
 
     <div class="overview">
@@ -151,6 +154,17 @@ const {
     font-family: var(--header-font);
     font-size: 1.25rem;
     font-weight: 700;
+  }
+
+  .label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    & > span:last-child {
+      font-weight: normal;
+      font-size: 1rem;
+    }
   }
 
   .overview {
