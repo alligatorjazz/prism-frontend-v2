@@ -20,7 +20,7 @@ const siteMetadata = await getSiteMetadata();
 const { pageMetadata, ...props } = Astro.props;
 
 const backgrounds = {
-  "ruled-bg": `url(${(await getImage({ src: ruledBg, format: "webp" })).src})`,
+  "ruled-bg": `url(${(await getImage({ src: ruledBg, format: "webp", quality: "low" })).src})`,
 };
 ---
 

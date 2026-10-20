@@ -114,7 +114,7 @@ export function EventList({ events, error, eventsPerPage = 3 }: Props) {
     <div data-uid={uid} className="event-list" data-page="1">
       <ul>
         {pageEvents.map(({ title, date, location, image, link, source }) => (
-          <li className="rounded" key={`${title}-${date}-${source}`}>
+          <li key={`${title}-${date}-${source}`}>
             {image && (
               <div className="image">
                 <img
@@ -132,7 +132,6 @@ export function EventList({ events, error, eventsPerPage = 3 }: Props) {
             </div>
             <div className="learn-more">
               <a
-                className="rounded"
                 href={link || "#"}
                 target={link ? "_blank" : undefined}
                 rel={link ? "noopener noreferrer" : undefined}
@@ -143,7 +142,7 @@ export function EventList({ events, error, eventsPerPage = 3 }: Props) {
           </li>
         ))}
       </ul>
-      <div className="controls rounded">
+      <div className="controls">
         <button onClick={() => previousPage()}>{"<"}</button>
         {pageSlots.map((slot, index) =>
           slot === "..." ? (
