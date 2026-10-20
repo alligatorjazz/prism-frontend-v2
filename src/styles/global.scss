@@ -83,6 +83,22 @@ div.image.cover>img {
   transition: transform 0.2s ease;
   filter: drop-shadow(1px 1px 1px var(--text-color));
   padding: 1rem;
+  position: relative;
+  border-radius: 0 10% 0 0;
+}
+
+.post-it:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-width: 0 16px 16px 0;
+  border-style: solid;
+  border-color: var(--youth-yellow-2) rgba(255, 0, 0, 0.01);
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
+
 }
 
 .invisible {
