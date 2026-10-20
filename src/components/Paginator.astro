@@ -6,21 +6,22 @@ import type { HTMLAttributes } from "astro/types";
 interface Props extends HTMLAttributes<"section"> {
   totalPages: number;
   startingPage?: number;
+  size: "sm" | "md" | "lg";
 }
 
 const paginatorId = crypto.randomUUID();
 
-const { totalPages, startingPage, ...props } = Astro.props;
+const { totalPages, startingPage, size = "lg", ...props } = Astro.props;
 ---
 
 <section {...props}>
   <div class="page-slot" data-paginator={`${paginatorId}-page-slot`}>
     <slot />
   </div>
-  <nav class="controls">
+  <nav class:list={["controls", size]}>
     <button
       data-paginator={`${paginatorId}-previous`}
-      class="prev"
+      class="prev arrow-button"
       data-page="-1"
     >
       <Image src={arrow} alt="Previous Page" />
@@ -34,7 +35,11 @@ const { totalPages, startingPage, ...props } = Astro.props;
       > /{" "}
       <span class="total">{totalPages ?? 1}</span>
     </span>
-    <button data-paginator={`${paginatorId}-next`} class="next" data-page="+1">
+    <button
+      data-paginator={`${paginatorId}-next`}
+      class="next arrow-button"
+      data-page="+1"
+    >
       <Image src={arrow} class="flip" alt="Previous Page" />
     </button>
   </nav>
@@ -48,7 +53,6 @@ const { totalPages, startingPage, ...props } = Astro.props;
   nav.controls {
     display: flex;
     justify-content: center;
-    font-size: 4rem;
     gap: 1rem;
     margin: auto;
 
@@ -82,6 +86,33 @@ const { totalPages, startingPage, ...props } = Astro.props;
       &:last-child {
         background-color: green;
       }
+    }
+  }
+
+  .arrow-button {
+    width: 8rem;
+    height: 8rem;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  nav.controls.lg {
+    font-size: 4rem;
+  }
+  nav.controls.md {
+    font-size: 3rem;
+    .arrow-button {
+      width: 8rem;
+    }
+  }
+
+  nav.controls.sm {
+    font-size: 2rem;
+    .arrow-button {
+      width: 6rem;
     }
   }
 </style>

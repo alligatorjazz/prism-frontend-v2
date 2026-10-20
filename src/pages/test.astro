@@ -1,6 +1,5 @@
 ---
 import Paginator from "@components/Paginator.astro";
-import PostIt from "@components/PostIt.astro";
 import Base from "@templates/Base.astro";
 ---
 
@@ -16,7 +15,7 @@ import Base from "@templates/Base.astro";
   class={"page-content"}
 >
   <main>
-    <Paginator totalPages={3}>
+    <Paginator size={"sm"} totalPages={3}>
       <div>
         <ul>
           {new Array(9).fill(null).map(() => <li class="post-it">item</li>)}
@@ -39,7 +38,7 @@ import Base from "@templates/Base.astro";
 
 <style>
   main {
-    padding: 8rem;
+    /* padding: 8rem; */
   }
   ul {
     display: grid;
