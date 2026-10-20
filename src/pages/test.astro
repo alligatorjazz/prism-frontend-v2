@@ -1,0 +1,59 @@
+---
+import Paginator from "@components/Paginator.astro";
+import PostIt from "@components/PostIt.astro";
+import Base from "@templates/Base.astro";
+---
+
+<Base
+  pageMetadata={{
+    title: "Partners",
+    description:
+      "PRISM prides itself in being a collaborative member of the LGBT community in South Florida. See some of our partners below!",
+    type: "website",
+    image: "https://picsum.photos/200",
+    "image:alt": "test",
+  }}
+  class={"page-content"}
+>
+  <main>
+    <Paginator totalPages={3}>
+      <div>
+        <ul>
+          {new Array(9).fill(null).map(() => <li class="post-it">item</li>)}
+        </ul>
+      </div>
+      <div>
+        <ul>
+          {new Array(9).fill(null).map(() => <li class="post-it">item</li>)}
+        </ul>
+      </div>
+
+      <div>
+        <ul>
+          {new Array(9).fill(null).map(() => <li class="post-it">item</li>)}
+        </ul>
+      </div>
+    </Paginator>
+  </main>
+</Base>
+
+<style>
+  main {
+    padding: 8rem;
+  }
+  ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      width: 12rem;
+      height: 12rem;
+    }
+  }
+</style>

@@ -2,22 +2,27 @@
 import { Image } from "astro:assets";
 import arrow from "@assets/img/pagination-arrow.png";
 import type { HTMLAttributes } from "astro/types";
-import { uuid } from "astro:schema";
 
 interface Props extends HTMLAttributes<"section"> {
   totalPages: number;
   startingPage?: number;
 }
 
-const paginatorId = uuid();
+const paginatorId = crypto.randomUUID();
 
 const { totalPages, startingPage, ...props } = Astro.props;
 ---
 
 <section {...props}>
-  <div class="content"></div>
+  <div class="page-slot" data-paginator={`${paginatorId}-page-slot`}>
+    <slot />
+  </div>
   <nav class="controls">
-    <button class="prev" data-page="-1" disabled>
+    <button
+      data-paginator={`${paginatorId}-previous`}
+      class="prev"
+      data-page="-1"
+    >
       <Image src={arrow} alt="Previous Page" />
     </button>
 
@@ -29,21 +34,20 @@ const { totalPages, startingPage, ...props } = Astro.props;
       > /{" "}
       <span class="total">{totalPages ?? 1}</span>
     </span>
-    <button class="next" data-page="+1" disabled={totalPages <= 1}>
+    <button data-paginator={`${paginatorId}-next`} class="next" data-page="+1">
       <Image src={arrow} class="flip" alt="Previous Page" />
     </button>
   </nav>
 </section>
 
-<style>
+<style define:vars={{ totalPages }}>
   section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    overflow: hidden;
   }
 
   nav.controls {
     display: flex;
+    justify-content: center;
     font-size: 4rem;
     gap: 1rem;
     margin: auto;
@@ -59,33 +63,98 @@ const { totalPages, startingPage, ...props } = Astro.props;
       transform: scaleX(-1);
     }
   }
+
+  .page-slot {
+    display: flex;
+    flex-direction: row;
+    width: calc(var(--totalPages) * 100%);
+
+    transition: all 300ms;
+    & > :global(*) {
+      width: 100%;
+      height: 100%;
+      flex: 1;
+
+      background-color: yellow;
+      &:first-child {
+        background-color: red;
+      }
+      &:last-child {
+        background-color: green;
+      }
+    }
+  }
 </style>
 
 <script define:vars={{ paginatorId, totalPages }} is:inline>
-  import { clamp } from "@lib/index";
+  const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
-  const currentPage = document.querySelector(
-    `span[data-paginator=${paginatorId}-currentPage]`,
+  console.log("initializing paginator ", paginatorId);
+
+  const currentPageElement = document.querySelector(
+    `span[data-paginator="${paginatorId}-currentPage"]`,
   );
 
-  if (!currentPage) {
+  const pageSlot = document.querySelector(
+    `div[data-paginator="${paginatorId}-page-slot"]`,
+  );
+  const nextButton = document.querySelector(
+    `button[data-paginator="${paginatorId}-next"]`,
+  );
+  const previousButton = document.querySelector(
+    `button[data-paginator="${paginatorId}-previous"]`,
+  );
+
+  if (!currentPageElement) {
     throw new Error(`Could not find currentPage element for ${paginatorId}`);
   }
 
-  currentPage.addEventListener("change", () => {
-    currentPage.innerHTML = `${currentPage.dataset["page"]}`;
-  });
+  function getCurrentPage() {
+    return currentPageElement.dataset["page"];
+  }
+
+  function updatePageUI() {
+    console.debug("updating page");
+
+    pageSlot.style.transform = `translateX(calc(${-100 / totalPages}% * ${getCurrentPage() - 1}))`;
+    if (getCurrentPage() == "1") {
+      previousButton.style.opacity = "0.5";
+      previousButton.disabled = true;
+    } else {
+      previousButton.style.opacity = "1";
+      previousButton.disabled = false;
+    }
+
+    if (getCurrentPage() == `${totalPages}`) {
+      nextButton.style.opacity = "0.5";
+      nextButton.disabled = true;
+    } else {
+      nextButton.style.opacity = "1";
+      nextButton.disabled = false;
+    }
+  }
 
   function setPage(num) {
-		currentPage.dataset:w
-		;
+    console.debug("setting page to ", num);
+    currentPageElement.dataset["page"] = num;
+    currentPageElement.innerHTML = `${getCurrentPage()}`;
+    updatePageUI();
   }
 
   function nextPage() {
-    return clamp(currentPage + 1, 1, totalPages);
+    setPage(clamp(parseInt(getCurrentPage()) + 1, 1, totalPages));
   }
 
   function previousPage() {
-    return clamp(currentPage + 1, 1, totalPages);
+    setPage(clamp(parseInt(getCurrentPage()) - 1, 1, totalPages));
   }
+
+  nextButton.addEventListener("click", () => {
+    nextPage();
+  });
+
+  previousButton.addEventListener("click", () => {
+    console.debug("going back");
+    previousPage();
+  });
 </script>
