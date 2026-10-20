@@ -134,7 +134,7 @@
     width: 100%;
     max-width: 32rem;
     padding: 1rem;
-    border-radius: 10px;
+    // border-radius: 10px;
     display: flex;
     justify-content: space-evenly;
     gap: 1rem;
@@ -154,7 +154,7 @@
     button.current-page {
       color: var(--fg-color);
       background: var(--bg-color);
-      border-radius: 100%;
+      // border-radius: 100%;
     }
 
     .ellipsis {
@@ -198,7 +198,7 @@
     height: 2.5rem;
     border: 0.3rem solid var(--fg-color);
     border-top-color: transparent;
-    border-radius: 50%;
+    // border-radius: 50%;
     animation: spin 0.8s linear infinite;
     opacity: 0.6;
 
