@@ -7,16 +7,23 @@ interface Props extends HTMLAttributes<"section"> {
   totalPages: number;
   startingPage?: number;
   size: "sm" | "md" | "lg";
+  scrollToTop?: boolean;
 }
 
 const paginatorId = crypto.randomUUID();
 
-const { totalPages, startingPage, size = "lg", ...props } = Astro.props;
+const {
+  totalPages,
+  startingPage,
+  size = "lg",
+  scrollToTop,
+  ...props
+} = Astro.props;
 ---
 
 <section {...props}>
   <div class="page-slot" data-paginator={`${paginatorId}-page-slot`}>
-    <slot />
+    <div class="page-content"><slot /></div>
   </div>
   <nav class:list={["controls", size]}>
     <button
@@ -47,7 +54,7 @@ const { totalPages, startingPage, size = "lg", ...props } = Astro.props;
 
 <style define:vars={{ totalPages }}>
   section {
-    overflow: hidden;
+    overflow: visible;
   }
 
   nav.controls {
@@ -69,15 +76,19 @@ const { totalPages, startingPage, size = "lg", ...props } = Astro.props;
   }
 
   .page-slot {
-    display: flex;
-    flex-direction: row;
     width: calc(var(--totalPages) * 100%);
-
     transition: all 300ms;
-    & > :global(*) {
-      width: 100%;
-      height: 100%;
-      flex: 1;
+
+    .page-content {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      padding: 2rem;
+      & > :global(*) {
+        width: 100%;
+        height: 100%;
+        flex: 1;
+      }
     }
   }
 
@@ -109,7 +120,7 @@ const { totalPages, startingPage, size = "lg", ...props } = Astro.props;
   }
 </style>
 
-<script define:vars={{ paginatorId, totalPages }} is:inline>
+<script define:vars={{ paginatorId, totalPages, scrollToTop }} is:inline>
   const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
   console.log("initializing paginator ", paginatorId);
@@ -154,6 +165,10 @@ const { totalPages, startingPage, size = "lg", ...props } = Astro.props;
     } else {
       nextButton.style.opacity = "1";
       nextButton.disabled = false;
+    }
+
+    if (scrollToTop) {
+      window.scrollY = 0;
     }
   }
 

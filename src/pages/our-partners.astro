@@ -1,14 +1,11 @@
 ---
-import arrow from "@assets/img/pagination-arrow.png";
 import Base from "@templates/Base.astro";
 import PageIntro from "@sections/PageIntro.astro";
 import SectionBorder from "@components/SectionBorder.astro";
 import { getItems } from "@api/wix";
 import ScribbleSeparator from "@components/ScribbleSeparator.astro";
-import { Image } from "astro:assets";
+import Paginator from "@components/Paginator.astro";
 
-const { page } = Astro.params;
-console.log(page);
 interface Partner {
   _id: string;
   _owner: string;
@@ -32,12 +29,6 @@ const allPartners: Partner[] = (await getItems(
 const organizations = allPartners.filter((p) => p.organization);
 const donors = allPartners.filter((p) => p.donor);
 
-const orgsTotalPages = Math.max(
-  1,
-  Math.ceil(organizations.length / ITEMS_PER_PAGE),
-);
-const donorsTotalPages = Math.max(1, Math.ceil(donors.length / ITEMS_PER_PAGE));
-
 function wixImageUrl(wixImage: string | undefined): string | undefined {
   if (!wixImage) return undefined;
   const match = wixImage.match(/wix:image:\/\/v1\/([^/]+)\/[^#]+/);
@@ -54,6 +45,9 @@ function chunkItems<T>(items: T[], size: number): T[][] {
 
 const orgChunks = chunkItems(organizations, ITEMS_PER_PAGE);
 const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
+
+const orgsTotalPages = Math.max(1, orgChunks.length);
+const donorsTotalPages = Math.max(1, donorChunks.length);
 ---
 
 <Base
@@ -81,232 +75,118 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
 
   <SectionBorder type="marker" backgroundColor="rainbow-purple" />
   <main>
-    <section
-      id="organizations"
-      class="partner-section ruled-bg"
-      data-total-pages={orgsTotalPages}
-    >
+    <section id="organizations" class="partner-section ruled-bg">
       <div class="container">
         <h2>Organizations</h2>
 
-        <div class="slider" data-section="organizations">
-          <div class="track">
-            {
-              orgChunks.map((pagePartners, pageIndex) => (
-                <div class="page" data-page={pageIndex + 1}>
-                  {pagePartners.length > 0 ? (
-                    <ul class="grid">
-                      {pagePartners.map((partner) => {
-                        const logoUrl = wixImageUrl(partner.logo);
-
-                        return (
-                          <li>
-                            <article class="post-it">
-                              {logoUrl ? (
-                                <div class="logo">
-                                  <img
-                                    src={logoUrl}
-                                    alt={`${partner.title} logo`}
-                                  />
-                                </div>
+        <Paginator size="lg" totalPages={orgsTotalPages}>
+          {
+            orgChunks.map((pagePartners) => (
+              <div>
+                {pagePartners.length > 0 ? (
+                  <ul class="grid">
+                    {pagePartners.map((partner) => {
+                      const logoUrl = wixImageUrl(partner.logo);
+                      return (
+                        <li>
+                          <article class="post-it">
+                            {logoUrl ? (
+                              <div class="logo">
+                                <img
+                                  src={logoUrl}
+                                  alt={`${partner.title} logo`}
+                                />
+                              </div>
+                            ) : (
+                              <div class="logo placeholder">
+                                <span>{partner.title[0]}</span>
+                              </div>
+                            )}
+                            <h3>
+                              {partner.website ? (
+                                <a
+                                  href={partner.website}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {partner.title}
+                                </a>
                               ) : (
-                                <div class="logo placeholder">
-                                  <span>{partner.title[0]}</span>
-                                </div>
+                                partner.title
                               )}
-                              <h3>
-                                {partner.website ? (
-                                  <a
-                                    href={partner.website}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    {partner.title}
-                                  </a>
-                                ) : (
-                                  partner.title
-                                )}
-                              </h3>
-                            </article>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  ) : (
-                    <p class="empty">No organization partners to display.</p>
-                  )}
-                </div>
-              ))
-            }
-          </div>
-        </div>
-
-        {
-          orgsTotalPages > 1 && (
-            <nav
-              class="pagination"
-              data-section="organizations"
-              aria-label="Organizations pagination"
-            >
-              <button class="prev" data-page="-1" disabled>
-                <Image src={arrow} alt="Previous Page" />
-              </button>
-
-              <span class="status">
-                <span class="current">1</span> /{" "}
-                <span class="total">{donorsTotalPages}</span>
-              </span>
-              <button
-                class="next"
-                data-page="+1"
-                disabled={orgsTotalPages <= 1}
-              >
-                <Image src={arrow} class="flip" alt="Previous Page" />
-              </button>
-            </nav>
-          )
-        }
+                            </h3>
+                          </article>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : (
+                  <p class="empty">No organization partners to display.</p>
+                )}
+              </div>
+            ))
+          }
+        </Paginator>
       </div>
       <ScribbleSeparator />
     </section>
 
-    <section
-      id="donors"
-      class="partner-section ruled-bg"
-      data-total-pages={donorsTotalPages}
-    >
+    <section id="donors" class="partner-section ruled-bg">
       <div class="container">
         <h2>Donors</h2>
 
-        <div class="slider" data-section="donors">
-          <div class="track">
-            {
-              donorChunks.map((pagePartners, pageIndex) => (
-                <div class="page" data-page={pageIndex + 1}>
-                  {pagePartners.length > 0 ? (
-                    <ul class="grid">
-                      {pagePartners.map((partner) => {
-                        const logoUrl = wixImageUrl(partner.logo);
-
-                        return (
-                          <li>
-                            <article class="post-it">
-                              {logoUrl ? (
-                                <div class="logo">
-                                  <img
-                                    src={logoUrl}
-                                    alt={`${partner.title} logo`}
-                                  />
-                                </div>
+        <Paginator size="lg" totalPages={donorsTotalPages}>
+          {
+            donorChunks.map((pagePartners) => (
+              <div>
+                {pagePartners.length > 0 ? (
+                  <ul class="grid">
+                    {pagePartners.map((partner) => {
+                      const logoUrl = wixImageUrl(partner.logo);
+                      return (
+                        <li>
+                          <article class="post-it">
+                            {logoUrl ? (
+                              <div class="logo">
+                                <img
+                                  src={logoUrl}
+                                  alt={`${partner.title} logo`}
+                                />
+                              </div>
+                            ) : (
+                              <div class="logo placeholder">
+                                <span>{partner.title[0]}</span>
+                              </div>
+                            )}
+                            <h3>
+                              {partner.website ? (
+                                <a
+                                  href={partner.website}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {partner.title}
+                                </a>
                               ) : (
-                                <div class="logo placeholder">
-                                  <span>{partner.title[0]}</span>
-                                </div>
+                                partner.title
                               )}
-                              <h3>
-                                {partner.website ? (
-                                  <a
-                                    href={partner.website}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    {partner.title}
-                                  </a>
-                                ) : (
-                                  partner.title
-                                )}
-                              </h3>
-                            </article>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  ) : (
-                    <p class="empty">No donors to display.</p>
-                  )}
-                </div>
-              ))
-            }
-          </div>
-        </div>
-
-        {
-          donorsTotalPages > 1 && (
-            <nav
-              class="pagination"
-              data-section="donors"
-              aria-label="Donors pagination"
-            >
-              <button class="prev" data-page="-1" disabled>
-                <Image src={arrow} alt="Previous Page" />
-              </button>
-              <span class="status">
-                <span class="current">1</span> /{" "}
-                <span class="total">{donorsTotalPages}</span>
-              </span>
-              <button
-                class="next"
-                data-page="+1"
-                disabled={donorsTotalPages <= 1}
-              >
-                <Image src={arrow} class="flip" alt="Next Page" />
-              </button>
-            </nav>
-          )
-        }
+                            </h3>
+                          </article>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : (
+                  <p class="empty">No donors to display.</p>
+                )}
+              </div>
+            ))
+          }
+        </Paginator>
       </div>
     </section>
   </main>
 </Base>
-
-<script>
-  function initSlider(section: string) {
-    const slider = document.querySelector(
-      `.slider[data-section="${section}"]`,
-    ) as HTMLElement;
-    const track = slider?.querySelector(".track") as HTMLElement;
-    const pagination = document.querySelector(
-      `.pagination[data-section="${section}"]`,
-    ) as HTMLElement;
-    if (!slider || !track || !pagination) return;
-
-    const totalPages = parseInt(
-      slider.closest(".partner-section")?.getAttribute("data-total-pages") ||
-        "1",
-      10,
-    );
-    let currentPage = 1;
-
-    const prevButton = pagination.querySelector(".prev") as HTMLButtonElement;
-    const nextButton = pagination.querySelector(".next") as HTMLButtonElement;
-    const currentLabel = pagination.querySelector(".current") as HTMLElement;
-
-    function updateButtons() {
-      prevButton.disabled = currentPage <= 1;
-      nextButton.disabled = currentPage >= totalPages;
-      currentLabel.textContent = currentPage.toString();
-    }
-
-    function goToPage(newPage: number) {
-      if (newPage < 1 || newPage > totalPages || newPage === currentPage)
-        return;
-
-      const direction = newPage > currentPage ? "left" : "right";
-
-      track.style.setProperty("--slide-direction", direction);
-      track.style.setProperty("--current-page", newPage.toString());
-
-      currentPage = newPage;
-      updateButtons();
-    }
-
-    prevButton.addEventListener("click", () => goToPage(currentPage - 1));
-    nextButton.addEventListener("click", () => goToPage(currentPage + 1));
-  }
-
-  initSlider("organizations");
-  initSlider("donors");
-</script>
 
 <style lang="scss">
   .page-content {
@@ -329,41 +209,15 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
   }
 
   .container {
-    max-width: var(--xl);
     margin: auto;
-    padding: 4rem 1rem;
+    padding: 4rem 0rem;
   }
 
   h2 {
     font-size: 2rem;
+    position: relative;
     text-align: center;
-    /* color: var(--fg-color); */
     margin-bottom: 2rem;
-  }
-
-  .slider {
-    overflow: hidden;
-    width: 100%;
-  }
-
-  .track {
-    display: flex;
-    width: 100%;
-    transition: transform 0.4s ease-in-out;
-    transform: translateX(calc((var(--current-page, 1) - 1) * -100%));
-
-    &.animating-left {
-      transform: translateX(calc(var(--current-page, 1) * -100%));
-    }
-
-    &.animating-right {
-      transform: translateX(calc((var(--current-page, 1) - 2) * -100%));
-    }
-  }
-
-  .page {
-    flex: 0 0 100%;
-    width: 100%;
   }
 
   .grid {
@@ -374,60 +228,54 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1.5rem;
 
-    li {
-      article {
+    li article {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      height: 100%;
+      transition: transform 0.2s ease;
+      filter: var(--shadow-light);
+
+      &:hover {
+        transform: translateY(-4px);
+        filter: var(--shadow);
+        cursor: pointer;
+      }
+
+      .logo {
+        width: 120px;
+        height: 120px;
         display: flex;
-        flex-direction: column;
         align-items: center;
-        gap: 1rem;
-        height: 100%;
-        transition: transform 0.2s ease;
-        filter: var(--shadow-light);
+        justify-content: center;
+        font-family: var(--cursive);
 
-        &:hover {
-          transform: translateY(-4px);
-          filter: var(--shadow);
-          cursor: pointer;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
         }
 
-        .logo {
-          width: 120px;
-          height: 120px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        &.placeholder {
+          background-color: var(--rainbow-purple);
+          border-radius: 50%;
+          color: white;
+          font-size: 2rem;
+          font-family: var(--handwriting);
+          font-weight: bold;
+        }
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        text-align: center;
+        margin: 0;
+
+        a {
+          color: var(--text-color);
+          text-decoration: none;
           font-family: var(--cursive);
-
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-          }
-
-          &.placeholder {
-            background-color: var(--rainbow-purple);
-            border-radius: 50%;
-            color: white;
-            font-size: 2rem;
-            font-family: var(--handwriting);
-            font-weight: bold;
-          }
-        }
-
-        h3 {
-          font-size: 1.25rem;
-          text-align: center;
-          margin: 0;
-
-          a {
-            color: var(--text-color);
-            text-decoration: none;
-
-            font-family: var(--cursive);
-            /* &:hover { */
-            /*   text-decoration: underline; */
-            /* } */
-          }
         }
       }
     }
@@ -436,42 +284,5 @@ const donorChunks = chunkItems(donors, ITEMS_PER_PAGE);
   .empty {
     text-align: center;
     font-size: 1.25rem;
-  }
-
-  .pagination {
-    max-width: var(--xl);
-    margin: 2rem auto 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    font-size: 1.25rem;
-
-    button {
-      background: transparent;
-      border: none;
-      color: var(--text-color);
-      text-decoration: underline;
-      font-size: inherit;
-      cursor: pointer;
-
-      img {
-        width: 100px;
-      }
-      &:disabled {
-        pointer-events: none;
-        opacity: 0.5;
-        text-decoration: none;
-        cursor: default;
-      }
-    }
-    span.status {
-      font-size: 3rem;
-      font-family: var(--handwriting);
-    }
-  }
-
-  img.flip {
-    transform: rotate(180deg);
   }
 </style>
