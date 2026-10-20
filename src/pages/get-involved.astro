@@ -2,16 +2,43 @@
 // src/pages/get-involved.astro
 // Based on: Membership Model document (Updated August 2026)
 import Base from "@templates/Base.astro";
-import PageIntro from "@sections/PageIntro.astro";
 import SectionBorder from "@components/SectionBorder.astro";
 import TornPaperBox from "@components/TornPaperBox.astro";
 import LadderOfEngagement from "@components/LadderOfEngagement.astro";
-import CoreTracks from "@sections/CoreTracks.astro";
+import CardGrid from "@sections/CardGrid.astro";
+import FitComparison from "@sections/FitComparison.astro";
 import LeadershipPrograms from "@sections/LeadershipPrograms.astro";
+import type { CardData } from "@datatypes/card";
 import { faker } from "@faker-js/faker";
 
 // TODO: Replace with actual images from @assets/img/
 const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
+
+// Core tracks. Order follows the mockup: Outreach, Policy, People's Operations.
+// TODO: copy pending review against the Membership Plan (Updated August 2026).
+const coreTracks: CardData[] = [
+  {
+    title: "Outreach",
+    color: "var(--rainbow-orange)",
+    description:
+      "Mass outreach and harm reduction. Table at events, distribute resources, and hold the real conversations that connect people to PRISM.",
+    link: "/outreach",
+  },
+  {
+    title: "Policy",
+    color: "var(--rainbow-red)",
+    description:
+      "Advocacy and legislation. Turn community power into pressure on school boards and lawmakers.",
+    link: "/policy",
+  },
+  {
+    title: "People's Operations",
+    color: "var(--activist-aqua)",
+    description:
+      "Internal base-building. Steward our Discord, run phonebanks, do wellness checks, and recruit the next wave.",
+    link: "/people-ops",
+  },
+];
 ---
 
 <Base
@@ -73,13 +100,23 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
       </div>
     </section>
 
-    <SectionBorder backgroundColor="youth-yellow-2" flip type="marker" />
+    <SectionBorder backgroundColor="rainbow-purple" flip type="marker" />
 
     <!-- Core Tracks -->
     <!-- Based on: Membership Model - Section 3: Core Track Pathways -->
-    <CoreTracks />
+    <section class="core-tracks-band">
+      <CardGrid
+        id="core-tracks"
+        heading="Ways to Plug In!"
+        intro="PRISM membership is divided into different core tracks. Each track offers distinct activities, skills development, and leadership opportunities."
+        cards={coreTracks}
+        background="transparent"
+      />
 
-    <SectionBorder backgroundColor="youth-yellow-2" type="marker" />
+      <!-- Volunteer vs Member, and the arrow into the leadership programs -->
+      <FitComparison />
+    </section>
+    <SectionBorder backgroundColor="rainbow-purple" type="marker" />
 
     <!-- Leadership Programs -->
     <!-- Based on: Membership Model - Section 4: Specialized Leadership Programs -->
@@ -114,6 +151,7 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
       margin: 0 auto;
 
       h2 {
+        color: var(--fg-color);
         text-align: center;
         font-size: 2.5rem;
         margin-bottom: 3rem;
@@ -133,18 +171,18 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
           text-align: center;
 
           .step-number {
-            display: inline-flex;
+            padding: 0.5rem;
+            background: var(--rainbow-blue);
+            width: 3rem;
+            height: 3rem;
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
-            background: var(--rainbow-purple);
-            color: white;
-            border-radius: 50%;
-            filter: drop-shadow(1px 1px 1px var(--text-color));
-            font-size: 1.5rem;
-            font-weight: bold;
+            border-radius: 100%;
+            margin: auto;
             margin-bottom: 1rem;
+            font-size: 2rem;
+            font-family: var(--handwriting);
           }
 
           h3 {
@@ -168,60 +206,10 @@ const heroImage = faker.image.urlPicsumPhotos({ width: 1200, height: 600 });
     }
   }
 
-  .recruitment-section {
-    padding: 4rem 2rem;
-    background: var(--bg-color);
-
-    .section-content {
-      max-width: 1000px;
-      margin: 0 auto;
-      text-align: center;
-
-      h2 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-      }
-
-      .goal {
-        font-size: 1.3rem;
-        margin-bottom: 3rem;
-
-        strong {
-          color: var(--rainbow-purple);
-        }
-      }
-
-      .recruitment-channels {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-
-        .channel {
-          background: var(--fg-color);
-          padding: 2rem;
-          /* border-radius: 12px; */
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-          .percentage {
-            display: block;
-            font-size: 3rem;
-            font-weight: bold;
-            color: var(--rainbow-orange);
-            margin-bottom: 0.5rem;
-          }
-
-          h3 {
-            margin: 0 0 1rem 0;
-            font-size: 1.3rem;
-          }
-
-          p {
-            margin: 0;
-            line-height: 1.5;
-          }
-        }
-      }
-    }
+  /* The band that both the track grid and the fit comparison sit on. */
+  .core-tracks-band {
+    background-color: var(--rainbow-purple);
+    color: var(--witty-white);
   }
 
   .final-cta {

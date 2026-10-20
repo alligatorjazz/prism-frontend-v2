@@ -15,9 +15,7 @@ const { class: className, image, label, tape, ...props } = Astro.props;
 
 <div class:list={["container", className]} {...props}>
   <Image {...image} />
-  <p class="label">
-    {label}
-  </p>
+  <div class="label"><slot /></div>
   {
     tape && (
       <div class="tape">
@@ -51,14 +49,16 @@ const { class: className, image, label, tape, ...props } = Astro.props;
     margin: 0;
     /* padding: var(--border-size); */
     border: var(--border-size) solid var(--fg-color);
+    border-top: 0;
     background-color: var(--fg-color);
+    width: 100%;
     text-align: center;
     font-weight: bold;
     font-size: var(--font-size);
     font-style: var(--header-font);
     white-space: nowrap;
-    width: 100%;
   }
+
   .tape {
     width: 100%;
     height: 100%;
