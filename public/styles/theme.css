@@ -23,7 +23,7 @@ html {
   --handwriting: var(--crudex);
   --cursive: "Indie Flower", cursive;
 
-  --round-edge: 10px;
+  /* --round-edge: 10px; */
   --shadow: drop-shadow(0 35px 35px rgba(0, 0, 0, 0.35));
   --shadow-light: drop-shadow(0 35px 35px rgba(0, 0, 0, 0.125));
 }
