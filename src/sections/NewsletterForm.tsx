@@ -4,7 +4,7 @@ interface Props extends HTMLAttributes<HTMLFormElement> {}
 
 export function NewsletterForm({ ...props }: Props) {
   return (
-    <form className="rounded" name="newsletter-signup">
+    <form name="newsletter-signup">
       <p>Subscribe to our Newsletter</p>
       <div className="inputs">
         <div>
