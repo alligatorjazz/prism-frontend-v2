@@ -7,6 +7,27 @@ import TrackIntro from "@sections/TrackIntro.astro";
 import speech from "@assets/img/icons/Speech.png";
 import alex from "@assets/img/team/alex.avif";
 
+// How the Fellowship actually runs, from the Membership Model's
+// "Fellowship Meeting Overview". Deliberately distinct from the
+// Fellowship Roles grid below, which covers the six focus areas.
+const activities = [
+  {
+    title: "Weekly Meetings & Studios",
+    description:
+      "Fellows meet regularly for strategic planning check-ins and twice each month in Creative Studios — a beginning-of-month session to plan upcoming campaigns, and an end-of-month session to review recent work and trade peer feedback.",
+  },
+  {
+    title: "Monthly Learning Course",
+    description:
+      "Each month the Content Creation Director leads a self-guided video course on a creative, storytelling, advocacy, or professional-development skill, paired with a short assignment Fellows bring to the end-of-month Studio for discussion.",
+  },
+  {
+    title: "Real Portfolio Work",
+    description:
+      "Fellows produce original content in their focus area — writing, photography, design, video, or social media — collaborating with PRISM staff and other Fellows while building a professional portfolio of advocacy work.",
+  },
+];
+
 // Fellowship Roles Overview, from the Membership Model.
 const fellowshipRoles = [
   {
@@ -104,6 +125,7 @@ const eligibility = [
       image={alex}
       imageAlt="Portrait of Alexander Puga"
       description="The Creative Fellowship is led by PRISM's Content Creation Director and is designed for students who are passionate about advocacy, organizing, and creative storytelling. Fellows work alongside PRISM's team to create impactful content that educates, inspires, and mobilizes communities across South Florida. Through hands-on projects, mentorship, and professional development, Fellows build a portfolio while helping shape PRISM's voice and impact."
+      activities={activities}
     />
 
     <SectionBorder type="marker" backgroundColor="rainbow-green" flip />
@@ -134,8 +156,6 @@ const eligibility = [
     <!-- Based on: Membership Model - Fellowship Expectations & Eligibility -->
     <section id="expectations">
       <div class="container">
-        <h3>What Fellows Gain | Who Should Apply</h3>
-
         <div class="card-grid two-up">
           <article class="card">
             <h4>What Fellows Gain</h4>
@@ -145,7 +165,7 @@ const eligibility = [
           </article>
 
           <article class="card">
-            <h4>Eligibility</h4>
+            <h4>Who Should Apply</h4>
             <ul>
               {eligibility.map((item) => <li>{item}</li>)}
             </ul>
@@ -220,7 +240,6 @@ const eligibility = [
     #expectations {
       background-color: var(--rainbow-green);
       padding: 2rem 0;
-      /* color: var(--fg-color); */
 
       h3 {
         font-size: 3rem;
