@@ -1,3 +1,5 @@
+import type { ImageMetadata } from "astro";
+
 /**
  * One entry in a CardGrid.
  *
@@ -17,7 +19,7 @@ export type CardData = {
   /** Any CSS colour. Drives the title, kicker, list headings and CTA. */
   color?: string;
   /** Image URL. Omit for a text-only card. */
-  image?: string;
+  image?: string | ImageMetadata;
   /** Alt text for the image. Pass "" for a decorative image. */
   imageAlt?: string;
   /** When set, the whole card links here. */

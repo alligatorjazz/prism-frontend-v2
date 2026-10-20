@@ -8,6 +8,9 @@
 import CardGrid from "@sections/CardGrid.astro";
 import type { CardData } from "@datatypes/card";
 import { faker } from "@faker-js/faker";
+import instaGrid from "@assets/img/insta-grid.png";
+import weThePeople from "@assets/img/taking-2-schools.avif";
+import students from "@assets/img/WeThePeople2026-17.jpg";
 
 // TODO: Replace with actual images from @assets/img/
 const cards: CardData[] = [
@@ -18,7 +21,7 @@ const cards: CardData[] = [
     description:
       "6-month volunteer leadership cohort for LGBTQ+ and allied students under 24. Fellows produce content, develop professional skills, and showcase their work at a public event.",
     meta: "6-month program",
-    image: faker.image.urlPicsumPhotos({ width: 400, height: 250 }),
+    image: instaGrid.src,
     link: "/creative-fellowship",
   },
   {
@@ -28,7 +31,7 @@ const cards: CardData[] = [
     description:
       "GSA network empowerment program for high school and university LGBTQ+ organization leaders. Provides resources, training, and support for student activists.",
     meta: "Ongoing program",
-    image: faker.image.urlPicsumPhotos({ width: 400, height: 250 }),
+    image: weThePeople.src,
     link: "/psap",
   },
   {
@@ -38,7 +41,7 @@ const cards: CardData[] = [
     description:
       "9-month board governance program for strategy review and recommendations. Works directly with the Executive Director and YAC Chair.",
     meta: "9-month program",
-    image: faker.image.urlPicsumPhotos({ width: 400, height: 250 }),
+    image: students.src,
     link: "/yac",
   },
 ];
