@@ -35,6 +35,7 @@ function wixImageUrl(wixImage: string | undefined): string | undefined {
             src: wixImageUrl(partner.logo) ?? "",
             format: "webp",
             inferSize: true,
+            quality: "low",
           });
 
           return (

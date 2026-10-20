@@ -1,11 +1,12 @@
 ---
 import paperNoise from "../assets/img/pure-noise.png";
+import { getImage } from "astro:assets";
 interface Props {
   offset?: boolean;
 }
 
 const { offset } = Astro.props;
-const background = `url("${paperNoise.src}")`;
+const background = `url("${(await getImage({ src: paperNoise, format: "webp", quality: "low" })).src}")`;
 ---
 
 <div class="container" style={{ background }}>
