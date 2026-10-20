@@ -1,14 +1,32 @@
 ---
 // src/components/OurPartners.astro
-// Mini version of the full our-partners page
-// Shows first 5 organization partners with a link to see all
-import { getImage, Image } from "astro:assets";
+// Mini version of the full /our-partners page.
+// Card grid, logo treatment, shadows and CTA all mirror
+// src/pages/our-partners.astro so the two surfaces read as one design.
 import { getItems } from "@api/wix";
 
-// Fetch organization partners via Wix API
-// Based on: our-partners.astro data fetching pattern
-const allPartners = await getItems("Partners");
-const partners = allPartners.slice(0, 5);
+interface Partner {
+  _id: string;
+  _owner: string;
+  _createdDate: string;
+  _updatedDate: string;
+  title: string;
+  gala: boolean;
+  website?: string;
+  logo?: string;
+  sponsorship?: string[];
+  organization: boolean;
+  donor: boolean;
+}
+
+const PARTNER_COUNT = 5;
+
+const allPartners = (await getItems("Partners")) as unknown as Partner[];
+
+// The previous comment claimed "organization partners" but the code sliced
+// the unfiltered list, so donors could appear here.
+const organizations = allPartners.filter((p) => p.organization);
+const partners = organizations.slice(0, PARTNER_COUNT);
 
 function wixImageUrl(wixImage: string | undefined): string | undefined {
   if (!wixImage) return undefined;
@@ -28,50 +46,49 @@ function wixImageUrl(wixImage: string | undefined): string | undefined {
       sponsorships, and other collaborations.
     </p>
 
-    <ul class="grid">
-      {
-        partners.map(async (partner) => {
-          const logoUrl = await getImage({
-            src: wixImageUrl(partner.logo) ?? "",
-            format: "webp",
-            inferSize: true,
-            quality: "low",
-          });
+    {
+      partners.length > 0 ? (
+        <ul class="grid">
+          {partners.map((partner) => {
+            const logoUrl = wixImageUrl(partner.logo);
 
-          return (
-            <li>
-              <article>
-                {logoUrl ? (
-                  <div class="logo">
-                    <img src={logoUrl.src} alt={`${partner.title} logo`} />
-                  </div>
-                ) : (
-                  <div class="logo placeholder">
-                    <span>{partner.title[0]}</span>
-                  </div>
-                )}
-                <h3>
-                  {partner.website ? (
-                    <a
-                      href={partner.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {partner.title}
-                    </a>
+            return (
+              <li>
+                <article class="post-it">
+                  {logoUrl ? (
+                    <div class="logo">
+                      <img src={logoUrl} alt={`${partner.title} logo`} />
+                    </div>
                   ) : (
-                    partner.title
+                    <div class="logo placeholder">
+                      <span>{partner.title[0]}</span>
+                    </div>
                   )}
-                </h3>
-              </article>
-            </li>
-          );
-        })
-      }
-    </ul>
+                  <h3>
+                    {partner.website ? (
+                      <a
+                        href={partner.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {partner.title}
+                      </a>
+                    ) : (
+                      partner.title
+                    )}
+                  </h3>
+                </article>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p class="empty">No organization partners to display.</p>
+      )
+    }
 
     <div class="cta">
-      <a href="/our-partners" class="see-all"> See All Partners → </a>
+      <a href="/our-partners" class="see-all">See All Partners →</a>
     </div>
   </div>
 </section>
@@ -82,6 +99,7 @@ function wixImageUrl(wixImage: string | undefined): string | undefined {
     background-repeat: repeat-y;
     background-position: top center;
     padding: 4rem 0;
+    font-size: 1.25rem;
   }
 
   .container {
@@ -92,6 +110,7 @@ function wixImageUrl(wixImage: string | undefined): string | undefined {
 
   h2 {
     font-size: 2rem;
+    position: relative;
     text-align: center;
     margin-bottom: 1rem;
   }
@@ -100,7 +119,7 @@ function wixImageUrl(wixImage: string | undefined): string | undefined {
     text-align: center;
     max-width: 800px;
     margin: 0 auto 3rem auto;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     line-height: 1.6;
   }
 
@@ -112,61 +131,61 @@ function wixImageUrl(wixImage: string | undefined): string | undefined {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1.5rem;
 
-    li {
-      article {
-        background-color: var(--youth-yellow-1);
-        padding: 1.5rem;
+    li article {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      height: 100%;
+      transition: transform 0.2s ease;
+      filter: var(--shadow-light);
+
+      &:hover {
+        transform: translateY(-4px);
+        filter: var(--shadow);
+        cursor: pointer;
+      }
+
+      .logo {
+        width: 120px;
+        height: 120px;
         display: flex;
-        flex-direction: column;
         align-items: center;
-        gap: 1rem;
-        height: 100%;
-        transition: transform 0.2s ease;
-        filter: drop-shadow(1px 1px 1px var(--text-color));
+        justify-content: center;
+        font-family: var(--cursive);
 
-        &:hover {
-          transform: translateY(-4px);
-          filter: drop-shadow(5px 5px 5px var(--text-color));
-          cursor: pointer;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
         }
 
-        .logo {
-          width: 120px;
-          height: 120px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        &.placeholder {
+          background-color: var(--rainbow-purple);
+          color: white;
+          font-size: 2rem;
+          font-family: var(--handwriting);
+          font-weight: bold;
+        }
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        text-align: center;
+        margin: 0;
+
+        a {
+          color: var(--text-color);
+          text-decoration: none;
           font-family: var(--cursive);
-
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-          }
-
-          &.placeholder {
-            background-color: var(--rainbow-purple);
-            border-radius: 50%;
-            color: white;
-            font-size: 2rem;
-            font-family: var(--cursive);
-            font-weight: bold;
-          }
-        }
-
-        h3 {
-          font-size: 1.25rem;
-          text-align: center;
-          margin: 0;
-
-          a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-family: var(--cursive);
-          }
         }
       }
     }
+  }
+
+  .empty {
+    text-align: center;
+    font-size: 1.25rem;
   }
 
   .cta {
@@ -177,17 +196,15 @@ function wixImageUrl(wixImage: string | undefined): string | undefined {
   .see-all {
     display: inline-block;
     padding: 1rem 2rem;
-    background: var(--rainbow-purple);
+    background-color: var(--rainbow-purple);
     color: white;
     text-decoration: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    transition: all 0.2s ease;
+    font-weight: bold;
+    font-size: 1.25rem;
+    transition: all 300ms;
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      filter: brightness(110%);
     }
   }
 </style>
