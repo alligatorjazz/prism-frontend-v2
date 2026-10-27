@@ -23,7 +23,7 @@ const { routes, class: className } = Astro.props;
     routes.map((route) => {
       if (route.type === "internal") {
         return (
-          <li class="nav-item">
+          <li class:list={["nav-item", route.highlight ? "highlighted" : ""]}>
             <a
               class:list={["nav-link", route.highlight ? "highlighted" : ""]}
               href={route.path}
@@ -85,6 +85,7 @@ const { routes, class: className } = Astro.props;
     transition: color 300ms;
     text-decoration: none;
     font-family: var(--header-font);
+    cursor: pointer;
 
     &:hover {
       color: var(--accent-color);
@@ -95,10 +96,19 @@ const { routes, class: className } = Astro.props;
     }
   }
 
-  .highlighted {
+  .nav-link.highlighted {
     background: var(--accent-color);
     padding: 0.5rem 4rem;
     border-radius: var(--round-edge);
+    &:hover {
+      color: var(--fg-color);
+    }
+  }
+  .nav-item.highlighted {
+    &:hover * {
+      filter: brightness(105%);
+      /* color: var(--bold-black); */
+    }
   }
 
   .nav-item {

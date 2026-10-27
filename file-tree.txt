@@ -10,12 +10,18 @@
 ├──  eslint.config.js
 ├──  example.mdx
 ├──  file-tree.txt
+├──  localhost_2026-10-20_07-37-40.report.html
 ├──  notes
 │   └──  mtg-notes-2026-09-15.md
 ├──  package-lock.json
 ├──  package.json
 ├──  public
-│   ├── 󰕙 favicon.svg
+│   ├──  android-chrome-192x192.png
+│   ├──  android-chrome-512x512.png
+│   ├──  apple-touch-icon.png
+│   ├──  favicon-16x16.png
+│   ├──  favicon-32x32.png
+│   ├──  favicon.ico
 │   ├──  fonts
 │   │   ├──  Crudex.otf
 │   │   ├──  museo-slab
@@ -54,6 +60,7 @@
 │   ├──  img
 │   │   ├──  book-scale.png
 │   │   └──  prism-logo-primary.png
+│   ├──  site.webmanifest
 │   ├──  styles
 │   │   └──  theme.css
 │   └──  video
@@ -236,6 +243,7 @@
 │   │       │   ├──  Vote.png
 │   │       │   ├──  white_pc.png
 │   │       │   └──  WLW.png
+│   │       ├──  insta-grid.png
 │   │       ├──  laptop-sticker.png
 │   │       ├──  logos
 │   │       │   ├──  backgrounds
@@ -418,10 +426,30 @@
 │   │       │   ├──  alex.avif
 │   │       │   ├──  aux.avif
 │   │       │   ├──  avion.avif
+│   │       │   ├──  damian.avif
+│   │       │   ├──  fabiana.avif
+│   │       │   ├──  gala.avif
+│   │       │   ├──  hannah.avif
+│   │       │   ├──  jordan.avif
+│   │       │   ├──  mary.avif
+│   │       │   ├──  maxx.avif
 │   │       │   ├──  miles.avif
-│   │       │   └──  mv.avif
+│   │       │   ├──  mv.avif
+│   │       │   ├──  samuel.avif
+│   │       │   └──  sofia.avif
 │   │       ├──  team-group-photo-faw-26.jpg
 │   │       ├──  torn-notebook-paper.png
+│   │       ├──  WeThePeople2026-7.jpg
+│   │       ├──  WeThePeople2026-8.jpg
+│   │       ├──  WeThePeople2026-9.jpg
+│   │       ├──  WeThePeople2026-10.jpg
+│   │       ├──  WeThePeople2026-11.jpg
+│   │       ├──  WeThePeople2026-12.jpg
+│   │       ├──  WeThePeople2026-13.jpg
+│   │       ├──  WeThePeople2026-14.jpg
+│   │       ├──  WeThePeople2026-15.jpg
+│   │       ├──  WeThePeople2026-16.jpg
+│   │       ├──  WeThePeople2026-17.jpg
 │   │       └──  yellow-tile-bg.png
 │   ├──  components
 │   │   ├──  BigButton.astro
@@ -429,12 +457,15 @@
 │   │   ├──  BlogPostList.astro
 │   │   ├──  Bookshelf.astro
 │   │   ├──  Calendar.astro
+│   │   ├──  Card.astro
 │   │   ├──  Carousel.astro
 │   │   ├──  ColoredHeader.astro
+│   │   ├──  EventCard.astro
 │   │   ├──  EventList.scss
 │   │   ├──  EventList.tsx
 │   │   ├──  EventPage.scss
 │   │   ├──  EventPage.tsx
+│   │   ├──  FlowArrow.astro
 │   │   ├──  LadderOfEngagement.astro
 │   │   ├──  LeadershipProgramCard.astro
 │   │   ├──  LinkCard.astro
@@ -456,7 +487,8 @@
 │   │   ├──  TierGrid.astro
 │   │   ├──  TornPaperBorder.astro
 │   │   ├──  TornPaperBox.astro
-│   │   └──  ToString.astro
+│   │   ├──  ToString.astro
+│   │   └──  YearbookPortrait.astro
 │   ├──  config.ts
 │   ├──  content
 │   │   └──  posts
@@ -570,6 +602,10 @@
 │   │   ├──  blog.ts
 │   │   ├──  dates.ts
 │   │   ├──  dom.ts
+│   │   ├──  events
+│   │   │   ├──  index.ts
+│   │   │   ├──  model.ts
+│   │   │   └──  wix.ts
 │   │   ├──  index.ts
 │   │   └──  payload.ts
 │   ├──  pages
@@ -577,9 +613,11 @@
 │   │   ├──  about.astro
 │   │   ├──  api
 │   │   │   └──  events.ts
+│   │   ├──  contact-us.astro
 │   │   ├──  creative-fellowship.astro
 │   │   ├──  donate.astro
 │   │   ├──  events.astro
+│   │   ├──  events.astro.bak
 │   │   ├──  get-involved.astro
 │   │   ├──  index.astro
 │   │   ├──  learn
@@ -610,15 +648,19 @@
 │   ├──  sections
 │   │   ├──  AlternatingRibbons.astro
 │   │   ├──  BlogArchive.astro
+│   │   ├──  CardGrid.astro
 │   │   ├──  CardsWithHeader.astro
 │   │   ├──  CenteredPaperWithHeader.astro
 │   │   ├──  ConstrainedSection.astro
 │   │   ├──  ContentWithHeader.astro
 │   │   ├──  EventsWithHeader.astro
+│   │   ├──  EventsWithHeader.astro.bak
+│   │   ├──  FitComparison.astro
 │   │   ├──  FlagWithTagline.astro
 │   │   ├──  Footer.astro
 │   │   ├──  HeroVideo.astro
 │   │   ├──  LeadershipPrograms.astro
+│   │   ├──  LeadershipPrograms_1.astro
 │   │   ├──  NewsletterForm.scss
 │   │   ├──  NewsletterForm.tsx
 │   │   ├──  NewsletterSignup.astro
@@ -627,7 +669,8 @@
 │   │   ├──  PaperWithPolaroids.astro
 │   │   ├──  PolicyNotebook.astro
 │   │   ├──  StickersWithHeader.astro
-│   │   └──  ThreeColumns.astro
+│   │   ├──  ThreeColumns.astro
+│   │   └──  TrackIntro.astro
 │   ├──  styles
 │   │   ├──  global.scss
 │   │   └──  utils.scss
@@ -636,6 +679,7 @@
 │   │   └──  BlogPost.astro
 │   └──  types
 │       ├──  blog.ts
+│       ├──  card.ts
 │       ├──  index.ts
 │       ├──  openGraph.ts
 │       ├──  payload.ts
