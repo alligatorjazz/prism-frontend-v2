@@ -1,6 +1,5 @@
 ---
 import SectionBorder from "../components/SectionBorder.astro";
-import PageIntro from "../sections/PageIntro.astro";
 import Base from "../templates/Base.astro";
 import Polaroid from "@components/Polaroid.astro";
 import boca from "@assets/img/boca-raton-hs.avif";
@@ -20,6 +19,8 @@ import team from "@assets/img/growing-team.avif";
     "image:alt": "test",
   }}
 >
+  <section id="intro" class="ruled-bg"><h1>Our History</h1></section>
+  <SectionBorder type="marker" flip backgroundColor={"rainbow-red"} />
   <section id="beginning" class={"history lg"}>
     <div class="container">
       <Polaroid
@@ -153,70 +154,79 @@ import team from "@assets/img/growing-team.avif";
       </div>
     </div>
   </section>
+
+  <style lang="scss">
+    section {
+      padding-top: 4rem;
+    }
+    .history > .container {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      justify-content: center;
+      padding: 4rem 2rem;
+      flex-wrap: wrap;
+
+      .image {
+        width: 350px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .info {
+        flex: 1;
+        color: var(--fg-color);
+        min-width: 350px;
+        h2 {
+          font-size: 2rem;
+          font-weight: 600;
+        }
+        p {
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    #intro {
+      padding: 4rem;
+      margin-top: 4rem;
+      h1 {
+        font-family: var(--handwriting);
+        font-size: 3rem;
+        text-align: center;
+      }
+    }
+    #beginning {
+      padding-top: 0rem;
+      background-color: var(--rainbow-red);
+    }
+
+    #non-profit {
+      background-color: var(--rainbow-blue);
+    }
+
+    #advocacy {
+      background-color: var(--rainbow-orange);
+    }
+
+    #schools {
+      background-color: var(--rainbow-purple);
+    }
+
+    #team {
+      background-color: var(--rainbow-yellow);
+      .info {
+        color: var(--text-color);
+      }
+    }
+
+    #future {
+    }
+
+    .history:nth-of-type(odd) > .container {
+      flex-direction: row-reverse;
+    }
+  </style>
 </Base>
-
-<style lang="scss">
-  section {
-    padding-top: 4rem;
-  }
-  .history > .container {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    justify-content: center;
-    padding: 4rem 2rem;
-    flex-wrap: wrap;
-
-    .image {
-      width: 350px;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-    .info {
-      flex: 1;
-      color: var(--fg-color);
-      min-width: 350px;
-      h2 {
-        font-size: 2rem;
-        font-weight: 600;
-      }
-      p {
-        font-size: 1.25rem;
-      }
-    }
-  }
-
-  #beginning {
-    padding-top: 0rem;
-    background-color: var(--rainbow-red);
-  }
-
-  #non-profit {
-    background-color: var(--rainbow-blue);
-  }
-
-  #advocacy {
-    background-color: var(--rainbow-orange);
-  }
-
-  #schools {
-    background-color: var(--rainbow-purple);
-  }
-
-  #team {
-    background-color: var(--rainbow-yellow);
-    .info {
-      color: var(--text-color);
-    }
-  }
-
-  #future {
-  }
-
-  .history:nth-of-type(odd) > .container {
-    flex-direction: row-reverse;
-  }
-</style>
