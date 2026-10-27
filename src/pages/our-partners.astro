@@ -5,6 +5,8 @@ import SectionBorder from "@components/SectionBorder.astro";
 import { getItems } from "@api/wix";
 import ScribbleSeparator from "@components/ScribbleSeparator.astro";
 import Paginator from "@components/Paginator.astro";
+import BigButton from "@components/BigButton.astro";
+import TornPaperBox from "@components/TornPaperBox.astro";
 
 interface Partner {
   _id: string;
@@ -125,7 +127,6 @@ const donorsTotalPages = Math.max(1, donorChunks.length);
       </div>
       <ScribbleSeparator />
     </section>
-
     <section id="donors" class="partner-section ruled-bg">
       <div class="container">
         <h2>Donors</h2>
@@ -174,6 +175,16 @@ const donorsTotalPages = Math.max(1, donorChunks.length);
           }
         </Paginator>
       </div>
+    </section>
+    <section class="final-cta">
+      <TornPaperBox class="section-content">
+        <h2>Ready to Make a Difference?</h2>
+        <p>
+          Support PRISM and help us create a more inclusive South Florida for
+          LGBTQ+ youth!
+        </p>
+        <a href="/donate" class="cta-button primary">Donate</a>
+      </TornPaperBox>
     </section>
   </main>
 </Base>
@@ -267,6 +278,72 @@ const donorsTotalPages = Math.max(1, donorChunks.length);
           text-decoration: none;
           font-family: var(--cursive);
         }
+      }
+    }
+  }
+
+  .final-cta {
+    padding: 4rem 2rem;
+    background: linear-gradient(
+      135deg,
+      var(--rainbow-red),
+      var(--rainbow-orange),
+      var(--rainbow-yellow),
+      var(--rainbow-green),
+      var(--rainbow-blue),
+      var(--rainbow-purple)
+    );
+    text-align: center;
+
+    .section-content {
+      max-width: 800px;
+      margin: 0 auto;
+
+      h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+      }
+
+      .cta-button {
+        &:hover {
+          background: var(--fg-color);
+          color: var(--youth-yellow-2);
+        }
+      }
+    }
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    /* border-radius: 8px; */
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+
+    &.primary {
+      background: var(--rainbow-green);
+      color: white;
+
+      &:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
+    }
+
+    &.secondary {
+      background: var(--fg-color);
+      color: var(--text-color);
+      border: 2px solid var(--rainbow-green);
+
+      &:hover {
+        background: var(--rainbow-green);
+        color: white;
       }
     }
   }
