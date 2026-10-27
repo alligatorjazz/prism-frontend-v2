@@ -20,7 +20,7 @@ interface Partner {
   donor: boolean;
 }
 
-const ITEMS_PER_PAGE = 12;
+const ITEMS_PER_PAGE = 8;
 
 const allPartners: Partner[] = (await getItems(
   "Partners",
@@ -204,7 +204,8 @@ const donorsTotalPages = Math.max(1, donorChunks.length);
   }
 
   h2 {
-    font-size: 2rem;
+    font-size: 4rem;
+    font-family: var(--handwriting);
     position: relative;
     text-align: center;
     margin-bottom: 2rem;
@@ -213,7 +214,7 @@ const donorsTotalPages = Math.max(1, donorChunks.length);
   .grid {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0 15vw;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1.5rem;
