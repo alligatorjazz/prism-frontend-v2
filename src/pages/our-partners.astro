@@ -89,7 +89,12 @@ const donorsTotalPages = Math.max(1, donorChunks.length);
                       const logoUrl = wixImageUrl(partner.logo);
                       return (
                         <li>
-                          <article class="post-it">
+                          <a
+                            href={partner.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="post-it"
+                          >
                             {logoUrl ? (
                               <div class="logo">
                                 <img
@@ -103,19 +108,9 @@ const donorsTotalPages = Math.max(1, donorChunks.length);
                               </div>
                             )}
                             <h3>
-                              {partner.website ? (
-                                <a
-                                  href={partner.website}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  {partner.title}
-                                </a>
-                              ) : (
-                                partner.title
-                              )}
+                              <p>{partner.title}</p>
                             </h3>
-                          </article>
+                          </a>
                         </li>
                       );
                     })}
@@ -145,7 +140,12 @@ const donorsTotalPages = Math.max(1, donorChunks.length);
                       const logoUrl = wixImageUrl(partner.logo);
                       return (
                         <li>
-                          <article class="post-it">
+                          <a
+                            href={partner.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="post-it"
+                          >
                             {logoUrl ? (
                               <div class="logo">
                                 <img
@@ -159,19 +159,9 @@ const donorsTotalPages = Math.max(1, donorChunks.length);
                               </div>
                             )}
                             <h3>
-                              {partner.website ? (
-                                <a
-                                  href={partner.website}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  {partner.title}
-                                </a>
-                              ) : (
-                                partner.title
-                              )}
+                              <p>{partner.title}</p>
                             </h3>
-                          </article>
+                          </a>
                         </li>
                       );
                     })}
@@ -228,7 +218,7 @@ const donorsTotalPages = Math.max(1, donorChunks.length);
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1.5rem;
 
-    li article {
+    li .post-it {
       display: flex;
       flex-direction: column;
       align-items: center;

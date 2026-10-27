@@ -81,66 +81,95 @@ div.image.cover>img {
 @property --clip-amount {
   syntax: "<length-percentage>";
   inherits: true;
-  initial-value: 10%;
+  initial-value: 0%;
+  /* fold is opt-in, so 0% is the sensible document default */
 }
 
 .post-it {
-  /* shadow tuning knobs */
-  --shade: color-mix(in srgb, var(--text-color) 25%, transparent);
-  --shadow-spread: 4px;
-  /* how far the shadow peeks past the flap */
-
-  --clip-amount: 10%;
-
-  /* shared crease points */
-  --fold-corner-x: calc(100% - var(--clip-amount));
-  --fold-corner-y: var(--clip-amount);
-
-  /* shadow apex pushed further out from the top-right corner */
-  --shadow-corner-x: calc(var(--fold-corner-x) - var(--shadow-spread));
-  --shadow-corner-y: calc(var(--fold-corner-y) + var(--shadow-spread));
-
+  /* ---------- always on ---------- */
   --transition-time: 0.2s;
 
   background: var(--youth-yellow-2);
   filter: drop-shadow(1px 1px 1px var(--text-color));
   padding: 1rem;
   position: relative;
+  display: block;
 
-  clip-path: polygon(0 0,
-      calc(100% - var(--clip-amount)) 0%,
-      100% var(--clip-amount),
-      100% 100%,
-      0 100%);
+  /* ---------- only when clickable ---------- */
+  &:is(a, .clickable) {
+    /* shadow tuning knobs */
+    --shade: color-mix(in srgb, var(--text-color) 25%, transparent);
+    --shadow-spread: 4px;
 
-  transition: --clip-amount var(--transition-time) ease, transform var(--transition-time) ease;
+    --clip-amount: 10%;
 
-  &:hover {
-    --clip-amount: 20%;
+    /* shared crease points */
+    --fold-corner-x: calc(100% - var(--clip-amount));
+    --fold-corner-y: var(--clip-amount);
+
+    /* shadow apex pushed further out from the top-right corner */
+    --shadow-corner-x: calc(var(--fold-corner-x) - var(--shadow-spread));
+    --shadow-corner-y: calc(var(--fold-corner-y) + var(--shadow-spread));
+
+    cursor: pointer;
+
+    clip-path: polygon(0 0,
+        calc(100% - var(--clip-amount)) 0%,
+        100% var(--clip-amount),
+        100% 100%,
+        0 100%);
+
+    transition:
+      --clip-amount var(--transition-time) ease,
+      transform var(--transition-time) ease;
+
+    @media (hover: hover) {
+      &:hover {
+        --clip-amount: 20%;
+      }
+    }
+
+    /* keyboard parity for anchors / focusable .clickable elements */
+    &:focus-visible {
+      --clip-amount: 20%;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: white;
+      z-index: 2;
+      clip-path: polygon(var(--fold-corner-x) 0%,
+          100% var(--clip-amount),
+          var(--fold-corner-x) var(--fold-corner-y));
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: var(--shade);
+      z-index: 1;
+      clip-path: polygon(var(--fold-corner-x) 0%,
+          100% var(--clip-amount),
+          var(--shadow-corner-x) var(--shadow-corner-y));
+    }
   }
 }
 
-.post-it::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-color: white;
-  z-index: 2;
-  clip-path: polygon(var(--fold-corner-x) 0%,
-      100% var(--clip-amount),
-      var(--fold-corner-x) var(--fold-corner-y));
+/* anchors arrive with inline layout and link chrome */
+a.post-it {
+  color: inherit;
+  text-decoration: none;
 }
 
-.post-it::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-color: var(--shade);
-  z-index: 1;
-  clip-path: polygon(var(--fold-corner-x) 0%,
-      100% var(--clip-amount),
-      var(--shadow-corner-x) var(--shadow-corner-y));
+@media (prefers-reduced-motion: reduce) {
+  .post-it {
+    --transition-time: 0s;
+  }
 }
+
 
 
 
