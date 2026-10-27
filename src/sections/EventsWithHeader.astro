@@ -1,100 +1,120 @@
 ---
-import { getImageUrl } from "@wix/sdk/media";
-import { getEvents } from "../api/wix";
-import ColoredHeader from "../components/ColoredHeader.astro";
-import { EventList, type NormalizedEvent } from "../components/EventList";
-import { strictSlug } from "../lib";
-import { inferRemoteSize } from "astro:assets";
+// Home-page events band. Data comes from the universal event library -- the
+// previous version called the provider SDK directly and hand-built objects
+// with { date, link }, which reached EventCard without a `registration` field.
+import { getAllEvents, type NormalizedEvent } from "@lib/events";
+import EventCard from "@components/EventCard.astro";
+import BigButton from "@components/BigButton.astro";
 
 interface Props {
   title: string;
   backgroundImage?: string;
 }
 
-const { title, backgroundImage } = Astro.props;
-
-/**
- * Converts a Wix internal image URI into a public HTTPS URL.
- *
- * Wix images use the format:
- *   wix:image://v1/{mediaId}/{displayName}#originWidth=W&originHeight=H
- *
- * The static CDN URL is: https://static.wixstatic.com/media/{mediaId}
- */
-export function wixImageToUrl(wixImageUri: string): string {
-  const match = wixImageUri.match(/^wix:image:\/\/v1\/([^/]+)\//);
-  if (!match) return wixImageUri; // already a URL or unrecognized format
-  return `https://static.wixstatic.com/media/${match[1]}`;
-}
+const { title } = Astro.props;
 
 let events: NormalizedEvent[] = [];
 let error: string | null = null;
 
 try {
-  const rawEvents = await getEvents();
-
-  events = await Promise.all(
-    rawEvents.map(async (event) => {
-      const location =
-        event.location?.type === "VENUE"
-          ? event.location.venue?.name ||
-            event.location.venue?.address?.formatted ||
-            "Location TBD"
-          : event.location?.type === "ONLINE"
-            ? "Online Event"
-            : "Location TBD";
-
-      let image: NormalizedEvent["image"] = null;
-
-      if (event.mainImage) {
-        const remoteImageInfo = getImageUrl(event.mainImage as string);
-
-        image = { ...remoteImageInfo };
-      }
-
-      return {
-        title: event.title || "Untitled Event",
-        date: event.dateAndTimeSettings?.startDate || new Date().toISOString(),
-        location,
-        image,
-        link: event.eventPageUrl?.url || "#",
-        source: "wix",
-      };
-    }),
-  );
+  events = await getAllEvents();
 } catch (err) {
   error = err instanceof Error ? err.message : "Failed to load events";
 }
+
+const shown = events.slice(0, 3);
 ---
 
-<section id={strictSlug(title)}>
-  <ColoredHeader
-    background="var(--bg-color)"
-    borderTop="marker"
-    borderBottom="marker"
-  >
-    <h1>{title}</h1>
-  </ColoredHeader>
-  <div
-    class="content"
-    style={{
-      backgroundImage,
-    }}
-  >
-    <EventList client:load events={events} error={error} />
+<section class="events-with-header">
+  <div class="events-header">
+    <h2>{title}</h2>
+  </div>
+
+  {
+    error ? (
+      <p class="error">Error loading events: {error}</p>
+    ) : shown.length === 0 ? (
+      <p class="no-events">No upcoming events found.</p>
+    ) : (
+      <ul class="event-grid">
+        {shown.map((event) => (
+          <EventCard event={event} variant="list" />
+        ))}
+      </ul>
+    )
+  }
+  <div class="cta">
+    <a href="/events" class="see-all">See All Events→</a>
   </div>
 </section>
 
-<style>
-  section {
+<style lang="scss">
+  @use "../styles/utils" as *;
+
+  .events-with-header {
+    width: 100%;
+    padding: 2rem 0;
   }
-  h1 {
-    text-align: center;
-    color: white;
+
+  .events-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 8rem;
+    margin-bottom: 1rem;
+    background-size: cover;
+    background-position: center;
+
+    h2 {
+      font-family: var(--header-font);
+      font-weight: 700;
+      font-size: 3rem;
+      margin: 0;
+      color: var(--fg-color);
+      text-align: center;
+    }
   }
-  .content {
+
+  .event-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    list-style: none;
     padding: 2rem;
-    background-size: 2000px;
-    background-attachment: fixed;
+    margin: 0;
+
+    @include breakpoint-up(md) {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      justify-items: center;
+    }
+  }
+
+  .error,
+  .no-events {
+    text-align: center;
+    font-family: var(--header-font);
+    padding: 2rem 1rem;
+  }
+
+  .cta {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .see-all {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--rainbow-purple);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.25rem;
+    transition: all 300ms;
+
+    &:hover {
+      filter: brightness(110%);
+    }
   }
 </style>

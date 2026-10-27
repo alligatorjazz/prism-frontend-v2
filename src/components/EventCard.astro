@@ -1,0 +1,207 @@
+---
+import {
+  ensureEvent,
+  eventCtaUrl,
+  formatEventDate,
+  type NormalizedEvent,
+} from "@lib/events";
+
+interface Props {
+  /** Loose on purpose: a straggling caller degrades instead of throwing. */
+  event: NormalizedEvent | Record<string, unknown>;
+  variant?: "list" | "page";
+}
+
+const { event: incoming, variant = "page" } = Astro.props;
+
+// Guarantees registration / location / tags exist even if the caller skipped
+// the adapter, and names the caller in the build log when that happens.
+const event = ensureEvent(incoming);
+
+const { title, startDate, location, image, registration, tags } = event;
+
+const formattedDate = formatEventDate(startDate);
+const ctaUrl = eventCtaUrl(event);
+const ctaLabel = registration.ctaLabel;
+const isExternal = registration.isExternal && Boolean(ctaUrl);
+
+const imageClass = variant === "list" ? "image" : "event-card-image";
+const actionClass = variant === "list" ? "learn-more" : "event-card-action";
+
+const statusLabel =
+  registration.status === "open"
+    ? isExternal
+      ? "External RSVP"
+      : "RSVP open"
+    : registration.status === "waitlist"
+      ? "Waitlist"
+      : registration.status === "closed"
+        ? "Registration closed"
+        : tags[0] ?? null;
+---
+
+<li class:list={[variant === "list" ? "event-list-item" : "event-card rounded"]}>
+  {
+    image && (
+      <div class={imageClass}>
+        <img
+          src={image.url}
+          width={image.width || undefined}
+          height={image.height || undefined}
+          alt={image.alt}
+          loading={variant === "page" ? "lazy" : undefined}
+        />
+      </div>
+    )
+  }
+
+  {
+    variant === "list" ? (
+      <div class="info">
+        <h1>{title}</h1>
+        <h2>{formattedDate}</h2>
+        <h3>{location.name}</h3>
+      </div>
+    ) : (
+      <div class="event-card-body">
+        <!-- {statusLabel && <div class="event-source-badge">{statusLabel}</div>} -->
+        <h2>{title}</h2>
+        <h3>{formattedDate}</h3>
+        <h4>{location.name}</h4>
+      </div>
+    )
+  }
+
+  <div class={actionClass}>
+    {ctaUrl ? (
+      <a
+        class="rounded"
+        href={ctaUrl}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noopener noreferrer" : undefined}
+      >
+        {ctaLabel}
+      </a>
+    ) : (
+      <span class="rounded disabled">{ctaLabel}</span>
+    )}
+  </div>
+</li>
+
+<style lang="scss">
+  @use "../styles/utils" as *;
+
+  .event-list-item {
+    display: flex;
+    flex-direction: column;
+    height: 28rem;
+    width: 20rem;
+    background-color: var(--youth-yellow-2);
+    padding: 1rem;
+
+    .image {
+      height: 40%;
+      width: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .info {
+      flex: 1;
+
+      * {
+        font-size: 1rem;
+        font-weight: normal;
+      }
+
+      h1 {
+        font-size: 1.25rem;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .event-card {
+    display: flex;
+    flex-direction: column;
+    height: 28rem;
+    width: 20rem;
+    background: var(--accent-color);
+
+    .event-card-image {
+      height: 40%;
+      width: 100%;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .event-card-body {
+      padding: 0 1rem;
+      flex: 1;
+
+      * {
+        font-size: 1rem;
+        font-weight: normal;
+      }
+
+      .event-source-badge {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        opacity: 0.7;
+        margin-bottom: 0.25rem;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+        font-weight: bold;
+      }
+
+      h3 {
+        font-size: 0.95rem;
+        margin-top: 0.25rem;
+      }
+
+      h4 {
+        font-size: 0.9rem;
+        opacity: 0.85;
+        margin-top: 0.25rem;
+      }
+    }
+  }
+
+  .learn-more,
+  .event-card-action {
+    padding: 0.5rem 1rem;
+    color: var(--fg-color);
+    width: 100%;
+
+    a,
+    span.disabled {
+      width: 100%;
+      height: 100%;
+      display: block;
+      padding: 0.5rem 0rem;
+      background: var(--bg-color);
+      text-align: center;
+      color: var(--fg-color);
+      font-family: var(--header-font);
+      font-weight: 700;
+      font-size: 1.25rem;
+      text-decoration: none;
+    }
+
+    span.disabled {
+      opacity: 0.6;
+    }
+  }
+</style>

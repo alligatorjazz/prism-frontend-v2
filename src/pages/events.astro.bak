@@ -1,0 +1,20 @@
+---
+import Base from "../templates/Base.astro";
+import { EventPage } from "../components/EventPage";
+
+const pageMetadata = {
+  title: "Events",
+  description: "Upcoming events from PRISM FL",
+  type: "website",
+};
+---
+
+<Base pageMetadata={pageMetadata}>
+  <main><EventPage client:load /></main>
+</Base>
+
+<style>
+  main {
+    padding: 4rem;
+  }
+</style>

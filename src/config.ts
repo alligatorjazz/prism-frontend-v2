@@ -29,6 +29,12 @@ export const globalRoutes: Route[] = [
     path: "/get-involved",
     displayName: "Get Involved",
     children: [
+      {
+        type: "internal",
+        path: "/events",
+        displayName: "Events",
+      },
+
       { type: "internal", path: "/outreach", displayName: "Outreach" },
       {
         type: "internal",

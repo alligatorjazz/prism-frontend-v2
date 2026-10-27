@@ -62,6 +62,7 @@ export async function getEvents() {
         },
       },
       sort: [{ fieldName: "dateAndTimeSettings.startDate", order: "ASC" }],
+      fields: ["DETAILS", "URLS", "REGISTRATION"],
       paging: {
         limit,
         ...(cursor ? { cursor } : {}),
@@ -92,6 +93,7 @@ export async function getEventsPage(limit: number = 12, cursor?: string) {
       },
     },
     sort: [{ fieldName: "dateAndTimeSettings.startDate", order: "ASC" }],
+    fields: ["DETAILS", "URLS", "REGISTRATION"],
     paging: {
       limit,
       ...(cursor ? { cursor } : {}),

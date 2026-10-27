@@ -1,20 +1,180 @@
 ---
-import Base from "../templates/Base.astro";
-import { EventPage } from "../components/EventPage";
+import Base from "@templates/Base.astro";
+import PageIntro from "@sections/PageIntro.astro";
+import Paginator from "@components/Paginator.astro";
+import EventCard from "@components/EventCard.astro";
+import {
+  chunkItems,
+  getAllEvents,
+  sortEventsByDate,
+  type NormalizedEvent,
+} from "@lib/events";
+import heroImage from "@assets/img/long-pride-flag.png";
+
+const EVENTS_PER_PAGE = 12;
+
+const DESCRIPTION =
+  "PRISM FL events are where South Florida's LGBTQ+ community comes together! Pride celebrations, community mixers, advocacy workshops, and youth gatherings. Come out and join us!";
 
 const pageMetadata = {
   title: "Events",
-  description: "Upcoming events from PRISM FL",
+  description: DESCRIPTION,
   type: "website",
 };
+
+let events: NormalizedEvent[] = [];
+let error: string | null = null;
+
+try {
+  events = sortEventsByDate(await getAllEvents());
+} catch (err) {
+  error = err instanceof Error ? err.message : "Failed to load events";
+}
+
+const pages = chunkItems(events, EVENTS_PER_PAGE);
+const totalPages = Math.max(1, pages.length);
+const totalEvents = events.length;
 ---
 
 <Base pageMetadata={pageMetadata}>
-  <main><EventPage client:load /></main>
+  <PageIntro
+    title="Events"
+    description={DESCRIPTION}
+    image={{
+      ...heroImage,
+      alt: "PRISM FL community members gathered at a recent event",
+    }}
+    pointBackTo={{ href: "/get-involved", label: "Get Involved" }}
+  />
+
+  <main class="event-page">
+    <div class="event-page-header">
+      <h2>Upcoming Events</h2>
+      <p class="subtitle">
+        {
+          totalEvents > 0
+            ? `${totalEvents} upcoming event${totalEvents !== 1 ? "s" : ""}`
+            : "No upcoming events"
+        }
+      </p>
+    </div>
+
+    <div class="event-page-content">
+      {
+        error ? (
+          <div class="event-state">
+            <p class="error">Error loading events: {error}</p>
+            <a class="retry-button rounded" href={Astro.url.pathname}>
+              Retry
+            </a>
+          </div>
+        ) : totalEvents === 0 ? (
+          <p class="no-events">No upcoming events found.</p>
+        ) : (
+          <Paginator size="lg" totalPages={totalPages}>
+            {pages.map((pageEvents) => (
+              <div>
+                <ul class="event-grid">
+                  {pageEvents.map((event) => (
+                    <EventCard event={event} variant="page" />
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </Paginator>
+        )
+      }
+    </div>
+  </main>
 </Base>
 
-<style>
-  main {
-    padding: 4rem;
+<style lang="scss">
+  @use "../styles/utils" as *;
+
+  .event-page {
+    overflow: hidden;
+    width: 100%;
+    max-width: var(--2xl);
+    margin: auto;
+    padding: 2rem 1rem 4rem;
+
+    .event-page-header {
+      text-align: center;
+      margin-bottom: 2rem;
+
+      /* PageIntro renders the <h1>, so this stays an <h2>. */
+      h2 {
+        font-family: var(--header-font);
+        font-weight: 700;
+        font-size: 2rem;
+        color: var(--fg-color);
+        margin-bottom: 0.5rem;
+      }
+
+      .subtitle {
+        font-family: var(--header-font);
+        font-size: 1.125rem;
+        color: var(--fg-color);
+        opacity: 0.8;
+      }
+    }
+
+    .event-page-content {
+      width: 100%;
+    }
+
+    .event-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      gap: 1rem;
+      list-style: none;
+      align-items: stretch;
+
+      @include breakpoint-up(md) {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        justify-items: center;
+      }
+
+      @include breakpoint-up(lg) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+    }
+
+    .event-state {
+      text-align: center;
+    }
+
+    .no-events,
+    .error {
+      text-align: center;
+      padding: 3rem 1rem;
+      font-family: var(--header-font);
+      font-size: 1.125rem;
+    }
+
+    .error {
+      color: #c0392b;
+    }
+
+    .retry-button {
+      display: inline-block;
+      margin: 1rem auto;
+      padding: 0.5rem 2rem;
+      background: var(--accent-color);
+      color: var(--fg-color);
+      font-family: var(--header-font);
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
   }
 </style>
