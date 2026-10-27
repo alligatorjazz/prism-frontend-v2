@@ -79,7 +79,7 @@ div.image.cover>img {
 }
 
 .post-it {
-  background: var(--youth-yellow-1);
+  background: var(--youth-yellow-2);
   transition: transform 0.2s ease;
   filter: drop-shadow(1px 1px 1px var(--text-color));
   padding: 1rem;
@@ -94,7 +94,7 @@ div.image.cover>img {
   right: 0;
   border-width: 0 16px 16px 0;
   border-style: solid;
-  border-color: var(--youth-yellow-2) rgba(255, 0, 0, 0.01);
+  border-color: var(--youth-yellow-1) rgba(255, 0, 0, 0.0001);
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
