@@ -78,28 +78,71 @@ div.image.cover>img {
   background: var(--test-var);
 }
 
+@property --clip-amount {
+  syntax: "<length-percentage>";
+  inherits: true;
+  initial-value: 10%;
+}
+
 .post-it {
+  /* shadow tuning knobs */
+  --shade: color-mix(in srgb, var(--text-color) 25%, transparent);
+  --shadow-spread: 4px;
+  /* how far the shadow peeks past the flap */
+
+  --clip-amount: 10%;
+
+  /* shared crease points */
+  --fold-corner-x: calc(100% - var(--clip-amount));
+  --fold-corner-y: var(--clip-amount);
+
+  /* shadow apex pushed further out from the top-right corner */
+  --shadow-corner-x: calc(var(--fold-corner-x) - var(--shadow-spread));
+  --shadow-corner-y: calc(var(--fold-corner-y) + var(--shadow-spread));
+
+  --transition-time: 0.2s;
+
   background: var(--youth-yellow-2);
-  transition: transform 0.2s ease;
   filter: drop-shadow(1px 1px 1px var(--text-color));
   padding: 1rem;
   position: relative;
-  border-radius: 0 10% 0 0;
+
+  clip-path: polygon(0 0,
+      calc(100% - var(--clip-amount)) 0%,
+      100% var(--clip-amount),
+      100% 100%,
+      0 100%);
+
+  transition: --clip-amount var(--transition-time) ease, transform var(--transition-time) ease;
+
+  &:hover {
+    --clip-amount: 20%;
+  }
 }
 
-.post-it:before {
-  content: "";
+.post-it::before {
+  content: '';
   position: absolute;
-  top: 0;
-  right: 0;
-  border-width: 0 16px 16px 0;
-  border-style: solid;
-  border-color: var(--youth-yellow-1) rgba(255, 0, 0, 0.0001);
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
-
+  inset: 0;
+  background-color: white;
+  z-index: 2;
+  clip-path: polygon(var(--fold-corner-x) 0%,
+      100% var(--clip-amount),
+      var(--fold-corner-x) var(--fold-corner-y));
 }
+
+.post-it::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--shade);
+  z-index: 1;
+  clip-path: polygon(var(--fold-corner-x) 0%,
+      100% var(--clip-amount),
+      var(--shadow-corner-x) var(--shadow-corner-y));
+}
+
+
 
 .invisible {
   opacity: 0;
