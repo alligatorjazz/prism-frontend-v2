@@ -29,6 +29,7 @@
       height: 28rem;
       width: 20rem;
       background-color: var(--youth-yellow-2);
+      padding: 1rem;
 
       .image {
         height: 40%;
@@ -43,7 +44,6 @@
       }
 
       .info {
-        padding: 0 1rem;
         flex: 1;
         // color: var(--fg-color);
 
